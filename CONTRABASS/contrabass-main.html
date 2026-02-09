@@ -3557,6 +3557,9 @@
         </div>
     </div>
 
+        </div> <!-- End mainAppContent -->
+    </div> <!-- End app-container -->
+
     <!-- 녹화 설정 전용 모달 -->
     <div id="recordingModal" class="modal">
         <div class="modal-content">
@@ -3635,8 +3638,7 @@
                 </div>
             </div>
         </div>
-        </div> <!-- End mainAppContent -->
-    </div> <!-- End app-container -->
+    </div>
 
     <script>
         const { ipcRenderer } = require('electron');
@@ -3778,6 +3780,7 @@
                 createParticles();
                 loadRecordingSettings(); // 녹화 설정 로드
                 setupModalRecordingToggle(); // 모달 녹화 토글 설정
+                setupRecordingModalOptions(); // 녹화 설정 모달 옵션 초기화
                 createSummaryCards(); // 요약 카드 생성
                 initializeTheme(); // 테마 초기화
                 setupTestOutputListeners(); // 테스트 출력 이벤트 리스너 설정
@@ -6755,9 +6758,6 @@
                     enabledOption.classList.remove('selected');
                     folderSection.style.display = 'none';
                 }
-                
-                // 녹화 옵션 클릭 이벤트 설정
-                setupRecordingModalOptions();
                 
                 // 모달 표시
                 document.getElementById('recordingModal').style.display = 'flex';
