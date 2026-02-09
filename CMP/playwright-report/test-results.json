@@ -1,0 +1,578 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\okestro\\Desktop\\test\\CMP\\playwright.config.js",
+    "rootDir": "C:/Users/okestro/Desktop/test/CMP/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "C:/Users/okestro/Desktop/test/CMP/playwright-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:/Users/okestro/Desktop/test/CMP/playwright-report/test-results.json"
+        }
+      ],
+      [
+        "list",
+        {
+          "printSteps": true
+        }
+      ],
+      [
+        "line",
+        {
+          "printSteps": true
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/okestro/Desktop/test/CMP/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/okestro/Desktop/test/CMP/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "scenario/**/*.spec.js",
+          "**/*.spec.js"
+        ],
+        "timeout": 3600000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 7,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "scenario\\scenario-1.spec.js",
+      "file": "scenario/scenario-1.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "시나리오 1: 로그인 및 AWS 인스턴스 생성",
+          "file": "scenario/scenario-1.spec.js",
+          "line": 205,
+          "column": 15,
+          "specs": [
+            {
+              "title": "로그인 페이지 접근",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2170,
+                      "error": {
+                        "message": "Error: 브라우저가 강제 종료되었습니다",
+                        "stack": "Error: 브라우저가 강제 종료되었습니다\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:112:24)\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:388:7\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:387:5",
+                        "location": {
+                          "file": "C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js",
+                          "column": 24,
+                          "line": 112
+                        },
+                        "snippet": "  110 |     if (page.isClosed()) {\n  111 |       testCase.status = 'fail';\n> 112 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  113 |       testResults.status = 'fail';\n  114 |       testResults.error = testCase.error;\n  115 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js",
+                            "column": 24,
+                            "line": 112
+                          },
+                          "message": "Error: 브라우저가 강제 종료되었습니다\n\n  110 |     if (page.isClosed()) {\n  111 |       testCase.status = 'fail';\n> 112 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  113 |       testResults.status = 'fail';\n  114 |       testResults.error = testCase.error;\n  115 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:112:24)\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:388:7\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:387:5"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "🎬 시나리오 1 녹화 설정: 비활성화\n"
+                        },
+                        {
+                          "text": "🎬 녹화가 비활성화되어 일반 브라우저 컨텍스트를 생성합니다.\n"
+                        },
+                        {
+                          "text": "[2025-11-14T05:43:21.825Z] INFO: 📝 로그인 페이지 접근 시작...\n"
+                        },
+                        {
+                          "text": "🌐 로그인 페이지 접근 중...\n"
+                        },
+                        {
+                          "text": "🌐 CMP 로그인 페이지 접근 중...\n"
+                        },
+                        {
+                          "text": "🧹 쿠키 및 세션 클리어 완료\n"
+                        },
+                        {
+                          "text": "✅ CMP 로그인 페이지 접근 완료\n"
+                        },
+                        {
+                          "text": "✅ 로그인 페이지 접근 완료\n"
+                        },
+                        {
+                          "text": "[2025-11-14T05:43:23.986Z] ERROR: ❌ 로그인 페이지 접근 실패: 브라우저 강제 종료\n"
+                        },
+                        {
+                          "text": "[2025-11-14T05:43:23.986Z] ERROR: ❌ 로그인 페이지 접근 실패: 브라우저가 강제 종료되었습니다\n"
+                        },
+                        {
+                          "text": "[2025-11-14T05:43:23.986Z] INFO: ⏱️ 로그인 페이지 접근 소요시간: 2161ms\n"
+                        },
+                        {
+                          "text": "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.\n"
+                        },
+                        {
+                          "text": "\n--- CMP 시나리오 1 최종 테스트 결과 ---\n"
+                        },
+                        {
+                          "text": "❌ 로그인 페이지 접근: FAIL (2161ms)\n"
+                        },
+                        {
+                          "text": "❌ 로그인 정보 입력: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 로그인 실행 및 성공 확인: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ AWS 서비스 접근: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 인스턴스 페이지 이동: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 기본 정보 입력: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 네트워크 입력: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 보안 설정 입력: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 새 인스턴스 선택: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ 인스턴스 RUNNING 확인: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "----------------------------------\n"
+                        },
+                        {
+                          "text": "🏁 CMP 시나리오 1 테스트 완료\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "❌ 스크린샷 저장 실패: __dirname is not defined\n"
+                        },
+                        {
+                          "text": "⚠️ 브라우저가 닫혀있어 스크린샷을 캡처할 수 없습니다: 로그인 페이지 접근\n"
+                        },
+                        {
+                          "text": "  오류: 브라우저가 강제 종료되었습니다\n"
+                        },
+                        {
+                          "text": "❌ CMP 시나리오 1 테스트 중 실패한 케이스가 있습니다.\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "로그인 페이지 접근",
+                          "duration": 2163,
+                          "error": {
+                            "message": "Error: 브라우저가 강제 종료되었습니다",
+                            "stack": "Error: 브라우저가 강제 종료되었습니다\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:112:24)\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:388:7\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:387:5",
+                            "location": {
+                              "file": "C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js",
+                              "column": 24,
+                              "line": 112
+                            },
+                            "snippet": "  110 |     if (page.isClosed()) {\n  111 |       testCase.status = 'fail';\n> 112 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  113 |       testResults.status = 'fail';\n  114 |       testResults.error = testCase.error;\n  115 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-11-14T05:43:20.793Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\test\\CMP\\test-results\\scenario-scenario-1-시나리오-1-로그인-및-AWS-인스턴스-생성-로그인-페이지-접근-chromium\\test-finished-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js",
+                        "column": 24,
+                        "line": 112
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-1ee934a28c69e858ba1c",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 386,
+              "column": 3
+            },
+            {
+              "title": "로그인 정보 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-cd6dae15795caa6f7bdb",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 397,
+              "column": 3
+            },
+            {
+              "title": "로그인 실행 및 성공 확인",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-5d158b0d572f427d8470",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 408,
+              "column": 3
+            },
+            {
+              "title": "AWS 서비스 접근",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-006b0b8ec2843e2a86a9",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 419,
+              "column": 3
+            },
+            {
+              "title": "인스턴스 페이지 이동",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-a577131d68b71a9930a5",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 430,
+              "column": 3
+            },
+            {
+              "title": "기본 정보 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-e57f2fd4535a0a53fd39",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 441,
+              "column": 3
+            },
+            {
+              "title": "네트워크 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.222Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-7da0dea8c5d755965d31",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 452,
+              "column": 3
+            },
+            {
+              "title": "보안 설정 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.223Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-d56f68c175e04aeabe28",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 463,
+              "column": 3
+            },
+            {
+              "title": "새 인스턴스 선택",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.223Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-950c4ca85bd886ffda6a",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 474,
+              "column": 3
+            },
+            {
+              "title": "인스턴스 RUNNING 확인",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-14T05:43:24.223Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d8af0fbbce451178e86b-10af74ec056fadba4503",
+              "file": "scenario/scenario-1.spec.js",
+              "line": 485,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-14T05:43:19.756Z",
+    "duration": 4500.412,
+    "expected": 0,
+    "skipped": 9,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

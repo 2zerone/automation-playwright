@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member Management</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    ## 이 부분을 수정하시오.
+   <h1>OKESTRO TROMBONE 자동화 테스트</h1>
+    <div class="container">
+        <h2>Member List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="member : ${members}">
+                    <td th:text="${member.id}"></td>
+                    <td th:text="${member.name}"></td>
+                    <td th:text="${member.email}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Add Member</h2>
+        <form action="/members/add" method="post" onsubmit="return validateForm()">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Add Member</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            const id = document.getElementById('id').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            if (!id || !name || !email) {
+                alert('All fields are required.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

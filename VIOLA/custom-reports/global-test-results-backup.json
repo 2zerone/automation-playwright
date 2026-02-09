@@ -1,0 +1,43 @@
+{
+  "scenario-2": {
+    "status": "stopped",
+    "duration": "0분 7초",
+    "startTime": "2025-09-29T11:06:30.466Z",
+    "endTime": "2025-09-29T11:06:37.907Z",
+    "timestamp": "2025. 9. 29. 오후 8:06:30",
+    "testCases": [
+      {
+        "name": "로그인 페이지 접근",
+        "status": "pass",
+        "duration": 2623,
+        "error": null,
+        "startTime": "2025-09-28T15:26:16.763Z",
+        "endTime": "2025-09-29T11:06:37.906Z"
+      },
+      {
+        "name": "로그인 정보 입력",
+        "status": "pass",
+        "duration": 1553,
+        "error": null,
+        "startTime": "2025-09-28T15:26:19.966Z",
+        "endTime": "2025-09-29T11:06:37.906Z"
+      },
+      {
+        "name": "로그인 실행",
+        "status": "fail",
+        "duration": 3126,
+        "error": "브라우저 강제 종료",
+        "startTime": "2025-09-28T15:26:21.534Z",
+        "endTime": "2025-09-29T11:06:37.906Z"
+      },
+      {
+        "name": "로그인 성공 확인",
+        "status": "not-test",
+        "duration": 3399,
+        "error": "브라우저 강제 종료로 인한 미실행",
+        "startTime": "2025-09-28T15:26:24.691Z",
+        "endTime": "2025-09-29T11:06:37.906Z"
+      }
+    ]
+  }
+}

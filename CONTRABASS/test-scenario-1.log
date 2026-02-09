@@ -1,0 +1,60 @@
+🎺 CONTRABASS Electron 시나리오 실행기
+
+🎻 CONTRABASS 시나리오 1 실행을 시작합니다...
+
+⏰ 시작 시간: 2025. 10. 20. 오후 7:55:39
+
+📊 CONTRABASS 시나리오 1 구조 레포트
+============================================================
+
+📋 CONTRABASS 시나리오 목록
+----------------------------------------
+1. CONTRABASS 기본 로그인 및 대시보드 확인
+2. CONTRABASS 워크플로우 생성 및 관리
+3. CONTRABASS 티켓 생성 및 승인 프로세스
+4. CONTRABASS GitLab 연동 테스트
+5. CONTRABASS 파이프라인 실행 및 모니터링
+6. CONTRABASS SonarQube 정적 분석
+7. CONTRABASS JUnit 테스트 결과 확인
+8. CONTRABASS 배포 파이프라인 생성
+
+📋 테스트 파일 사용: scenario-1.spec.js
+
+🔄 Playwright 테스트 실행 중...
+============================================================
+📂 실행할 테스트 파일: C:\Users\okestro\Desktop\test\CONTRABASS\tests\scenario\scenario-1.spec.js
+🔍 Playwright 테스트 직접 실행
+--- PLAYWRIGHT DEBUG ---
+CWD: C:\Users\okestro\Desktop\test\CONTRABASS
+testFile (raw): C:\Users\okestro\Desktop\test\CONTRABASS\tests\scenario\scenario-1.spec.js
+testFile (posix): C:/Users/okestro/Desktop/test/CONTRABASS/tests/scenario/scenario-1.spec.js
+config (posix): C:/Users/okestro/Desktop/test/CONTRABASS/playwright.config.js
+scenarioDir: C:\Users\okestro\Desktop\test\CONTRABASS\tests\scenario
+scenarioDir file list:
+ - scenario-1.spec.js
+ - scenario-10.spec.js
+ - scenario-11.spec.js
+ - scenario-12.spec.js
+ - scenario-13.spec.js
+ - scenario-14.spec.js
+ - scenario-15.spec.js
+ - scenario-16.spec.js
+ - scenario-17.spec.js
+ - scenario-18.spec.js
+ - scenario-19.spec.js
+ - scenario-2.spec.js
+ - scenario-20.spec.js
+ - scenario-21.spec.js
+ - scenario-3.spec.js
+ - scenario-4.spec.js
+ - scenario-5.spec.js
+ - scenario-6.spec.js
+ - scenario-7.spec.js
+ - scenario-8.spec.js
+ - scenario-9.spec.js
+exists(testFile): true
+exists(config): true
+--- /PLAYWRIGHT DEBUG ---
+
+🚀 CONTRABASS 시나리오 실행 시작
+📂 실행 명령: npx playwright test "tests/scenario/scenario-1.spec.js" --project=chromium --headed --reporter=json

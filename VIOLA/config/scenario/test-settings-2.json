@@ -1,0 +1,11 @@
+{
+  "login": {
+    "userId": "yh.lee5@okestro.com",
+    "password": "Okestro2018!"
+  },
+  "scenario": {
+    "id": 2,
+    "type": "scenario_2",
+    "description": "시나리오 2 설정"
+  }
+}

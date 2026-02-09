@@ -1,0 +1,605 @@
+#!/usr/bin/env node
+
+import { execFileSync, execSync, spawn } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log('🎺 TROMBONE Electron 시나리오 실행기\n');
+
+// 3단계 구조 레포트 출력 함수
+function printThreeLevelReport(scenarioId) {
+    console.log(`\n📊 시나리오 ${scenarioId} 3단계 구조 레포트`);
+    console.log('=' .repeat(60));
+    
+    // 대메뉴 목록
+    const mainMenus = [
+        '업무코드 등록',
+        '툴체인 등록', 
+        '저장소 등록',
+        '사용자 등록',
+        '사용자에게 업무코드 할당',
+        'SonarQube 등록',
+        'JUnit 등록',
+        '파이프라인 등록',
+        '워크플로우 컴포넌트 등록'
+    ];
+    
+    console.log('\n📋 1단계: 대메뉴 목록');
+    console.log('-'.repeat(40));
+    mainMenus.forEach((menu, index) => {
+        console.log(`${index + 1}. ${menu}`);
+    });
+    
+    // 각 대메뉴별 중메뉴 예시
+    const subMenus = {
+        '업무코드 등록': [
+            '업무코드 메뉴 접근',
+            '업무코드 등록 화면 열기', 
+            '업무코드 정보 입력',
+            '업무코드 저장 및 확인'
+        ],
+        '툴체인 등록': [
+            '툴체인 메뉴 접근',
+            '툴체인 등록 화면 열기',
+            '툴체인 기본 정보 입력', 
+            '툴체인 저장 및 확인'
+        ],
+        '저장소 등록': [
+            '저장소 메뉴 접근',
+            '저장소 등록 화면 열기',
+            '저장소 정보 입력',
+            '저장소 저장 및 확인'
+        ],
+        '사용자 등록': [
+            '사용자 메뉴 접근',
+            '사용자 등록 화면 열기',
+            '사용자 기본 정보 입력',
+            '티켓 전용 업무 및 역할 설정',
+            '사용자 업무 및 역할 설정',
+            '사용자 구분 설정',
+            '사용자 저장 및 확인'
+        ],
+        '사용자에게 업무코드 할당': [
+            '사용자 업무코드 메뉴 접근',
+            '사용자 업무코드 등록 화면 열기',
+            '사용자 업무코드 정보 입력',
+            '사용자 업무코드 저장 및 확인'
+        ],
+        'SonarQube 등록': [
+            'SonarQube 메뉴 접근',
+            'SonarQube 등록 화면 열기',
+            'SonarQube 정보 입력',
+            'SonarQube 저장 및 확인'
+        ],
+        'JUnit 등록': [
+            'JUnit 메뉴 접근',
+            'JUnit 등록 화면 열기',
+            'JUnit 정보 입력',
+            'JUnit 저장 및 확인'
+        ],
+        '파이프라인 등록': [
+            'STG 파이프라인 등록',
+            'PRD 파이프라인 등록'
+        ],
+        '워크플로우 컴포넌트 등록': [
+            '워크플로우 컴포넌트 메뉴 접근',
+            '워크플로우 컴포넌트 등록 화면 열기',
+            '워크플로우 컴포넌트 정보 입력',
+            '워크플로우 컴포넌트 저장 및 확인'
+        ]
+    };
+    
+    console.log('\n📋 2단계: 중메뉴 상세 구조');
+    console.log('-'.repeat(40));
+    mainMenus.forEach((mainMenu, mainIndex) => {
+        console.log(`\n${mainIndex + 1}. ${mainMenu}`);
+        const subMenuList = subMenus[mainMenu];
+        subMenuList.forEach((subMenu, subIndex) => {
+            console.log(`   ${mainIndex + 1}.${subIndex + 1} ${subMenu}`);
+        });
+    });
+    
+    console.log('\n📋 3단계: 상세결과');
+    console.log('-'.repeat(40));
+    console.log('각 중메뉴 클릭 시 상세 테스트 결과, 스크린샷, 로그 확인 가능');
+    console.log('Playwright HTML 레포트에서 상세 내용 확인 가능');
+}
+
+// 시나리오 실행 옵션
+const scenarioOptions = {
+    // 특정 시나리오 실행
+    run: (scenarioId) => {
+        console.log(`🚀 시나리오 ${scenarioId} 실행을 시작합니다...\n`);
+        
+        // 3단계 구조 레포트 미리보기
+        printThreeLevelReport(scenarioId);
+        
+        // 시나리오 설정 파일 존재 확인
+        const configPath = path.join(__dirname, `config/scenario/test-settings-${scenarioId}.json`);
+        if (!fs.existsSync(configPath)) {
+            console.error(`❌ 시나리오 ${scenarioId} 설정 파일을 찾을 수 없습니다: ${configPath}`);
+            process.exit(1);
+        }
+        
+        // 시나리오 테스트 파일 존재 확인
+        const testPath = path.join(__dirname, 'tests', 'scenario', `scenario-${scenarioId}.spec.js`);
+        const interruptTestPath = path.join(__dirname, 'tests', 'test-interrupt.spec.js');
+        
+        let testFile = testPath;
+        if (scenarioId === 'interrupt') {
+            testFile = interruptTestPath;
+            console.log(`\n📋 중단 테스트 파일 사용: test-interrupt.js`);
+        } else if (fs.existsSync(testPath)) {
+            console.log(`\n📋 테스트 파일 사용: scenario-${scenarioId}.spec.js`);
+        } else {
+            console.error(`❌ 시나리오 ${scenarioId} 테스트 파일을 찾을 수 없습니다.`);
+            console.error(`   찾은 경로: ${testPath}`);
+            process.exit(1);
+        }
+        
+        console.log('\n🔄 Playwright 테스트 실행 중...');
+        console.log('=' .repeat(60));
+        
+        // Playwright 테스트 실행
+        try {
+            console.log(`\n📂 실행할 테스트 파일: ${testFile}`);
+            // 직접 Playwright 테스트 실행
+            console.log(`🔍 Playwright 테스트 직접 실행`);
+            
+            // 환경 변수 설정
+            const env = {
+                ...process.env,
+                PLAYWRIGHT_HEADLESS: 'false',
+                NODE_ENV: 'test',
+                PLAYWRIGHT_VIDEO_ENABLED: 'false'
+            };
+            
+                        // 3단계 플랜으로 Playwright 실행 (완전 교체)
+            const projectRoot = __dirname;
+            const toPosix = p => path.resolve(p).replace(/\\/g, '/');
+            const npxCmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+
+            const testFilePosix = toPosix(testFile);
+            const scenarioDir = path.join(__dirname, 'tests', 'scenario');
+            const scenarioDirPosix = toPosix(scenarioDir);
+            const configPath = path.join(__dirname, 'playwright.config.js');
+            const configPosix = toPosix(configPath);
+
+            // 디버그 로그(실제 무엇을 실행하는지 확인)
+            console.log('--- PLAYWRIGHT DEBUG ---');
+            console.log('CWD:', projectRoot);
+            console.log('testFile (raw):', testFile);
+            console.log('testFile (posix):', testFilePosix);
+            console.log('config (posix):', configPosix);
+            console.log('scenarioDir:', scenarioDir);
+            if (fs.existsSync(scenarioDir)) {
+              const listing = fs.readdirSync(scenarioDir);
+              console.log('scenarioDir file list:\n - ' + listing.join('\n - '));
+            } else {
+              console.log('scenarioDir does NOT exist');
+            }
+            console.log('exists(testFile):', fs.existsSync(testFile));
+            console.log('exists(config):', fs.existsSync(configPath));
+            console.log('--- /PLAYWRIGHT DEBUG ---');
+
+            const finalEnv = {
+              ...process.env,
+              PLAYWRIGHT_HEADLESS: 'false',
+              NODE_ENV: 'test',
+              PLAYWRIGHT_VIDEO_ENABLED: 'false'
+            };
+
+            // 공통: 인자에 "scenarioId" 같은 위치 인자/패턴 절대 넣지 말 것.
+            // 오직 파일 경로 또는 디렉터리 경로만 넘긴다.
+
+            // runPlaywright 함수 제거 - 직접 execFileSync 사용
+
+            // 🅰️ A 플랜: execSync로 실행 (POSIX 경로)
+            console.log('\n🚀 PLAN-A: execSync로 실행 (POSIX 경로)');
+            console.log(`📂 실행 명령: npx playwright test "${testFilePosix}" --project=chromium`);
+            
+            try {
+              execSync(`npx playwright test "${testFilePosix}" --project=chromium --headed`, {
+                stdio: 'inherit',
+                cwd: projectRoot,
+                env: finalEnv
+              });
+              console.log('\n✅ PLAN-A 성공: 테스트 실행 완료');
+            } catch (eA) {
+              console.log('\n⚠️ 테스트 실행 실패:', eA?.message?.split('\n')[0] || eA?.message);
+              throw new Error(`테스트 실행이 실패했습니다: ${eA.message}`);
+            }
+            
+            console.log('\n' + '=' .repeat(60));
+            console.log(`✅ 시나리오 ${scenarioId} 실행 완료`);
+            
+            // 새로운 테스트 결과 파싱 및 저장
+            console.log('\n📊 새로운 테스트 결과 파싱 중...');
+            try {
+                const testResultsPath = path.join(__dirname, 'playwright-report/test-results.json');
+                
+                if (fs.existsSync(testResultsPath)) {
+                    const testResults = JSON.parse(fs.readFileSync(testResultsPath, 'utf8'));
+                    console.log('✅ Playwright 테스트 결과 파일 파싱 완료');
+                    
+                    // 시나리오별 결과 추출 및 저장
+                    const scenarioResults = {
+                        scenarioId: scenarioId,
+                        status: 'pass', // 기본값
+                        duration: '0분',
+                        startTime: new Date().toISOString(),
+                        endTime: new Date().toISOString(),
+                        tester: 'yh.lee5',
+                        testCases: [],
+                        errorDetails: null,
+                        screenshots: [],
+                        logs: []
+                    };
+                    
+                    // 테스트 결과 분석
+                    if (testResults.suites) {
+                        const scenarioSuite = testResults.suites.find(suite => 
+                            suite.file && suite.file.includes(`scenario/scenario-${scenarioId}.spec.js`)
+                        );
+                        
+                        if (scenarioSuite) {
+                            // 테스트 케이스 추출
+                            const extractTestCases = (suite) => {
+                                let cases = [];
+                                if (suite.specs) {
+                                    suite.specs.forEach(spec => {
+                                        if (spec.tests && spec.tests.length > 0) {
+                                            spec.tests.forEach(test => {
+                                                if (test.results && test.results.length > 0) {
+                                                    const result = test.results[0];
+                                                    // 실제 실행 시간 계산
+                                                    const testStartTime = new Date(Date.now() - (result.duration || 0));
+                                                    const testEndTime = new Date();
+                                                    
+                                                    cases.push({
+                                                        name: spec.title,
+                                                        status: result.status === 'passed' ? 'pass' : 'fail',
+                                                        duration: result.duration || 0,
+                                                        error: result.error?.message || null,
+                                                        startTime: testStartTime.toISOString(),
+                                                        endTime: testEndTime.toISOString()
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                                if (suite.suites) {
+                                    suite.suites.forEach(subSuite => {
+                                        cases = cases.concat(extractTestCases(subSuite));
+                                    });
+                                }
+                                return cases;
+                            };
+                            
+                            scenarioResults.testCases = extractTestCases(scenarioSuite);
+                            scenarioResults.status = scenarioResults.testCases.every(tc => tc.status === 'pass') ? 'pass' : 'fail';
+                            
+                            console.log(`📊 파싱된 테스트 케이스: ${scenarioResults.testCases.length}개`);
+                        }
+                    }
+                    
+                    // 결과를 global.testResults에 저장 (main.js에서 접근 가능)
+                    const globalResultsPath = path.join(__dirname, 'custom-reports/global-test-results.json');
+                    let globalResults = {};
+                    
+                    if (fs.existsSync(globalResultsPath)) {
+                        globalResults = JSON.parse(fs.readFileSync(globalResultsPath, 'utf8'));
+                    }
+                    
+                    globalResults[`scenario-${scenarioId}`] = scenarioResults;
+                    fs.writeFileSync(globalResultsPath, JSON.stringify(globalResults, null, 2), 'utf8');
+                    
+                    console.log('✅ 새로운 테스트 결과 저장 완료');
+                } else {
+                    console.log('⚠️ Playwright 테스트 결과 파일을 찾을 수 없습니다.');
+                }
+            } catch (error) {
+                console.error('❌ 테스트 결과 파싱 중 오류:', error.message);
+            }
+            
+            // 새로운 커스텀 리포트 생성 (main.js의 generateAndOpenCustomReport 함수 호출)
+            console.log('\n📊 새로운 커스텀 리포트 생성 중...');
+            try {
+                // main.js의 generateAndOpenCustomReport 함수를 호출하여 새로운 리포트 생성
+                const mainProcess = spawn('node', ['main.js', 'generate-report', scenarioId], {
+                    cwd: __dirname,
+                    stdio: 'inherit'
+                });
+                
+                mainProcess.on('close', (code) => {
+                    if (code === 0) {
+                        console.log('✅ 새로운 커스텀 리포트 생성 완료');
+                        
+                        // 생성된 리포트 열기
+                        const customReportPath = path.join(__dirname, 'custom-reports', `scenario-${scenarioId}`, 'custom-report.html');
+                        if (fs.existsSync(customReportPath)) {
+                            console.log('\n📊 커스텀 리포트를 엽니다...');
+                            const platform = process.platform;
+                            let command;
+                            
+                            if (platform === 'win32') {
+                                command = `start "" "${customReportPath}"`;
+                            } else if (platform === 'darwin') {
+                                command = `open "${customReportPath}"`;
+                            } else {
+                                command = `xdg-open "${customReportPath}"`;
+                            }
+                            
+                            try {
+                                execSync(command, { stdio: 'inherit' });
+                            } catch (error) {
+                                console.error('❌ 커스텀 리포트를 열 수 없습니다:', error.message);
+                            }
+                        }
+                    } else {
+                        console.error('❌ 커스텀 리포트 생성 실패');
+                    }
+                });
+                
+            } catch (error) {
+                console.error('❌ 커스텀 리포트 생성 중 오류:', error.message);
+            }
+            
+            console.log('\n📊 3단계 구조 레포트 요약:');
+            console.log('1단계: 대메뉴 - 9개 항목');
+            console.log('2단계: 중메뉴 - 각 대메뉴별 2-7개 항목');
+            console.log('3단계: 상세결과 - 각 중메뉴별 상세 테스트 결과');
+            console.log('\n💡 Playwright HTML 레포트에서 상세 내용 확인: playwright-report/index.html');
+            
+        } catch (error) {
+            console.log('\n' + '=' .repeat(60));
+            
+            // 에러 코드에 따른 메시지 분류
+            if (error.status === 130) {
+                // SIGINT (Ctrl+C)로 중단된 경우
+                console.log(`⏹️ 시나리오 ${scenarioId} 실행이 사용자에 의해 중단되었습니다.`);
+                console.log('💡 테스트를 다시 실행하려면: node electron-scenario-runner.js run 1');
+            } else if (error.status === 1) {
+                // 테스트 실패
+                console.log(`❌ 시나리오 ${scenarioId} 실행 실패`);
+                console.log('🔍 실패한 테스트는 Playwright HTML 레포트에서 확인 가능합니다.');
+            } else {
+                // 기타 오류
+                console.log(`❌ 시나리오 ${scenarioId} 실행 중 오류 발생`);
+                console.log(`오류 코드: ${error.status}`);
+                console.log(`오류 메시지: ${error.message}`);
+            }
+            
+            console.log('\n📊 3단계 구조 레포트 상태:');
+            console.log('⚠️ 테스트가 완료되지 않아 일부 결과만 확인 가능합니다.');
+            console.log('💡 Playwright HTML 레포트에서 중단 지점까지의 결과 확인: playwright-report/index.html');
+            
+            process.exit(error.status || 1);
+        }
+    },
+    
+    // 시나리오 목록 보기
+    list: () => {
+        console.log('📋 사용 가능한 시나리오 목록:\n');
+        
+        const scenarioDir = path.join(__dirname, 'config/scenario');
+        if (!fs.existsSync(scenarioDir)) {
+            console.log('❌ 시나리오 설정 디렉토리를 찾을 수 없습니다.');
+            return;
+        }
+        
+        const files = fs.readdirSync(scenarioDir)
+            .filter(file => file.startsWith('test-settings-') && file.endsWith('.json'))
+            .sort((a, b) => {
+                const aMatch = a.match(/\d+/);
+                const bMatch = b.match(/\d+/);
+                if (!aMatch || !bMatch) return 0;
+                const aNum = parseInt(aMatch[0]);
+                const bNum = parseInt(bMatch[0]);
+                return aNum - bNum;
+            });
+        
+        if (files.length === 0) {
+            console.log('❌ 시나리오 설정 파일이 없습니다.');
+            return;
+        }
+        
+        files.forEach(file => {
+            const match = file.match(/\d+/);
+            if (!match) return;
+            const scenarioId = match[0];
+            const configPath = path.join(scenarioDir, file);
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            
+            const testPath = path.join(__dirname, 'tests', 'scenario', `scenario-${scenarioId}.spec.js`);
+            
+            let status = '❌';
+            if (fs.existsSync(testPath)) {
+                status = '✅';
+            }
+            
+            const description = config.scenario?.description || '설명 없음';
+            console.log(`  ${scenarioId}. ${status} ${description}`);
+        });
+        
+        console.log('\n💡 모든 시나리오는 상세 단계별 테스트를 제공합니다.');
+    },
+    
+    // 시나리오 상태 확인
+    status: (scenarioId) => {
+        console.log(`📊 시나리오 ${scenarioId} 상태 확인:\n`);
+        
+        // 설정 파일 확인
+        const configPath = path.join(__dirname, `config/scenario/test-settings-${scenarioId}.json`);
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            console.log('✅ 설정 파일: 존재');
+            console.log(`   - 시나리오 ID: ${config.scenario?.id || 'N/A'}`);
+            console.log(`   - 시나리오 타입: ${config.scenario?.type || 'N/A'}`);
+            console.log(`   - 설명: ${config.scenario?.description || 'N/A'}`);
+        } else {
+            console.log('❌ 설정 파일: 없음');
+        }
+        
+        // 테스트 파일 확인
+        const testPath = path.join(__dirname, 'tests', 'scenario', `scenario-${scenarioId}.spec.js`);
+        
+        if (fs.existsSync(testPath)) {
+            console.log('✅ 테스트 파일: 존재');
+        } else {
+            console.log('❌ 테스트 파일: 없음');
+        }
+        
+        // 결과 파일 확인
+        const resultPath = path.join(__dirname, 'test-results');
+        if (fs.existsSync(resultPath)) {
+            const resultFiles = fs.readdirSync(resultPath);
+            const scenarioResults = resultFiles.filter(file => 
+                file.includes(`scenario-${scenarioId}`) || 
+                file.includes('detailed-results.json')
+            );
+            
+            if (scenarioResults.length > 0) {
+                console.log('✅ 결과 파일: 존재');
+                scenarioResults.forEach(file => {
+                    console.log(`   - ${file}`);
+                });
+            } else {
+                console.log('❌ 결과 파일: 없음 (아직 실행되지 않음)');
+            }
+        } else {
+            console.log('❌ 결과 디렉토리: 없음');
+        }
+    },
+    
+    // 대시보드 열기
+    dashboard: () => {
+        const dashboardPath = path.join(__dirname, 'test-results/dashboard.html');
+        console.log(`📊 대시보드를 엽니다: ${dashboardPath}`);
+        
+        // 운영체제별 브라우저 열기
+        const platform = process.platform;
+        let command;
+        
+        if (platform === 'win32') {
+            command = `start "" "${dashboardPath}"`;
+        } else if (platform === 'darwin') {
+            command = `open "${dashboardPath}"`;
+        } else {
+            command = `xdg-open "${dashboardPath}"`;
+        }
+        
+        try {
+            execSync(command, { stdio: 'inherit' });
+        } catch (error) {
+            console.log('브라우저를 자동으로 열 수 없습니다. 수동으로 파일을 열어주세요.');
+        }
+    },
+    
+    // Playwright 리포트 열기
+    report: () => {
+        const reportPath = path.join(__dirname, 'playwright-report/index.html');
+        console.log(`📋 Playwright 리포트를 엽니다: ${reportPath}`);
+        
+        // 운영체제별 브라우저 열기
+        const platform = process.platform;
+        let command;
+        
+        if (platform === 'win32') {
+            command = `start "" "${reportPath}"`;
+        } else if (platform === 'darwin') {
+            command = `open "${reportPath}"`;
+        } else {
+            command = `xdg-open "${reportPath}"`;
+        }
+        
+        try {
+            execSync(command, { stdio: 'inherit' });
+        } catch (error) {
+            console.log('브라우저를 자동으로 열 수 없습니다. 수동으로 파일을 열어주세요.');
+        }
+    },
+    
+    // 테스트 결과 정리
+    clean: () => {
+        console.log('🧹 테스트 결과를 정리합니다...');
+        
+        const dirsToClean = ['playwright-report'];
+        dirsToClean.forEach(dir => {
+            const dirPath = path.join(__dirname, dir);
+            if (fs.existsSync(dirPath)) {
+                fs.rmSync(dirPath, { recursive: true, force: true });
+                console.log(`✅ ${dir} 디렉토리 삭제됨`);
+            }
+        });
+        
+        console.log('✅ 정리 완료');
+    },
+    
+    // 도움말
+    help: () => {
+        console.log(`
+🎺 TROMBONE Electron 시나리오 실행기 사용법
+
+사용법: node electron-scenario-runner.js [옵션] [시나리오ID]
+
+옵션:
+  run <시나리오ID>        특정 시나리오 실행 (예: run 1)
+  list                    사용 가능한 시나리오 목록 보기
+  status <시나리오ID>     특정 시나리오 상태 확인 (예: status 1)
+  report                  Playwright 리포트 열기
+  clean                   테스트 결과 정리
+  help                    이 도움말 표시
+
+예시:
+  node electron-scenario-runner.js run 1              # 시나리오 1 실행
+  node electron-scenario-runner.js list               # 시나리오 목록 보기
+  node electron-scenario-runner.js status 1           # 시나리오 1 상태 확인
+  node electron-scenario-runner.js report             # Playwright 리포트 열기
+  node electron-scenario-runner.js clean              # 결과 정리
+
+3단계 구조 레포트:
+  1단계: 대메뉴 목록 (업무코드 등록, 툴체인 등록, 저장소 등록 등)
+  2단계: 중메뉴 항목 (각 대메뉴별 세부 단계)
+  3단계: 상세결과 (각 중메뉴별 테스트 결과, 스크린샷, 로그)
+
+QA를 위한 세부 단계별 테스트:
+  - 모든 시나리오는 각 단계마다 PASS/FAIL 결과 제공
+  - 상세한 로그와 소요시간 정보 포함
+
+결과 파일:
+  - playwright-report/index.html         # Playwright HTML 리포트 (3단계 구조)
+        `);
+    }
+};
+
+// 명령행 인수 처리
+const args = process.argv.slice(2);
+const command = args[0];
+
+if (!command || command === 'help') {
+    scenarioOptions.help();
+} else if (scenarioOptions[command]) {
+    if (command === 'run' || command === 'status') {
+        const scenarioId = args[1];
+        if (!scenarioId) {
+            console.error('❌ 시나리오 ID가 필요합니다.');
+            scenarioOptions.help();
+            process.exit(1);
+        }
+        scenarioOptions[command](scenarioId);
+    } else {
+        scenarioOptions[command]();
+    }
+} else {
+    console.error('❌ 알 수 없는 명령입니다:', command);
+    scenarioOptions.help();
+    process.exit(1);
+}
+
+console.log('\n🏁 시나리오 실행기 종료'); 

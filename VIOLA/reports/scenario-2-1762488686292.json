@@ -1,0 +1,175 @@
+{
+  "status": "fail",
+  "error": {
+    "message": "Pod 선택 실패: null",
+    "stack": "Error: Pod 선택 실패: null\n    at PodRecoveryManager.selectPod (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:226:15)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:185:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:80:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:184:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)"
+  },
+  "testCases": [
+    {
+      "name": "로그인 페이지 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T04:11:01.286Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:01.288Z",
+          "type": "info",
+          "message": "로그인 페이지 접근 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:03.596Z",
+          "type": "success",
+          "message": "로그인 페이지 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:03.596Z",
+      "duration": 2.309
+    },
+    {
+      "name": "로그인 정보 입력",
+      "status": "pass",
+      "startTime": "2025-11-07T04:11:03.596Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:03.596Z",
+          "type": "info",
+          "message": "로그인 정보 입력 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:04.753Z",
+          "type": "success",
+          "message": "로그인 정보 입력 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:04.753Z",
+      "duration": 1.157
+    },
+    {
+      "name": "로그인 실행 및 성공 확인",
+      "status": "pass",
+      "startTime": "2025-11-07T04:11:04.753Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:04.753Z",
+          "type": "info",
+          "message": "로그인 실행 및 성공 확인 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:11.859Z",
+          "type": "success",
+          "message": "로그인 실행 및 성공 확인 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:11.859Z",
+      "duration": 7.106
+    },
+    {
+      "name": "Kubernetes Engine 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T04:11:11.859Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:11.859Z",
+          "type": "info",
+          "message": "Kubernetes Engine 접근 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:15.047Z",
+          "type": "success",
+          "message": "Kubernetes Engine 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:15.047Z",
+      "duration": 3.188
+    },
+    {
+      "name": "클러스터 선택",
+      "status": "pass",
+      "startTime": "2025-11-07T04:11:15.047Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:15.047Z",
+          "type": "info",
+          "message": "클러스터 선택 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:17.824Z",
+          "type": "success",
+          "message": "클러스터 선택 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:17.825Z",
+      "duration": 2.778
+    },
+    {
+      "name": "컨테이너 관리 이동",
+      "status": "pass",
+      "startTime": "2025-11-07T04:11:17.825Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:17.825Z",
+          "type": "info",
+          "message": "컨테이너 관리 이동 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:21.029Z",
+          "type": "success",
+          "message": "컨테이너 관리 이동 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:21.029Z",
+      "duration": 3.204
+    },
+    {
+      "name": "Pod 선택",
+      "status": "fail",
+      "startTime": "2025-11-07T04:11:21.030Z",
+      "error": {
+        "message": "Pod 선택 실패: null",
+        "stack": "Error: Pod 선택 실패: null\n    at PodRecoveryManager.selectPod (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:226:15)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:185:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:80:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:184:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)"
+      },
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:11:21.030Z",
+          "type": "info",
+          "message": "Pod 선택 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:11:26.291Z",
+          "type": "error",
+          "message": "Pod 선택 실패: Pod 선택 실패: null"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:11:26.291Z",
+      "duration": 5.261
+    },
+    {
+      "name": "Pod 삭제",
+      "status": "pending"
+    },
+    {
+      "name": "백업 메뉴 이동",
+      "status": "pending"
+    },
+    {
+      "name": "백업 복원",
+      "status": "pending"
+    },
+    {
+      "name": "복원 확인",
+      "status": "pending"
+    }
+  ]
+}

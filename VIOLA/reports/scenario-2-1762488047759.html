@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIOLA Scenario 2 - 테스트 리포트</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; border-bottom: 3px solid #f44336; padding-bottom: 10px; }
+    .summary { display: flex; gap: 20px; margin: 20px 0; }
+    .summary-card { flex: 1; padding: 20px; border-radius: 8px; color: white; text-align: center; }
+    .summary-card.pass { background: #4CAF50; }
+    .summary-card.fail { background: #f44336; }
+    .summary-card.total { background: #2196F3; }
+    .summary-card h3 { margin: 0; font-size: 24px; }
+    .summary-card p { margin: 5px 0 0 0; font-size: 14px; }
+    .test-case { margin: 15px 0; padding: 15px; border-radius: 8px; border-left: 4px solid #ddd; }
+    .test-case.pass { background: #f1f8f4; border-left-color: #4CAF50; }
+    .test-case.fail { background: #ffebee; border-left-color: #f44336; }
+    .test-case h3 { margin: 0 0 10px 0; color: #333; }
+    .test-case .status { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+    .test-case .status.pass { background: #4CAF50; color: white; }
+    .test-case .status.fail { background: #f44336; color: white; }
+    .logs { margin-top: 10px; font-size: 12px; }
+    .log-entry { padding: 5px; margin: 2px 0; border-radius: 4px; }
+    .log-entry.info { background: #e3f2fd; }
+    .log-entry.success { background: #e8f5e9; }
+    .log-entry.error { background: #ffebee; }
+    .timestamp { color: #666; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 VIOLA Scenario 2: Pod 삭제 및 백업 복원</h1>
+    
+    <div class="summary">
+      <div class="summary-card total">
+        <h3>11</h3>
+        <p>Total Tests</p>
+      </div>
+      <div class="summary-card pass">
+        <h3>6</h3>
+        <p>Passed</p>
+      </div>
+      <div class="summary-card fail">
+        <h3>1</h3>
+        <p>Failed</p>
+      </div>
+    </div>
+    
+    <h2>📋 Test Cases</h2>
+    
+      <div class="test-case pass">
+        <h3>
+          로그인 페이지 접근
+          <span class="status pass">PASS</span>
+        </h3>
+        <p><strong>Duration:</strong> 2.15s</p>
+        
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:34</span>
+                📝 로그인 페이지 접근 시작...
+              </div>
+            
+              <div class="log-entry success">
+                <span class="timestamp">오전 11:10:36</span>
+                ✅ 로그인 페이지 접근 성공
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case pass">
+        <h3>
+          로그인 정보 입력
+          <span class="status pass">PASS</span>
+        </h3>
+        <p><strong>Duration:</strong> 1.15s</p>
+        
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:36</span>
+                📝 로그인 정보 입력 시작...
+              </div>
+            
+              <div class="log-entry success">
+                <span class="timestamp">오전 11:10:37</span>
+                ✅ 로그인 정보 입력 성공
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case pass">
+        <h3>
+          로그인 실행 및 성공 확인
+          <span class="status pass">PASS</span>
+        </h3>
+        <p><strong>Duration:</strong> 7.10s</p>
+        
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:37</span>
+                📝 로그인 실행 및 성공 확인 시작...
+              </div>
+            
+              <div class="log-entry success">
+                <span class="timestamp">오전 11:10:44</span>
+                ✅ 로그인 실행 및 성공 확인 성공
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case pass">
+        <h3>
+          Kubernetes Engine 접근
+          <span class="status pass">PASS</span>
+        </h3>
+        <p><strong>Duration:</strong> 3.18s</p>
+        
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:44</span>
+                📝 Kubernetes Engine 접근 시작...
+              </div>
+            
+              <div class="log-entry success">
+                <span class="timestamp">오전 11:10:47</span>
+                ✅ Kubernetes Engine 접근 성공
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case pass">
+        <h3>
+          클러스터 선택
+          <span class="status pass">PASS</span>
+        </h3>
+        <p><strong>Duration:</strong> 2.74s</p>
+        
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:47</span>
+                📝 클러스터 선택 시작...
+              </div>
+            
+              <div class="log-entry success">
+                <span class="timestamp">오전 11:10:50</span>
+                ✅ 클러스터 선택 성공
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case pass">
+        <h3>
+          컨테이너 관리 이동
+          <span class="status pass">PASS</span>
+        </h3>
+        <p><strong>Duration:</strong> 3.20s</p>
+        
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:50</span>
+                📝 컨테이너 관리 이동 시작...
+              </div>
+            
+              <div class="log-entry success">
+                <span class="timestamp">오전 11:10:53</span>
+                ✅ 컨테이너 관리 이동 성공
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case fail">
+        <h3>
+          Pod 선택
+          <span class="status fail">FAIL</span>
+        </h3>
+        <p><strong>Duration:</strong> 6594.03s</p>
+        <p style="color: #f44336;"><strong>Error:</strong> locator.check: Target page, context or browser has been closed</p>
+        
+          <div class="logs">
+            <strong>Logs:</strong>
+            
+              <div class="log-entry info">
+                <span class="timestamp">오전 11:10:53</span>
+                📝 Pod 선택 시작...
+              </div>
+            
+              <div class="log-entry error">
+                <span class="timestamp">오후 1:00:47</span>
+                ❌ Pod 선택 실패: locator.check: Target page, context or browser has been closed
+              </div>
+            
+          </div>
+        
+      </div>
+    
+      <div class="test-case pending">
+        <h3>
+          Pod 삭제
+          <span class="status pending">PENDING</span>
+        </h3>
+        
+        
+        
+      </div>
+    
+      <div class="test-case pending">
+        <h3>
+          백업 메뉴 이동
+          <span class="status pending">PENDING</span>
+        </h3>
+        
+        
+        
+      </div>
+    
+      <div class="test-case pending">
+        <h3>
+          백업 복원
+          <span class="status pending">PENDING</span>
+        </h3>
+        
+        
+        
+      </div>
+    
+      <div class="test-case pending">
+        <h3>
+          복원 확인
+          <span class="status pending">PENDING</span>
+        </h3>
+        
+        
+        
+      </div>
+    
+    
+    <p style="text-align: center; color: #666; margin-top: 30px;">
+      Generated at 2025. 11. 7. 오후 1:00:47
+    </p>
+  </div>
+</body>
+</html>
+  

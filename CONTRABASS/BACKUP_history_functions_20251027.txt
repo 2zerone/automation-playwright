@@ -1,0 +1,387 @@
+// CONTRABASS 실행 기록 창 관련 코드 백업 (2025-10-27)
+// 라인 4297-4679
+
+        function saveScenarioHistory(scenarioId, historyData) {
+            // 시나리오별 기록 배열 초기화
+            if (!scenarioHistories[scenarioId]) {
+                scenarioHistories[scenarioId] = [];
+            }
+            
+            // 새로운 기록 추가 (최신 순으로 정렬)
+            const newHistoryEntry = {
+                ...historyData,
+                id: Date.now() // 고유 ID
+            };
+            
+            scenarioHistories[scenarioId].unshift(newHistoryEntry);
+            
+            console.log(`📊 시나리오 ${scenarioId} 실행 기록 저장:`, {
+                totalRecords: scenarioHistories[scenarioId].length,
+                newRecord: newHistoryEntry
+            });
+            
+            // 최대 50개까지만 유지
+            if (scenarioHistories[scenarioId].length > 50) {
+                scenarioHistories[scenarioId] = scenarioHistories[scenarioId].slice(0, 50);
+            }
+            
+            // localStorage에 저장
+            try {
+                localStorage.setItem(`contrabass-scenario-history-${scenarioId}`, JSON.stringify(scenarioHistories[scenarioId]));
+                console.log(`✅ 시나리오 ${scenarioId} 실행 기록 localStorage 저장 완료`);
+            } catch (error) {
+                console.error('시나리오 기록 저장 중 오류:', error);
+            }
+        }
+        
+        // 시나리오 기록의 리포트 경로 업데이트
+        function updateScenarioHistoryReportPath(scenarioId, timestamp, reportPath) {
+            if (!scenarioHistories[scenarioId]) return;
+            
+            // 해당 타임스탬프의 기록 찾기
+            const historyIndex = scenarioHistories[scenarioId].findIndex(history => history.timestamp === timestamp);
+            if (historyIndex !== -1) {
+                // 리포트 경로 업데이트
+                scenarioHistories[scenarioId][historyIndex].reportPath = reportPath;
+                
+                // localStorage에 저장
+                try {
+                    localStorage.setItem(`contrabass-scenario-history-${scenarioId}`, JSON.stringify(scenarioHistories[scenarioId]));
+                    console.log(`시나리오 ${scenarioId} 기록의 리포트 경로가 업데이트되었습니다: ${reportPath}`);
+                } catch (error) {
+                    console.error('시나리오 기록 업데이트 중 오류:', error);
+                }
+            }
+        }
+        
+        // 시나리오 실행 기록 초기화 (테스트용)
+        function clearScenarioHistory(scenarioId) {
+            try {
+                localStorage.removeItem(`contrabass-scenario-history-${scenarioId}`);
+                scenarioHistories[scenarioId] = [];
+                console.log(`시나리오 ${scenarioId} 실행 기록이 초기화되었습니다.`);
+            } catch (error) {
+                console.error('시나리오 기록 초기화 중 오류:', error);
+            }
+        }
+        
+        // 전역 함수로 노출 (브라우저 콘솔에서 사용)
+        window.clearScenarioHistory = clearScenarioHistory;
+        
+        // 모든 시나리오 실행 기록 삭제 (브라우저 콘솔에서 사용)
+        function clearAllScenarioHistory() {
+            try {
+                for (let i = 1; i <= 21; i++) {
+                    localStorage.removeItem(`contrabass-scenario-history-${i}`);
+                    if (scenarioHistories[i]) {
+                        scenarioHistories[i] = [];
+                    }
+                }
+                console.log('✅ 모든 시나리오 실행 기록이 삭제되었습니다.');
+            } catch (error) {
+                console.error('모든 시나리오 기록 삭제 중 오류:', error);
+            }
+        }
+        
+        // 전역 함수로 노출
+        window.clearAllScenarioHistory = clearAllScenarioHistory;
+        
+
+        
+        // 파일 시스템에서 시나리오 히스토리 가져오기 (인덱스 파일 사용) - VIOLA 방식
+        async function getScenarioHistoryFromFiles(scenarioId) {
+            try {
+                // 시나리오 디렉토리의 index.json 파일에서 파일 목록 로드
+                const indexResponse = await fetch(`./custom-reports/scenario-${scenarioId}/index.json`);
+                
+                if (!indexResponse.ok) {
+                    console.warn(`시나리오 ${scenarioId}의 인덱스 파일을 찾을 수 없습니다.`);
+                    return [];
+                }
+                
+                const indexData = await indexResponse.json();
+                const reportFiles = indexData.files || [];
+                
+                console.log(`📊 시나리오 ${scenarioId} 인덱스에서 로드된 파일 수:`, reportFiles.length);
+                
+                const history = [];
+                
+                for (const file of reportFiles) {
+                    const timestampMatch = file.match(/custom-report-(.+)\.html/);
+                    if (timestampMatch) {
+                        const timestamp = timestampMatch[1];
+                        const reportFilePath = `./custom-reports/scenario-${scenarioId}/${file}`;
+                        
+                        // duration과 status 추출
+                        const reportInfo = await extractDurationFromReport(reportFilePath);
+                        const duration = reportInfo.duration;
+                        const durationText = reportInfo.durationText;
+                        const status = reportInfo.status || 'completed';
+                        
+                        history.push({
+                            timestamp: timestamp,
+                            formattedTimestamp: new Date(timestamp).toLocaleString('ko-KR'),
+                            reportPath: reportFilePath,
+                            status: status,
+                            duration: duration,
+                            durationText: durationText
+                        });
+                    }
+                }
+                
+                return history;
+            } catch (error) {
+                console.error(`시나리오 ${scenarioId} 히스토리 로드 중 오류:`, error);
+                return [];
+            }
+        }
+        
+        // 리포트 HTML에서 duration과 status 추출 (VIOLA 방식)
+        async function extractDurationFromReport(reportPath) {
+            try {
+                console.log(`📊 리포트에서 duration과 status 추출 시도: ${reportPath}`);
+                const response = await fetch(reportPath);
+                if (!response.ok) {
+                    console.warn(`⚠️ 리포트 파일을 읽을 수 없음: ${reportPath}`);
+                    return { duration: 0, durationText: '알 수 없음', status: 'completed' };
+                }
+
+                const htmlContent = await response.text();
+
+                // Status 추출
+                let status = 'completed';
+                const hasFailStatus = htmlContent.includes('status-badge fail') || htmlContent.includes('class="status-fail"');
+                const hasStoppedStatus = htmlContent.includes('stopped') || htmlContent.includes('중단');
+                const hasNotTestStatus = htmlContent.includes('status-not-test');
+                const hasPassStatus = htmlContent.includes('status-badge pass') || htmlContent.includes('status-pass');
+
+                if (hasFailStatus || hasStoppedStatus) {
+                    status = 'failed';
+                } else if (hasNotTestStatus && !hasPassStatus) {
+                    status = 'not-run';
+                } else if (hasPassStatus) {
+                    status = 'completed';
+                }
+
+                // Duration 추출 - 우선순위가 높은 패턴 먼저 시도 (VIOLA 방식)
+                const patterns = [
+                    /총\s*실행시간[:\s]*(\d+초|\d+분\s*\d*초|\d+ms)/i,
+                    /총\s*소요시간[:\s]*(\d+초|\d+분\s*\d*초|\d+ms)/i,
+                    /fa-play.*?실행시간[:\s]*(\d+초|\d+분\s+\d+초|\d+ms)/i,
+                    /meta-item.*?실행시간[:\s]*(\d+초|\d+분\s+\d+초|\d+ms)/i,
+                    /실행시간[:\s]*(\d+초|\d+분\s+\d+초)(?!ms)/i,
+                    /테스트\s*소요시간[:\s]*(\d+초|\d+분\s*\d*초|\d+ms)/i,
+                    /실행\s*소요시간[:\s]*(\d+초|\d+분\s*\d*초|\d+ms)/i,
+                    /duration[:\s]*(\d+초|\d+분\s*\d*초|\d+ms)/i
+                ];
+                
+                for (const pattern of patterns) {
+                    const match = htmlContent.match(pattern);
+                    if (match) {
+                        const durationStr = match[1];
+                        
+                        if (durationStr.includes('분')) {
+                            const minutesMatch = durationStr.match(/(\d+)분/);
+                            const secondsMatch = durationStr.match(/(\d+)초/);
+                            
+                            const minutes = minutesMatch ? parseInt(minutesMatch[1]) : 0;
+                            const seconds = secondsMatch ? parseInt(secondsMatch[1]) : 0;
+                            const totalSeconds = minutes * 60 + seconds;
+                            
+                            return {
+                                duration: totalSeconds,
+                                durationText: `${minutes}분 ${seconds}초`,
+                                status: status
+                            };
+                        } else if (durationStr.includes('초')) {
+                            const seconds = parseInt(durationStr);
+                            const minutes = Math.floor(seconds / 60);
+                            const remainingSeconds = seconds % 60;
+                            return {
+                                duration: seconds,
+                                durationText: `${minutes}분 ${remainingSeconds}초`,
+                                status: status
+                            };
+                        }
+                    }
+                }
+
+                return { duration: 0, durationText: '알 수 없음', status: status };
+            } catch (error) {
+                console.warn(`⚠️ 리포트 파일 읽기 실패: ${reportPath}`, error);
+                return { duration: 0, durationText: '알 수 없음', status: 'completed' };
+            }
+        }
+
+        // 시나리오 실행 기록 로드
+        // 타임스탬프 변환 헬퍼 함수 (2025-10-17T08-10-58 → Date 객체)
+        function parseTimestamp(timestamp) {
+            try {
+                // "2025-10-17T08-10-58" 형식을 "2025-10-17T08:10:58"로 변환
+                const normalized = timestamp.replace(/T(\d{2})-(\d{2})-(\d{2})/, 'T$1:$2:$3');
+                const date = new Date(normalized);
+                
+                if (isNaN(date.getTime())) {
+                    console.warn(`⚠️ 타임스탬프 파싱 실패: ${timestamp}`);
+                    return new Date(); // fallback to current date
+                }
+                
+                return date;
+            } catch (error) {
+                console.warn(`⚠️ 타임스탬프 파싱 오류: ${timestamp}`, error);
+                return new Date();
+            }
+        }
+
+        async function loadScenarioHistory(scenarioId) {
+            // 현재 활성화된 탭에 따라 다른 컨테이너 사용
+            const isHistoryTab = document.getElementById('history').classList.contains('active');
+            const containerId = isHistoryTab ? `history-content-${scenarioId}` : `scenario-history-content-${scenarioId}`;
+            const historyContent = document.getElementById(containerId);
+            if (!historyContent) return;
+            
+            try {
+                console.log(`📊 시나리오 ${scenarioId} 기록 로드 시작 (CONTRABASS)`);
+                
+                // localStorage에서 최신 실행 기록 로드
+                let history = [];
+                try {
+                    const storedHistory = localStorage.getItem(`contrabass-scenario-history-${scenarioId}`);
+                    if (storedHistory) {
+                        history = JSON.parse(storedHistory);
+                        console.log(`📊 localStorage에서 로드된 기록 수: ${history.length}`);
+                    }
+                } catch (error) {
+                    console.warn(`⚠️ localStorage 기록 로드 실패:`, error);
+                }
+                
+                // 파일 시스템에서 리포트 파일도 가져오기 (백업용)
+                if (history.length === 0) {
+                    history = await getScenarioHistoryFromFiles(scenarioId);
+                    console.log(`📊 파일 시스템에서 로드된 기록 수: ${history.length}`);
+                }
+                
+                // 각 기록의 reportPath 확인
+                history.forEach((item, index) => {
+                    console.log(`📊 기록 ${index + 1}:`, {
+                        timestamp: item.timestamp,
+                        timestampType: typeof item.timestamp,
+                        timestampDate: parseTimestamp(item.timestamp),
+                        status: item.status,
+                        reportPath: item.reportPath,
+                        reportPathType: typeof item.reportPath,
+                        hasReportPath: !!item.reportPath
+                    });
+                });
+                
+                if (history.length > 0) {
+                                    // 저장된 reportPath를 그대로 사용 (이미 올바른 경로가 저장되어 있음)
+                const updatedHistory = history.map(item => {
+                    console.log(`📊 기록 확인:`, {
+                        timestamp: new Date(item.timestamp).toLocaleString('ko-KR'),
+                        status: item.status,
+                        reportPath: item.reportPath,
+                        hasReportPath: !!item.reportPath,
+                        reportPathType: typeof item.reportPath,
+                        reportPathLength: item.reportPath ? item.reportPath.length : 0
+                    });
+                    return item;
+                });
+                    
+                    const historyHtml = updatedHistory.map(item => {
+                        let timestamp = 'N/A';
+                        try {
+                            const date = new Date(item.timestamp);
+                            if (!isNaN(date.getTime())) {
+                                timestamp = date.toLocaleString('ko-KR');
+                            }
+                        } catch (e) {
+                            console.warn('⚠️ timestamp 파싱 실패:', item.timestamp);
+                        }
+                        const statusText = getStatusText(item.status);
+                        const statusClass = item.status === 'completed' ? 'success' : 
+                                          item.status === 'failed' ? 'error' : 
+                                          item.status === 'running' ? 'warning' : 'info';
+                        
+                        // durationText 우선 사용, 없으면 duration(초) 변환
+                        let durationText = 'N/A';
+                        if (item.durationText && item.durationText !== 'N/A' && item.durationText !== '알 수 없음') {
+                            durationText = item.durationText;
+                        } else if (item.duration && typeof item.duration === 'number' && item.duration > 0) {
+                            if (item.duration < 60) {
+                                durationText = `${item.duration}초`;
+                            } else {
+                                const minutes = Math.floor(item.duration / 60);
+                                const seconds = item.duration % 60;
+                                durationText = `${minutes}분 ${seconds}초`;
+                            }
+                        }
+                        
+                        return `
+                            <div class="history-item">
+                                <div class="history-info">
+                                    <div class="history-timestamp">
+                                        <i class="fas fa-clock"></i>
+                                        <span>${timestamp}</span>
+                                    </div>
+                                    <div class="history-status ${statusClass}">
+                                        <i class="fas fa-circle"></i>
+                                        <span>${statusText}</span>
+                                    </div>
+                                    <div class="history-duration">
+                                        <i class="fas fa-stopwatch"></i>
+                                        <span>${durationText}</span>
+                                    </div>
+                                </div>
+                                <div class="history-actions">
+                                    ${item.reportPath ? `
+                                        <button class="btn btn-small btn-primary history-report-btn" data-report-path="${item.reportPath}" data-scenario-id="${scenarioId}">
+                                            <i class="fas fa-external-link-alt"></i> 리포트 열기
+                                    </button>
+                                    ` : `
+                                        <span class="no-report">리포트 없음</span>
+                                    `}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    historyContent.innerHTML = historyHtml;
+                    
+                    // 리포트 열기 버튼에 이벤트 리스너 추가
+                    const reportButtons = historyContent.querySelectorAll('.history-report-btn');
+                    reportButtons.forEach(button => {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            const reportPath = this.dataset.reportPath;
+                            const scenarioId = parseInt(this.dataset.scenarioId);
+                            
+                            console.log(`🔍 버튼 클릭 이벤트 발생!`);
+                            console.log(`  - 버튼 요소:`, this);
+                            console.log(`  - data-report-path:`, reportPath);
+                            console.log(`  - data-scenario-id:`, scenarioId);
+                            
+                            handleHistoryReportClick(reportPath, scenarioId);
+                        });
+                    });
+                    } else {
+                    historyContent.innerHTML = `
+                        <div class="history-empty">
+                            <i class="fas fa-info-circle"></i>
+                            <span>아직 실행 기록이 없습니다.</span>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('시나리오 기록 로드 중 오류:', error);
+                historyContent.innerHTML = `
+                    <div class="history-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>기록 로드 중 오류가 발생했습니다.</span>
+                        </div>
+                    `;
+                }
+        }
+

@@ -1,0 +1,226 @@
+{
+  "status": "fail",
+  "error": {
+    "message": "locator.count: Target page, context or browser has been closed",
+    "stack": "locator.count: Target page, context or browser has been closed\n    at PodRecoveryManager.restoreBackup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\lib\\classes\\PodRecoveryManager.js:319:55)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:215:7\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:85:5)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:214:5"
+  },
+  "testCases": [
+    {
+      "name": "로그인 페이지 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T04:16:47.506Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:16:47.508Z",
+          "type": "info",
+          "message": "로그인 페이지 접근 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:16:49.780Z",
+          "type": "success",
+          "message": "로그인 페이지 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:16:49.780Z",
+      "duration": 2.272
+    },
+    {
+      "name": "로그인 정보 입력",
+      "status": "pass",
+      "startTime": "2025-11-07T04:16:49.780Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:16:49.780Z",
+          "type": "info",
+          "message": "로그인 정보 입력 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:16:50.937Z",
+          "type": "success",
+          "message": "로그인 정보 입력 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:16:50.937Z",
+      "duration": 1.157
+    },
+    {
+      "name": "로그인 실행 및 성공 확인",
+      "status": "pass",
+      "startTime": "2025-11-07T04:16:50.937Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:16:50.937Z",
+          "type": "info",
+          "message": "로그인 실행 및 성공 확인 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:16:58.036Z",
+          "type": "success",
+          "message": "로그인 실행 및 성공 확인 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:16:58.036Z",
+      "duration": 7.099
+    },
+    {
+      "name": "Kubernetes Engine 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T04:16:58.038Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:16:58.038Z",
+          "type": "info",
+          "message": "Kubernetes Engine 접근 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:17:01.224Z",
+          "type": "success",
+          "message": "Kubernetes Engine 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:17:01.224Z",
+      "duration": 3.186
+    },
+    {
+      "name": "클러스터 선택",
+      "status": "pass",
+      "startTime": "2025-11-07T04:17:01.224Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:17:01.224Z",
+          "type": "info",
+          "message": "클러스터 선택 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:17:03.987Z",
+          "type": "success",
+          "message": "클러스터 선택 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:17:03.987Z",
+      "duration": 2.763
+    },
+    {
+      "name": "컨테이너 관리 이동",
+      "status": "pass",
+      "startTime": "2025-11-07T04:17:03.987Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:17:03.987Z",
+          "type": "info",
+          "message": "컨테이너 관리 이동 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:17:07.206Z",
+          "type": "success",
+          "message": "컨테이너 관리 이동 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:17:07.206Z",
+      "duration": 3.219
+    },
+    {
+      "name": "Pod 선택",
+      "status": "pass",
+      "startTime": "2025-11-07T04:17:07.206Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:17:07.206Z",
+          "type": "info",
+          "message": "Pod 선택 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:17:08.837Z",
+          "type": "success",
+          "message": "Pod 선택 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:17:08.837Z",
+      "duration": 1.631
+    },
+    {
+      "name": "Pod 삭제",
+      "status": "pass",
+      "startTime": "2025-11-07T04:17:08.838Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:17:08.838Z",
+          "type": "info",
+          "message": "Pod 삭제 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:18:48.700Z",
+          "type": "success",
+          "message": "Pod 삭제 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:18:48.700Z",
+      "duration": 99.862
+    },
+    {
+      "name": "백업 메뉴 이동",
+      "status": "pass",
+      "startTime": "2025-11-07T04:18:48.700Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:18:48.700Z",
+          "type": "info",
+          "message": "백업 메뉴 이동 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:18:52.382Z",
+          "type": "success",
+          "message": "백업 메뉴 이동 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:18:52.383Z",
+      "duration": 3.683
+    },
+    {
+      "name": "백업 복원",
+      "status": "fail",
+      "startTime": "2025-11-07T04:18:52.384Z",
+      "error": {
+        "message": "locator.count: Target page, context or browser has been closed",
+        "stack": "locator.count: Target page, context or browser has been closed\n    at PodRecoveryManager.restoreBackup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\lib\\classes\\PodRecoveryManager.js:319:55)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:215:7\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:85:5)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:214:5"
+      },
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:18:52.384Z",
+          "type": "info",
+          "message": "백업 복원 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:18:55.511Z",
+          "type": "error",
+          "message": "백업 복원 실패: locator.count: Target page, context or browser has been closed"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:18:55.511Z",
+      "duration": 3.127
+    },
+    {
+      "name": "복원 확인",
+      "status": "pending"
+    }
+  ]
+}

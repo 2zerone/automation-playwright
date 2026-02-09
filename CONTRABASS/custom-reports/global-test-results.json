@@ -1,0 +1,594 @@
+{
+  "scenario-1": {
+    "status": "fail",
+    "testCases": [
+      {
+        "name": "로그인 페이지 접근",
+        "status": "fail",
+        "duration": 18212,
+        "error": "Error: page.goto: net::ERR_ABORTED; maybe frame was detached?\nCall log:\n\u001b[2m  - navigating to \"https://305tst.console.bf.okestro.cloud/\", waiting until \"networkidle\"\u001b[22m\n\n\n   at ..\\lib\\classes\\LoginManager.js:47\n\n  45 |     \n  46 |     // HTTPS 인증서 오류 무시 설정\n> 47 |     await this.page.goto('https://305tst.console.bf.okestro.cloud/', {\n     |                     ^\n  48 |       waitUntil: 'networkidle',\n  49 |       timeout: 30000\n  50 |     });\n    at LoginManager.navigateToLoginPage (C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\lib\\classes\\LoginManager.js:47:21)\n    at C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\tests\\scenario\\scenario-1.spec.js:63:9\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\tests\\scenario\\scenario-common.js:99:5)\n    at C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\tests\\scenario\\scenario-1.spec.js:61:7\n    at C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\tests\\scenario\\scenario-1.spec.js:60:5",
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:18.723Z",
+        "endTime": "2025-12-05T09:21:36.935Z"
+      },
+      {
+        "name": "로그인 정보 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.018Z",
+        "endTime": "2025-12-05T09:21:40.018Z"
+      },
+      {
+        "name": "로그인 실행 및 성공 확인",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.019Z",
+        "endTime": "2025-12-05T09:21:40.019Z"
+      },
+      {
+        "name": "인스턴스 생성 페이지 이동",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.019Z",
+        "endTime": "2025-12-05T09:21:40.019Z"
+      },
+      {
+        "name": "기본 정보 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.020Z",
+        "endTime": "2025-12-05T09:21:40.020Z"
+      },
+      {
+        "name": "인스턴스 사양 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.020Z",
+        "endTime": "2025-12-05T09:21:40.020Z"
+      },
+      {
+        "name": "세그먼트 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.020Z",
+        "endTime": "2025-12-05T09:21:40.020Z"
+      },
+      {
+        "name": "보안 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.020Z",
+        "endTime": "2025-12-05T09:21:40.020Z"
+      },
+      {
+        "name": "항목 선택",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.020Z",
+        "endTime": "2025-12-05T09:21:40.020Z"
+      },
+      {
+        "name": "인스턴스 생성 확인",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-12-05T09:21:40.020Z",
+        "endTime": "2025-12-05T09:21:40.020Z"
+      }
+    ],
+    "duration": "0분 29초",
+    "startTime": "2025-12-05T09:21:12.596Z",
+    "endTime": "2025-12-05T09:21:41.189Z",
+    "timestamp": "2025. 12. 5. 오후 6:21:12"
+  },
+  "scenario-2": {
+    "status": "pass",
+    "testCases": [
+      {
+        "name": "로그인 페이지 접근",
+        "status": "pass",
+        "duration": 3392,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:02:14.262Z",
+        "endTime": "2025-11-13T05:02:17.654Z"
+      },
+      {
+        "name": "로그인 정보 입력",
+        "status": "pass",
+        "duration": 2298,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:02:21.400Z",
+        "endTime": "2025-11-13T05:02:23.698Z"
+      },
+      {
+        "name": "로그인 실행 및 성공 확인",
+        "status": "pass",
+        "duration": 11005,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:02:23.746Z",
+        "endTime": "2025-11-13T05:02:34.751Z"
+      },
+      {
+        "name": "로드밸런서 메뉴 접근",
+        "status": "pass",
+        "duration": 24267,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:02:34.790Z",
+        "endTime": "2025-11-13T05:02:59.057Z"
+      },
+      {
+        "name": "기본 정보 입력",
+        "status": "pass",
+        "duration": 8241,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:02:59.107Z",
+        "endTime": "2025-11-13T05:03:07.348Z"
+      },
+      {
+        "name": "리스너 입력",
+        "status": "pass",
+        "duration": 5999,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:03:07.435Z",
+        "endTime": "2025-11-13T05:03:13.434Z"
+      },
+      {
+        "name": "풀 입력",
+        "status": "pass",
+        "duration": 5254,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:03:13.479Z",
+        "endTime": "2025-11-13T05:03:18.733Z"
+      },
+      {
+        "name": "풀멤버 입력",
+        "status": "pass",
+        "duration": 9477,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:03:18.764Z",
+        "endTime": "2025-11-13T05:03:28.241Z"
+      },
+      {
+        "name": "헬스체크 입력",
+        "status": "pass",
+        "duration": 5323,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:03:28.274Z",
+        "endTime": "2025-11-13T05:03:33.597Z"
+      },
+      {
+        "name": "로드밸런서 생성 확인",
+        "status": "pass",
+        "duration": 41055,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T05:03:33.629Z",
+        "endTime": "2025-11-13T05:04:14.684Z"
+      }
+    ],
+    "duration": "2분 10초",
+    "startTime": "2025-11-13T05:02:06.541Z",
+    "endTime": "2025-11-13T05:04:16.367Z",
+    "timestamp": "2025. 11. 13. 오후 2:02:06"
+  },
+  "scenario-3": {
+    "status": "pass",
+    "testCases": [
+      {
+        "name": "Navigate to page",
+        "status": "pass",
+        "duration": 4120,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:32.040Z",
+        "endTime": "2026-02-03T04:42:36.160Z"
+      },
+      {
+        "name": "Click username button",
+        "status": "pass",
+        "duration": 4728,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:39.255Z",
+        "endTime": "2026-02-03T04:42:43.983Z"
+      },
+      {
+        "name": "Fill username",
+        "status": "pass",
+        "duration": 3354,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:44.056Z",
+        "endTime": "2026-02-03T04:42:47.410Z"
+      },
+      {
+        "name": "Click password button",
+        "status": "pass",
+        "duration": 4001,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:47.481Z",
+        "endTime": "2026-02-03T04:42:51.482Z"
+      },
+      {
+        "name": "Fill password",
+        "status": "pass",
+        "duration": 3442,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:51.517Z",
+        "endTime": "2026-02-03T04:42:54.959Z"
+      },
+      {
+        "name": "Click login button",
+        "status": "pass",
+        "duration": 4258,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:54.999Z",
+        "endTime": "2026-02-03T04:42:59.257Z"
+      },
+      {
+        "name": "Navigate to page 2",
+        "status": "pass",
+        "duration": 4570,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T04:42:59.286Z",
+        "endTime": "2026-02-03T04:43:03.856Z"
+      }
+    ],
+    "duration": "0분 41초",
+    "startTime": "2026-02-03T04:42:24.002Z",
+    "endTime": "2026-02-03T04:43:05.421Z",
+    "timestamp": "2026. 2. 3. 오후 1:42:24"
+  },
+  "scenario-4": {
+    "status": "fail",
+    "testCases": [],
+    "duration": "0분 4초",
+    "startTime": "2026-02-03T05:02:19.639Z",
+    "endTime": "2026-02-03T05:02:23.706Z",
+    "timestamp": "2026. 2. 3. 오후 2:02:19"
+  },
+  "scenario-5": {
+    "status": "fail",
+    "testCases": [],
+    "duration": "0분 4초",
+    "startTime": "2026-02-03T05:08:33.260Z",
+    "endTime": "2026-02-03T05:08:37.466Z",
+    "timestamp": "2026. 2. 3. 오후 2:08:33"
+  },
+  "scenario-6": {
+    "status": "pass",
+    "testCases": [
+      {
+        "name": "Navigate to page",
+        "status": "pass",
+        "duration": 3254,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:26.615Z",
+        "endTime": "2026-02-03T05:16:29.869Z"
+      },
+      {
+        "name": "Fill username",
+        "status": "pass",
+        "duration": 2652,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:31.793Z",
+        "endTime": "2026-02-03T05:16:34.445Z"
+      },
+      {
+        "name": "Fill password",
+        "status": "pass",
+        "duration": 2571,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:34.479Z",
+        "endTime": "2026-02-03T05:16:37.050Z"
+      },
+      {
+        "name": "Click login button",
+        "status": "pass",
+        "duration": 2442,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:37.097Z",
+        "endTime": "2026-02-03T05:16:39.539Z"
+      },
+      {
+        "name": "Click element",
+        "status": "pass",
+        "duration": 1957,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:39.559Z",
+        "endTime": "2026-02-03T05:16:41.516Z"
+      },
+      {
+        "name": "Click field",
+        "status": "pass",
+        "duration": 1853,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:41.535Z",
+        "endTime": "2026-02-03T05:16:43.388Z"
+      },
+      {
+        "name": "Click field 2",
+        "status": "pass",
+        "duration": 1804,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:43.408Z",
+        "endTime": "2026-02-03T05:16:45.212Z"
+      },
+      {
+        "name": "Click temporary cluster button",
+        "status": "pass",
+        "duration": 2723,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T05:16:45.229Z",
+        "endTime": "2026-02-03T05:16:47.952Z"
+      }
+    ],
+    "duration": "0분 28초",
+    "startTime": "2026-02-03T05:16:20.370Z",
+    "endTime": "2026-02-03T05:16:48.366Z",
+    "timestamp": "2026. 2. 3. 오후 2:16:20"
+  },
+  "scenario-7": {
+    "status": "pass",
+    "testCases": [
+      {
+        "name": "Navigate to page",
+        "status": "pass",
+        "duration": 3247,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:32.233Z",
+        "endTime": "2026-02-03T06:37:35.480Z"
+      },
+      {
+        "name": "Fill username",
+        "status": "pass",
+        "duration": 2679,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:38.036Z",
+        "endTime": "2026-02-03T06:37:40.715Z"
+      },
+      {
+        "name": "Fill password",
+        "status": "pass",
+        "duration": 2443,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:40.749Z",
+        "endTime": "2026-02-03T06:37:43.192Z"
+      },
+      {
+        "name": "Click login button",
+        "status": "pass",
+        "duration": 2436,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:43.218Z",
+        "endTime": "2026-02-03T06:37:45.654Z"
+      },
+      {
+        "name": "Click element",
+        "status": "pass",
+        "duration": 1904,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:45.672Z",
+        "endTime": "2026-02-03T06:37:47.576Z"
+      },
+      {
+        "name": "Click field",
+        "status": "pass",
+        "duration": 2363,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:47.593Z",
+        "endTime": "2026-02-03T06:37:49.956Z"
+      },
+      {
+        "name": "Click field 2",
+        "status": "pass",
+        "duration": 1816,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:49.973Z",
+        "endTime": "2026-02-03T06:37:51.789Z"
+      },
+      {
+        "name": "Click gpu cluster h100 button",
+        "status": "pass",
+        "duration": 4134,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:51.811Z",
+        "endTime": "2026-02-03T06:37:55.945Z"
+      },
+      {
+        "name": "Click element 2",
+        "status": "pass",
+        "duration": 1767,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:55.963Z",
+        "endTime": "2026-02-03T06:37:57.730Z"
+      },
+      {
+        "name": "Click element 3",
+        "status": "pass",
+        "duration": 1794,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:57.748Z",
+        "endTime": "2026-02-03T06:37:59.542Z"
+      },
+      {
+        "name": "Click field 3",
+        "status": "pass",
+        "duration": 1989,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:37:59.561Z",
+        "endTime": "2026-02-03T06:38:01.550Z"
+      },
+      {
+        "name": "Click create button",
+        "status": "pass",
+        "duration": 2381,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-03T06:38:01.564Z",
+        "endTime": "2026-02-03T06:38:03.945Z"
+      }
+    ],
+    "duration": "0분 39초",
+    "startTime": "2026-02-03T06:37:25.388Z",
+    "endTime": "2026-02-03T06:38:04.438Z",
+    "timestamp": "2026. 2. 3. 오후 3:37:25"
+  },
+  "scenario-10": {
+    "status": "pass",
+    "testCases": [
+      {
+        "name": "Navigate to page",
+        "status": "pass",
+        "duration": 4681,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:20.580Z",
+        "endTime": "2026-02-05T07:01:25.261Z"
+      },
+      {
+        "name": "Fill username",
+        "status": "pass",
+        "duration": 2924,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:28.746Z",
+        "endTime": "2026-02-05T07:01:31.670Z"
+      },
+      {
+        "name": "Fill password",
+        "status": "pass",
+        "duration": 2624,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:31.696Z",
+        "endTime": "2026-02-05T07:01:34.320Z"
+      },
+      {
+        "name": "Click login button",
+        "status": "pass",
+        "duration": 3262,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:34.354Z",
+        "endTime": "2026-02-05T07:01:37.616Z"
+      },
+      {
+        "name": "Click field",
+        "status": "pass",
+        "duration": 1951,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:37.635Z",
+        "endTime": "2026-02-05T07:01:39.586Z"
+      },
+      {
+        "name": "Click field 2",
+        "status": "pass",
+        "duration": 1895,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:39.603Z",
+        "endTime": "2026-02-05T07:01:41.498Z"
+      },
+      {
+        "name": "Click field 3",
+        "status": "pass",
+        "duration": 1855,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:41.513Z",
+        "endTime": "2026-02-05T07:01:43.368Z"
+      },
+      {
+        "name": "Click field 4",
+        "status": "pass",
+        "duration": 1881,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:43.384Z",
+        "endTime": "2026-02-05T07:01:45.265Z"
+      },
+      {
+        "name": "Click create button",
+        "status": "pass",
+        "duration": 2357,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:45.281Z",
+        "endTime": "2026-02-05T07:01:47.638Z"
+      },
+      {
+        "name": "Fill name",
+        "status": "pass",
+        "duration": 1640,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:47.654Z",
+        "endTime": "2026-02-05T07:01:49.294Z"
+      },
+      {
+        "name": "Click confirm button",
+        "status": "pass",
+        "duration": 2279,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-05T07:01:49.307Z",
+        "endTime": "2026-02-05T07:01:51.586Z"
+      }
+    ],
+    "duration": "0분 42초",
+    "startTime": "2026-02-05T07:01:09.653Z",
+    "endTime": "2026-02-05T07:01:52.000Z",
+    "timestamp": "2026. 2. 5. 오후 4:01:09"
+  }
+}

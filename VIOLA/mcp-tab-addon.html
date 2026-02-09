@@ -1,0 +1,544 @@
+<!-- 
+=================================================================
+VIOLA Playwright MCP 탭 추가 코드
+=================================================================
+이 파일의 내용을 viola-main.html에 붙여넣으세요.
+
+사용 방법:
+1. <!-- MCP 탭 HTML 추가 --> 섹션을 이력 관리 탭 다음에 붙여넣기
+2. /* MCP 탭 CSS */ 섹션을 </style> 직전에 붙여넣기  
+3. // MCP 탭 JavaScript 섹션을 </script> 직전에 붙여넣기
+4. 네비게이션 아이템은 이미 추가되어 있음
+=================================================================
+-->
+
+<!-- ==================== MCP 탭 HTML 추가 (이력 관리 탭 다음에 붙여넣기) ==================== -->
+
+            <!-- Playwright MCP 탭 -->
+            <div id="playwright-mcp" class="tab-content">
+                <div class="content-header">
+                    <h2>🤖 Playwright MCP</h2>
+                    <p>자연어로 테스트를 요청하고, MCP를 활용한 자동화된 테스트를 실행합니다.</p>
+                </div>
+                <div class="content-body">
+                    <!-- 프롬프트 입력 섹션 -->
+                    <div class="mcp-prompt-section">
+                        <h3>💬 테스트 요청</h3>
+                        <div class="mcp-prompt-container">
+                            <textarea id="mcpPromptInput" class="mcp-prompt-input" 
+                                placeholder="예: '로그인해서 Pod 생성 테스트 해줘'" 
+                                rows="4"></textarea>
+                            <div class="mcp-button-group">
+                                <button class="btn-primary" onclick="executeMCPTest()">
+                                    <i class="fas fa-play"></i> 테스트 실행
+                                </button>
+                                <button class="btn-secondary" onclick="saveMCPPrompt()">
+                                    <i class="fas fa-save"></i> 프롬프트 저장
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 저장된 프롬프트 목록 -->
+                    <div class="mcp-saved-prompts-section">
+                        <div class="section-header">
+                            <h3>📚 저장된 프롬프트</h3>
+                            <button class="btn-secondary btn-sm" onclick="showAddPromptDialog()">
+                                <i class="fas fa-plus"></i> 새 프롬프트 추가
+                            </button>
+                        </div>
+                        <div id="mcpSavedPromptsList" class="mcp-prompts-grid">
+                            <!-- 저장된 프롬프트 카드들이 동적으로 생성됩니다 -->
+                        </div>
+                    </div>
+
+                    <!-- MCP 실행 로그 -->
+                    <div class="mcp-log-section">
+                        <h3>📋 실행 로그</h3>
+                        <div id="mcpLogContainer" class="mcp-log-container">
+                            <div class="log-placeholder">테스트 실행 로그가 여기에 표시됩니다.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<!-- ==================== MCP 탭 CSS (</style> 직전에 붙여넣기) ==================== -->
+
+        /* Playwright MCP 탭 스타일 */
+        .mcp-prompt-section,
+        .mcp-saved-prompts-section,
+        .mcp-log-section {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .mcp-prompt-section h3,
+        .mcp-saved-prompts-section h3,
+        .mcp-log-section h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .mcp-prompt-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mcp-prompt-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #000000;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .mcp-prompt-input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .mcp-button-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .mcp-prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .mcp-prompt-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .mcp-prompt-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-color: #10b981;
+        }
+
+        .mcp-prompt-card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #000000;
+            font-size: 1.05em;
+        }
+
+        .mcp-prompt-card-content {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .mcp-prompt-card-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .mcp-prompt-card-actions button {
+            padding: 6px 12px;
+            font-size: 0.85em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mcp-prompt-card-actions .btn-use {
+            background: #10b981;
+            color: white;
+        }
+
+        .mcp-prompt-card-actions .btn-use:hover {
+            background: #059669;
+        }
+
+        .mcp-prompt-card-actions .btn-edit {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .mcp-prompt-card-actions .btn-edit:hover {
+            background: #2563eb;
+        }
+
+        .mcp-prompt-card-actions .btn-delete {
+            background: #ef4444;
+            color: white;
+        }
+
+        .mcp-prompt-card-actions .btn-delete:hover {
+            background: #dc2626;
+        }
+
+        .mcp-log-container {
+            background: rgba(0, 0, 0, 0.9);
+            color: #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .log-placeholder {
+            color: #666;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .mcp-log-entry {
+            margin-bottom: 8px;
+            padding: 4px 0;
+        }
+
+        .mcp-log-entry.info {
+            color: #10b981;
+        }
+
+        .mcp-log-entry.success {
+            color: #22c55e;
+        }
+
+        .mcp-log-entry.error {
+            color: #ef4444;
+        }
+
+        .mcp-log-entry.warning {
+            color: #f59e0b;
+        }
+
+
+<!-- ==================== MCP 탭 JavaScript (</script> 직전에 붙여넣기) ==================== -->
+
+        // ==================== Playwright MCP 탭 관련 함수들 ====================
+        
+        // MCP 프롬프트 저장소 (LocalStorage에 저장)
+        const MCP_PROMPTS_KEY = 'viola_mcp_prompts';
+        
+        // MCP 탭 초기화
+        function initializeMCPTab() {
+            console.log('🤖 MCP 탭 초기화 중...');
+            loadSavedPrompts();
+        }
+        
+        // 저장된 프롬프트 로드
+        function loadSavedPrompts() {
+            const prompts = getMCPPrompts();
+            const promptsList = document.getElementById('mcpSavedPromptsList');
+            
+            if (!promptsList) return;
+            
+            if (prompts.length === 0) {
+                promptsList.innerHTML = `
+                    <div class="log-placeholder">
+                        저장된 프롬프트가 없습니다.<br>
+                        자주 사용하는 프롬프트를 저장하여 빠르게 재사용하세요.
+                    </div>
+                `;
+                return;
+            }
+            
+            promptsList.innerHTML = '';
+            prompts.forEach(prompt => {
+                const card = createPromptCard(prompt);
+                promptsList.appendChild(card);
+            });
+        }
+        
+        // 프롬프트 카드 생성
+        function createPromptCard(prompt) {
+            const card = document.createElement('div');
+            card.className = 'mcp-prompt-card';
+            card.innerHTML = `
+                <div class="mcp-prompt-card-title">${escapeHtml(prompt.title)}</div>
+                <div class="mcp-prompt-card-content">${escapeHtml(prompt.content)}</div>
+                <div class="mcp-prompt-card-actions">
+                    <button class="btn-use" onclick="useSavedPrompt('${prompt.id}')">
+                        <i class="fas fa-play"></i> 사용
+                    </button>
+                    <button class="btn-edit" onclick="editPrompt('${prompt.id}')">
+                        <i class="fas fa-edit"></i> 수정
+                    </button>
+                    <button class="btn-delete" onclick="deletePrompt('${prompt.id}')">
+                        <i class="fas fa-trash"></i> 삭제
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+        
+        // LocalStorage에서 프롬프트 가져오기
+        function getMCPPrompts() {
+            try {
+                const prompts = localStorage.getItem(MCP_PROMPTS_KEY);
+                return prompts ? JSON.parse(prompts) : [];
+            } catch (error) {
+                console.error('프롬프트 로드 실패:', error);
+                return [];
+            }
+        }
+        
+        // LocalStorage에 프롬프트 저장
+        function saveMCPPromptsToStorage(prompts) {
+            try {
+                localStorage.setItem(MCP_PROMPTS_KEY, JSON.stringify(prompts));
+                return true;
+            } catch (error) {
+                console.error('프롬프트 저장 실패:', error);
+                showToast('프롬프트 저장에 실패했습니다.', 'error');
+                return false;
+            }
+        }
+        
+        // 프롬프트 저장 (현재 입력란의 내용)
+        async function saveMCPPrompt() {
+            const input = document.getElementById('mcpPromptInput');
+            const content = input.value.trim();
+            
+            if (!content) {
+                showToast('프롬프트 내용을 입력해주세요.', 'warning');
+                return;
+            }
+            
+            // 제목 입력 받기
+            const title = prompt('프롬프트 제목을 입력하세요:', content.substring(0, 30) + '...');
+            if (!title) return;
+            
+            const prompts = getMCPPrompts();
+            const newPrompt = {
+                id: Date.now().toString(),
+                title: title.trim(),
+                content: content,
+                createdAt: new Date().toISOString()
+            };
+            
+            prompts.push(newPrompt);
+            
+            if (saveMCPPromptsToStorage(prompts)) {
+                showToast('✅ 프롬프트가 저장되었습니다.', 'success');
+                loadSavedPrompts();
+            }
+        }
+        
+        // 새 프롬프트 추가 다이얼로그
+        function showAddPromptDialog() {
+            const title = prompt('프롬프트 제목을 입력하세요:');
+            if (!title) return;
+            
+            const content = prompt('프롬프트 내용을 입력하세요:');
+            if (!content) return;
+            
+            const prompts = getMCPPrompts();
+            const newPrompt = {
+                id: Date.now().toString(),
+                title: title.trim(),
+                content: content.trim(),
+                createdAt: new Date().toISOString()
+            };
+            
+            prompts.push(newPrompt);
+            
+            if (saveMCPPromptsToStorage(prompts)) {
+                showToast('✅ 프롬프트가 추가되었습니다.', 'success');
+                loadSavedPrompts();
+            }
+        }
+        
+        // 저장된 프롬프트 사용
+        function useSavedPrompt(promptId) {
+            const prompts = getMCPPrompts();
+            const prompt = prompts.find(p => p.id === promptId);
+            
+            if (!prompt) {
+                showToast('프롬프트를 찾을 수 없습니다.', 'error');
+                return;
+            }
+            
+            const input = document.getElementById('mcpPromptInput');
+            input.value = prompt.content;
+            input.focus();
+            
+            showToast(`📝 "${prompt.title}" 프롬프트를 입력란에 불러왔습니다.`, 'info');
+        }
+        
+        // 프롬프트 수정
+        function editPrompt(promptId) {
+            const prompts = getMCPPrompts();
+            const promptIndex = prompts.findIndex(p => p.id === promptId);
+            
+            if (promptIndex === -1) {
+                showToast('프롬프트를 찾을 수 없습니다.', 'error');
+                return;
+            }
+            
+            const prompt = prompts[promptIndex];
+            const newTitle = prompt('제목 수정:', prompt.title);
+            if (!newTitle) return;
+            
+            const newContent = prompt('내용 수정:', prompt.content);
+            if (!newContent) return;
+            
+            prompts[promptIndex] = {
+                ...prompt,
+                title: newTitle.trim(),
+                content: newContent.trim(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            if (saveMCPPromptsToStorage(prompts)) {
+                showToast('✅ 프롬프트가 수정되었습니다.', 'success');
+                loadSavedPrompts();
+            }
+        }
+        
+        // 프롬프트 삭제
+        function deletePrompt(promptId) {
+            if (!confirm('이 프롬프트를 삭제하시겠습니까?')) return;
+            
+            const prompts = getMCPPrompts();
+            const filteredPrompts = prompts.filter(p => p.id !== promptId);
+            
+            if (saveMCPPromptsToStorage(filteredPrompts)) {
+                showToast('✅ 프롬프트가 삭제되었습니다.', 'success');
+                loadSavedPrompts();
+            }
+        }
+        
+        // MCP 테스트 실행
+        async function executeMCPTest() {
+            const input = document.getElementById('mcpPromptInput');
+            const promptText = input.value.trim();
+            
+            if (!promptText) {
+                showToast('테스트 요청 내용을 입력해주세요.', 'warning');
+                return;
+            }
+            
+            addMCPLog('info', `🤖 MCP 테스트 요청: ${promptText}`);
+            addMCPLog('info', '📋 VIOLA MD 문서 로딩 중...');
+            
+            try {
+                // IPC를 통해 메인 프로세스에 MCP 테스트 요청
+                const result = await ipcRenderer.invoke('execute-mcp-test', {
+                    product: 'VIOLA',
+                    prompt: promptText
+                });
+                
+                if (result.success) {
+                    addMCPLog('success', '✅ MCP 테스트 실행 성공');
+                    addMCPLog('info', result.message || '테스트가 완료되었습니다.');
+                    
+                    if (result.logs) {
+                        result.logs.forEach(log => {
+                            addMCPLog(log.type || 'info', log.message);
+                        });
+                    }
+                    
+                    showToast('✅ MCP 테스트가 성공적으로 실행되었습니다.', 'success');
+                } else {
+                    addMCPLog('error', '❌ MCP 테스트 실행 실패');
+                    addMCPLog('error', result.error || '알 수 없는 오류');
+                    showToast('❌ MCP 테스트 실행에 실패했습니다.', 'error');
+                }
+            } catch (error) {
+                addMCPLog('error', `❌ 오류 발생: ${error.message}`);
+                console.error('MCP 테스트 실행 오류:', error);
+                showToast('❌ MCP 테스트 실행 중 오류가 발생했습니다.', 'error');
+            }
+        }
+        
+        // MCP 로그 추가
+        function addMCPLog(type, message) {
+            const logContainer = document.getElementById('mcpLogContainer');
+            if (!logContainer) return;
+            
+            // 플레이스홀더 제거
+            const placeholder = logContainer.querySelector('.log-placeholder');
+            if (placeholder) {
+                placeholder.remove();
+            }
+            
+            const timestamp = new Date().toLocaleTimeString('ko-KR');
+            const logEntry = document.createElement('div');
+            logEntry.className = `mcp-log-entry ${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        // MCP 로그 초기화
+        function clearMCPLog() {
+            const logContainer = document.getElementById('mcpLogContainer');
+            if (!logContainer) return;
+            
+            logContainer.innerHTML = '<div class="log-placeholder">테스트 실행 로그가 여기에 표시됩니다.</div>';
+        }
+        
+        // HTML 이스케이프 (XSS 방지)
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+        
+        // 기존 switchTab 함수 수정 (MCP 탭 초기화 추가)
+        // 원래 switchTab 함수를 찾아서 아래 코드 추가
+        /*
+        if (tabName === 'playwright-mcp') {
+            console.log('Playwright MCP 탭으로 전환');
+            initializeMCPTab();
+        }
+        */
+
+

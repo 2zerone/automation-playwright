@@ -1,0 +1,58 @@
+{
+  "login": {
+    "userId": "yh.lee5",
+    "password": "Okestro2018!"
+  },
+  "project": {
+    "code": "TEST007",
+    "name": "TEST 업무코드"
+  },
+  "repository": {
+    "name": "TEST-REPO"
+  },
+  "user": {
+    "id": "yh.lee5",
+    "name": "유저007",
+    "email": "user007@okestro.com",
+    "level": "대리(03)",
+    "role": "빌드배포 관리자",
+    "systemRole": "시스템관리자(사용자)"
+  },
+  "users": [
+    {
+      "id": "yh.lee5",
+      "name": "이영한",
+      "role": "빌드배포 관리자",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee2",
+      "name": "이영한QA",
+      "role": "테스트담당자",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee3",
+      "name": "이영한개발리더",
+      "role": "개발리더",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee6",
+      "name": "이영한개발자",
+      "role": "개발자",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee7",
+      "name": "이영한결재자",
+      "role": "결재자",
+      "systemRole": "시스템관리자(사용자)"
+    }
+  ],
+  "scenario": {
+    "id": 7,
+    "type": "scenario_7",
+    "description": "시나리오 7 설정"
+  }
+} 

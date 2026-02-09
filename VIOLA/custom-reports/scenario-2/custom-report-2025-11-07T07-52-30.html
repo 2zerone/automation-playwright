@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIOLA 자동화 테스트 커스텀 리포트 - 시나리오 2: Pod 삭제 및 백업 복원</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.5em;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .header .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+        }
+        
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .summary-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .summary-card .label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .success { color: #27ae60; }
+        .failure { color: #e74c3c; }
+        .not-test { color: #6c757d; }
+        .total { color: #3498db; }
+        .execution { color: #e67e22; }
+        .rate { color: #9b59b6; }
+        .time { color: #f39c12; }
+        
+        .progress-bar {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 25px;
+            height: 25px;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 50%, #58d68d 100%);
+            border-radius: 25px;
+            transition: width 2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .project-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .project-header {
+            margin-bottom: 20px;
+        }
+        
+        .project-header h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+        }
+        
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        
+        .user-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .user-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .user-info h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .user-info p {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .user-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .role-badge {
+            padding: 4px 8px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 12px;
+            font-size: 0.8em;
+            border: 1px solid #bbdefb;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .sort-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .sort-button {
+            padding: 8px 16px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .sort-button:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .sort-button.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 테이블 열 너비 설정 */
+        th:nth-child(1), td:nth-child(1) { width: 25%; } /* 단계명 */
+        th:nth-child(2), td:nth-child(2) { width: 15%; } /* 상태 */
+        th:nth-child(3), td:nth-child(3) { width: 15%; } /* 소요시간 */
+        th:nth-child(4), td:nth-child(4) { width: 45%; } /* 오류 정보 */
+        
+        /* 오류 정보 열 스타일 */
+        td:nth-child(4) {
+            white-space: pre-wrap;
+            max-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* 오류 정보가 길 때 호버 시 전체 내용 표시 */
+        td:nth-child(4):hover {
+            white-space: pre-wrap;
+            overflow: visible;
+            position: relative;
+            z-index: 10;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .result-row {
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .result-row:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .result-row.expanded {
+            background-color: #e3f2fd;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-badge.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-badge.stopped {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.skip {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.not-run {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .status-badge.not-test {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+        }
+        
+        .test-case-details {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .details-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .details-header i {
+            color: #3498db;
+        }
+        
+
+        
+        .log-content {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.9em;
+            line-height: 1.5;
+            overflow: hidden;
+        }
+        
+        .log-container {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .log-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .log-header i {
+            font-size: 0.9em;
+        }
+        
+        .log-body {
+            padding: 0;
+        }
+        
+        .log-line {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f3f4;
+            transition: background-color 0.2s ease;
+        }
+        
+        .log-line:last-child {
+            border-bottom: none;
+        }
+        
+        .log-line:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .log-line.log-info {
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .log-line.log-success {
+            border-left: 4px solid #28a745;
+        }
+        
+        .log-line.log-error {
+            border-left: 4px solid #dc3545;
+        }
+        
+        .log-line.log-warning {
+            border-left: 4px solid #ffc107;
+        }
+        
+        .log-time {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 120px;
+            color: #6c757d;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .log-time i {
+            color: #adb5bd;
+            font-size: 0.8em;
+        }
+        
+        .log-content-inner {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .log-icon {
+            font-size: 1.1em;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .log-message {
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .log-line.log-success .log-message {
+            color: #28a745;
+        }
+        
+        .log-line.log-error .log-message {
+            color: #dc3545;
+        }
+        
+        .log-line.log-warning .log-message {
+            color: #856404;
+        }
+        
+        .expand-icon {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .result-row.expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+        
+        /* 비디오 섹션 스타일 */
+        .video-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .video-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .video-container {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .video-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-info h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+        }
+        
+        .video-size {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .video-player {
+            margin-bottom: 15px;
+        }
+        
+        .video-player video {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-actions {
+            text-align: center;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.9em;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .meta-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        .screenshots-section {
+            margin-top: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .screenshots-header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .screenshots-header i {
+            font-size: 0.9em;
+        }
+        
+        .screenshots-grid {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .screenshot-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .screenshot-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        
+        .screenshot-item img:hover {
+            opacity: 0.8;
+        }
+        
+        .screenshot-caption {
+            text-align: center;
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .no-screenshots {
+            padding: 40px 20px;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VIOLA 자동화 테스트</h1>
+            <div class="subtitle"> 시나리오 리포트 - 시나리오 2: Pod 삭제 및 백업 복원</div>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i> 생성일: 2025. 11. 7.
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> 생성시간: 오후 4:51:26
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-user"></i> 수행자: 이영한
+                </div>
+                
+                <div class="meta-item">
+                    <i class="fas fa-play"></i> 실행시간: 1분 4초
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-check-circle"></i> 결과: 실패
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-card">
+                <div class="number total" id="total-tests">12</div>
+                <div class="label">총 단계</div>
+            </div>
+            <div class="summary-card">
+                <div class="number success" id="passed-tests">11</div>
+                <div class="label">성공</div>
+            </div>
+            <div class="summary-card">
+                <div class="number failure" id="failed-tests">1</div>
+                <div class="label">실패</div>
+            </div>
+            <div class="summary-card">
+                <div class="number not-test" id="not-test-steps">0</div>
+                <div class="label">미수행</div>
+            </div>
+            <div class="summary-card">
+                <div class="number execution" id="execution-rate">100.0%</div>
+                <div class="label">수행률</div>
+            </div>
+            <div class="summary-card">
+                <div class="number rate" id="success-rate">91.7%</div>
+                <div class="label">성공률</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 100.0%"></div>
+        </div>
+
+        <div class="content">
+            <h2 class="section-title">클러스터 정보</h2>
+            <div class="project-info">
+                <div class="project-header">
+                    <h3><i class="fas fa-project-diagram"></i> 클러스터명 - biz-cluster-1</h3>
+                </div>
+                <div class="project-details">
+                    <div class="detail-item">
+                        <div class="detail-label">테스트 환경</div>
+                        <div class="detail-value">304test 검증 환경</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">테스트 사용자 정보</h2>
+            <div class="user-list" id="user-list">
+                
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-avatar">이영한</div>
+                        <div class="user-info">
+                            <h3>이영한</h3>
+                            <p>yh.lee5@okestro.com</p>
+                        </div>
+                    </div>
+                    <div class="user-roles">
+                        <span class="role-badge">관리자</span>
+                    </div>
+                </div>
+            
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-avatar">이영한</div>
+                        <div class="user-info">
+                            <h3>이영한</h3>
+                            <p>yh.lee5@okestro.com</p>
+                        </div>
+                    </div>
+                    <div class="user-roles">
+                        <span class="role-badge">관리자</span>
+                    </div>
+                </div>
+            
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-avatar">이영한</div>
+                        <div class="user-info">
+                            <h3>이영한</h3>
+                            <p>yh.lee5@okestro.com</p>
+                        </div>
+                    </div>
+                    <div class="user-roles">
+                        <span class="role-badge">관리자</span>
+                    </div>
+                </div>
+            
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-avatar">이영한</div>
+                        <div class="user-info">
+                            <h3>이영한</h3>
+                            <p>yh.lee5@okestro.com</p>
+                        </div>
+                    </div>
+                    <div class="user-roles">
+                        <span class="role-badge">관리자</span>
+                    </div>
+                </div>
+            
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-avatar">이영한</div>
+                        <div class="user-info">
+                            <h3>이영한</h3>
+                            <p>yh.lee5@okestro.com</p>
+                        </div>
+                    </div>
+                    <div class="user-roles">
+                        <span class="role-badge">관리자</span>
+                    </div>
+                </div>
+            
+            </div>
+
+            <h2 class="section-title">테스트 케이스 결과</h2>
+            <div class="controls">
+                <div class="sort-controls">
+                    <button class="sort-button active" data-sort="all">전체</button>
+                    <button class="sort-button" data-sort="pass">성공</button>
+                    <button class="sort-button" data-sort="fail">실패</button>
+                    <button class="sort-button" data-sort="not-test">미수행</button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="test-results-table">
+                    <thead>
+                        <tr>
+                            <th>단계명</th>
+                            <th>상태</th>
+                            <th>소요시간</th>
+                            <th>오류 정보</th>
+                        </tr>
+                    </thead>
+                    <tbody id="test-results-body">
+                        
+                                <tr class="result-row" data-status="fail" onclick="toggleTestCaseDetails(0)">
+                                    <td>
+                                        VIOLA Scenario 2: Pod 삭제 및 백업 복원
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge fail">실패</span></td>
+                                    <td>N/A</td>
+                                    <td>Playwright 실행 실패 - 정확한 실패 지점을 알 수 없음</td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-0" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>VIOLA Scenario 2: Pod 삭제 및 백업 복원 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">VIOLA Scenario 2: Pod 삭제 및 백업 복원 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-error">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">❌</span>
+                                        <span class="log-message">VIOLA Scenario 2: Pod 삭제 및 백업 복원 실패: Playwright 실행 실패 - 정확한 실패 지점을 알 수 없음</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                <div class="no-screenshots">
+                    <i class="fas fa-camera-slash" style="font-size: 2em; margin-bottom: 10px; display: block; color: #6c757d;"></i>
+                    <p>스크린샷 없음</p>
+                    <small style="color: #6c757d;">스크린샷은 각 단계 완료 시점에 자동으로 캡처됩니다.</small>
+                </div>
+            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(1)">
+                                    <td>
+                                        로그인 페이지 접근
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>2.04초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-1" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>로그인 페이지 접근 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">로그인 페이지 접근 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">로그인 페이지 접근 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 2045ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-로그인 페이지 접근-성공-2025-11-07T07-51-33-809.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-로그인 페이지 접근-성공-2025-11-07T07-51-33-809.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(2)">
+                                    <td>
+                                        로그인 정보 입력
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>1.25초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-2" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>로그인 정보 입력 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">로그인 정보 입력 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">로그인 정보 입력 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 1246ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-로그인 정보 입력-성공-2025-11-07T07-51-35-387.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-로그인 정보 입력-성공-2025-11-07T07-51-35-387.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(3)">
+                                    <td>
+                                        로그인 실행 및 성공 확인
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>7.40초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-3" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>로그인 실행 및 성공 확인 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">로그인 실행 및 성공 확인 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">로그인 실행 및 성공 확인 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 7401ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-로그인 실행 및 성공 확인-성공-2025-11-07T07-51-43-335.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-로그인 실행 및 성공 확인-성공-2025-11-07T07-51-43-335.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(4)">
+                                    <td>
+                                        Kubernetes Engine 접근
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>3.36초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-4" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>Kubernetes Engine 접근 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">Kubernetes Engine 접근 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">Kubernetes Engine 접근 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 3357ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-Kubernetes Engine 접근-성공-2025-11-07T07-51-47-325.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-Kubernetes Engine 접근-성공-2025-11-07T07-51-47-325.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(5)">
+                                    <td>
+                                        클러스터 선택
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>2.99초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-5" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>클러스터 선택 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">클러스터 선택 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">클러스터 선택 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 2991ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-클러스터 선택-성공-2025-11-07T07-51-51-294.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-클러스터 선택-성공-2025-11-07T07-51-51-294.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(6)">
+                                    <td>
+                                        컨테이너 관리 이동
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>3.27초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-6" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>컨테이너 관리 이동 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">컨테이너 관리 이동 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">컨테이너 관리 이동 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 3267ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-컨테이너 관리 이동-성공-2025-11-07T07-51-54-991.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-컨테이너 관리 이동-성공-2025-11-07T07-51-54-991.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(7)">
+                                    <td>
+                                        Pod 선택
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>1.67초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-7" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>Pod 선택 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">Pod 선택 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">Pod 선택 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 1666ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-Pod 선택-성공-2025-11-07T07-51-57-077.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-Pod 선택-성공-2025-11-07T07-51-57-077.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(8)">
+                                    <td>
+                                        Pod 삭제
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>5.51초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-8" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>Pod 삭제 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">Pod 삭제 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">Pod 삭제 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 5515ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-Pod 삭제-성공-2025-11-07T07-52-02-971.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-Pod 삭제-성공-2025-11-07T07-52-02-971.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(9)">
+                                    <td>
+                                        백업 이동
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>3.60초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-9" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>백업 이동 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">백업 이동 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">백업 이동 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 3597ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                <div class="no-screenshots">
+                    <i class="fas fa-camera-slash" style="font-size: 2em; margin-bottom: 10px; display: block; color: #6c757d;"></i>
+                    <p>스크린샷 없음</p>
+                    <small style="color: #6c757d;">스크린샷은 각 단계 완료 시점에 자동으로 캡처됩니다.</small>
+                </div>
+            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(10)">
+                                    <td>
+                                        백업 복원
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>14.03초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-10" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>백업 복원 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">백업 복원 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">백업 복원 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 14031ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-백업 복원-성공-2025-11-07T07-52-22-885.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-백업 복원-성공-2025-11-07T07-52-22-885.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                                <tr class="result-row" data-status="pass" onclick="toggleTestCaseDetails(11)">
+                                    <td>
+                                        복원 확인
+                                        <i class="fas fa-chevron-right expand-icon"></i>
+                                    </td>
+                                    <td><span class="status-badge pass">성공</span></td>
+                                    <td>6.07초</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="test-case-details-row" id="details-11" style="display: none;">
+                                    <td colspan="4">
+                                        <div class="test-case-details">
+                                            <div class="details-header">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>복원 확인 - 상세 정보</span>
+                                            </div>
+                                            <div class="log-content">
+                                    <div class="log-container">
+                                        <div class="log-header">
+                                            <i class="fas fa-terminal"></i>
+                                            <span>실행 로그</span>
+                                        </div>
+                                        <div class="log-body">
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">ℹ️</span>
+                                        <span class="log-message">복원 확인 시작</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-success">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">✅</span>
+                                        <span class="log-message">복원 확인 성공</span>
+                                    </div>
+                                                </div>
+                                            
+                                    <div class="log-line log-info">
+                                                    <div class="log-time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span>오후 4:52:30</span>
+                                                    </div>
+                                                    <div class="log-content-inner">
+                                        <span class="log-icon">⏱️</span>
+                                        <span class="log-message">소요시간: 6066ms</span>
+                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                            <div class="screenshots-section">
+                                                <div class="screenshots-header">
+                                                    <i class="fas fa-camera"></i>
+                                                    <span>스크린샷</span>
+                                                </div>
+                                                <div class="screenshots-grid">
+                                                    
+                    <div class="screenshot-item">
+                        <img src="screenshot-복원 확인-성공-2025-11-07T07-52-29-331.png" alt="단계 완료 스크린샷" onclick="openScreenshotModal('screenshot-복원 확인-성공-2025-11-07T07-52-29-331.png')" 
+                             onerror="this.parentElement.innerHTML='<div class=\'no-screenshots\'><i class=\'fas fa-exclamation-triangle\' style=\'color: #ffc107;\'></i><p>스크린샷을 불러올 수 없습니다</p></div>'">
+                        <div class="screenshot-caption">단계 완료 시점</div>
+                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 비디오 섹션 일시적으로 비활성화 -->
+        <!--  -->
+
+        <div class="footer">
+            <p>&copy; 2025 Okestro 플랫폼품질팀. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 테스트 수행 시간으로 고정 (실시간 업데이트 제거)
+        
+        // 테스트 케이스 상세 정보 토글
+        function toggleTestCaseDetails(index) {
+            const detailsRow = document.getElementById('details-' + index);
+            const resultRow = detailsRow.previousElementSibling;
+            
+            if (detailsRow.style.display === 'none') {
+                detailsRow.style.display = 'table-row';
+                resultRow.classList.add('expanded');
+            } else {
+                detailsRow.style.display = 'none';
+                resultRow.classList.remove('expanded');
+            }
+        }
+
+        // 정렬 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButtons = document.querySelectorAll('.sort-button');
+            const resultRows = document.querySelectorAll('.result-row');
+            
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 활성 버튼 변경
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const sortType = this.getAttribute('data-sort');
+                    
+                    resultRows.forEach(row => {
+                        const status = row.getAttribute('data-status');
+                        
+                        if (sortType === 'all' || status === sortType) {
+                            row.style.display = 'table-row';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+                });
+            });
+        });
+    </script>
+    
+    <!-- 스크린샷 모달 -->
+    <div id="screenshotModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="스크린샷">
+        </div>
+    </div>
+    
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            z-index: 1001;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #ccc;
+        }
+        
+        #modalImage {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+    </style>
+    
+    <script>
+        // 스크린샷 모달 기능
+        function openScreenshotModal(imageSrc) {
+            const modal = document.getElementById('screenshotModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+        
+        // 모달 닫기
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('screenshotModal').style.display = 'none';
+        }
+        
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('screenshotModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

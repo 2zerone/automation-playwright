@@ -1,0 +1,887 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\okestro\\Desktop\\test\\VIOLA\\playwright.config.js",
+    "rootDir": "C:/Users/okestro/Desktop/test/VIOLA/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "C:/Users/okestro/Desktop/test/VIOLA/playwright-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:/Users/okestro/Desktop/test/VIOLA/playwright-report/test-results.json"
+        }
+      ],
+      [
+        "list",
+        {
+          "printSteps": true,
+          "printStdio": "always"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/okestro/Desktop/test/VIOLA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/okestro/Desktop/test/VIOLA/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "scenario/**/*.spec.js",
+          "**/*.spec.js"
+        ],
+        "timeout": 3600000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 7,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "scenario\\scenario-2.spec.js",
+      "file": "scenario/scenario-2.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "VIOLA Scenario 2: Pod 삭제 및 백업 복원",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 3600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 57124,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "\n========================================\n"
+                    },
+                    {
+                      "text": "🎬 VIOLA Scenario 2 시작: Pod 삭제 및 백업 복원\n"
+                    },
+                    {
+                      "text": "========================================\n"
+                    },
+                    {
+                      "text": "📌 이 시나리오는 scenario-1에서 생성한 Pod를 삭제하고 백업으로부터 복원합니다.\n\n"
+                    },
+                    {
+                      "text": "📂 설정 파일 로드: C:\\Users\\okestro\\Desktop\\test\\VIOLA\\config\\test-settings.json\n"
+                    },
+                    {
+                      "text": "✅ 설정 파일 로드 완료\n\n"
+                    },
+                    {
+                      "text": "========================================\n"
+                    },
+                    {
+                      "text": "📍 Phase 1: 로그인 (1/2)\n"
+                    },
+                    {
+                      "text": "========================================\n\n"
+                    },
+                    {
+                      "text": "🔧 LoginManager 초기화 중...\n"
+                    },
+                    {
+                      "text": "✅ LoginManager 초기화 완료\n\n"
+                    },
+                    {
+                      "text": "👉 Step 1/11: 로그인 페이지 접근\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"로그인 페이지 접근\" (인덱스: 0)\n"
+                    },
+                    {
+                      "text": "  ⏱️  로그인 페이지 접근 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:34] 로그인 페이지 접근 시작\n"
+                    },
+                    {
+                      "text": "🌐 VIOLA 로그인 페이지 접근 중...\n"
+                    },
+                    {
+                      "text": "🧹 쿠키 및 세션 클리어 완료\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: VIOLA 로그인 페이지 접근 (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ VIOLA 로그인 페이지 접근 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 로그인 페이지 접근 성공 (2.92초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:37] 로그인 페이지 접근 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:37] ⏱️ 로그인 페이지 접근 소요시간: 2924ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-로그인 페이지 접근-성공-2025-11-07T07-12-37-486.png\n"
+                    },
+                    {
+                      "text": "👉 Step 2/11: 로그인 정보 입력\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"로그인 정보 입력\" (인덱스: 1)\n"
+                    },
+                    {
+                      "text": "  ⏱️  로그인 정보 입력 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:37] 로그인 정보 입력 시작\n"
+                    },
+                    {
+                      "text": "📝 로그인 정보 입력 중...\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: VIOLA 로그인 정보 입력 (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 로그인 정보 입력 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 로그인 정보 입력 성공 (1.17초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:38] 로그인 정보 입력 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:38] ⏱️ 로그인 정보 입력 소요시간: 1173ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-로그인 정보 입력-성공-2025-11-07T07-12-38-971.png\n"
+                    },
+                    {
+                      "text": "👉 Step 3/11: 로그인 실행 및 성공 확인\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"로그인 실행 및 성공 확인\" (인덱스: 2)\n"
+                    },
+                    {
+                      "text": "  ⏱️  로그인 실행 및 성공 확인 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:39] 로그인 실행 및 성공 확인 시작\n"
+                    },
+                    {
+                      "text": "🚀 로그인 실행 및 성공 확인 중...\n"
+                    },
+                    {
+                      "text": "✅ 로그인 버튼 클릭 완료 (OTP 입력 대기 중)\n"
+                    },
+                    {
+                      "text": "✅ OTP 처리 완료! 즉시 재개...\n\n"
+                    },
+                    {
+                      "text": "🔍 로그인 성공 확인 중...\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: VIOLA 로그인 성공 (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 로그인 실행 및 성공 확인 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 로그인 실행 및 성공 확인 성공 (7.36초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:46] 로그인 실행 및 성공 확인 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:46] ⏱️ 로그인 실행 및 성공 확인 소요시간: 7361ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-로그인 실행 및 성공 확인-성공-2025-11-07T07-12-46-620.png\n"
+                    },
+                    {
+                      "text": "\n✅ Phase 1 완료: 로그인 성공\n\n"
+                    },
+                    {
+                      "text": "========================================\n"
+                    },
+                    {
+                      "text": "📍 Phase 2: Pod 삭제 및 백업 복원 (2/2)\n"
+                    },
+                    {
+                      "text": "========================================\n\n"
+                    },
+                    {
+                      "text": "🔧 PodRecoveryManager 초기화 중...\n"
+                    },
+                    {
+                      "text": "✅ PodRecoveryManager 초기화 완료\n"
+                    },
+                    {
+                      "text": "📂 scenario-1에서 생성한 Pod 정보 로드 중...\n"
+                    },
+                    {
+                      "text": "📂 Pod 정보 파일 경로: C:\\Users\\okestro\\Desktop\\test\\VIOLA\\config\\latest-pod.json\n"
+                    },
+                    {
+                      "text": "📄 파일 내용: {\n  \"podName\": \"yh-pod-67\",\n  \"backupName\": \"yh-ns-251107-155534COMPLETED\",\n  \"createdAt\": \"2025-11-07T06:54:54.425Z\",\n  \"counter\": 67,\n  \"backupCreatedAt\": \"2025-11-07T06:55:43.842Z\"\n}\n"
+                    },
+                    {
+                      "text": "✅ Pod 정보 파싱 성공:\n"
+                    },
+                    {
+                      "text": "   - Pod 이름: yh-pod-67\n"
+                    },
+                    {
+                      "text": "   - Backup 이름: yh-ns-251107-155534COMPLETED\n"
+                    },
+                    {
+                      "text": "   - 생성 시간: 2025-11-07T06:54:54.425Z\n"
+                    },
+                    {
+                      "text": "   - 카운터: 67\n"
+                    },
+                    {
+                      "text": "✅ Pod 정보 로드 완료: yh-pod-67\n\n"
+                    },
+                    {
+                      "text": "👉 Step 4/11: Kubernetes Engine 접근\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"Kubernetes Engine 접근\" (인덱스: 3)\n"
+                    },
+                    {
+                      "text": "  ⏱️  Kubernetes Engine 접근 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:46] Kubernetes Engine 접근 시작\n"
+                    },
+                    {
+                      "text": "🎯 Kubernetes Engine 접근 중...\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: kubernetes_engine (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ Kubernetes Engine 접근 완료\n"
+                    },
+                    {
+                      "text": "  ✅ Kubernetes Engine 접근 성공 (3.39초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:50] Kubernetes Engine 접근 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:50] ⏱️ Kubernetes Engine 접근 소요시간: 3389ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-Kubernetes Engine 접근-성공-2025-11-07T07-12-50-303.png\n"
+                    },
+                    {
+                      "text": "👉 Step 5/11: 클러스터 선택\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"클러스터 선택\" (인덱스: 4)\n"
+                    },
+                    {
+                      "text": "  ⏱️  클러스터 선택 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:50] 클러스터 선택 시작\n"
+                    },
+                    {
+                      "text": "🎯 클러스터 선택 중...\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: cluster_selected (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 클러스터 선택 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 클러스터 선택 성공 (3.04초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:53] 클러스터 선택 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:53] ⏱️ 클러스터 선택 소요시간: 3035ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-클러스터 선택-성공-2025-11-07T07-12-53-737.png\n"
+                    },
+                    {
+                      "text": "👉 Step 6/11: 컨테이너 관리 이동\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"컨테이너 관리 이동\" (인덱스: 5)\n"
+                    },
+                    {
+                      "text": "  ⏱️  컨테이너 관리 이동 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:53] 컨테이너 관리 이동 시작\n"
+                    },
+                    {
+                      "text": "📂 컨테이너 관리 메뉴로 이동 중...\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: container_management (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 컨테이너 관리 메뉴 이동 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 컨테이너 관리 이동 성공 (3.50초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:57] 컨테이너 관리 이동 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:57] ⏱️ 컨테이너 관리 이동 소요시간: 3496ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-컨테이너 관리 이동-성공-2025-11-07T07-12-57-420.png\n"
+                    },
+                    {
+                      "text": "👉 Step 7/11: Pod 선택\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"Pod 선택\" (인덱스: 6)\n"
+                    },
+                    {
+                      "text": "  ⏱️  Pod 선택 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:57] Pod 선택 시작\n"
+                    },
+                    {
+                      "text": "📦 Pod 선택 중: yh-pod-67\n"
+                    },
+                    {
+                      "text": "🔍 filter 방식으로 Pod row 찾기: yh-pod-67\n"
+                    },
+                    {
+                      "text": "✅ Pod 체크박스 선택 완료: yh-pod-67\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: pod_selected (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ Pod 선택 완료\n"
+                    },
+                    {
+                      "text": "  ✅ Pod 선택 성공 (1.72초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:12:59] Pod 선택 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:59] ⏱️ Pod 선택 소요시간: 1716ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-Pod 선택-성공-2025-11-07T07-12-59-404.png\n"
+                    },
+                    {
+                      "text": "👉 Step 8/11: Pod 삭제\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"Pod 삭제\" (인덱스: 7)\n"
+                    },
+                    {
+                      "text": "  ⏱️  Pod 삭제 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:12:59] Pod 삭제 시작\n"
+                    },
+                    {
+                      "text": "🗑️ Pod 삭제 중: yh-pod-67\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: pod_deleted (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ Pod 삭제 완료\n"
+                    },
+                    {
+                      "text": "  ✅ Pod 삭제 성공 (5.51초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:13:05] Pod 삭제 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:05] ⏱️ Pod 삭제 소요시간: 5509ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-Pod 삭제-성공-2025-11-07T07-13-05-152.png\n"
+                    },
+                    {
+                      "text": "👉 Step 9/11: 백업 메뉴 이동\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"백업 메뉴 이동\" (인덱스: 8)\n"
+                    },
+                    {
+                      "text": "  ⏱️  백업 메뉴 이동 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:06] 백업 메뉴 이동 시작\n"
+                    },
+                    {
+                      "text": "💾 백업 메뉴로 이동 중...\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: backup_menu (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 백업 메뉴 이동 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 백업 메뉴 이동 성공 (3.46초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:13:09] 백업 메뉴 이동 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:09] ⏱️ 백업 메뉴 이동 소요시간: 3455ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-백업 메뉴 이동-성공-2025-11-07T07-13-09-584.png\n"
+                    },
+                    {
+                      "text": "👉 Step 10/11: 백업 복원\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"백업 복원\" (인덱스: 9)\n"
+                    },
+                    {
+                      "text": "  ⏱️  백업 복원 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:10] 백업 복원 시작\n"
+                    },
+                    {
+                      "text": "♻️ 백업 복원 중: yh-ns-251107-155534COMPLETED\n"
+                    },
+                    {
+                      "text": "🔍 filter 방식으로 Backup row 찾기: yh-ns-251107-155534COMPLETED\n"
+                    },
+                    {
+                      "text": "✅ 백업 체크박스 선택 완료: yh-ns-251107-155534COMPLETED\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: backup_restored (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 백업 복원 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 백업 복원 성공 (13.99초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:13:24] 백업 복원 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:24] ⏱️ 백업 복원 소요시간: 13992ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-백업 복원-성공-2025-11-07T07-13-24-874.png\n"
+                    },
+                    {
+                      "text": "👉 Step 11/11: 복원 확인\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 테스트 케이스 처리: \"복원 확인\" (인덱스: 10)\n"
+                    },
+                    {
+                      "text": "  ⏱️  복원 확인 시작...\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:25] 복원 확인 시작\n"
+                    },
+                    {
+                      "text": "✅ 복원 확인 중: yh-pod-67\n"
+                    },
+                    {
+                      "text": "🔍 복원된 Pod 확인 중: yh-pod-67\n"
+                    },
+                    {
+                      "text": "✅ Pod 복원 확인 성공: yh-pod-67\n"
+                    },
+                    {
+                      "text": "🔍 감지된 시나리오 ID: 2\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 캡처 시작: restoration_verified (시나리오 2)\n"
+                    },
+                    {
+                      "text": "✅ 복원 확인 완료\n"
+                    },
+                    {
+                      "text": "  ✅ 복원 확인 성공 (5.65초)\n"
+                    },
+                    {
+                      "text": "  ✅ [오후 4:13:30] 복원 확인 성공\n"
+                    },
+                    {
+                      "text": "  ℹ️  [오후 4:13:30] ⏱️ 복원 확인 소요시간: 5654ms\n"
+                    },
+                    {
+                      "text": "📸 스크린샷 저장: screenshot-복원 확인-성공-2025-11-07T07-13-30-676.png\n"
+                    },
+                    {
+                      "text": "\n✅ Phase 2 완료: Pod 삭제 및 백업 복원 성공\n\n"
+                    },
+                    {
+                      "text": "========================================\n"
+                    },
+                    {
+                      "text": "🎉 VIOLA Scenario 2 전체 완료!\n"
+                    },
+                    {
+                      "text": "========================================\n"
+                    },
+                    {
+                      "text": "\n========================================\n"
+                    },
+                    {
+                      "text": "📊 테스트 결과 저장 중...\n"
+                    },
+                    {
+                      "text": "========================================\n\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] 최종 testResults.testCases 상태:\n"
+                    },
+                    {
+                      "text": "   [0] 로그인 페이지 접근:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 2924ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [1] 로그인 정보 입력:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 1173ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [2] 로그인 실행 및 성공 확인:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 7361ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [3] Kubernetes Engine 접근:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 3389ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [4] 클러스터 선택:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 3035ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [5] 컨테이너 관리 이동:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 3496ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [6] Pod 선택:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 1716ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [7] Pod 삭제:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 5509ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [8] 백업 메뉴 이동:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 3455ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [9] 백업 복원:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 13992ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "   [10] 복원 확인:\n"
+                    },
+                    {
+                      "text": "        status: pass\n"
+                    },
+                    {
+                      "text": "        duration: 5654ms\n"
+                    },
+                    {
+                      "text": "        screenshots: 1개\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] testResults.status: pass\n"
+                    },
+                    {
+                      "text": "🔍 [디버그] testResults.error: null\n\n"
+                    },
+                    {
+                      "text": "📖 기존 global-test-results.json 로드 완료\n"
+                    },
+                    {
+                      "text": "✅ global-test-results.json 업데이트 완료:\n"
+                    },
+                    {
+                      "text": "   - viola-scenario-2\n"
+                    },
+                    {
+                      "text": "   - scenario-2\n"
+                    },
+                    {
+                      "text": "   - 2\n"
+                    },
+                    {
+                      "text": "\n📊 테스트 결과 저장 완료!\n"
+                    },
+                    {
+                      "text": "📌 커스텀 리포트는 Electron 앱의 ReportGenerator가 생성합니다.\n"
+                    },
+                    {
+                      "text": "========================================\n\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (VIOLA 로그인 페이지 접근): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at LoginManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at LoginManager.navigateToLoginPage (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/LoginManager.js:53:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:183:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:182:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (VIOLA 로그인 정보 입력): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at LoginManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at LoginManager.fillLoginCredentials (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/LoginManager.js:74:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:188:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:187:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (VIOLA 로그인 성공): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at LoginManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at LoginManager.submitLoginAndVerify (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/LoginManager.js:118:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:193:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:192:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (kubernetes_engine): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.navigateToKubernetes (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:142:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:218:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:217:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (cluster_selected): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.selectCluster (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:160:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:223:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:222:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (container_management): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.navigateToContainerManagement (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:182:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:228:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:227:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (pod_selected): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.selectPod (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:238:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:233:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:232:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (pod_deleted): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.deletePod (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:258:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:238:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:237:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (backup_menu): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.navigateToBackup (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:283:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:243:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:242:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (backup_restored): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at PodRecoveryManager.restoreBackup (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:347:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:248:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:247:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    },
+                    {
+                      "text": "❌ 스크린샷 저장 실패 (restoration_verified): __dirname is not defined\n"
+                    },
+                    {
+                      "text": "   스택: ReferenceError: __dirname is not defined\n    at PodRecoveryManager.captureScreenshot (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/BaseManager.js:25:40)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at processTimers (node:internal/timers:526:9)\n    at PodRecoveryManager.verifyRestoration (file:///C:/Users/okestro/Desktop/test/VIOLA/lib/classes/PodRecoveryManager.js:388:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:253:7\n    at runTestStep (file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:85:5)\n    at file:///C:/Users/okestro/Desktop/test/VIOLA/tests/scenario/scenario-2.spec.js:252:5\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:309:9\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:326:11\n    at TimeoutManager.withRunnable (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\timeoutManager.js:67:14)\n    at TestInfoImpl._runWithTimeout (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\testInfo.js:324:7)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:307:7\n    at WorkerMain._runTest (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:282:5)\n    at WorkerMain.runTestGroup (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\worker\\workerMain.js:194:11)\n    at process.<anonymous> (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\node_modules\\playwright\\lib\\common\\process.js:65:22)\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2025-11-07T07:12:33.528Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\okestro\\Desktop\\test\\VIOLA\\test-results\\scenario-scenario-2-VIOLA-Scenario-2-Pod-삭제-및-백업-복원-chromium\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6386ec0fd7ab0ffed442-7a598a86261b390d66dc",
+          "file": "scenario/scenario-2.spec.js",
+          "line": 157,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-07T07:12:32.221Z",
+    "duration": 59343.146,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

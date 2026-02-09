@@ -1,0 +1,20 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# API Keys
+.env
+.env.local
+autoscript/.groq-api-key
+**/.groq-api-key
+**/api-key.txt
+
+# Google API 인증 파일
+autoscript/balmy-state-471105-h5-c819a6c1e5f3.json
+**/balmy-state-*.json
+**/*credentials*.json
+**/*service-account*.json

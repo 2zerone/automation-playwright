@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스크립트 자동화</title>
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+  <div class="container">
+    <!-- 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <button id="backBtn" class="icon-btn back-btn" title="뒤로가기" style="display: none; margin-right: 12px;">
+          ← 뒤로
+        </button>
+        <h1>🎬 스크립트 자동화 프로그램</h1>
+        <span class="version">v1.0.0</span>
+      </div>
+      <div class="header-right">
+        <button id="settingsBtn" class="icon-btn" title="설정">⚙️</button>
+        <button id="refreshBtn" class="icon-btn" title="새로고침">🔄</button>
+      </div>
+    </header>
+
+    <!-- 신규: 테스트 유형 선택 화면 (제품 선택 후 표시) -->
+    <div id="testTypeSelectionScreen" class="test-type-screen hidden">
+      <div class="test-type-container">
+        <div class="test-type-header">
+          <h2 class="test-type-title">테스트 유형 선택</h2>
+          <p class="test-type-subtitle"><span id="selectedProductName"></span> 테스트를 시작합니다</p>
+        </div>
+        
+        <div class="test-type-cards">
+          <div class="test-type-card" onclick="selectTestType('api')">
+            <div class="test-type-icon">🧪</div>
+            <h3 class="test-type-name">API 테스트</h3>
+            <p class="test-type-desc">SwaggerUI JSON 기반 REST API 테스트</p>
+            <span class="test-type-status coming-soon">Coming Soon</span>
+          </div>
+          
+          <div class="test-type-card" onclick="selectTestType('ui')">
+            <div class="test-type-icon">🖥️</div>
+            <h3 class="test-type-name">UI 테스트</h3>
+            <p class="test-type-desc">Playwright 기반 UI 자동화 테스트</p>
+            <span class="test-type-status available">사용 가능</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- 사이드바 -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <h3>제품 선택</h3>
+          <div id="productList" class="product-list"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>시트 관리</h3>
+          <button id="openSheetBtn" class="action-btn full-width">
+            🌐 시트 열기
+          </button>
+        </div>
+      </aside>
+
+      <!-- 메인 영역 -->
+      <main class="main-area">
+        <!-- 탭 -->
+        <div class="tabs">
+          <button class="tab active" data-tab="codegen">🎬 Codegen 녹화 → 시트 기록</button>
+          <button class="tab" data-tab="convert">🔄 시트 기록 → 코드 변환</button>
+          <!-- 시나리오 빌더 탭 임시 비활성화 -->
+          <!-- <button class="tab" data-tab="scenario">📋 시나리오 빌더</button> -->
+        </div>
+
+        <!-- Codegen 탭 -->
+        <div id="codegenTab" class="tab-content active">
+          <!-- 가로 레이아웃 컨테이너 -->
+          <div class="horizontal-layout">
+            <!-- 왼쪽: 녹화 섹션 -->
+            <div class="form-section layout-left">
+              <h2>녹화</h2>
+              
+              <!-- 녹화 모드 선택 -->
+              <div class="form-group">
+                <label>녹화 모드</label>
+                <div class="mode-selection">
+                  <label class="mode-option">
+                    <input type="radio" name="recordMode" value="direct" checked />
+                    <span class="mode-label">
+                      <strong>일반 모드</strong>
+                      <small>녹화 후 바로 .spec.js 파일 생성</small>
+                    </span>
+                  </label>
+                  <label class="mode-option">
+                    <input type="radio" name="recordMode" value="sheet" />
+                    <span class="mode-label">
+                      <strong>기록 모드</strong>
+                      <small>녹화 후 Google Sheets에 기록</small>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="urlInput">시작 URL</label>
+                <input type="text" id="urlInput" placeholder="http://tst.console.trombone.okestro.cloud/login" />
+              </div>
+
+              <!-- 일반 모드 입력 필드 -->
+              <div id="directModeInputs" class="form-group">
+                <label for="fileNameInput">파일명 (영문)</label>
+                <input type="text" id="fileNameInput" placeholder="예: user-login-test" />
+                <small>영문, 숫자, 하이픈(-), 언더스코어(_)만 사용 가능합니다</small>
+              </div>
+
+              <!-- 기록 모드 입력 필드 -->
+              <div id="sheetModeInputs" class="form-row" style="display: none;">
+                <div class="form-group">
+                  <label for="caseIdInput">통합테스트 ID</label>
+                  <input type="text" id="caseIdInput" placeholder="통합테스트 ID를 입력해주세요. (ex.INT_TRB_001)" />
+                </div>
+
+                <div class="form-group">
+                  <label for="titleInput">통합테스트 명</label>
+                  <input type="text" id="titleInput" placeholder="통합테스트 명을 입력해주세요. (ex.사용자 로그인 테스트)" />
+                </div>
+              </div>
+
+              <div class="action-row">
+                <button id="startCodegenBtn" class="primary-btn large">
+                  🎬 Codegen 녹화 시작
+                </button>
+              </div>
+
+              <div class="info-box" id="directModeInfo">
+                <strong>💡 일반 모드 사용 방법:</strong>
+                <ol>
+                  <li>URL과 파일명(영문)을 입력하세요.</li>
+                  <li>"Codegen 녹화 시작" 버튼을 클릭하세요.</li>
+                  <li>열린 브라우저에서 테스트할 동작을 수행하세요.</li>
+                  <li>완료 후 브라우저를 종료하면 Manager 클래스가 자동 생성됩니다.</li>
+                  <li>우측에서 Manager를 선택하고 "시나리오 생성" 버튼을 클릭하세요.</li>
+                  <li>동일한 Manager로 여러 시나리오를 생성할 수 있습니다.</li>
+                </ol>
+              </div>
+
+              <div class="info-box" id="sheetModeInfo" style="display: none;">
+                <strong>💡 기록 모드 사용 방법:</strong>
+                <ol>
+                  <li>URL, 케이스 ID, 테스트명을 입력하세요.</li>
+                  <li>"Codegen 녹화 시작" 버튼을 클릭하세요.</li>
+                  <li>열린 브라우저에서 테스트할 동작을 수행하세요.</li>
+                  <li>완료 후 브라우저를 종료하면 자동으로 Google Sheets에 저장됩니다.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- 우측: Manager 선택 및 시나리오 생성 섹션 -->
+            <div class="form-section layout-right" id="managerSelectSection" style="display: none;">
+            <h2>📦 Manager 클래스 → 시나리오 생성</h2>
+            <p class="section-description">녹화로 생성된 Manager 클래스를 선택하여 테스트 시나리오 파일을 만드세요. 동일한 Manager로 여러 시나리오를 생성할 수 있습니다.</p>
+            
+            <div class="manager-select-container">
+              <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                <label for="managerSelect">Manager 클래스 선택</label>
+                <select id="managerSelect" class="manager-select">
+                  <option value="">-- Manager를 선택하세요 --</option>
+                  <!-- 동적으로 옵션 생성 -->
+                </select>
+                <small id="managerInfo" class="manager-info"></small>
+              </div>
+              
+              <button id="createScenarioBtn" class="primary-btn" disabled>
+                ✅ 시나리오 생성
+              </button>
+            </div>
+
+            <!-- 생성된 시나리오 목록 -->
+            <div id="scenarioHistorySection" style="display: none; margin-top: 20px;">
+              <h3>📋 생성된 시나리오</h3>
+              <div id="scenarioHistory" class="scenario-history">
+                <!-- 동적으로 생성 -->
+              </div>
+            </div>
+          </div>
+          </div><!-- horizontal-layout 닫기 -->
+        </div>
+
+        <!-- 코드 변환 탭 -->
+        <div id="convertTab" class="tab-content">
+          <div class="form-section">
+            <h2>코드로 변환</h2>
+
+            <div class="form-group">
+              <label for="convertCaseId">통합테스트 ID</label>
+              <input type="text" id="convertCaseId" placeholder="통합테스트 ID를 입력해주세요. (ex.INT_TRB_001)" />
+              <small>Google Sheets에 저장된 통합테스트 ID를 입력하세요</small>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="useManagerFormat" />
+                <span>Manager 클래스 형식으로 생성</span>
+              </label>
+            </div>
+
+            <div class="action-row">
+              <button id="convertCodeBtn" class="primary-btn large">
+                🔄 코드 변환
+              </button>
+            </div>
+
+            <div id="convertedFileInfo" class="file-info hidden">
+              <h3>✅ 변환 완료</h3>
+              <p id="convertedFilePath"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 시나리오 빌더 탭 임시 비활성화 -->
+        <!--
+        <div id="scenarioTab" class="tab-content">
+          <div class="scenario-builder">
+            <div class="manager-palette">
+              <div class="palette-header">
+                <h3>파일 목록</h3>
+                <div class="palette-header-actions">
+                  <button id="loadManagersBtn" class="action-btn" title="파일 목록 불러오기">목록 불러오기</button>
+                  <button id="addToScenarioBtn" class="action-btn" title="선택한 파일을 시나리오 구성에 추가">추가</button>
+                </div>
+              </div>
+              <div id="managerList" class="manager-list">
+              </div>
+            </div>
+
+            <div class="scenario-canvas">
+              <div class="canvas-header">
+                <h3>시나리오 구성</h3>
+                <div class="scenario-input-group">
+                  <label>시나리오 번호:</label>
+                  <input type="number" id="scenarioNumber" min="1" placeholder="ex. 10" />
+                  <button id="resetScenarioBtn" class="primary-btn">초기화</button>
+                  <button id="generateScenarioBtn" class="primary-btn">생성</button>
+                </div>
+              </div>
+              <div id="scenarioSequence" class="sequence-area">
+                <div class="drop-zone-empty" id="emptyDropZone">
+                  <div class="drop-zone-icon">📦</div>
+                  <div class="drop-zone-text">Manager를 여기에 드래그하거나 ▶ 버튼으로 추가하세요</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="method-panel">
+              <div class="method-panel-header">
+                <h3>메서드 선택</h3>
+                <div class="method-actions">
+                  <button id="selectAllMethodsBtn" class="method-action-btn" style="display: none;">전체 선택</button>
+                  <button id="deselectAllMethodsBtn" class="method-action-btn" style="display: none;">전체 해제</button>
+                </div>
+              </div>
+              <div id="methodList" class="method-list">
+                <div class="empty-state">Manager를 선택하세요</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        -->
+
+        <!-- 로그 영역 -->
+        <div class="log-section">
+          <div class="log-header">
+            <h3>📝 실행 로그</h3>
+            <div class="log-header-actions">
+              <button id="toggleLogBtn" class="icon-btn" title="로그창 접기/펼치기">▼</button>
+              <button id="clearLogBtn" class="clear-btn">지우기</button>
+            </div>
+          </div>
+          <div id="logOutput" class="log-output"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 비밀번호 입력 모달 -->
+  <div id="passwordModal" class="modal hidden">
+    <div class="modal-content" style="max-width: 400px;">
+      <div class="modal-header">
+        <h2>🔒 비밀번호 입력</h2>
+        <button class="close-btn" id="closePasswordBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="passwordInput">설정에 접근하려면 비밀번호를 입력하세요</label>
+          <input type="password" id="passwordInput" placeholder="비밀번호 입력" autofocus />
+        </div>
+        <div id="passwordError" class="error-message hidden" style="color: var(--error); font-size: 12px; margin-top: 8px;">
+          비밀번호가 올바르지 않습니다.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmPasswordBtn" class="primary-btn">확인</button>
+        <button id="cancelPasswordBtn" class="secondary-btn">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 설정 모달 -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>⚙️ 설정</h2>
+        <button class="close-btn" id="closeSettingsBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="spreadsheetIdInput">Google Sheets ID</label>
+          <input type="text" id="spreadsheetIdInput" />
+          <small>스프레드시트 URL의 /d/ 뒤에 있는 ID를 입력하세요</small>
+        </div>
+
+        <div class="form-group">
+          <label for="credentialsPathInput">인증 파일 경로</label>
+          <div class="file-input-group">
+            <input type="text" id="credentialsPathInput" readonly />
+            <button id="selectCredentialsBtn" class="secondary-btn">찾아보기</button>
+          </div>
+          <small>Google Service Account JSON 파일</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveSettingsBtn" class="primary-btn">저장</button>
+        <button id="cancelSettingsBtn" class="secondary-btn">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 생성 완료 모달 -->
+  <div id="successModal" class="custom-modal">
+    <div class="custom-modal-content success-modal-content">
+      <div class="success-modal-icon">✅</div>
+      <div class="success-modal-title">시나리오 생성 완료</div>
+      <div class="success-modal-message" id="successModalMessage"></div>
+      <div class="success-modal-path" id="successModalPath"></div>
+      <button id="closeSuccessModalBtn" class="primary-btn" style="margin-top: 20px;">확인</button>
+    </div>
+  </div>
+
+  <!-- 초기화 확인 모달 -->
+  <div id="resetConfirmModal" class="modal hidden">
+    <div class="modal-content success-modal-content">
+      <div class="success-modal-icon">⚠️</div>
+      <div class="success-modal-title">초기화 확인</div>
+      <div class="success-modal-message" id="resetConfirmMessage">정말 초기화하시겠습니까?</div>
+      <div class="reset-confirm-list" id="resetConfirmList">
+        <div>초기화하면 다음 항목들이 모두 초기화됩니다:</div>
+        <div class="reset-confirm-item">• 파일 목록</div>
+        <div class="reset-confirm-item">• 시나리오 구성</div>
+        <div class="reset-confirm-item">• 메서드 선택</div>
+      </div>
+      <div class="reset-confirm-buttons">
+        <button id="confirmResetBtn" class="primary-btn">확인</button>
+        <button id="cancelResetBtn" class="secondary-btn">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 커스텀 모달 -->
+  <div id="customModal" class="custom-modal">
+    <div class="custom-modal-content">
+      <div class="custom-modal-header">
+        <h3 id="modalTitle">알림</h3>
+      </div>
+      <div class="custom-modal-body">
+        <p id="modalMessage"></p>
+      </div>
+      <div class="custom-modal-footer">
+        <button id="modalConfirmBtn" class="modal-btn modal-btn-primary">확인</button>
+        <button id="modalCancelBtn" class="modal-btn modal-btn-secondary" style="display: none;">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

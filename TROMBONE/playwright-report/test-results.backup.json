@@ -1,0 +1,174 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\okestro\\Desktop\\test\\TROMBONE\\playwright.config.js",
+    "rootDir": "C:/Users/okestro/Desktop/test/TROMBONE/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "C:/Users/okestro/Desktop/test/TROMBONE/playwright-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:/Users/okestro/Desktop/test/TROMBONE/playwright-report/test-results.json"
+        }
+      ],
+      [
+        "list",
+        {
+          "printSteps": true
+        }
+      ],
+      [
+        "line",
+        {
+          "printSteps": true
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/okestro/Desktop/test/TROMBONE/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/okestro/Desktop/test/TROMBONE/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "scenario/**/*.spec.js",
+          "**/*.spec.js"
+        ],
+        "timeout": 3600000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.53.1",
+    "workers": 7,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "scenario\\INT_TRB_006.spec.js",
+      "file": "scenario/INT_TRB_006.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "통테 의뢰 테스트",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 3600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 31001,
+                  "error": {
+                    "message": "Error: locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('.tabpanel').locator('text=\"빌드배포0 0 24\"')\u001b[22m\n",
+                    "stack": "Error: locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('.tabpanel').locator('text=\"빌드배포0 0 24\"')\u001b[22m\n\n    at C:\\Users\\okestro\\Desktop\\test\\TROMBONE\\tests\\scenario\\INT_TRB_006.spec.js:44:64",
+                    "location": {
+                      "file": "C:\\Users\\okestro\\Desktop\\test\\TROMBONE\\tests\\scenario\\INT_TRB_006.spec.js",
+                      "column": 64,
+                      "line": 44
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 42 |\u001b[39m\n \u001b[90m 43 |\u001b[39m   \u001b[90m// Step 8: tabpanel에서 '빌드배포0 0 24' 클릭한다 (🤖 Groq AI 변환)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 44 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'.tabpanel'\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m'text=\"빌드배포0 0 24\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 45 |\u001b[39m   console\u001b[33m.\u001b[39mlog(\u001b[32m'Step 8: 클릭 완료'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 46 |\u001b[39m\n \u001b[90m 47 |\u001b[39m   \u001b[90m// Step 9: listitem에서 /^티켓 관리0 0 24 24$/  포함된 'a' 클릭한다 (🤖 Groq AI 변환)\u001b[39m\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\okestro\\Desktop\\test\\TROMBONE\\tests\\scenario\\INT_TRB_006.spec.js",
+                        "column": 64,
+                        "line": 44
+                      },
+                      "message": "Error: locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('.tabpanel').locator('text=\"빌드배포0 0 24\"')\u001b[22m\n\n\n\u001b[0m \u001b[90m 42 |\u001b[39m\n \u001b[90m 43 |\u001b[39m   \u001b[90m// Step 8: tabpanel에서 '빌드배포0 0 24' 클릭한다 (🤖 Groq AI 변환)\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 44 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'.tabpanel'\u001b[39m)\u001b[33m.\u001b[39mlocator(\u001b[32m'text=\"빌드배포0 0 24\"'\u001b[39m)\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 45 |\u001b[39m   console\u001b[33m.\u001b[39mlog(\u001b[32m'Step 8: 클릭 완료'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 46 |\u001b[39m\n \u001b[90m 47 |\u001b[39m   \u001b[90m// Step 9: listitem에서 /^티켓 관리0 0 24 24$/  포함된 'a' 클릭한다 (🤖 Groq AI 변환)\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\okestro\\Desktop\\test\\TROMBONE\\tests\\scenario\\INT_TRB_006.spec.js:44:64\u001b[22m"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "Step 1: 페이지 이동 완료\n"
+                    },
+                    {
+                      "text": "Step 2: 클릭 완료\n"
+                    },
+                    {
+                      "text": "Step 3: 입력 완료 (고정 값)\n"
+                    },
+                    {
+                      "text": "Step 4: 클릭 완료\n"
+                    },
+                    {
+                      "text": "Step 5: 입력 완료 (고정 값)\n"
+                    },
+                    {
+                      "text": "Step 6: 클릭 완료\n"
+                    },
+                    {
+                      "text": "Step 7: 클릭 완료\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2025-12-01T08:18:59.048Z",
+                  "annotations": [],
+                  "attachments": [],
+                  "errorLocation": {
+                    "file": "C:\\Users\\okestro\\Desktop\\test\\TROMBONE\\tests\\scenario\\INT_TRB_006.spec.js",
+                    "column": 64,
+                    "line": 44
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "29d70a544918391c8784-871e3598c4f42cf473ee",
+          "file": "scenario/INT_TRB_006.spec.js",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-12-01T08:18:58.391Z",
+    "duration": 32382.688,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

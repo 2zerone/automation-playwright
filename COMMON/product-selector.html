@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKESTRO 제품 선택</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        body.trombone-hover {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+        }
+
+        body.viola-hover {
+            background: linear-gradient(135deg, #f0fff4 0%, #e8f8f5 100%);
+        }
+
+        body.contrabass-hover {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        }
+
+        body.cmp-hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00bcd4, #0097a7);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .trombone-card::before {
+            background: linear-gradient(90deg, #00bcd4, #0097a7);
+        }
+
+        .viola-card::before {
+            background: linear-gradient(90deg, #a8e6cf, #7fcdcd);
+        }
+
+        .contrabass-card::before {
+            background: linear-gradient(90deg, #f44336, #d32f2f);
+        }
+
+        .cmp-card::before {
+            background: linear-gradient(90deg, #2196f3, #1976d2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .trombone-card:hover {
+            border-color: #00bcd4;
+        }
+
+        .viola-card:hover {
+            border-color: #a8e6cf;
+        }
+
+        .contrabass-card:hover {
+            border-color: #f44336;
+        }
+
+        .cmp-card:hover {
+            border-color: #2196f3;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .product-icon span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .trombone-icon {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+            color: white;
+        }
+
+        .viola-icon {
+            background: linear-gradient(135deg, #a8e6cf, #7fcdcd);
+            color: white;
+        }
+
+        .product-card:hover .product-icon {
+            transform: scale(1.1);
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .trombone-card {
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+        }
+
+        .viola-card {
+            background: linear-gradient(135deg, #f0fff4, #e8f8f5);
+        }
+
+        .contrabass-card {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+        }
+
+        .cmp-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+
+        .contrabass-icon {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .cmp-icon {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .loading.show {
+            display: flex;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">OKESTRO 제품 선택</h1>
+        <p class="subtitle">사용할 제품을 선택해주세요</p>
+        
+        <div class="product-grid">
+            <div class="product-card trombone-card" onclick="selectProduct('trombone')" onmouseenter="handleProductHover('trombone')" onmouseleave="handleProductLeave()">
+                <div class="product-icon trombone-icon">
+                    <img src="./images/trombone_24x24.png" alt="TROMBONE" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display: none;">TRO</span>
+                </div>
+                <h3 class="product-name">TROMBONE</h3>
+                <p class="product-description">
+                    UI 테스트 자동화 도구<br>
+                </p>
+            </div>
+            
+            <div class="product-card viola-card" onclick="selectProduct('viola')" onmouseenter="handleProductHover('viola')" onmouseleave="handleProductLeave()">
+                <div class="product-icon viola-icon">
+                    <img src="./images/viola_24x24.png" alt="VIOLA" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display: none;">VIO</span>
+                </div>
+                <h3 class="product-name">VIOLA</h3>
+                <p class="product-description">
+                    UI 테스트 자동화 도구<br>
+                </p>
+            </div>
+
+            <div class="product-card contrabass-card" onclick="selectProduct('contrabass')" onmouseenter="handleProductHover('contrabass')" onmouseleave="handleProductLeave()">
+                <div class="product-icon contrabass-icon">
+                    <img src="./images/contrabass_24x24.png" alt="CONTRABASS" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display: none;">CON</span>
+                </div>
+                <h3 class="product-name">CONTRABASS</h3>
+                <p class="product-description">
+                    UI 테스트 자동화 도구<br>
+                </p>
+            </div>
+
+            <div class="product-card cmp-card" onclick="selectProduct('cmp')" onmouseenter="handleProductHover('cmp')" onmouseleave="handleProductLeave()">
+                <div class="product-icon cmp-icon">
+                    <img src="./images/cmp_24x24.png" alt="CMP" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span style="display: none;">CMP</span>
+                </div>
+                <h3 class="product-name">CMP</h3>
+                <p class="product-description">
+                    UI 테스트 자동화 도구<br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <span>제품을 로딩 중...</span>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        function selectProduct(product) {
+            const loading = document.getElementById('loading');
+            loading.classList.add('show');
+            
+            // 제품 선택 정보를 메인 프로세스로 전송
+            ipcRenderer.send('product-selected', product);
+        }
+
+        // 제품 hover 시 배경 변경
+        function handleProductHover(product) {
+            document.body.className = product + '-hover';
+        }
+
+        // 제품 hover 해제 시 기본 배경으로 복원
+        function handleProductLeave() {
+            document.body.className = '';
+        }
+
+        // 제품 로딩 완료 이벤트 수신
+        ipcRenderer.on('product-loaded', (event, product) => {
+            console.log(`${product} 제품이 로딩되었습니다.`);
+        });
+    </script>
+</body>
+</html>

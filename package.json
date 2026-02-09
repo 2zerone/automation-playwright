@@ -1,0 +1,102 @@
+{
+  "name": "uitest",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:install": "playwright install",
+    "test:codegen": "playwright codegen https://305tst.console.bf.okestro.cloud/ --viewport-size=1920,1080 --ignore-https-errors",
+    "test:codegen:trombone": "playwright codegen http://tst.console.trombone.okestro.cloud/ --viewport-size=1920,1080",
+    "autoscript": "node autoscript/sheets-to-playwright-direct.js generate",
+    "autoscript:trombone": "node autoscript/sheets-to-playwright-direct.js generate trombone",
+    "autoscript:viola": "node autoscript/sheets-to-playwright-direct.js generate viola",
+    "autoscript:contrabass": "node autoscript/sheets-to-playwright-direct.js generate contrabass",
+    "autoscript:cmp": "node autoscript/sheets-to-playwright-direct.js generate cmp",
+    "autoscript:manager:trombone": "node autoscript/sheets-to-playwright-direct.js generate trombone --manager",
+    "autoscript:manager:viola": "node autoscript/sheets-to-playwright-direct.js generate viola --manager",
+    "autoscript:manager:contrabass": "node autoscript/sheets-to-playwright-direct.js generate contrabass --manager",
+    "autoscript:manager:cmp": "node autoscript/sheets-to-playwright-direct.js generate cmp --manager",
+    "autoscript-all": "node autoscript/sheets-to-playwright-direct.js generate-all",
+    "autoscript-all:trombone": "node autoscript/sheets-to-playwright-direct.js generate-all trombone",
+    "autoscript-all:viola": "node autoscript/sheets-to-playwright-direct.js generate-all viola",
+    "autoscript-all:contrabass": "node autoscript/sheets-to-playwright-direct.js generate-all contrabass",
+    "autoscript-all:cmp": "node autoscript/sheets-to-playwright-direct.js generate-all cmp",
+    "sheets:list": "node autoscript/sheets-to-playwright-direct.js list",
+    "codegen:sheets": "node autoscript/codegen-to-sheets.js",
+    "codegen:auto": "node autoscript/codegen-auto-sheets.js",
+    "codegen:auto:trombone": "node autoscript/codegen-auto-sheets.js trombone",
+    "codegen:auto:viola": "node autoscript/codegen-auto-sheets.js viola",
+    "codegen:auto:contrabass": "node autoscript/codegen-auto-sheets.js contrabass",
+    "codegen:auto:cmp": "node autoscript/codegen-auto-sheets.js cmp",
+    "sheets:server": "node autoscript/sheets-api-server.js",
+    "merge:tests": "node autoscript/merge-test-cases.js",
+    "append:tests": "node autoscript/append-test-cases.js",
+    "test:stg": "playwright test --config=playwright.config.js",
+    "test:prd": "playwright test --config=playwright.config.js",
+    "test:main": "playwright test tests/trombone-main.spec.js --headed",
+    "test:slow": "playwright test tests/trombone-main-slow.spec.js --headed",
+    "test:slow:debug": "playwright test tests/trombone-main-slow.spec.js --debug",
+    "setup": "node scripts/setup-test-data.js",
+    "test:setup": "npm run setup && npm run test",
+    "start": "electron . --single-instance",
+    "restart": "taskkill /f /im electron.exe 2>nul || echo 'No electron process found' && npm start",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "TROMBONE 자동화 테스트",
+  "main": "TROMBONE/main.js",
+  "build": {
+    "appId": "com.playwright.testrunner",
+    "productName": "TROMBONE 자동화 테스트",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "TROMBONE/**/*",
+      "VIOLA/**/*",
+      "CMP/**/*",
+      "CONTRABASS/**/*",
+      "COMMON/**/*",
+      "autoscript/**/*",
+      "!autoscript/balmy-state-*.json",
+      "!**/*.json.backup",
+      "!**/custom-reports/**/*",
+      "!**/test-results/**/*",
+      "!**/playwright-report/**/*",
+      "config/**/*",
+      "reports/**/*",
+      "playwright.config.js",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "portable",
+      "verifyUpdateCodeSignature": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "@types/node": "^24.0.3",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "ps-list": "^8.1.1",
+    "googleapis": "^144.0.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}

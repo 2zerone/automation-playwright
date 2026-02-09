@@ -1,0 +1,61 @@
+{
+  "login": {
+    "userId": "yh.lee5",
+    "password": "Okestro2018!"
+  },
+  "project": {
+    "code": "LYH",
+    "name": "LYH 업무코드"
+  },
+  "repository": {
+    "name": "LYH-REPO",
+    "group": "LYH"
+  },
+  "users": [
+    {
+      "id": "yh.lee5",
+      "name": "이영한관리자",
+      "role": "빌드배포 관리자",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee2",
+      "name": "이영한QA",
+      "role": "테스트담당자",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee3",
+      "name": "이영한개발리더",
+      "role": "개발리더",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee6",
+      "name": "이영한개발자",
+      "role": "개발자",
+      "systemRole": "시스템관리자(사용자)"
+    },
+    {
+      "id": "yh.lee7",
+      "name": "이영한결재자",
+      "role": "결재자",
+      "systemRole": "시스템관리자(사용자)"
+    }
+  ],
+  "scenario": {
+    "id": 1,
+    "type": "scenario_1",
+    "description": "시나리오 1 설정"
+  },
+  "user": {
+    "id": "lyh2716",
+    "name": "이영한2716",
+    "email": "lyh2716@okestro.com",
+    "level": "개발자"
+  },
+  "gitlab": {
+    "username": "yh.lee5",
+    "password": "cloud1234"
+  }
+}

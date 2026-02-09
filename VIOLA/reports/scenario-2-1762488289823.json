@@ -1,0 +1,192 @@
+{
+  "status": "fail",
+  "error": {
+    "message": "locator.click: Page crashed\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '확인' })\u001b[22m\n",
+    "stack": "locator.click: Page crashed\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '확인' })\u001b[22m\n\n    at PodRecoveryManager.deletePod (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\lib\\classes\\PodRecoveryManager.js:224:57)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:190:7\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:80:5)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:189:5"
+  },
+  "testCases": [
+    {
+      "name": "로그인 페이지 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:04.739Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:04.740Z",
+          "type": "info",
+          "message": "로그인 페이지 접근 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:07.083Z",
+          "type": "success",
+          "message": "로그인 페이지 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:07.083Z",
+      "duration": 2.343
+    },
+    {
+      "name": "로그인 정보 입력",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:07.083Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:07.083Z",
+          "type": "info",
+          "message": "로그인 정보 입력 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:08.267Z",
+          "type": "success",
+          "message": "로그인 정보 입력 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:08.267Z",
+      "duration": 1.184
+    },
+    {
+      "name": "로그인 실행 및 성공 확인",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:08.267Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:08.267Z",
+          "type": "info",
+          "message": "로그인 실행 및 성공 확인 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:15.599Z",
+          "type": "success",
+          "message": "로그인 실행 및 성공 확인 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:15.599Z",
+      "duration": 7.332
+    },
+    {
+      "name": "Kubernetes Engine 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:15.600Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:15.600Z",
+          "type": "info",
+          "message": "Kubernetes Engine 접근 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:18.868Z",
+          "type": "success",
+          "message": "Kubernetes Engine 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:18.868Z",
+      "duration": 3.268
+    },
+    {
+      "name": "클러스터 선택",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:18.869Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:18.869Z",
+          "type": "info",
+          "message": "클러스터 선택 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:21.679Z",
+          "type": "success",
+          "message": "클러스터 선택 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:21.679Z",
+      "duration": 2.81
+    },
+    {
+      "name": "컨테이너 관리 이동",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:21.680Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:21.680Z",
+          "type": "info",
+          "message": "컨테이너 관리 이동 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:24.847Z",
+          "type": "success",
+          "message": "컨테이너 관리 이동 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:24.847Z",
+      "duration": 3.167
+    },
+    {
+      "name": "Pod 선택",
+      "status": "pass",
+      "startTime": "2025-11-07T04:04:24.847Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:24.847Z",
+          "type": "info",
+          "message": "Pod 선택 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:26.496Z",
+          "type": "success",
+          "message": "Pod 선택 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:26.496Z",
+      "duration": 1.649
+    },
+    {
+      "name": "Pod 삭제",
+      "status": "fail",
+      "startTime": "2025-11-07T04:04:26.496Z",
+      "error": {
+        "message": "locator.click: Page crashed\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '확인' })\u001b[22m\n",
+        "stack": "locator.click: Page crashed\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '확인' })\u001b[22m\n\n    at PodRecoveryManager.deletePod (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\lib\\classes\\PodRecoveryManager.js:224:57)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:190:7\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:80:5)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:189:5"
+      },
+      "logs": [
+        {
+          "timestamp": "2025-11-07T04:04:26.497Z",
+          "type": "info",
+          "message": "Pod 삭제 시작"
+        },
+        {
+          "timestamp": "2025-11-07T04:04:49.822Z",
+          "type": "error",
+          "message": "Pod 삭제 실패: locator.click: Page crashed\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '확인' })\u001b[22m\n"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T04:04:49.823Z",
+      "duration": 23.327
+    },
+    {
+      "name": "백업 메뉴 이동",
+      "status": "pending"
+    },
+    {
+      "name": "백업 복원",
+      "status": "pending"
+    },
+    {
+      "name": "복원 확인",
+      "status": "pending"
+    }
+  ]
+}

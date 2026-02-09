@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron 애플리케이션 구성도</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .mermaid {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+        }
+        .download-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Electron 애플리케이션 구성도</h1>
+        <div class="mermaid">
+graph TB
+    subgraph "Electron 애플리케이션"
+        subgraph "메인 프로세스"
+            MainProcess["main.js<br/>Electron 메인 프로세스"]
+            MainProcess --> |초기 로드| ProductSelector["product-selector.html<br/>제품 선택 화면"]
+        end
+        
+        subgraph "제품 선택"
+            ProductSelector --> |제품 선택| SelectTrombone["TROMBONE 선택"]
+            ProductSelector --> |제품 선택| SelectViola["VIOLA 선택"]
+            ProductSelector --> |제품 선택| SelectContrabass["CONTRABASS 선택"]
+            ProductSelector --> |제품 선택| SelectCMP["CMP 선택"]
+        end
+        
+        subgraph "제품별 GUI 화면"
+            TromboneGUI["TROMBONE/<br/>trombone-main.html"]
+            ViolaGUI["VIOLA/<br/>viola-main.html"]
+            ContrabassGUI["CONTRABASS/<br/>contrabass-main.html"]
+            CMPGUI["CMP/<br/>cmp-main.html<br/>(예시: 상세 구조)"]
+            
+            SelectTrombone --> TromboneGUI
+            SelectViola --> ViolaGUI
+            SelectContrabass --> ContrabassGUI
+            SelectCMP --> CMPGUI
+        end
+        
+        subgraph "CMP 제품 상세 구조 예시"
+            subgraph "렌더러 프로세스 GUI"
+                CMPGUI --> |시나리오 선택| ScenarioSelect["시나리오 선택 UI"]
+                CMPGUI --> |실행 버튼 클릭| RunBtn["실행 버튼"]
+                CMPGUI --> |로그 확인| LogView["실시간 로그 뷰어"]
+                CMPGUI --> |이력 관리| HistoryTab["이력 관리 탭"]
+            end
+            
+            subgraph "메인 프로세스 IPC"
+                IPC["IPC 핸들러<br/>- generate-custom-report<br/>- run-scenario<br/>- open-custom-report"]
+            end
+            
+            subgraph "테스트 실행 엔진"
+                Runner["electron-scenario-runner.js<br/>시나리오 실행 엔진"]
+                Runner --> |Playwright 실행| Playwright["Playwright<br/>브라우저 자동화"]
+            end
+            
+            subgraph "테스트 파일"
+                SpecFiles["tests/scenario/<br/>scenario-*.spec.js"]
+                SpecFiles --> |테스트 케이스 실행| TestCases["테스트 케이스"]
+            end
+            
+            subgraph "Manager 클래스"
+                BaseMgr["lib/classes/<br/>BaseManager.js"]
+                LoginMgr["lib/classes/<br/>LoginManager.js"]
+                ProductMgr["lib/classes/<br/>제품별 Manager"]
+                BaseMgr --> |상속| LoginMgr
+                BaseMgr --> |상속| ProductMgr
+                TestCases --> |사용| LoginMgr
+                TestCases --> |사용| ProductMgr
+            end
+            
+            subgraph "리포트 생성"
+                ReportGen["lib/report-generator.js<br/>리포트 생성 엔진"]
+                ReportGen --> |HTML 생성| CustomReport["custom-reports/<br/>커스텀 리포트"]
+            end
+            
+            subgraph "설정 파일"
+                Config["config/<br/>test-settings.json"]
+                Config --> |설정 로드| Runner
+                Config --> |설정 로드| ReportGen
+            end
+            
+            subgraph "데이터 저장"
+                GlobalResults["custom-reports/<br/>global-test-results.json"]
+            end
+            
+            RunBtn --> |IPC 호출| IPC
+            IPC --> |시나리오 실행| Runner
+            Runner --> |테스트 파일 로드| SpecFiles
+            Playwright --> |테스트 결과| GlobalResults
+            Runner --> |테스트 완료| IPC
+            IPC --> |리포트 생성 요청| ReportGen
+            ReportGen --> |리포트 데이터 읽기| GlobalResults
+            ReportGen --> |리포트 저장| CustomReport
+            IPC --> |로그 전달| LogView
+            IPC --> |이력 업데이트| HistoryTab
+        end
+        
+        subgraph "다른 제품들 동일 구조"
+            Note["TROMBONE, VIOLA, CONTRABASS도<br/>CMP와 동일한 구조를 가짐<br/>- 각 제품별 main.html<br/>- electron-scenario-runner.js<br/>- lib/report-generator.js<br/>- tests/scenario/<br/>- config/test-settings.json"]
+        end
+    end
+    
+    style MainProcess fill:#e1f5ff
+    style ProductSelector fill:#fff4e1
+    style CMPGUI fill:#ffe1f5
+    style IPC fill:#fff4e1
+    style Runner fill:#ffe1f5
+    style ReportGen fill:#e1ffe1
+    style Playwright fill:#f5e1ff
+    style Note fill:#f0f0f0
+        </div>
+        
+        <button class="download-btn" onclick="downloadAsImage()">이미지로 저장</button>
+    </div>
+    
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
+        // 다이어그램 로드 후 불필요한 여백 제거
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const svg = document.querySelector('.mermaid svg');
+                if (svg) {
+                    // SVG의 실제 크기에 맞춰 컨테이너 조정
+                    const bbox = svg.getBBox();
+                    const mermaidContainer = document.querySelector('.mermaid');
+                    if (mermaidContainer) {
+                        mermaidContainer.style.height = 'auto';
+                        mermaidContainer.style.paddingBottom = '10px';
+                    }
+                }
+            }, 500);
+        });
+        
+        function downloadAsImage() {
+            try {
+                const svg = document.querySelector('.mermaid svg');
+                if (!svg) {
+                    alert('SVG를 찾을 수 없습니다. 다이어그램이 로드될 때까지 기다려주세요.');
+                    return;
+                }
+                
+                // 원본 SVG의 크기 정보 가져오기
+                const viewBox = svg.getAttribute('viewBox');
+                const svgWidth = svg.getAttribute('width');
+                const svgHeight = svg.getAttribute('height');
+                
+                // viewBox에서 크기 추출
+                let width, height;
+                if (viewBox) {
+                    const parts = viewBox.split(' ');
+                    width = parseFloat(parts[2]);
+                    height = parseFloat(parts[3]);
+                } else {
+                    width = parseFloat(svgWidth) || 1200;
+                    height = parseFloat(svgHeight) || 800;
+                }
+                
+                // SVG 복사본 생성 (원본 변경 방지)
+                const svgClone = svg.cloneNode(true);
+                
+                // 복사본의 속성 설정
+                svgClone.setAttribute('width', width);
+                svgClone.setAttribute('height', height);
+                if (viewBox) {
+                    svgClone.setAttribute('viewBox', viewBox);
+                }
+                
+                // 네임스페이스 확인 및 추가
+                if (!svgClone.getAttribute('xmlns')) {
+                    svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                }
+                
+                // SVG 데이터 가져오기
+                const svgData = new XMLSerializer().serializeToString(svgClone);
+                
+                // SVG를 base64로 인코딩
+                const base64Svg = btoa(unescape(encodeURIComponent(svgData)));
+                const svgDataUri = 'data:image/svg+xml;base64,' + base64Svg;
+                
+                // Canvas 생성
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                // CORS 문제 방지를 위해 crossOrigin 설정
+                img.crossOrigin = 'anonymous';
+                
+                img.onload = function() {
+                    try {
+                        // Canvas 크기를 이미지 크기에 맞춤
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        
+                        // 배경색 설정
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
+                        // 이미지 그리기
+                        ctx.drawImage(img, 0, 0);
+                        
+                        // PNG로 변환하여 다운로드
+                        canvas.toBlob(function(blob) {
+                            if (!blob) {
+                                alert('이미지 생성에 실패했습니다.');
+                                return;
+                            }
+                            
+                            const link = document.createElement('a');
+                            link.download = 'architecture-electron.png';
+                            link.href = URL.createObjectURL(blob);
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            
+                            // 메모리 정리
+                            URL.revokeObjectURL(link.href);
+                            
+                            console.log('이미지 다운로드 완료');
+                        }, 'image/png');
+                    } catch (error) {
+                        console.error('이미지 변환 오류:', error);
+                        alert('이미지 변환 중 오류가 발생했습니다: ' + error.message);
+                    }
+                };
+                
+                img.onerror = function() {
+                    console.error('이미지 로드 실패');
+                    alert('SVG 이미지 로드에 실패했습니다.');
+                };
+                
+                img.src = svgDataUri;
+            } catch (error) {
+                console.error('다운로드 오류:', error);
+                alert('이미지 저장 중 오류가 발생했습니다: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
+

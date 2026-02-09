@@ -1,0 +1,182 @@
+{
+  "scenario-1": {
+    "status": "fail",
+    "testCases": [
+      {
+        "name": "로그인 페이지 접근",
+        "status": "fail",
+        "duration": 2170,
+        "error": "Error: 브라우저가 강제 종료되었습니다\n\n  110 |     if (page.isClosed()) {\n  111 |       testCase.status = 'fail';\n> 112 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  113 |       testResults.status = 'fail';\n  114 |       testResults.error = testCase.error;\n  115 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:112:24)\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:388:7\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-1.spec.js:387:5",
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:20.793Z",
+        "endTime": "2025-11-14T05:43:22.963Z"
+      },
+      {
+        "name": "로그인 정보 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.222Z",
+        "endTime": "2025-11-14T05:43:24.222Z"
+      },
+      {
+        "name": "로그인 실행 및 성공 확인",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.222Z",
+        "endTime": "2025-11-14T05:43:24.222Z"
+      },
+      {
+        "name": "AWS 서비스 접근",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.222Z",
+        "endTime": "2025-11-14T05:43:24.222Z"
+      },
+      {
+        "name": "인스턴스 페이지 이동",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.222Z",
+        "endTime": "2025-11-14T05:43:24.222Z"
+      },
+      {
+        "name": "기본 정보 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.222Z",
+        "endTime": "2025-11-14T05:43:24.222Z"
+      },
+      {
+        "name": "네트워크 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.222Z",
+        "endTime": "2025-11-14T05:43:24.222Z"
+      },
+      {
+        "name": "보안 설정 입력",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.223Z",
+        "endTime": "2025-11-14T05:43:24.223Z"
+      },
+      {
+        "name": "새 인스턴스 선택",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.223Z",
+        "endTime": "2025-11-14T05:43:24.223Z"
+      },
+      {
+        "name": "인스턴스 RUNNING 확인",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-14T05:43:24.223Z",
+        "endTime": "2025-11-14T05:43:24.223Z"
+      }
+    ],
+    "duration": "0분 7초",
+    "startTime": "2025-11-14T05:43:17.544Z",
+    "endTime": "2025-11-14T05:43:24.337Z",
+    "timestamp": "2025. 11. 14. 오후 2:43:17"
+  },
+  "scenario-2": {
+    "status": "fail",
+    "testCases": [
+      {
+        "name": "로그인 페이지 접근",
+        "status": "pass",
+        "duration": 2565,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:24.317Z",
+        "endTime": "2025-11-13T01:18:26.882Z"
+      },
+      {
+        "name": "로그인 정보 입력",
+        "status": "pass",
+        "duration": 1504,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:28.485Z",
+        "endTime": "2025-11-13T01:18:29.989Z"
+      },
+      {
+        "name": "로그인 실행 및 성공 확인",
+        "status": "pass",
+        "duration": 7779,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:30.002Z",
+        "endTime": "2025-11-13T01:18:37.781Z"
+      },
+      {
+        "name": "대시보드 생성",
+        "status": "pass",
+        "duration": 11718,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:37.789Z",
+        "endTime": "2025-11-13T01:18:49.507Z"
+      },
+      {
+        "name": "위젯 설정",
+        "status": "pass",
+        "duration": 1951,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:49.518Z",
+        "endTime": "2025-11-13T01:18:51.469Z"
+      },
+      {
+        "name": "메트릭 선택",
+        "status": "pass",
+        "duration": 3695,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:51.482Z",
+        "endTime": "2025-11-13T01:18:55.177Z"
+      },
+      {
+        "name": "리소스 추가",
+        "status": "fail",
+        "duration": 24249,
+        "error": "Error: 인스턴스를 찾을 수 없습니다: aws-yh-9. 리스트에 해당 인스턴스가 있는지 확인해주세요.\n\n   at ..\\lib\\classes\\aws2Manager.js:196\n\n  194 |     } catch (error) {\n  195 |       console.error(`❌ 인스턴스를 찾을 수 없습니다: ${this.currentInstanceName}`);\n> 196 |       throw new Error(`인스턴스를 찾을 수 없습니다: ${this.currentInstanceName}. 리스트에 해당 인스턴스가 있는지 확인해주세요.`);\n      |             ^\n  197 |     }\n  198 |     \n  199 |     // Step : \\'추가\\' 버튼 클릭\n    at aws2Manager.resourceSelect_3 (C:\\Users\\okestro\\Desktop\\test\\CMP\\lib\\classes\\aws2Manager.js:196:13)\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-2.spec.js:433:9\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-2.spec.js:105:5)\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-2.spec.js:431:7\n    at C:\\Users\\okestro\\Desktop\\test\\CMP\\tests\\scenario\\scenario-2.spec.js:430:5",
+        "hasResults": true,
+        "startTime": "2025-11-13T01:18:55.188Z",
+        "endTime": "2025-11-13T01:19:19.437Z"
+      },
+      {
+        "name": "대시보드 확인",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2025-11-13T01:19:19.763Z",
+        "endTime": "2025-11-13T01:19:19.763Z"
+      }
+    ],
+    "duration": "0분 59초",
+    "startTime": "2025-11-13T01:18:21.159Z",
+    "endTime": "2025-11-13T01:19:19.894Z",
+    "timestamp": "2025. 11. 13. 오전 10:18:21"
+  }
+}

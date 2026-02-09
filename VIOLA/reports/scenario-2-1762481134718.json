@@ -1,0 +1,175 @@
+{
+  "status": "fail",
+  "error": {
+    "message": "locator.check: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('row', { name: /null/ }).getByLabel('')\u001b[22m\n",
+    "stack": "locator.check: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('row', { name: /null/ }).getByLabel('')\u001b[22m\n\n    at PodRecoveryManager.selectPod (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\lib\\classes\\PodRecoveryManager.js:166:96)\n    at stepFunction (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:149:32)\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:71:11)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:148:11"
+  },
+  "testCases": [
+    {
+      "name": "로그인 페이지 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T02:04:51.241Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:04:51.242Z",
+          "type": "info",
+          "message": "📝 로그인 페이지 접근 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:04:53.344Z",
+          "type": "success",
+          "message": "✅ 로그인 페이지 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:04:53.344Z",
+      "duration": 2.102
+    },
+    {
+      "name": "로그인 정보 입력",
+      "status": "pass",
+      "startTime": "2025-11-07T02:04:53.344Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:04:53.344Z",
+          "type": "info",
+          "message": "📝 로그인 정보 입력 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:04:54.498Z",
+          "type": "success",
+          "message": "✅ 로그인 정보 입력 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:04:54.498Z",
+      "duration": 1.154
+    },
+    {
+      "name": "로그인 실행 및 성공 확인",
+      "status": "pass",
+      "startTime": "2025-11-07T02:04:54.498Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:04:54.498Z",
+          "type": "info",
+          "message": "📝 로그인 실행 및 성공 확인 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:05:01.610Z",
+          "type": "success",
+          "message": "✅ 로그인 실행 및 성공 확인 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:05:01.610Z",
+      "duration": 7.112
+    },
+    {
+      "name": "Kubernetes Engine 접근",
+      "status": "pass",
+      "startTime": "2025-11-07T02:05:01.610Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:05:01.610Z",
+          "type": "info",
+          "message": "📝 Kubernetes Engine 접근 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:05:04.808Z",
+          "type": "success",
+          "message": "✅ Kubernetes Engine 접근 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:05:04.808Z",
+      "duration": 3.198
+    },
+    {
+      "name": "클러스터 선택",
+      "status": "pass",
+      "startTime": "2025-11-07T02:05:04.808Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:05:04.808Z",
+          "type": "info",
+          "message": "📝 클러스터 선택 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:05:07.567Z",
+          "type": "success",
+          "message": "✅ 클러스터 선택 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:05:07.567Z",
+      "duration": 2.759
+    },
+    {
+      "name": "컨테이너 관리 이동",
+      "status": "pass",
+      "startTime": "2025-11-07T02:05:07.567Z",
+      "error": null,
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:05:07.567Z",
+          "type": "info",
+          "message": "📝 컨테이너 관리 이동 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:05:10.737Z",
+          "type": "success",
+          "message": "✅ 컨테이너 관리 이동 성공"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:05:10.737Z",
+      "duration": 3.17
+    },
+    {
+      "name": "Pod 선택",
+      "status": "fail",
+      "startTime": "2025-11-07T02:05:10.737Z",
+      "error": {
+        "message": "locator.check: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('row', { name: /null/ }).getByLabel('')\u001b[22m\n",
+        "stack": "locator.check: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('row', { name: /null/ }).getByLabel('')\u001b[22m\n\n    at PodRecoveryManager.selectPod (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\lib\\classes\\PodRecoveryManager.js:166:96)\n    at stepFunction (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:149:32)\n    at runTestStep (C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:71:11)\n    at C:\\Users\\okestro\\Desktop\\test\\VIOLA\\tests\\scenario\\scenario-2.spec.js:148:11"
+      },
+      "logs": [
+        {
+          "timestamp": "2025-11-07T02:05:10.737Z",
+          "type": "info",
+          "message": "📝 Pod 선택 시작..."
+        },
+        {
+          "timestamp": "2025-11-07T02:05:34.717Z",
+          "type": "error",
+          "message": "❌ Pod 선택 실패: locator.check: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('row', { name: /null/ }).getByLabel('')\u001b[22m\n"
+        }
+      ],
+      "screenshots": [],
+      "endTime": "2025-11-07T02:05:34.717Z",
+      "duration": 23.98
+    },
+    {
+      "name": "Pod 삭제",
+      "status": "pending"
+    },
+    {
+      "name": "백업 메뉴 이동",
+      "status": "pending"
+    },
+    {
+      "name": "백업 복원",
+      "status": "pending"
+    },
+    {
+      "name": "복원 확인",
+      "status": "pending"
+    }
+  ]
+}

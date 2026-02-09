@@ -1,0 +1,36 @@
+{
+  "environment": {
+    "url": "https://304test.console.bf.okestro.cloud/",
+    "name": "304test 검증 환경"
+  },
+  "login": {
+    "userId": "yh.lee5@okestro.com",
+    "password": "Okestro2018!"
+  },
+  "project": {
+    "code": "CMP",
+    "name": "Cloud Management Platform"
+  },
+  "repository": {
+    "name": "CMP-Platform"
+  },
+  "user": {
+    "id": "yh.lee5",
+    "name": "이영한",
+    "email": "yh.lee5@okestro.com",
+    "role": "테스트담당자"
+  },
+  "users": [
+    {
+      "id": "yh.lee5",
+      "name": "이영한",
+      "role": "테스트담당자"
+    }
+  ],
+  "timeout": 30000,
+  "headless": false,
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  }
+}

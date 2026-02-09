@@ -1,0 +1,26 @@
+{
+  "login": {
+    "userId": "yh.lee5",
+    "password": "Okestro2018!"
+  },
+  "project": {
+    "code": "TEST007",
+    "name": "TEST 업무코드"
+  },
+  "repository": {
+    "name": "TEST-REPO"
+  },
+  "user": {
+    "id": "yh.lee5",
+    "name": "유저007",
+    "email": "user007@okestro.com",
+    "level": "대리(03)",
+    "role": "빌드배포 관리자",
+    "systemRole": "시스템관리자(사용자)"
+  },
+  "scenario": {
+    "id": 14,
+    "type": "scenario_14",
+    "description": "시나리오 14 설정"
+  }
+} 

@@ -1,0 +1,38 @@
+{
+  "environment": {
+    "url": "https://304test.console.bf.okestro.cloud/",
+    "name": "304test 검증 환경"
+  },
+  "login": {
+    "userId": "yh.lee5@okestro.com",
+    "password": "Okestro2018!"
+  },
+  "gitlab": {
+    "username": "root",
+    "password": "cloud1234",
+    "url": "http://gitlab.trombone.qa.okestro.cloud/"
+  },
+  "project": {
+    "code": "LYH007",
+    "name": "LYH 업무코드"
+  },
+  "repository": {
+    "name": "LYH-REPO"
+  },
+  "user": {
+    "id": "yh.lee5",
+    "name": "유저007",
+    "email": "user007@okestro.com",
+    "level": "대리(03)",
+    "role": "빌드배포 관리자",
+    "systemRole": "시스템관리자(사용자)"
+  },
+  "users": [
+    {
+      "id": "yh.lee5",
+      "name": "이영한",
+      "role": "빌드배포 관리자",
+      "systemRole": "시스템관리자(사용자)"
+    }
+  ]
+}

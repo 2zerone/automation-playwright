@@ -1,0 +1,11 @@
+{
+  "scenario": {
+    "id": "interrupt",
+    "type": "interrupt-test",
+    "description": "중단 테스트 시뮬레이션"
+  },
+  "project": {
+    "code": "TEST-INTERRUPT",
+    "name": "중단 테스트"
+  }
+} 
