@@ -1,0 +1,14 @@
+{
+  "test": {
+    "values": [
+      {
+        "index": 2,
+        "fieldName": "username",
+        "fieldLabel": "아이디",
+        "value": "yh.lee5",
+        "action": "getByRole('textbox', { name: '아이디' }).fill('yh.lee5')"
+      }
+    ],
+    "savedAt": "2026-02-12T01:25:58.621Z"
+  }
+}

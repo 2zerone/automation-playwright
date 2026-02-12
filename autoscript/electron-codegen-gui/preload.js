@@ -22,6 +22,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
   parseManagerMethods: (filePath) => ipcRenderer.invoke('parse-manager-methods', filePath),
   generateScenarioSpec: (params) => ipcRenderer.invoke('generate-scenario-spec', params),
   checkScenarioExists: (params) => ipcRenderer.invoke('check-scenario-exists', params),
+  getNextAvailableScenarioNumber: (product) => ipcRenderer.invoke('get-next-available-scenario-number', product),
+  
+  // Unique 값 관리
+  saveUniqueValues: (className, uniqueValues) => ipcRenderer.invoke('save-unique-values', className, uniqueValues),
+  loadUniqueValues: (className) => ipcRenderer.invoke('load-unique-values', className),
+  parseManagerFillValues: (filePath) => ipcRenderer.invoke('parse-manager-fill-values', filePath),
+  
+  // Manager 삭제
+  deleteManager: (params) => ipcRenderer.invoke('delete-manager', params),
 
   // 파일 관련
   openInExplorer: (filePath) => ipcRenderer.invoke('open-in-explorer', filePath),

@@ -18,8 +18,12 @@ try {
       parseManagerMethods: (filePath) => ipcRenderer.invoke('parse-manager-methods', filePath),
       generateScenarioSpec: (params) => ipcRenderer.invoke('generate-scenario-spec', params),
       checkScenarioExists: (params) => ipcRenderer.invoke('check-scenario-exists', params),
+      getNextAvailableScenarioNumber: (product) => ipcRenderer.invoke('get-next-available-scenario-number', product),
       openInExplorer: (filePath) => ipcRenderer.invoke('open-in-explorer', filePath),
       selectFile: (options) => ipcRenderer.invoke('select-file', options),
+      saveUniqueValues: (params) => ipcRenderer.invoke('save-unique-values', params),
+      loadUniqueValues: (className) => ipcRenderer.invoke('load-unique-values', className),
+      parseManagerFillValues: (filePath) => ipcRenderer.invoke('parse-manager-fill-values', filePath),
       onCodegenLog: (callback) => {
         ipcRenderer.on('codegen-log', (event, data) => callback(data));
       },
@@ -45,6 +49,11 @@ try {
 // 전역 상태
 let config = null;
 let currentGeneratedFile = null;
+let currentUniqueValuesData = {
+  className: '',
+  fillValues: [],
+  selectedIndices: []
+};
 
 // DOM 요소
 const elements = {
@@ -75,9 +84,17 @@ const elements = {
   
   // 시나리오 빌더 탭
   managerList: document.getElementById('managerList'),
-  scenarioNumber: document.getElementById('scenarioNumber'),
   resetScenarioBtn: document.getElementById('resetScenarioBtn'),
   generateScenarioBtn: document.getElementById('generateScenarioBtn'),
+  
+  // 시나리오 정보 입력 모달
+  scenarioInfoModal: document.getElementById('scenarioInfoModal'),
+  modalScenarioNumber: document.getElementById('modalScenarioNumber'),
+  modalScenarioTitle: document.getElementById('modalScenarioTitle'),
+  modalScenarioDescription: document.getElementById('modalScenarioDescription'),
+  closeScenarioInfoModal: document.getElementById('closeScenarioInfoModal'),
+  cancelScenarioInfoBtn: document.getElementById('cancelScenarioInfoBtn'),
+  confirmScenarioInfoBtn: document.getElementById('confirmScenarioInfoBtn'),
   scenarioSequence: document.getElementById('scenarioSequence'),
   methodList: document.getElementById('methodList'),
   selectAllMethodsBtn: document.getElementById('selectAllMethodsBtn'),
@@ -98,6 +115,15 @@ const elements = {
   // 로그
   logOutput: document.getElementById('logOutput'),
   clearLogBtn: document.getElementById('clearLogBtn'),
+  
+  // Unique 값 선택 모달
+  uniqueValuesModal: document.getElementById('uniqueValuesModal'),
+  uniqueValuesList: document.getElementById('uniqueValuesList'),
+  closeUniqueValuesBtn: document.getElementById('closeUniqueValuesBtn'),
+  skipUniqueValuesBtn: document.getElementById('skipUniqueValuesBtn'),
+  saveUniqueValuesBtn: document.getElementById('saveUniqueValuesBtn'),
+  manageUniqueValuesBtn: document.getElementById('manageUniqueValuesBtn'),
+  deleteManagerBtn: document.getElementById('deleteManagerBtn'),
   
   // 헤더
   backBtn: document.getElementById('backBtn'),
@@ -442,6 +468,19 @@ async function startCodegen() {
         addLog('info', `📁 저장 위치: ${result.managerFile}`);
         addLog('info', `📦 클래스명: ${result.className}`);
         addLog('info', `📝 단계 수: ${result.steps.length}개`);
+        
+        // Unique 값 후보가 있으면 모달 표시
+        if (result.fillValues && result.fillValues.length > 0) {
+          addLog('info', `🔑 입력된 값 ${result.fillValues.length}개 감지됨`);
+          
+          // 입력된 값들 목록 표시
+          result.fillValues.forEach((fv, idx) => {
+            addLog('info', `   ${idx + 1}. [${fv.fieldLabel}] "${fv.value}"`);
+          });
+          
+          // Unique 값 선택 모달 표시
+          openUniqueValuesModal(result.className, result.fillValues);
+        }
       }
       
       // 입력 필드 초기화
@@ -658,6 +697,8 @@ function setupEventListeners() {
     
     if (selected) {
       elements.createScenarioBtn.disabled = false;
+      elements.manageUniqueValuesBtn.disabled = false;
+      elements.deleteManagerBtn.disabled = false;
       const title = selectedOption.dataset.title;
       const steps = selectedOption.dataset.steps;
       const date = selectedOption.dataset.date;
@@ -670,11 +711,15 @@ function setupEventListeners() {
       `;
     } else {
       elements.createScenarioBtn.disabled = true;
+      elements.manageUniqueValuesBtn.disabled = true;
+      elements.deleteManagerBtn.disabled = true;
       elements.managerInfo.innerHTML = '';
     }
   });
   
   elements.createScenarioBtn.addEventListener('click', createScenario);
+  elements.manageUniqueValuesBtn.addEventListener('click', manageUniqueValues);
+  elements.deleteManagerBtn.addEventListener('click', deleteManager);
   
   // 코드 변환
   elements.convertCodeBtn.addEventListener('click', convertCode);
@@ -743,11 +788,74 @@ function setupEventListeners() {
   }
   
   if (elements.generateScenarioBtn) {
-    elements.generateScenarioBtn.addEventListener('click', generateScenario);
+    elements.generateScenarioBtn.addEventListener('click', openScenarioInfoModal);
   }
   
   if (elements.resetScenarioBtn) {
     elements.resetScenarioBtn.addEventListener('click', resetScenario);
+  }
+  
+  // 시나리오 정보 입력 모달 이벤트
+  if (elements.closeScenarioInfoModal) {
+    elements.closeScenarioInfoModal.addEventListener('click', closeScenarioInfoModal);
+  }
+  
+  if (elements.cancelScenarioInfoBtn) {
+    elements.cancelScenarioInfoBtn.addEventListener('click', closeScenarioInfoModal);
+  }
+  
+  if (elements.confirmScenarioInfoBtn) {
+    elements.confirmScenarioInfoBtn.addEventListener('click', () => {
+      // Manager에서 시나리오 생성하는 경우와 직접 생성하는 경우 구분
+      if (window.tempManagerClassName) {
+        confirmCreateScenarioFromManager();
+      } else {
+        confirmGenerateScenario();
+      }
+    });
+  }
+  
+  // 모달 배경 클릭 시 닫기 (드래그 방지)
+  if (elements.scenarioInfoModal) {
+    let isDragging = false;
+    let startX = null;
+    let startY = null;
+    let mouseDownOnModal = false;
+    
+    elements.scenarioInfoModal.addEventListener('mousedown', (e) => {
+      if (e.target === elements.scenarioInfoModal) {
+        mouseDownOnModal = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        isDragging = false;
+      }
+    });
+    
+    // document에서 mousemove를 감지 (모달 밖으로 드래그해도 추적)
+    document.addEventListener('mousemove', (e) => {
+      if (mouseDownOnModal && startX !== null && startY !== null) {
+        const diffX = Math.abs(e.clientX - startX);
+        const diffY = Math.abs(e.clientY - startY);
+        if (diffX > 5 || diffY > 5) {
+          isDragging = true;
+        }
+      }
+    });
+    
+    // document에서 mouseup을 감지 (모달 밖에서 놓아도 처리)
+    document.addEventListener('mouseup', (e) => {
+      if (mouseDownOnModal) {
+        // 모달 배경에서 시작했고, 드래그하지 않았고, 모달 배경에서 끝난 경우만 닫기
+        if (e.target === elements.scenarioInfoModal && !isDragging) {
+          closeScenarioInfoModal();
+        }
+        // 상태 초기화
+        mouseDownOnModal = false;
+        isDragging = false;
+        startX = null;
+        startY = null;
+      }
+    });
   }
   
   if (elements.closeSuccessModalBtn) {
@@ -811,11 +919,6 @@ function setupEventListeners() {
   const toggleLogBtn = document.getElementById('toggleLogBtn');
   if (toggleLogBtn) {
     toggleLogBtn.addEventListener('click', toggleLogSection);
-  }
-  
-  // 시나리오 번호 입력 시 중복 체크
-  if (elements.scenarioNumber) {
-    elements.scenarioNumber.addEventListener('blur', checkScenarioNumber);
   }
   
   // 녹화 모드 선택 이벤트
@@ -1410,9 +1513,6 @@ function performReset() {
   if (elements.methodList) {
     elements.methodList.innerHTML = '<div class="empty-state">Manager를 선택하세요</div>';
   }
-  if (elements.scenarioNumber) {
-    elements.scenarioNumber.value = '';
-  }
   
   // 파일 목록 체크박스 리프레시
   if (scenarioState.managers && scenarioState.managers.length > 0) {
@@ -1431,53 +1531,8 @@ function showSuccessModal(scenarioNumber, filePath) {
   elements.successModal.classList.add('show');
 }
 
-// 시나리오 번호 중복 체크
-async function checkScenarioNumber() {
-  const scenarioNumber = elements.scenarioNumber?.value;
-  if (!scenarioNumber) return;
-  
-  try {
-    const result = await electronAPI.checkScenarioExists({
-      product: config.currentProduct,
-      scenarioNumber: parseInt(scenarioNumber)
-    });
-    
-    if (result.exists) {
-      elements.scenarioNumber.style.borderColor = 'var(--error)';
-      addLog('warning', `⚠️ scenario-${scenarioNumber}.spec.js 파일이 이미 존재합니다.`);
-    } else {
-      elements.scenarioNumber.style.borderColor = '';
-    }
-  } catch (error) {
-    // 에러는 무시 (파일 시스템 접근 실패 등)
-  }
-}
-
-// 시나리오 생성
-async function generateScenario() {
-  const scenarioNumber = elements.scenarioNumber?.value;
-  
-  if (!scenarioNumber) {
-    addLog('error', '❌ 시나리오 번호를 입력하세요');
-    return;
-  }
-  
-  // 시나리오 번호 중복 체크
-  try {
-    const checkResult = await electronAPI.checkScenarioExists({
-      product: config.currentProduct,
-      scenarioNumber: parseInt(scenarioNumber)
-    });
-    
-    if (checkResult.exists) {
-      addLog('error', `❌ scenario-${scenarioNumber}.spec.js 파일이 이미 존재합니다. 다른 번호를 사용하세요.`);
-      elements.scenarioNumber.focus();
-      return;
-    }
-  } catch (error) {
-    addLog('warning', `⚠️ 파일 존재 여부 확인 실패: ${error.message}`);
-  }
-  
+// 시나리오 생성 모달 열기
+async function openScenarioInfoModal() {
   const scenarioState = getScenarioState();
   if (!scenarioState) {
     addLog('error', '❌ 제품을 선택하세요');
@@ -1495,14 +1550,145 @@ async function generateScenario() {
     addLog('warning', `⚠️ 메서드가 선택되지 않은 Manager: ${managersWithoutMethods.map(m => m.managerName).join(', ')}`);
   }
   
+  // 다음 사용 가능한 시나리오 번호 자동 설정
+  let suggestedNumber = null;
+  try {
+    addLog('info', '🔍 다음 사용 가능한 시나리오 번호 검색 중...');
+    const result = await electronAPI.getNextAvailableScenarioNumber(config.currentProduct);
+    if (result.success) {
+      suggestedNumber = result.nextNumber;
+      if (elements.modalScenarioNumber) {
+        elements.modalScenarioNumber.value = result.nextNumber;
+        elements.modalScenarioNumber.dataset.suggestedNumber = result.nextNumber;
+      }
+      addLog('success', `✅ 다음 사용 가능한 번호: ${result.nextNumber}`);
+    }
+  } catch (error) {
+    addLog('warning', `⚠️ 시나리오 번호 자동 설정 실패: ${error.message}`);
+  }
+  
+  // 모달 필드 초기화
+  if (elements.modalScenarioTitle) elements.modalScenarioTitle.value = '';
+  if (elements.modalScenarioDescription) elements.modalScenarioDescription.value = '';
+  
+  // 시나리오 번호 입력 시 유효성 검사
+  if (elements.modalScenarioNumber) {
+    elements.modalScenarioNumber.addEventListener('input', async function() {
+      const enteredNumber = parseInt(this.value);
+      if (!enteredNumber || enteredNumber < 1) {
+        this.style.borderColor = '';
+        return;
+      }
+      
+      // 중복 체크
+      try {
+        const checkResult = await electronAPI.checkScenarioExists({
+          product: config.currentProduct,
+          scenarioNumber: enteredNumber
+        });
+        
+        if (checkResult.exists) {
+          this.style.borderColor = '#e74c3c';
+          this.title = `시나리오 ${enteredNumber}은(는) 이미 존재합니다.`;
+        } else {
+          this.style.borderColor = '#27ae60';
+          this.title = `시나리오 ${enteredNumber}을(를) 사용할 수 있습니다.`;
+        }
+      } catch (error) {
+        this.style.borderColor = '';
+      }
+    });
+  }
+  
+  // 모달 표시
+  if (elements.scenarioInfoModal) {
+    elements.scenarioInfoModal.classList.remove('hidden');
+  }
+}
+
+// 시나리오 생성 모달 닫기
+function closeScenarioInfoModal() {
+  if (elements.scenarioInfoModal) {
+    elements.scenarioInfoModal.classList.add('hidden');
+  }
+  // 임시 저장된 Manager 정보 초기화
+  window.tempManagerClassName = null;
+}
+
+// 시나리오 생성 확인
+async function confirmGenerateScenario() {
+  let scenarioNumber = elements.modalScenarioNumber?.value;
+  
+  // 시나리오 번호가 비어있으면 자동으로 다음 번호 가져오기
+  if (!scenarioNumber) {
+    try {
+      const result = await electronAPI.getNextAvailableScenarioNumber(config.currentProduct);
+      if (result.success) {
+        scenarioNumber = result.nextNumber.toString();
+        addLog('info', `✅ 시나리오 번호 자동 설정: ${scenarioNumber}`);
+      } else {
+        addLog('error', '❌ 시나리오 번호를 설정할 수 없습니다.');
+        return;
+      }
+    } catch (error) {
+      addLog('error', `❌ 시나리오 번호 자동 설정 실패: ${error.message}`);
+      return;
+    }
+  }
+  
+  // 시나리오 번호 중복 체크
+  try {
+    const checkResult = await electronAPI.checkScenarioExists({
+      product: config.currentProduct,
+      scenarioNumber: parseInt(scenarioNumber)
+    });
+    
+    if (checkResult.exists) {
+      addLog('error', `❌ 시나리오 ${scenarioNumber}은(는) 이미 존재합니다. 다른 번호를 사용하세요.`);
+      // 모달 다시 표시
+      if (elements.scenarioInfoModal) {
+        elements.scenarioInfoModal.classList.remove('hidden');
+      }
+      if (elements.modalScenarioNumber) {
+        elements.modalScenarioNumber.style.borderColor = '#e74c3c';
+        elements.modalScenarioNumber.focus();
+      }
+      return;
+    } else {
+      if (elements.modalScenarioNumber) {
+        elements.modalScenarioNumber.style.borderColor = '';
+      }
+    }
+  } catch (error) {
+    addLog('warning', `⚠️ 파일 존재 여부 확인 실패: ${error.message}`);
+  }
+  
+  const scenarioState = getScenarioState();
+  if (!scenarioState || scenarioState.selectedManagers.length === 0) {
+    addLog('error', '❌ Manager가 선택되지 않았습니다.');
+    closeScenarioInfoModal();
+    return;
+  }
+  
+  // 시나리오 제목과 설명 가져오기
+  const scenarioTitle = elements.modalScenarioTitle?.value?.trim() || '';
+  const scenarioDescription = elements.modalScenarioDescription?.value?.trim() || '';
+  
+  // 모달 닫기
+  closeScenarioInfoModal();
+  
   addLog('info', `📋 시나리오 ${scenarioNumber} 생성 중...`);
-  elements.generateScenarioBtn.disabled = true;
-  elements.generateScenarioBtn.textContent = '⏳ 생성 중...';
+  if (elements.generateScenarioBtn) {
+    elements.generateScenarioBtn.disabled = true;
+    elements.generateScenarioBtn.textContent = '⏳ 생성 중...';
+  }
   
   try {
     const result = await electronAPI.generateScenarioSpec({
       product: config.currentProduct,
       scenarioNumber: parseInt(scenarioNumber),
+      scenarioTitle: scenarioTitle,
+      scenarioDescription: scenarioDescription,
       managers: scenarioState.selectedManagers,
       templateScenario: 1 // 항상 scenario-1.spec.js 참조
     });
@@ -1519,8 +1705,10 @@ async function generateScenario() {
   } catch (error) {
     addLog('error', `❌ 시나리오 생성 실패: ${error.message}`);
   } finally {
-    elements.generateScenarioBtn.disabled = false;
-    elements.generateScenarioBtn.textContent = '생성';
+    if (elements.generateScenarioBtn) {
+      elements.generateScenarioBtn.disabled = false;
+      elements.generateScenarioBtn.textContent = '✅ 시나리오 생성';
+    }
   }
 }
 
@@ -1703,6 +1891,13 @@ function updateScenarioHistoryUI() {
 
 // 시나리오 생성 (Select Box 기반)
 async function createScenario() {
+  // elements.managerSelect가 없거나 값이 없으면 오류 처리
+  if (!elements.managerSelect) {
+    addLog('error', '❌ Manager 선택 요소를 찾을 수 없습니다.');
+    showModal('알림', 'Manager 선택 기능을 사용할 수 없습니다. 페이지를 새로고침해주세요.', false);
+    return;
+  }
+  
   const selectedManager = elements.managerSelect.value;
   
   if (!selectedManager) {
@@ -1710,19 +1905,147 @@ async function createScenario() {
     return;
   }
   
-  const confirmed = await showModal(
-    '시나리오 생성', 
-    `시나리오를 생성하시겠습니까?`,
-    true
-  );
-  if (!confirmed) return;
+  // 시나리오 정보 입력 모달 표시
+  await openScenarioCreationModal(selectedManager);
+}
+
+// 시나리오 생성 모달 열기 (Manager 선택 후)
+async function openScenarioCreationModal(managerClassName) {
+  // 다음 사용 가능한 시나리오 번호 자동 설정
+  let suggestedNumber = null;
+  try {
+    addLog('info', '🔍 다음 사용 가능한 시나리오 번호 검색 중...');
+    const result = await electronAPI.getNextAvailableScenarioNumber(config.currentProduct);
+    if (result.success) {
+      suggestedNumber = result.nextNumber;
+      if (elements.modalScenarioNumber) {
+        elements.modalScenarioNumber.value = result.nextNumber;
+        elements.modalScenarioNumber.dataset.suggestedNumber = result.nextNumber;
+      }
+      addLog('success', `✅ 다음 사용 가능한 번호: ${result.nextNumber}`);
+    }
+  } catch (error) {
+    addLog('warning', `⚠️ 시나리오 번호 자동 설정 실패: ${error.message}`);
+  }
+  
+  // 모달 필드 초기화
+  if (elements.modalScenarioTitle) elements.modalScenarioTitle.value = '';
+  if (elements.modalScenarioDescription) elements.modalScenarioDescription.value = '';
+  
+  // 시나리오 번호 입력 시 유효성 검사
+  if (elements.modalScenarioNumber) {
+    // 기존 이벤트 리스너 제거 (중복 방지)
+    elements.modalScenarioNumber.replaceWith(elements.modalScenarioNumber.cloneNode(true));
+    elements.modalScenarioNumber = document.getElementById('modalScenarioNumber');
+    elements.modalScenarioNumber.value = suggestedNumber || '';
+    
+    elements.modalScenarioNumber.addEventListener('input', async function() {
+      const enteredNumber = parseInt(this.value);
+      if (!enteredNumber || enteredNumber < 1) {
+        this.style.borderColor = '';
+        return;
+      }
+      
+      // 중복 체크
+      try {
+        const checkResult = await electronAPI.checkScenarioExists({
+          product: config.currentProduct,
+          scenarioNumber: enteredNumber
+        });
+        
+        if (checkResult.exists) {
+          this.style.borderColor = '#e74c3c';
+          this.title = `시나리오 ${enteredNumber}은(는) 이미 존재합니다.`;
+        } else {
+          this.style.borderColor = '#27ae60';
+          this.title = `시나리오 ${enteredNumber}을(를) 사용할 수 있습니다.`;
+        }
+      } catch (error) {
+        this.style.borderColor = '';
+      }
+    });
+  }
+  
+  // managerClassName을 임시로 저장 (confirmCreateScenarioFromManager에서 사용)
+  window.tempManagerClassName = managerClassName;
+  
+  // 모달 표시
+  if (elements.scenarioInfoModal) {
+    elements.scenarioInfoModal.classList.remove('hidden');
+  }
+}
+
+// Manager에서 시나리오 생성 확인
+async function confirmCreateScenarioFromManager() {
+  const managerClassName = window.tempManagerClassName;
+  if (!managerClassName) {
+    addLog('error', '❌ Manager가 선택되지 않았습니다.');
+    closeScenarioInfoModal();
+    return;
+  }
+  
+  let scenarioNumber = elements.modalScenarioNumber?.value;
+  
+  // 시나리오 번호가 비어있으면 자동으로 다음 번호 가져오기
+  if (!scenarioNumber) {
+    try {
+      const result = await electronAPI.getNextAvailableScenarioNumber(config.currentProduct);
+      if (result.success) {
+        scenarioNumber = result.nextNumber.toString();
+        addLog('info', `✅ 시나리오 번호 자동 설정: ${scenarioNumber}`);
+      } else {
+        addLog('error', '❌ 시나리오 번호를 설정할 수 없습니다.');
+        return;
+      }
+    } catch (error) {
+      addLog('error', `❌ 시나리오 번호 자동 설정 실패: ${error.message}`);
+      return;
+    }
+  }
+  
+  // 시나리오 번호 중복 체크
+  try {
+    const checkResult = await electronAPI.checkScenarioExists({
+      product: config.currentProduct,
+      scenarioNumber: parseInt(scenarioNumber)
+    });
+    
+    if (checkResult.exists) {
+      addLog('error', `❌ 시나리오 ${scenarioNumber}은(는) 이미 존재합니다. 다른 번호를 사용하세요.`);
+      // 모달 다시 표시
+      if (elements.scenarioInfoModal) {
+        elements.scenarioInfoModal.classList.remove('hidden');
+      }
+      if (elements.modalScenarioNumber) {
+        elements.modalScenarioNumber.style.borderColor = '#e74c3c';
+        elements.modalScenarioNumber.focus();
+      }
+      return;
+    } else {
+      if (elements.modalScenarioNumber) {
+        elements.modalScenarioNumber.style.borderColor = '';
+      }
+    }
+  } catch (error) {
+    addLog('warning', `⚠️ 파일 존재 여부 확인 실패: ${error.message}`);
+  }
+  
+  // 시나리오 제목과 설명 가져오기
+  const scenarioTitle = elements.modalScenarioTitle?.value?.trim() || '';
+  const scenarioDescription = elements.modalScenarioDescription?.value?.trim() || '';
+  
+  // 모달 닫기
+  closeScenarioInfoModal();
   
   try {
-    addLog('info', `🔄 시나리오 생성 중: ${selectedManager}`);
+    addLog('info', `🔄 시나리오 생성 중: ${managerClassName}`);
     
     const result = await electronAPI.createScenarioFromManager({
-      managerClassName: selectedManager,
-      product: config.currentProduct
+      managerClassName: managerClassName,
+      product: config.currentProduct,
+      scenarioNumber: parseInt(scenarioNumber),
+      scenarioTitle: scenarioTitle,
+      scenarioDescription: scenarioDescription
     });
     
     addLog('success', `✅ 시나리오 ${result.scenarioNumber} 생성 완료!`);
@@ -1732,7 +2055,7 @@ async function createScenario() {
     
     // 히스토리에 추가
     scenarioHistory.push({
-      managerClassName: selectedManager,
+      managerClassName: managerClassName,  // selectedManager → managerClassName으로 수정
       scenarioNumber: result.scenarioNumber,
       title: result.scenarioTitle,
       createdAt: new Date().toISOString()
@@ -1805,6 +2128,330 @@ function showModal(title, message, showCancel = false) {
 }
 
 // createScenario는 이제 이벤트 리스너로만 호출됨
+
+/**
+ * Manager의 Unique 값 관리
+ */
+async function manageUniqueValues() {
+  const selectedManager = elements.managerSelect.value;
+  
+  if (!selectedManager) {
+    addLog('error', '❌ Manager를 먼저 선택하세요');
+    return;
+  }
+  
+  try {
+    addLog('info', `🔑 ${selectedManager}의 Unique 값 설정을 불러옵니다...`);
+    
+    // Manager 파일 내용 읽기
+    const result = await electronAPI.getManagerList({ product: config.currentProduct });
+    const managerData = result.find(m => m.className === selectedManager);
+    
+    if (!managerData) {
+      addLog('error', '❌ Manager 파일을 찾을 수 없습니다');
+      return;
+    }
+    
+    // Manager 파일 파싱하여 fill 값들 추출
+    const parseResult = await electronAPI.parseManagerFillValues(managerData.filePath);
+    
+    if (!parseResult.success) {
+      addLog('error', `❌ Manager 파일 파싱 실패: ${parseResult.error}`);
+      return;
+    }
+    
+    const fillValues = parseResult.fillValues;
+    
+    if (fillValues.length === 0) {
+      addLog('info', '📝 이 Manager에는 입력 값이 없습니다.');
+      return;
+    }
+    
+    // 기존 unique 값 설정 로드
+    const uniqueResult = await electronAPI.loadUniqueValues(selectedManager);
+    const existingUniqueValues = uniqueResult.uniqueValues || [];
+    
+    addLog('info', `📝 ${fillValues.length}개의 입력 값을 발견했습니다.`);
+    if (existingUniqueValues.length > 0) {
+      addLog('info', `🔑 현재 ${existingUniqueValues.length}개의 Unique 값이 설정되어 있습니다.`);
+    }
+    
+    // Unique 값 선택 모달 열기 (기존 설정 표시)
+    openUniqueValuesModalWithExisting(selectedManager, fillValues, existingUniqueValues);
+    
+  } catch (error) {
+    addLog('error', `❌ Unique 값 관리 중 오류: ${error.message}`);
+    console.error('Unique 값 관리 실패:', error);
+  }
+}
+
+/**
+ * Manager 클래스 삭제
+ */
+async function deleteManager() {
+  const selectedManager = elements.managerSelect.value;
+  
+  if (!selectedManager) {
+    addLog('error', '❌ Manager를 먼저 선택하세요');
+    return;
+  }
+  
+  const confirmed = confirm(`정말로 "${selectedManager}" Manager 클래스를 삭제하시겠습니까?\n\n⚠️ 이 작업은 되돌릴 수 없으며, 다음 항목들이 삭제됩니다:\n- Manager .js 파일\n- Unique 값 설정\n- 관련 카운터 정보\n\n계속하시겠습니까?`);
+  
+  if (!confirmed) {
+    return;
+  }
+  
+  try {
+    addLog('info', `🗑️ ${selectedManager} 삭제 중...`);
+    
+    const result = await electronAPI.deleteManager({ 
+      product: config.currentProduct, 
+      className: selectedManager 
+    });
+    
+    if (result.success) {
+      addLog('success', `✅ ${selectedManager}이(가) 삭제되었습니다`);
+      
+      // Manager 목록 새로고침
+      await loadManagerList();
+      
+      // 선택 초기화
+      elements.managerSelect.value = '';
+      elements.managerInfo.textContent = '';
+      elements.createScenarioBtn.disabled = true;
+      elements.manageUniqueValuesBtn.disabled = true;
+      elements.deleteManagerBtn.disabled = true;
+    } else {
+      addLog('error', `❌ Manager 삭제 실패: ${result.error}`);
+    }
+  } catch (error) {
+    addLog('error', `❌ Manager 삭제 중 오류: ${error.message}`);
+    console.error('Manager 삭제 실패:', error);
+  }
+}
+
+/**
+ * 기존 설정을 포함하여 Unique 값 선택 모달 열기
+ */
+function openUniqueValuesModalWithExisting(className, fillValues, existingUniqueValues) {
+  currentUniqueValuesData = {
+    className,
+    fillValues,
+    selectedIndices: []
+  };
+
+  // 기존 설정에 따라 선택 인덱스 설정
+  existingUniqueValues.forEach(existing => {
+    const index = fillValues.findIndex(fv => 
+      fv.fieldName === existing.fieldName && fv.value === existing.value
+    );
+    if (index >= 0) {
+      currentUniqueValuesData.selectedIndices.push(index);
+    }
+  });
+
+  // 모달 내용 생성
+  const listContainer = elements.uniqueValuesList;
+  listContainer.innerHTML = fillValues.map((item, index) => {
+    const isSelected = currentUniqueValuesData.selectedIndices.includes(index);
+    return `
+      <div class="unique-value-item ${isSelected ? 'selected' : ''}" data-index="${index}">
+        <input type="checkbox" class="unique-value-checkbox" id="unique-checkbox-${index}" data-index="${index}" ${isSelected ? 'checked' : ''}>
+        <div class="unique-value-content">
+          <div class="unique-value-field">
+            ${item.fieldLabel || item.fieldName}
+          </div>
+          <div class="unique-value-value">
+            값: <code>${item.value}</code>
+          </div>
+          <div class="unique-value-preview">
+            선택 시 → <code>${item.value}_001</code>, <code>${item.value}_002</code> ...
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // 체크박스 이벤트 연결
+  listContainer.querySelectorAll('.unique-value-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', handleUniqueValueToggle);
+  });
+
+  // 아이템 클릭 이벤트 연결
+  listContainer.querySelectorAll('.unique-value-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT') {
+        const index = parseInt(item.dataset.index);
+        const checkbox = document.getElementById(`unique-checkbox-${index}`);
+        checkbox.checked = !checkbox.checked;
+        handleUniqueValueToggle({ target: checkbox });
+      }
+    });
+  });
+
+  // 모달 표시
+  elements.uniqueValuesModal.classList.remove('hidden');
+  
+  addLog('info', '🔑 Unique 값 관리 모달이 열렸습니다. 중복 방지가 필요한 값을 선택하세요.');
+}
+
+// ============================================================================
+// Unique 값 선택 모달 관련 함수
+// ============================================================================
+
+/**
+ * Unique 값 선택 모달 열기
+ */
+function openUniqueValuesModal(className, fillValues) {
+  if (!fillValues || fillValues.length === 0) {
+    addLog('info', '📝 입력된 값이 없어 Unique 값 선택을 건너뜁니다.');
+    return;
+  }
+
+  currentUniqueValuesData = {
+    className,
+    fillValues,
+    selectedIndices: []
+  };
+
+  // 모달 내용 생성
+  const listContainer = elements.uniqueValuesList;
+  listContainer.innerHTML = fillValues.map((item, index) => `
+    <div class="unique-value-item" data-index="${index}">
+      <input type="checkbox" class="unique-value-checkbox" id="unique-checkbox-${index}" data-index="${index}">
+      <div class="unique-value-content">
+        <div class="unique-value-field">
+          ${item.fieldLabel || item.fieldName}
+        </div>
+        <div class="unique-value-value">
+          값: <code>${item.value}</code>
+        </div>
+        <div class="unique-value-preview">
+          선택 시 → <code>${item.value}_001</code>, <code>${item.value}_002</code> ...
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // 체크박스 이벤트 연결
+  listContainer.querySelectorAll('.unique-value-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', handleUniqueValueToggle);
+  });
+
+  // 아이템 클릭 이벤트 연결
+  listContainer.querySelectorAll('.unique-value-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT') {
+        const index = parseInt(item.dataset.index);
+        const checkbox = document.getElementById(`unique-checkbox-${index}`);
+        checkbox.checked = !checkbox.checked;
+        handleUniqueValueToggle({ target: checkbox });
+      }
+    });
+  });
+
+  // 모달 표시
+  elements.uniqueValuesModal.classList.remove('hidden');
+  
+  addLog('info', '🔑 Unique 값 선택 모달이 열렸습니다. 중복 방지가 필요한 값을 선택하세요.');
+}
+
+/**
+ * Unique 값 체크박스 토글
+ */
+function handleUniqueValueToggle(e) {
+  const checkbox = e.target;
+  const index = parseInt(checkbox.dataset.index);
+  const item = checkbox.closest('.unique-value-item');
+  
+  if (checkbox.checked) {
+    item.classList.add('selected');
+    if (!currentUniqueValuesData.selectedIndices.includes(index)) {
+      currentUniqueValuesData.selectedIndices.push(index);
+    }
+  } else {
+    item.classList.remove('selected');
+    currentUniqueValuesData.selectedIndices = currentUniqueValuesData.selectedIndices.filter(i => i !== index);
+  }
+}
+
+/**
+ * Unique 값 선택 완료
+ */
+async function saveUniqueValues() {
+  try {
+    const selectedValues = currentUniqueValuesData.selectedIndices.map(index => 
+      currentUniqueValuesData.fillValues[index]
+    );
+
+    if (selectedValues.length > 0) {
+      addLog('info', `🔑 ${selectedValues.length}개의 Unique 값을 저장합니다...`);
+      
+      // electronAPI를 통해 저장 (main.js의 save-unique-values 핸들러 호출)
+      const result = await electronAPI.saveUniqueValues({
+        className: currentUniqueValuesData.className,
+        uniqueValues: selectedValues
+      });
+      
+      if (result.success) {
+        addLog('success', `✅ ${selectedValues.length}개의 Unique 값이 설정되었습니다.`);
+        
+        // 선택된 값 표시
+        selectedValues.forEach((val, idx) => {
+          addLog('info', `   ${idx + 1}. [${val.fieldLabel}] "${val.value}" → "${val.value}_001", "${val.value}_002" ...`);
+        });
+      } else {
+        addLog('error', `❌ Unique 값 저장 실패: ${result.error}`);
+      }
+    } else {
+      addLog('info', '📝 선택된 Unique 값이 없습니다. 모든 값이 원본 그대로 사용됩니다.');
+    }
+    
+    closeUniqueValuesModal();
+  } catch (error) {
+    addLog('error', `❌ Unique 값 저장 중 오류: ${error.message}`);
+    console.error('Unique 값 저장 실패:', error);
+  }
+}
+
+/**
+ * Unique 값 선택 모달 닫기
+ */
+function closeUniqueValuesModal() {
+  elements.uniqueValuesModal.classList.add('hidden');
+  
+  // 데이터 초기화
+  currentUniqueValuesData = {
+    className: '',
+    fillValues: [],
+    selectedIndices: []
+  };
+  
+  // 이벤트 리스너 제거
+  elements.uniqueValuesList.innerHTML = '';
+}
+
+/**
+ * Unique 값 선택 건너뛰기
+ */
+function skipUniqueValues() {
+  addLog('info', '⏭️ Unique 값 선택을 건너뛰었습니다. 모든 값이 원본 그대로 사용됩니다.');
+  closeUniqueValuesModal();
+}
+
+// Unique 값 모달 이벤트 리스너 연결
+if (elements.closeUniqueValuesBtn) {
+  elements.closeUniqueValuesBtn.addEventListener('click', skipUniqueValues);
+}
+
+if (elements.skipUniqueValuesBtn) {
+  elements.skipUniqueValuesBtn.addEventListener('click', skipUniqueValues);
+}
+
+if (elements.saveUniqueValuesBtn) {
+  elements.saveUniqueValuesBtn.addEventListener('click', saveUniqueValues);
+}
 
 // 앱 시작
 init();

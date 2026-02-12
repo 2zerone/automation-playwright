@@ -72,77 +72,228 @@ function shouldSkipAction(action) {
 function actionToStepName(action, index) {
   // goto
   if (action.startsWith('goto(')) {
-    return 'Navigate to page';
+    return '페이지 이동';
   }
   
-  // getByLabel, getByRole, getByText 등의 선택자
+  // dblclick (더블 클릭)
+  if (action.includes('.dblclick()')) {
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2]; // name 속성 값
+      const roleType = getRoleInKorean(roleNameMatch[1]); // role을 한글로
+      return `${roleName} ${roleType} 더블클릭`;
+    }
+    
+    // getByText에서 텍스트 추출
+    const textMatch = action.match(/getByText\(['"](.+?)['"]\)/);
+    if (textMatch) {
+      return `${textMatch[1]} 더블클릭`;
+    }
+    
+    // getByLabel에서 라벨 추출
+    const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
+    if (labelMatch) {
+      return `${labelMatch[1]} 더블클릭`;
+    }
+    
+    return '요소 더블클릭';
+  }
+  
+  // click (클릭)
   if (action.includes('.click()')) {
-    if (action.includes('getByLabel')) {
-      const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
-      if (labelMatch) return `Click ${sanitizeLabel(labelMatch[1])}`;
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2]; // name 속성 값
+      const roleType = getRoleInKorean(roleNameMatch[1]); // role을 한글로
+      return `${roleName} ${roleType} 클릭`;
     }
-    if (action.includes('getByRole')) {
-      const roleMatch = action.match(/getByRole\(.+?name:\s*['"](.+?)['"]/);
-      if (roleMatch) return `Click ${sanitizeLabel(roleMatch[1])} button`;
-      
-      const buttonMatch = action.match(/getByRole\(['"]button['"]/);
-      if (buttonMatch) return 'Click button';
+    
+    // getByText에서 텍스트 추출
+    const textMatch = action.match(/getByText\(['"](.+?)['"]\)/);
+    if (textMatch) {
+      return `${textMatch[1]} 클릭`;
     }
-    if (action.includes('getByText')) {
-      const textMatch = action.match(/getByText\(['"](.+?)['"]\)/);
-      if (textMatch) return `Click ${sanitizeLabel(textMatch[1])}`;
+    
+    // getByLabel에서 라벨 추출
+    const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
+    if (labelMatch) {
+      return `${labelMatch[1]} 클릭`;
     }
-    return 'Click element';
+    
+    // getByPlaceholder에서 placeholder 추출
+    const placeholderMatch = action.match(/getByPlaceholder\(['"](.+?)['"]\)/);
+    if (placeholderMatch) {
+      return `${placeholderMatch[1]} 클릭`;
+    }
+    
+    return '요소 클릭';
   }
   
-  // fill
+  // fill (입력)
   if (action.includes('.fill(')) {
-    if (action.includes('getByLabel')) {
-      const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
-      if (labelMatch) return `Fill ${sanitizeLabel(labelMatch[1])}`;
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2]; // name 속성 값
+      return `${roleName} 입력`;
     }
-    if (action.includes('getByRole')) {
-      const roleMatch = action.match(/getByRole\(.+?name:\s*['"](.+?)['"]/);
-      if (roleMatch) return `Fill ${sanitizeLabel(roleMatch[1])}`;
+    
+    // getByLabel에서 라벨 추출
+    const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
+    if (labelMatch) {
+      return `${labelMatch[1]} 입력`;
     }
-    return 'Fill field';
+    
+    // getByPlaceholder에서 placeholder 추출
+    const placeholderMatch = action.match(/getByPlaceholder\(['"](.+?)['"]\)/);
+    if (placeholderMatch) {
+      return `${placeholderMatch[1]} 입력`;
+    }
+    
+    return '필드 입력';
   }
   
-  // type
+  // type (타이핑)
   if (action.includes('.type(')) {
-    return 'Type text';
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2];
+      return `${roleName} 입력`;
+    }
+    
+    return '텍스트 입력';
   }
   
-  // press
+  // press (키 누르기)
   if (action.includes('.press(')) {
     const keyMatch = action.match(/press\(['"](.+?)['"]\)/);
-    if (keyMatch) return `Press ${sanitizeLabel(keyMatch[1])} key`;
-    return 'Press key';
+    if (keyMatch) {
+      const keyMap = {
+        'Enter': '엔터',
+        'Escape': 'ESC',
+        'Tab': '탭',
+        'Space': '스페이스',
+        'Backspace': '백스페이스',
+        'Delete': '삭제'
+      };
+      const keyName = keyMap[keyMatch[1]] || keyMatch[1];
+      return `${keyName} 키 누르기`;
+    }
+    return '키 누르기';
   }
   
-  // select
+  // selectOption (옵션 선택)
   if (action.includes('.selectOption(')) {
-    return 'Select option';
+    const optionMatch = action.match(/selectOption\(['"](.+?)['"]\)/);
+    if (optionMatch) {
+      return `${optionMatch[1]} 선택`;
+    }
+    return '옵션 선택';
   }
   
-  // check/uncheck
+  // check (체크박스 선택)
   if (action.includes('.check()')) {
-    return 'Check checkbox';
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2];
+      return `${roleName} 체크`;
+    }
+    
+    // getByLabel에서 라벨 추출
+    const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
+    if (labelMatch) {
+      return `${labelMatch[1]} 체크`;
+    }
+    
+    return '체크박스 선택';
   }
+  
+  // uncheck (체크박스 해제)
   if (action.includes('.uncheck()')) {
-    return 'Uncheck checkbox';
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2];
+      return `${roleName} 체크 해제`;
+    }
+    
+    // getByLabel에서 라벨 추출
+    const labelMatch = action.match(/getByLabel\(['"](.+?)['"]\)/);
+    if (labelMatch) {
+      return `${labelMatch[1]} 체크 해제`;
+    }
+    
+    return '체크박스 해제';
+  }
+  
+  // hover (마우스 호버)
+  if (action.includes('.hover()')) {
+    // getByRole에서 name 추출
+    const roleNameMatch = action.match(/getByRole\(['"](\w+)['"],\s*\{\s*name:\s*['"](.+?)['"]/);
+    if (roleNameMatch) {
+      const roleName = roleNameMatch[2];
+      const roleType = getRoleInKorean(roleNameMatch[1]);
+      return `${roleName} ${roleType} 호버`;
+    }
+    
+    return '요소 호버';
   }
   
   // wait
   if (action.includes('waitForSelector') || action.includes('waitForLoadState')) {
-    return 'Wait';
+    return '대기';
   }
   
   if (action.includes('waitForTimeout')) {
-    return 'Wait';
+    return '대기';
   }
   
-  return `Step ${index + 1}`;
+  return `단계 ${index + 1}`;
+}
+
+/**
+ * Playwright role을 한글로 변환
+ */
+function getRoleInKorean(role) {
+  const roleMap = {
+    'button': '버튼',
+    'textbox': '입력란',
+    'checkbox': '체크박스',
+    'radio': '라디오버튼',
+    'link': '링크',
+    'menuitem': '메뉴',
+    'tab': '탭',
+    'option': '옵션',
+    'combobox': '콤보박스',
+    'listbox': '리스트',
+    'searchbox': '검색창',
+    'switch': '스위치',
+    'slider': '슬라이더',
+    'spinbutton': '스핀버튼',
+    'progressbar': '프로그레스바',
+    'dialog': '다이얼로그',
+    'alert': '알림',
+    'status': '상태',
+    'log': '로그',
+    'marquee': '마퀴',
+    'timer': '타이머',
+    'heading': '제목',
+    'img': '이미지',
+    'list': '목록',
+    'listitem': '목록항목',
+    'row': '행',
+    'cell': '셀',
+    'table': '테이블',
+    'grid': '그리드',
+    'tree': '트리',
+    'treeitem': '트리항목'
+  };
+  
+  return roleMap[role] || role;
 }
 
 /**
@@ -217,14 +368,14 @@ function mergeConsecutiveActions(actions) {
       if (clickSelector && fillSelector && clickSelector === fillSelector) {
         console.log(`🔗 병합: click + fill → ${clickSelector}`);
         
-        // fill의 label에서 이름 추출
+        // fill의 label에서 한글 이름 추출 (영어로 변환하지 않고 그대로 사용)
         const labelMatch = nextAction.match(/name:\s*['"](.+?)['"]/);
-        const label = labelMatch ? sanitizeLabel(labelMatch[1]) : 'field';
+        const koreanLabel = labelMatch ? labelMatch[1] : '필드';
         
         merged.push({
           action: nextAction, // fill action을 기본으로 사용 (click은 자동 포함)
           mergedActions: [currentAction, nextAction],
-          mergedName: `Fill ${label}`
+          mergedName: `${koreanLabel} 입력`
         });
         
         i += 2; // 두 개를 건너뜀
@@ -306,6 +457,39 @@ function toEnglishLabel(koreanLabel) {
 }
 
 /**
+ * action에서 fill()된 값 추출 (unique 값 후보)
+ */
+function extractFillValues(actions) {
+  const fillValues = [];
+  
+  actions.forEach((action, index) => {
+    const actionStr = action.action || action;
+    
+    // fill() 메서드에서 값 추출
+    const fillMatch = actionStr.match(/\.fill\(['"](.+?)['"]\)/);
+    if (fillMatch) {
+      const value = fillMatch[1];
+      
+      // selector에서 필드명 추출
+      const selectorInfo = extractSelectorInfo(actionStr);
+      const fieldName = selectorInfo 
+        ? translateToEnglish(selectorInfo.label)
+        : 'field';
+      
+      fillValues.push({
+        index: index + 1,
+        fieldName,
+        fieldLabel: selectorInfo ? selectorInfo.label : 'Unknown',
+        value,
+        action: actionStr
+      });
+    }
+  });
+  
+  return fillValues;
+}
+
+/**
  * raw Playwright 코드를 Manager 클래스로 변환
  */
 export function convertRawToManager(rawFilePath, product, caseId, title) {
@@ -323,6 +507,10 @@ export function convertRawToManager(rawFilePath, product, caseId, title) {
   const mergedActions = mergeConsecutiveActions(actions);
   
   console.log(`🔗 병합 후 action 개수: ${mergedActions.length}`);
+  
+  // unique 값 후보 추출 (fill된 값들)
+  const fillValues = extractFillValues(mergedActions);
+  console.log(`🔍 추출된 입력 값 개수: ${fillValues.length}`);
   
   // 각 action을 step으로 변환
   const steps = mergedActions.map((action, index) => ({
@@ -357,8 +545,9 @@ export function convertRawToManager(rawFilePath, product, caseId, title) {
     }
   });
   
-  // 클래스명 생성 (camelCase)
-  const className = `AutoRecorded_${caseId.replace(/[-_]/g, '_')}`;
+  // 클래스명 생성 (PascalCase로 변환)
+  // caseId를 그대로 사용하되, 하이픈과 언더스코어를 언더스코어로 통일
+  const className = caseId.replace(/[-]/g, '_');
   
   // Manager 클래스 코드 생성
   const managerCode = generateManagerClass(productUpper, className, title, uniqueSteps);
@@ -367,7 +556,8 @@ export function convertRawToManager(rawFilePath, product, caseId, title) {
     className,
     code: managerCode,
     steps: uniqueSteps,
-    title
+    title,
+    fillValues  // unique 값 후보 목록 추가
   };
 }
 
@@ -387,20 +577,68 @@ function generateManagerClass(product, className, title, steps) {
       const clickAction = step.mergedActions[0];
       const fillAction = step.mergedActions[1];
       
+      // fill 값 추출 및 unique 값 처리 코드 생성
+      const fillMatch = fillAction.match(/\.fill\(['"](.+?)['"]\)/);
+      const fillValue = fillMatch ? fillMatch[1] : '';
+      
+      // selector에서 필드명 추출
+      const selectorInfo = extractSelectorInfo(fillAction);
+      const fieldName = selectorInfo ? translateToEnglish(selectorInfo.label) : 'field';
+      
+      // unique 값 처리 코드 생성
+      const uniqueValueCode = fillValue ? `
+    // Unique 값 처리 (설정되어 있으면 자동으로 카운터 추가)
+    const ${fieldName}Value = await this.processUniqueValue('${fieldName}', '${fillValue}');` : '';
+      
+      // fill 값을 변수로 대체
+      const modifiedFillAction = fillValue ? fillAction.replace(`'${fillValue}'`, `${fieldName}Value`) : fillAction;
+      
       return `
   /**
    * ${step.name}
    */
   async ${step.uniqueMethodName}(config) {
-    console.log('📝 Executing: ${step.name}...');
+    console.log('📝 Executing: ${step.name}...');${uniqueValueCode}
     await this.page.${clickAction};
-    await this.page.${fillAction};
+    await this.page.${modifiedFillAction};
     await this.page.waitForTimeout(${getWaitTime(fillAction)});
     await this.captureScreenshot('${step.uniqueMethodName}');
     console.log('✅ Completed: ${step.name}');
   }`;
     } else {
       // 일반 action
+      const action = step.action;
+      
+      // fill action인 경우 unique 값 처리
+      if (action.includes('.fill(')) {
+        const fillMatch = action.match(/\.fill\(['"](.+?)['"]\)/);
+        const fillValue = fillMatch ? fillMatch[1] : '';
+        
+        if (fillValue) {
+          const selectorInfo = extractSelectorInfo(action);
+          const fieldName = selectorInfo ? translateToEnglish(selectorInfo.label) : 'field';
+          
+          const uniqueValueCode = `
+    // Unique 값 처리 (설정되어 있으면 자동으로 카운터 추가)
+    const ${fieldName}Value = await this.processUniqueValue('${fieldName}', '${fillValue}');`;
+          
+          const modifiedAction = action.replace(`'${fillValue}'`, `${fieldName}Value`);
+          
+          return `
+  /**
+   * ${step.name}
+   */
+  async ${step.uniqueMethodName}(config) {
+    console.log('📝 Executing: ${step.name}...');${uniqueValueCode}
+    await this.page.${modifiedAction};
+    await this.page.waitForTimeout(${getWaitTime(action)});
+    await this.captureScreenshot('${step.uniqueMethodName}');
+    console.log('✅ Completed: ${step.name}');
+  }`;
+        }
+      }
+      
+      // fill이 아닌 일반 action
       return `
   /**
    * ${step.name}

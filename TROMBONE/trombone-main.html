@@ -2340,6 +2340,84 @@
             font-weight: 600;
         }
 
+        /* Unique 값 선택 모달 스타일 */
+        .unique-values-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .unique-values-info code {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .unique-values-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .unique-value-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .unique-value-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .unique-value-item.selected {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        .unique-value-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .unique-value-content {
+            flex: 1;
+        }
+
+        .unique-value-field {
+            font-weight: 600;
+            color: #00bdaa;
+            margin-bottom: 5px;
+        }
+
+        .unique-value-value {
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            font-size: 0.95em;
+        }
+
+        .unique-value-preview {
+            margin-top: 5px;
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .unique-value-preview code {
+            color: #ffd43b;
+        }
+
         .folder-path-input {
             display: flex;
             gap: 10px;
@@ -3458,7 +3536,7 @@
             <div id="scenarios" class="tab-content active">
                 <div class="content-header">
                     <h2>📋 시나리오 목록</h2>
-                    <p style="color: #000000;">총 8개의 테스트 시나리오를 관리하고 실행할 수 있습니다.</p>
+                    <p style="color: #000000;">테스트 시나리오를 관리하고 실행할 수 있습니다.</p>
                 </div>
                 <div class="content-body">
                     <!-- 요약 카드 섹션 -->
@@ -3779,16 +3857,41 @@
         </div>
     </div>
 
+    <!-- Unique 값 선택 모달 -->
+    <div id="uniqueValuesModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2>🔑 Unique 값 선택</h2>
+                <span class="close" onclick="closeUniqueValuesModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="unique-values-info">
+                    <p class="section-description">
+                        녹화 중 입력한 값들입니다. 시나리오를 반복 실행할 때 자동으로 카운터를 추가할 값들을 선택하세요.
+                        (예: <code>instance</code> → <code>instance_001</code>, <code>instance_002</code>)
+                    </p>
+                </div>
+                
+                <div class="unique-values-list" id="uniqueValuesList">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeUniqueValuesModal()">취소</button>
+                    <button type="button" class="btn btn-primary" onclick="saveUniqueValues()">선택 완료</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const { ipcRenderer } = require('electron');
 
         // TROMBONE 시나리오 데이터
         // 기본 시나리오 (IPC 실패 시에만 사용)
-        let scenarios = [
-            { id: 1, title: "CI/CD 일반 티켓을 통한 K8S 배포 시나리오 (예약 배포/직렬 결재)", description: "CI/CD 일반 티켓을 통해 K8S 배포 절차 검증하는 시나리오", status: "ready" },
-            { id: 2, title: "CI/CD 긴급 티켓을 통한 K8S 배포 시나리오 (즉시 배포/병렬 결재)", description: "CI/CD 긴급 티켓을 통해 K8S 배포 절차 검증하는 시나리오", status: "ready" },
-            { id: 3, title: "검증 데이터 생성 및 티켓 등록 시나리오", description: "검증 데이터를 생성하고 티켓을 등록하는 시나리오", status: "ready" },
-        ];
+        // 시나리오 데이터 (scenario-list.json에서 로드됨)
+        // 시나리오 데이터 (scenario-list.json에서 로드됨)
+        let scenarios = [];
 
         // 페이지 로드 시 초기화
         document.addEventListener('DOMContentLoaded', async () => {
@@ -3881,6 +3984,15 @@
                     console.log('✅ 메인 앱 표시');
                 }
                 
+                // 시나리오 목록 탭 활성화
+                console.log('📋 시나리오 목록 탭 활성화 중...');
+                switchTab('scenarios', null);
+                
+                // 시나리오 카드 다시 렌더링
+                console.log('🔄 시나리오 카드 렌더링 중...');
+                createSummaryCards();
+                initializeScenarios();
+                
                 showToast('🖥️ UI 테스트 화면으로 전환되었습니다.', 'success');
             }
         }
@@ -3907,30 +4019,26 @@
                             }));
                         console.log(`📋 ${currentProduct} 시나리오 로드 완료: ${scenarios.length}개`, scenarios.map(s => ({ id: s.id, title: s.title, status: s.status })));
                     } else {
-                        console.warn('📋 scenario-list.json 없음, 기본값 사용');
-                        scenarios = [
-                            { id: 1, title: "CI/CD 일반 티켓을 통한 K8S 배포 시나리오 (예약 배포/직렬 결재)", description: "시나리오 1", status: "ready" },
-                            { id: 2, title: "CI/CD 긴급 티켓을 통한 K8S 배포 시나리오 (즉시 배포/병렬 결재)", description: "시나리오 2", status: "ready" },
-                            { id: 3, title: "검증 데이터 생성 및 티켓 등록 시나리오", description: "시나리오 3", status: "ready" }
-                        ];
+                        console.warn('📋 scenario-list.json 없음, 빈 시나리오 목록 사용');
+                        scenarios = [];
                     }
                 } catch (jsonError) {
-                    console.warn('📋 scenario-list.json 로드 실패, 기본값 사용:', jsonError.message);
-                    scenarios = [
-                        { id: 1, title: "CI/CD 일반 티켓을 통한 K8S 배포 시나리오 (예약 배포/직렬 결재)", description: "시나리오 1", status: "ready" },
-                        { id: 2, title: "CI/CD 긴급 티켓을 통한 K8S 배포 시나리오 (즉시 배포/병렬 결재)", description: "시나리오 2", status: "ready" },
-                        { id: 3, title: "검증 데이터 생성 및 티켓 등록 시나리오", description: "시나리오 3", status: "ready" }
-                    ];
+                    console.warn('📋 scenario-list.json 로드 실패, 빈 시나리오 목록 사용:', jsonError.message);
+                    scenarios = [];
                 }
                 const countEl = document.getElementById('scenarioCountDesc');
-                if (countEl) countEl.textContent = `총 ${scenarios.length}개의 테스트 시나리오를 관리하고 실행할 수 있습니다.`;
+                if (countEl) {
+                    if (scenarios.length === 0) {
+                        countEl.textContent = `등록된 시나리오가 없습니다. 새로운 시나리오를 생성해보세요.`;
+                    } else {
+                        countEl.textContent = `총 ${scenarios.length}개의 테스트 시나리오를 관리하고 실행할 수 있습니다.`;
+                    }
+                }
             } catch (error) {
                 console.error('시나리오 로드 중 오류:', error);
-                scenarios = [
-                    { id: 1, title: "기본 시나리오", description: "기본 시나리오입니다", status: "ready" }
-                ];
+                scenarios = [];
                 const countEl = document.getElementById('scenarioCountDesc');
-                if (countEl) countEl.textContent = `총 ${scenarios.length}개의 테스트 시나리오를 관리하고 실행할 수 있습니다.`;
+                if (countEl) countEl.textContent = `등록된 시나리오가 없습니다. 새로운 시나리오를 생성해보세요.`;
             }
         }
 
@@ -4129,6 +4237,28 @@
                     stopAllBtn.style.cursor = 'not-allowed';
                 }
                 console.log('전체 중단 버튼 상태 업데이트:', isRunning ? '활성화' : '비활성화');
+            }
+            
+            // 선택 삭제 버튼 상태 업데이트
+            const deleteSelectedBtn = document.getElementById('deleteSelectedScenarios');
+            if (deleteSelectedBtn) {
+                const isRunning = currentRunningScenarioIds.size > 0;
+                const isDisabled = selectedScenarios.length === 0 || isRunning;
+                
+                if (selectedScenarios.length > 0 && !isRunning) {
+                    deleteSelectedBtn.innerHTML = `<i class="fas fa-trash" style="margin-right: 6px;"></i>선택 삭제 (${selectedScenarios.length}개)`;
+                    deleteSelectedBtn.style.opacity = '1';
+                    deleteSelectedBtn.style.pointerEvents = 'auto';
+                    deleteSelectedBtn.style.transform = 'scale(1)';
+                    deleteSelectedBtn.style.cursor = 'pointer';
+                } else {
+                    deleteSelectedBtn.innerHTML = `<i class="fas fa-trash" style="margin-right: 6px;"></i>선택 삭제`;
+                    deleteSelectedBtn.style.opacity = '0.6';
+                    deleteSelectedBtn.style.pointerEvents = 'none';
+                    deleteSelectedBtn.style.transform = 'scale(0.95)';
+                    deleteSelectedBtn.style.cursor = 'not-allowed';
+                }
+                console.log('선택 삭제 버튼 상태 업데이트:', selectedScenarios.length > 0 && !isRunning ? '활성화' : '비활성화');
             }
             
             // 선택된 시나리오 정보 표시
@@ -4358,6 +4488,11 @@
                         <i class="fas fa-undo" style="margin-right: 6px;"></i>
                         전체 초기화
                     </button>
+                    <button id="deleteSelectedScenarios" class="btn btn-danger delete-selected-btn" 
+                            style="flex: 1; padding: 12px 20px; font-size: 0.9em; font-weight: 500; border-radius: 8px; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-height: 48px; opacity: 0.6; pointer-events: none;">
+                        <i class="fas fa-trash" style="margin-right: 6px;"></i>
+                        선택 삭제
+                    </button>
                 </div>
             `;
             grid.insertAdjacentHTML('beforeend', buttonContainerHtml);
@@ -4421,6 +4556,20 @@
                 });
             } else {
                 console.error('전체 초기화 버튼이 DOM에 생성되지 않음!');
+            }
+
+            // 선택 삭제 버튼 이벤트 리스너 등록
+            const createdDeleteBtn = document.getElementById('deleteSelectedScenarios');
+            if (createdDeleteBtn) {
+                console.log('선택 삭제 버튼이 DOM에 생성됨:', createdDeleteBtn);
+                
+                createdDeleteBtn.addEventListener('click', function(e) {
+                    console.log('선택 삭제 버튼 클릭 이벤트 발생');
+                    e.preventDefault();
+                    deleteSelectedScenarios();
+                });
+            } else {
+                console.error('선택 삭제 버튼이 DOM에 생성되지 않음!');
             }
 
             // 저장된 시나리오 상태 로드
@@ -4686,8 +4835,10 @@
                 scenarioId
             });
             
-            // 콘솔에도 출력 (디버깅용)
-            console.log(`[${timestamp.toLocaleString('ko-KR')}] [${level.toUpperCase()}] ${message}${scenarioId ? ` (시나리오 ${scenarioId})` : ''}`);
+            // 콘솔에도 출력 (디버깅용, 원본 console.log 사용하여 무한 재귀 방지)
+            if (window._originalConsoleLog) {
+                window._originalConsoleLog(`[${timestamp.toLocaleString('ko-KR')}] [${level.toUpperCase()}] ${message}${scenarioId ? ` (시나리오 ${scenarioId})` : ''}`);
+            }
         }
 
         // 이력 관리 전체 로그 지우기
@@ -6300,6 +6451,87 @@
             }
         }
 
+        // 선택된 시나리오 일괄 삭제
+        async function deleteSelectedScenarios() {
+            if (selectedScenarios.length === 0) {
+                showToast('삭제할 시나리오를 선택하세요.', 'warning');
+                return;
+            }
+            
+            const scenarioNames = selectedScenarios.map(id => {
+                const scenario = scenarios.find(s => s.id === id);
+                return scenario ? `${id}번: ${scenario.title}` : `시나리오 ${id}`;
+            }).join('\n');
+            
+            if (!await showConfirmDialog(
+                '선택 시나리오 삭제', 
+                `정말로 선택한 ${selectedScenarios.length}개의 시나리오를 삭제하시겠습니까?\n\n삭제할 시나리오:\n${scenarioNames}\n\n⚠️ 이 작업은 되돌릴 수 없으며, 다음 항목들이 삭제됩니다:\n- Scenario spec 파일\n- Custom reports\n- 실행 기록`,
+                '계속하시겠습니까?'
+            )) {
+                return;
+            }
+            
+            try {
+                let successCount = 0;
+                let failCount = 0;
+                
+                // 각 시나리오 삭제
+                for (const scenarioId of selectedScenarios) {
+                    try {
+                        const result = await ipcRenderer.invoke('delete-scenario', scenarioId);
+                        
+                        if (result.success) {
+                            successCount++;
+                            
+                            // 메모리에서 시나리오 제거
+                            const index = scenarios.findIndex(s => s.id === scenarioId);
+                            if (index !== -1) {
+                                scenarios.splice(index, 1);
+                            }
+                            
+                            // UI에서 카드 제거
+                            const card = document.querySelector(`[data-scenario-id="${scenarioId}"]`);
+                            if (card) {
+                                card.remove();
+                            }
+                            
+                            addLog(`시나리오 ${scenarioId} 삭제 완료`, 'info');
+                        } else {
+                            failCount++;
+                            addLog(`시나리오 ${scenarioId} 삭제 실패: ${result.error}`, 'error');
+                        }
+                    } catch (error) {
+                        failCount++;
+                        console.error(`시나리오 ${scenarioId} 삭제 중 오류:`, error);
+                        addLog(`시나리오 ${scenarioId} 삭제 중 오류: ${error.message}`, 'error');
+                    }
+                }
+                
+                // 선택 초기화
+                selectedScenarios = [];
+                document.querySelectorAll('.scenario-checkbox-input:checked').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                // 요약 카드 업데이트
+                createSummaryCards();
+                createSummaryCardsForHistory();
+                
+                // 선택된 시나리오 목록 업데이트
+                updateSelectedScenarios();
+                
+                // 결과 메시지
+                if (successCount > 0) {
+                    showToast(`${successCount}개 시나리오 삭제 완료${failCount > 0 ? `, ${failCount}개 실패` : ''}`, 'success');
+                } else {
+                    showToast(`모든 시나리오 삭제 실패 (${failCount}개)`, 'error');
+                }
+            } catch (error) {
+                console.error('시나리오 일괄 삭제 중 오류:', error);
+                showToast('시나리오 삭제 중 오류가 발생했습니다.', 'error');
+            }
+        }
+
         // 제품 선택 화면으로 돌아가기
         function goBackToProductSelector() {
             const { ipcRenderer } = require('electron');
@@ -7025,16 +7257,29 @@
             const disabledOption = document.getElementById('recording-disabled-option');
             const hiddenInput = document.getElementById('modalRecordingEnabled');
             
+            console.log('🔧 setupModalRecordingToggle 호출됨');
+            console.log('  - enabledOption:', enabledOption);
+            console.log('  - disabledOption:', disabledOption);
+            console.log('  - hiddenInput:', hiddenInput);
+            
             if (enabledOption && disabledOption && hiddenInput) {
+                console.log('✅ 녹화 옵션 이벤트 리스너 등록 중...');
+                
                 // 활성화 옵션 클릭
-                enabledOption.addEventListener('click', function() {
+                enabledOption.addEventListener('click', function(e) {
+                    console.log('🎬 화면 녹화 활성화 버튼 클릭됨!', e);
                     selectRecordingOption(true);
                 });
                 
                 // 비활성화 옵션 클릭
-                disabledOption.addEventListener('click', function() {
+                disabledOption.addEventListener('click', function(e) {
+                    console.log('🚫 화면 녹화 비활성화 버튼 클릭됨!', e);
                     selectRecordingOption(false);
                 });
+                
+                console.log('✅ 녹화 옵션 이벤트 리스너 등록 완료');
+            } else {
+                console.error('❌ 녹화 옵션 요소를 찾을 수 없습니다!');
             }
         }
 
@@ -7140,12 +7385,28 @@
                     folderPath: currentFolderPath
                 };
                 
+                // 이벤트 리스너 재등록 (모달이 열릴 때마다 등록)
+                setupRecordingModalOptions();
+                
                 console.log(`📹 녹화 설정 모달 열기 완료: 시나리오 ${scenarioId}`);
                 
             } catch (error) {
                 console.error('녹화 설정 모달 열기 실패:', error);
                 showToast('녹화 설정 모달을 열 수 없습니다.', 'error');
             }
+        }
+
+        // 녹화 모달 옵션 클릭 핸들러 (전역 함수로 정의하여 재사용)
+        function handleEnabledOptionClick(e) {
+            const folderSection = document.getElementById('recordingModalFolderSection');
+            console.log('🎬 [녹화 전용 모달] 화면 녹화 활성화 버튼 클릭됨!', e);
+            selectRecordingModalOption(true, folderSection);
+        }
+        
+        function handleDisabledOptionClick(e) {
+            const folderSection = document.getElementById('recordingModalFolderSection');
+            console.log('🚫 [녹화 전용 모달] 화면 녹화 비활성화 버튼 클릭됨!', e);
+            selectRecordingModalOption(false, folderSection);
         }
 
         // 녹화 모달 옵션 설정
@@ -7155,16 +7416,28 @@
             const folderSection = document.getElementById('recordingModalFolderSection');
             const hiddenInput = document.getElementById('recordingModalEnabled');
             
+            console.log('🔧 setupRecordingModalOptions 호출됨 (녹화 전용 모달)');
+            console.log('  - recording-modal-enabled-option:', enabledOption);
+            console.log('  - recording-modal-disabled-option:', disabledOption);
+            console.log('  - hiddenInput:', hiddenInput);
+            console.log('  - folderSection:', folderSection);
+            
             if (enabledOption && disabledOption && hiddenInput) {
+                console.log('✅ 녹화 전용 모달 옵션 이벤트 리스너 등록 중...');
+                
+                // 기존 이벤트 리스너 제거 (중복 방지)
+                enabledOption.removeEventListener('click', handleEnabledOptionClick);
+                disabledOption.removeEventListener('click', handleDisabledOptionClick);
+                
                 // 활성화 옵션 클릭
-                enabledOption.addEventListener('click', function() {
-                    selectRecordingModalOption(true, folderSection);
-                });
+                enabledOption.addEventListener('click', handleEnabledOptionClick);
                 
                 // 비활성화 옵션 클릭
-                disabledOption.addEventListener('click', function() {
-                    selectRecordingModalOption(false, folderSection);
-                });
+                disabledOption.addEventListener('click', handleDisabledOptionClick);
+                
+                console.log('✅ 녹화 전용 모달 옵션 이벤트 리스너 등록 완료');
+            } else {
+                console.error('❌ 녹화 전용 모달 옵션 요소를 찾을 수 없습니다!');
             }
         }
 
@@ -7248,6 +7521,111 @@
                 console.error('📁 녹화 모달에서 폴더 선택 중 오류:', error);
                 showToast('녹화 폴더 선택 중 오류가 발생했습니다.', 'error');
             }
+        }
+
+        // Unique 값 선택 모달 관련 전역 변수
+        let currentUniqueValuesData = {
+            className: '',
+            fillValues: [],
+            selectedIndices: []
+        };
+
+        // Unique 값 선택 모달 열기
+        function openUniqueValuesModal(className, fillValues) {
+            if (!fillValues || fillValues.length === 0) {
+                console.log('📝 입력된 값이 없어 unique 값 선택 모달을 건너뜁니다.');
+                return false;
+            }
+
+            currentUniqueValuesData = {
+                className,
+                fillValues,
+                selectedIndices: []
+            };
+
+            // 모달 내용 생성
+            const listContainer = document.getElementById('uniqueValuesList');
+            listContainer.innerHTML = fillValues.map((item, index) => `
+                <div class="unique-value-item" onclick="toggleUniqueValue(${index})">
+                    <input type="checkbox" class="unique-value-checkbox" id="unique-checkbox-${index}" onchange="event.stopPropagation()">
+                    <div class="unique-value-content">
+                        <div class="unique-value-field">
+                            ${item.fieldLabel || item.fieldName}
+                        </div>
+                        <div class="unique-value-value">
+                            값: <code>${item.value}</code>
+                        </div>
+                        <div class="unique-value-preview">
+                            선택 시 다음 실행에서: <code>${item.value}_001</code>, <code>${item.value}_002</code> ...
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // 모달 표시
+            document.getElementById('uniqueValuesModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            return true;
+        }
+
+        // Unique 값 체크박스 토글
+        function toggleUniqueValue(index) {
+            const checkbox = document.getElementById(`unique-checkbox-${index}`);
+            const item = checkbox.closest('.unique-value-item');
+            
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                item.classList.add('selected');
+                if (!currentUniqueValuesData.selectedIndices.includes(index)) {
+                    currentUniqueValuesData.selectedIndices.push(index);
+                }
+            } else {
+                item.classList.remove('selected');
+                currentUniqueValuesData.selectedIndices = currentUniqueValuesData.selectedIndices.filter(i => i !== index);
+            }
+        }
+
+        // Unique 값 선택 완료
+        async function saveUniqueValues() {
+            try {
+                const selectedValues = currentUniqueValuesData.selectedIndices.map(index => 
+                    currentUniqueValuesData.fillValues[index]
+                );
+
+                console.log(`🔑 선택된 unique 값 개수: ${selectedValues.length}`);
+                
+                if (selectedValues.length > 0) {
+                    // 선택된 unique 값들을 저장
+                    await ipcRenderer.invoke('save-unique-values', {
+                        className: currentUniqueValuesData.className,
+                        uniqueValues: selectedValues
+                    });
+                    
+                    showToast(`${selectedValues.length}개의 unique 값이 설정되었습니다.`, 'success');
+                } else {
+                    console.log('📝 선택된 unique 값이 없습니다.');
+                }
+                
+                closeUniqueValuesModal();
+            } catch (error) {
+                console.error('❌ Unique 값 저장 중 오류:', error);
+                showToast('Unique 값 저장에 실패했습니다.', 'error');
+            }
+        }
+
+        // Unique 값 선택 모달 닫기
+        function closeUniqueValuesModal() {
+            document.getElementById('uniqueValuesModal').style.display = 'none';
+            document.body.style.overflow = '';
+            
+            // 데이터 초기화
+            currentUniqueValuesData = {
+                className: '',
+                fillValues: [],
+                selectedIndices: []
+            };
         }
 
         // 녹화 설정 저장
@@ -7771,8 +8149,10 @@
 
 
 
-            // 콘솔에도 출력 (디버깅용)
-            console.log(`[${timestamp.toLocaleString('ko-KR')}] [${level.toUpperCase()}] ${message}${scenarioId ? ` (시나리오 ${scenarioId})` : ''}`);
+            // 콘솔에도 출력 (디버깅용, 원본 console.log 사용하여 무한 재귀 방지)
+            if (window._originalConsoleLog) {
+                window._originalConsoleLog(`[${timestamp.toLocaleString('ko-KR')}] [${level.toUpperCase()}] ${message}${scenarioId ? ` (시나리오 ${scenarioId})` : ''}`);
+            }
         }
 
         // 실행 로그를 .txt 파일로 저장하는 함수
@@ -7871,24 +8251,31 @@
             console.log('🧹 실행 로그가 리셋되었습니다.');
         }
 
+        // 원본 console 함수들을 전역에 저장 (addLog에서 사용하기 위해)
+        window._originalConsoleLog = console.log;
+        window._originalConsoleError = console.error;
+        window._originalConsoleWarn = console.warn;
+        window._originalConsoleInfo = console.info;
+
         // 터미널 로그를 Electron UI에도 표시하기 위한 console.log 오버라이드
         function setupConsoleLogCapture() {
-            const originalConsoleLog = console.log;
-            const originalConsoleError = console.error;
-            const originalConsoleWarn = console.warn;
-            const originalConsoleInfo = console.info;
+            const originalConsoleLog = window._originalConsoleLog;
+            const originalConsoleError = window._originalConsoleError;
+            const originalConsoleWarn = window._originalConsoleWarn;
+            const originalConsoleInfo = window._originalConsoleInfo;
 
             // console.log 오버라이드
             console.log = function(...args) {
                 // 원본 console.log 실행
                 originalConsoleLog.apply(console, args);
                 
-                // Electron UI에도 로그 추가
+                // Electron UI에도 로그 추가 (무한 재귀 방지를 위해 조건 강화)
                 const message = args.map(arg => 
                     typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
                 ).join(' ');
                 
-                if (message && !message.includes('addLog')) {
+                // 무한 재귀 방지: addLog/addDirectLog에서 호출된 로그는 무시
+                if (message && !message.includes('addLog') && !message.includes('[터미널]')) {
                     // 현재 실행 중인 시나리오가 있으면 해당 시나리오의 로그 창에 표시
                     if (currentRunningScenarioIds.size > 0) {
                         const runningScenarioId = Array.from(currentRunningScenarioIds)[0];
@@ -7904,12 +8291,12 @@
                 // 원본 console.error 실행
                 originalConsoleError.apply(console, args);
                 
-                // Electron UI에도 로그 추가
+                // Electron UI에도 로그 추가 (무한 재귀 방지)
                 const message = args.map(arg => 
                     typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
                 ).join(' ');
                 
-                if (message && !message.includes('addLog')) {
+                if (message && !message.includes('addLog') && !message.includes('[터미널]')) {
                     // 현재 실행 중인 시나리오가 있으면 해당 시나리오의 로그 창에 표시
                     if (currentRunningScenarioIds.size > 0) {
                         const runningScenarioId = Array.from(currentRunningScenarioIds)[0];
@@ -7925,12 +8312,12 @@
                 // 원본 console.warn 실행
                 originalConsoleWarn.apply(console, args);
                 
-                // Electron UI에도 로그 추가
+                // Electron UI에도 로그 추가 (무한 재귀 방지)
                 const message = args.map(arg => 
                     typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
                 ).join(' ');
                 
-                if (message && !message.includes('addLog')) {
+                if (message && !message.includes('addLog') && !message.includes('[터미널]')) {
                     // 현재 실행 중인 시나리오가 있으면 해당 시나리오의 로그 창에 표시
                     if (currentRunningScenarioIds.size > 0) {
                         const runningScenarioId = Array.from(currentRunningScenarioIds)[0];
@@ -7946,12 +8333,12 @@
                 // 원본 console.info 실행
                 originalConsoleInfo.apply(console, args);
                 
-                // Electron UI에도 로그 추가
+                // Electron UI에도 로그 추가 (무한 재귀 방지)
                 const message = args.map(arg => 
                     typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
                 ).join(' ');
                 
-                if (message && !message.includes('addLog')) {
+                if (message && !message.includes('addLog') && !message.includes('[터미널]')) {
                     // 현재 실행 중인 시나리오가 있으면 해당 시나리오의 로그 창에 표시
                     if (currentRunningScenarioIds.size > 0) {
                         const runningScenarioId = Array.from(currentRunningScenarioIds)[0];
@@ -7962,7 +8349,10 @@
                 }
             };
 
-            console.log('✅ 터미널 로그 캡처 설정 완료');
+            // 원본 console.log 사용 (무한 재귀 방지)
+            if (window._originalConsoleLog) {
+                window._originalConsoleLog('✅ 터미널 로그 캡처 설정 완료');
+            }
         }
 
         // 잘못된 timestamp 데이터 정리
@@ -8355,38 +8745,10 @@
 
         // 이벤트 리스너 설정
         function setupEventListeners() {
-            // IPC 이벤트 리스너
-            ipcRenderer.on('test-output', (event, data) => {
-                console.log('📥 test-output 이벤트 수신:', data);
-                
-                // 시나리오별로 로그 구분 처리
-                if (data && data.testType && data.data) {
-                    // testType에서 시나리오 ID 추출 (예: "scenario-1" -> "1")
-                    const scenarioId = data.testType.replace('scenario-', '');
-                    const numericScenarioId = parseInt(scenarioId);
-                    
-                    console.log(`🔍 시나리오 ID: ${scenarioId}, 숫자 변환: ${numericScenarioId}`);
-                    console.log(`🔍 현재 실행 중인 시나리오들:`, Array.from(currentRunningScenarioIds));
-                    
-                    // Playwright 로그를 해당 시나리오에 직접 추가
-                    if (data.data.trim()) {
-                        // addLog 대신 addDirectLog 사용
-                        addDirectLog(`${data.data.trim()}`, 'info', numericScenarioId);
-                        
-                        console.log(`✅ 시나리오 ${numericScenarioId}에 Playwright 로그 추가: ${data.data.trim()}`);
-                        
-                        // 로그가 추가된 후 즉시 UI 업데이트
-                        updateHistoryScenarioLogView(numericScenarioId);
-                    }
-                } else {
-                    console.log(`⚠️ 잘못된 데이터 형식:`, data);
-                    
-                    // 기존 형식 호환성 유지
-                    currentRunningScenarioIds.forEach(scenarioId => {
-                        addLog(`[Playwright] ${String(data).trim()}`, 'info', scenarioId);
-                    });
-                }
-            });
+            console.log('🎯 [setupEventListeners] 기타 IPC 리스너 등록 시작');
+            
+            // ⚠️ test-output 리스너는 페이지 최상단에서 이미 등록됨 (중복 방지)
+            // 여기서는 다른 IPC 이벤트만 처리
 
             ipcRenderer.on('test-error', (event, data) => {
                 // 시나리오별로 로그 구분 처리

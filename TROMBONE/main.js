@@ -1169,6 +1169,283 @@ ipcMain.handle('reset-scenario-status', async (event, scenarioId) => {
   }
 });
 
+// 시나리오 삭제
+ipcMain.handle('delete-scenario', async (event, scenarioId) => {
+  try {
+    console.log(`🗑️ 시나리오 ${scenarioId} 삭제 시작... (제품: ${currentProduct})`);
+    
+    // 제품별 경로 결정 (대소문자 무관)
+    let productPath;
+    let productName;
+    const productLower = currentProduct ? currentProduct.toLowerCase() : 'trombone';
+    
+    switch(productLower) {
+      case 'trombone':
+        productPath = __dirname;
+        productName = 'trombone';
+        break;
+      case 'viola':
+        productPath = path.join(__dirname, '..', 'VIOLA');
+        productName = 'viola';
+        break;
+      case 'cmp':
+        productPath = path.join(__dirname, '..', 'CMP');
+        productName = 'cmp';
+        break;
+      case 'contrabass':
+        productPath = path.join(__dirname, '..', 'CONTRABASS');
+        productName = 'contrabass';
+        break;
+      default:
+        console.warn(`⚠️ 알 수 없는 제품: ${currentProduct}, TROMBONE으로 기본 설정`);
+        productPath = __dirname;
+        productName = 'trombone';
+    }
+    
+    console.log(`📁 제품 경로: ${productPath}`);
+    
+    // 1. scenario-list.json에서 항목 제거
+    const scenarioListPath = path.join(productPath, 'custom-reports', 'scenario-list.json');
+    if (fs.existsSync(scenarioListPath)) {
+      const data = fs.readFileSync(scenarioListPath, 'utf8');
+      const scenarioList = JSON.parse(data);
+      
+      const index = scenarioList.scenarios.findIndex(s => s.id === scenarioId);
+      if (index !== -1) {
+        scenarioList.scenarios.splice(index, 1);
+        fs.writeFileSync(scenarioListPath, JSON.stringify(scenarioList, null, 2), 'utf8');
+        console.log(`✅ scenario-list.json에서 시나리오 ${scenarioId} 제거 완료`);
+      }
+    }
+    
+    // 2. global-test-results.json에서 항목 제거
+    const globalResultsPath = path.join(productPath, 'custom-reports', 'global-test-results.json');
+    if (fs.existsSync(globalResultsPath)) {
+      const data = fs.readFileSync(globalResultsPath, 'utf8');
+      const globalResults = JSON.parse(data);
+      
+      delete globalResults[`scenario-${scenarioId}`];
+      delete globalResults[`${productName}-scenario-${scenarioId}`];
+      
+      fs.writeFileSync(globalResultsPath, JSON.stringify(globalResults, null, 2), 'utf8');
+      console.log(`✅ global-test-results.json에서 시나리오 ${scenarioId} 제거 완료`);
+    }
+    
+    // 3. spec 파일 삭제
+    const specPath = path.join(productPath, 'tests', 'scenario', `scenario-${scenarioId}.spec.js`);
+    if (fs.existsSync(specPath)) {
+      fs.unlinkSync(specPath);
+      console.log(`✅ spec 파일 삭제 완료: ${specPath}`);
+    }
+    
+    // 4. custom-reports 폴더 삭제
+    const reportDir = path.join(productPath, 'custom-reports', `scenario-${scenarioId}`);
+    if (fs.existsSync(reportDir)) {
+      fs.rmSync(reportDir, { recursive: true, force: true });
+      console.log(`✅ 리포트 폴더 삭제 완료: ${reportDir}`);
+    }
+    
+    // 5. recording-settings.json에서 항목 제거
+    const recordingSettingsPath = path.join(productPath, 'config', 'recording-settings.json');
+    if (fs.existsSync(recordingSettingsPath)) {
+      try {
+        const data = fs.readFileSync(recordingSettingsPath, 'utf8');
+        const recordingSettings = JSON.parse(data);
+        
+        if (recordingSettings[scenarioId] !== undefined) {
+          delete recordingSettings[scenarioId];
+          fs.writeFileSync(recordingSettingsPath, JSON.stringify(recordingSettings, null, 2), 'utf8');
+          console.log(`✅ recording-settings.json에서 시나리오 ${scenarioId} 제거 완료`);
+        }
+      } catch (error) {
+        console.warn(`⚠️ recording-settings.json 업데이트 실패:`, error.message);
+      }
+    }
+    
+    // 6. user-recording-folders.json에서 항목 제거
+    const userFoldersPath = path.join(productPath, 'config', 'user-recording-folders.json');
+    if (fs.existsSync(userFoldersPath)) {
+      try {
+        const data = fs.readFileSync(userFoldersPath, 'utf8');
+        const userFolders = JSON.parse(data);
+        
+        if (userFolders[scenarioId] !== undefined) {
+          delete userFolders[scenarioId];
+          fs.writeFileSync(userFoldersPath, JSON.stringify(userFolders, null, 2), 'utf8');
+          console.log(`✅ user-recording-folders.json에서 시나리오 ${scenarioId} 제거 완료`);
+        }
+      } catch (error) {
+        console.warn(`⚠️ user-recording-folders.json 업데이트 실패:`, error.message);
+      }
+    }
+    
+    console.log(`✅ ${currentProduct.toUpperCase()} 시나리오 ${scenarioId} 삭제 완료`);
+    return { success: true };
+  } catch (error) {
+    console.error('시나리오 삭제 중 오류:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// 시나리오 존재 여부 확인
+ipcMain.handle('check-scenario-exists', async (event, { product, scenarioNumber }) => {
+  try {
+    // scenarioNumber를 정수로 변환
+    const numericScenarioNumber = parseInt(scenarioNumber);
+    console.log(`🔍 시나리오 ${numericScenarioNumber} 존재 여부 확인 중... (제품: ${product}, 원본: ${scenarioNumber}, 타입: ${typeof scenarioNumber})`);
+    
+    // 제품별 경로 결정 (대소문자 무관)
+    let productPath;
+    const productLower = product ? product.toLowerCase() : 'trombone';
+    
+    switch(productLower) {
+      case 'trombone':
+        productPath = __dirname;
+        break;
+      case 'viola':
+        productPath = path.join(__dirname, '..', 'VIOLA');
+        break;
+      case 'cmp':
+        productPath = path.join(__dirname, '..', 'CMP');
+        break;
+      case 'contrabass':
+        productPath = path.join(__dirname, '..', 'CONTRABASS');
+        break;
+      default:
+        console.warn(`⚠️ 알 수 없는 제품: ${product}, TROMBONE으로 기본 설정`);
+        productPath = __dirname;
+    }
+    
+    console.log(`📁 최종 제품 경로: ${productPath}`);
+    
+    // 1. spec 파일 존재 여부 확인
+    const scenarioPath = path.join(productPath, 'tests', 'scenario', `scenario-${numericScenarioNumber}.spec.js`);
+    const specExists = fs.existsSync(scenarioPath);
+    console.log(`📁 spec 파일 경로: ${scenarioPath}`);
+    console.log(`📁 spec 파일 존재: ${specExists}`);
+    
+    // 2. scenario-list.json에서 ID 확인
+    let listExists = false;
+    const scenarioListPath = path.join(productPath, 'custom-reports', 'scenario-list.json');
+    console.log(`📁 scenario-list.json 경로: ${scenarioListPath}`);
+    console.log(`📁 scenario-list.json 존재: ${fs.existsSync(scenarioListPath)}`);
+    
+    if (fs.existsSync(scenarioListPath)) {
+      try {
+        const data = fs.readFileSync(scenarioListPath, 'utf8');
+        const scenarioList = JSON.parse(data);
+        console.log(`📋 scenario-list.json 시나리오 개수: ${scenarioList.scenarios?.length || 0}개`);
+        console.log(`📋 scenario-list.json ID 목록: [${scenarioList.scenarios?.map(s => `${s.id}(${typeof s.id})`).join(', ')}]`);
+        
+        // 숫자로 비교 (타입 불일치 방지)
+        listExists = scenarioList.scenarios.some(s => parseInt(s.id) === numericScenarioNumber);
+        console.log(`📋 시나리오 ${numericScenarioNumber} 목록 존재 여부: ${listExists}`);
+      } catch (jsonError) {
+        console.error('scenario-list.json 파싱 오류:', jsonError.message);
+      }
+    }
+    
+    const exists = specExists || listExists;
+    
+    console.log(`${exists ? '❌' : '✅'} 시나리오 ${numericScenarioNumber}: ${exists ? '이미 존재' : '사용 가능'} (spec: ${specExists}, list: ${listExists})`);
+    
+    return { success: true, exists };
+  } catch (error) {
+    console.error('시나리오 존재 여부 확인 중 오류:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// 다음 사용 가능한 시나리오 번호 가져오기
+ipcMain.handle('get-next-available-scenario-number', async (event, product) => {
+  try {
+    console.log(`🔍 ${product} 제품의 다음 사용 가능한 시나리오 번호 검색 중...`);
+    
+    // 제품별 경로 결정 (대소문자 무관)
+    let productPath;
+    const productLower = product ? product.toLowerCase() : 'trombone';
+    
+    switch(productLower) {
+      case 'trombone':
+        productPath = __dirname;
+        break;
+      case 'viola':
+        productPath = path.join(__dirname, '..', 'VIOLA');
+        break;
+      case 'cmp':
+        productPath = path.join(__dirname, '..', 'CMP');
+        break;
+      case 'contrabass':
+        productPath = path.join(__dirname, '..', 'CONTRABASS');
+        break;
+      default:
+        console.warn(`⚠️ 알 수 없는 제품: ${product}, TROMBONE으로 기본 설정`);
+        productPath = __dirname;
+    }
+    
+    console.log(`📁 최종 제품 경로: ${productPath}`);
+    
+    // scenario-list.json에서 사용 중인 ID 확인
+    const scenarioListPath = path.join(productPath, 'custom-reports', 'scenario-list.json');
+    let usedIds = [];
+    
+    console.log(`📁 scenario-list.json 경로: ${scenarioListPath}`);
+    console.log(`📁 존재 여부: ${fs.existsSync(scenarioListPath)}`);
+    
+    if (fs.existsSync(scenarioListPath)) {
+      try {
+        const data = fs.readFileSync(scenarioListPath, 'utf8');
+        console.log(`📄 scenario-list.json 내용 길이: ${data.length} bytes`);
+        
+        const scenarioList = JSON.parse(data);
+        console.log(`📋 scenario-list.json에서 읽은 시나리오 수: ${scenarioList.scenarios?.length || 0}개`);
+        
+        if (scenarioList.scenarios && Array.isArray(scenarioList.scenarios)) {
+          usedIds = scenarioList.scenarios.map(s => s.id);
+          console.log(`📋 scenario-list.json의 ID들: [${usedIds.join(', ')}]`);
+        }
+      } catch (jsonError) {
+        console.error(`❌ scenario-list.json 파싱 오류:`, jsonError);
+      }
+    } else {
+      console.log(`⚠️ scenario-list.json 파일이 존재하지 않습니다`);
+    }
+    
+    // tests/scenario 폴더에서 실제 spec 파일 확인
+    const scenarioDir = path.join(productPath, 'tests', 'scenario');
+    console.log(`📁 spec 파일 경로: ${scenarioDir}`);
+    
+    if (fs.existsSync(scenarioDir)) {
+      const files = fs.readdirSync(scenarioDir);
+      console.log(`📁 spec 파일 개수: ${files.filter(f => f.endsWith('.spec.js')).length}개`);
+      
+      files.forEach(file => {
+        const match = file.match(/^scenario-(\d+)\.spec\.js$/);
+        if (match) {
+          const id = parseInt(match[1]);
+          if (!usedIds.includes(id)) {
+            usedIds.push(id);
+          }
+        }
+      });
+    }
+    
+    // 가장 작은 빈 번호 찾기
+    let nextNumber = 1;
+    while (usedIds.includes(nextNumber)) {
+      nextNumber++;
+    }
+    
+    console.log(`✅ ${product} 제품의 다음 사용 가능한 시나리오 번호: ${nextNumber}`);
+    console.log(`📋 최종 사용 중인 ID: [${usedIds.sort((a, b) => a - b).join(', ')}]`);
+    
+    return { success: true, nextNumber };
+  } catch (error) {
+    console.error('다음 시나리오 번호 검색 중 오류:', error);
+    return { success: false, error: error.message, nextNumber: 1 };
+  }
+});
+
 // 시나리오별 설정 로드
 ipcMain.handle('load-scenario-settings', async (event, scenarioId) => {
   try {
@@ -5577,6 +5854,7 @@ ipcMain.handle('run-direct-codegen', async (event, { url, caseId, title, product
             className: managerInfo.className,
             steps: managerInfo.steps,
             title: managerInfo.title,
+            fillValues: managerInfo.fillValues || [],  // unique 값 후보 목록
             message: `Manager 클래스 생성 완료: ${managerInfo.className}`
           });
         } catch (error) {
@@ -5619,33 +5897,45 @@ ipcMain.handle('get-manager-list', async (event, { product }) => {
     const files = fs.readdirSync(classesDir);
     
     const managers = files
-      .filter(f => f.startsWith('AutoRecorded_') && f.endsWith('.js'))
+      .filter(f => f.endsWith('.js'))
       .map(f => {
         const className = f.replace('.js', '');
         const filePath = path.join(classesDir, f);
-        const stats = fs.statSync(filePath);
         
-        // 파일 내용 파싱하여 step 개수와 제목 추출
-        const content = fs.readFileSync(filePath, 'utf8');
-        
-        // camelCase 메서드 매칭 (process 메서드 제외)
-        const stepMatches = content.match(/async\s+([a-z][a-zA-Z0-9]*)\(config\)/g);
-        const stepCount = stepMatches ? 
-          stepMatches.filter(m => !m.includes('process')).length : 0;
-        
-        // 제목 추출 (한글 "프로세스" 또는 영어 "process")
-        const titleMatch = content.match(/\/\*\*\s*\n\s*\*\s*(.+?)\s+(프로세스|process)/);
-        const title = titleMatch ? titleMatch[1] : className.replace('AutoRecorded_', '');
-        
-        return {
-          className,
-          fileName: className.replace('AutoRecorded_', ''),
-          title,
-          createdAt: stats.birthtime,
-          stepCount,
-          filePath
-        };
+        try {
+          const stats = fs.statSync(filePath);
+          
+          // 파일 내용 파싱하여 Manager 클래스인지 확인
+          const content = fs.readFileSync(filePath, 'utf8');
+          
+          // BaseManager를 상속받는 클래스만 Manager로 인식
+          if (!content.includes('extends BaseManager')) {
+            return null;
+          }
+          
+          // camelCase 메서드 매칭 (process 메서드 제외)
+          const stepMatches = content.match(/async\s+([a-z][a-zA-Z0-9]*)\(config\)/g);
+          const stepCount = stepMatches ? 
+            stepMatches.filter(m => !m.includes('process')).length : 0;
+          
+          // 제목 추출 (한글 "프로세스" 또는 영어 "process")
+          const titleMatch = content.match(/\/\*\*\s*\n\s*\*\s*(.+?)\s+(프로세스|process)/);
+          const title = titleMatch ? titleMatch[1] : className;
+          
+          return {
+            className,
+            fileName: className,
+            title,
+            createdAt: stats.birthtime,
+            stepCount,
+            filePath
+          };
+        } catch (error) {
+          console.error(`Manager 파일 처리 실패 (${f}):`, error);
+          return null;
+        }
       })
+      .filter(m => m !== null) // null 제거
       .sort((a, b) => b.createdAt - a.createdAt); // 최신순 정렬
     
     console.log(`📦 ${productUpper} Manager 목록: ${managers.length}개`);
@@ -5658,7 +5948,7 @@ ipcMain.handle('get-manager-list', async (event, { product }) => {
 });
 
 // Manager에서 Scenario 생성
-ipcMain.handle('create-scenario-from-manager', async (event, { managerClassName, product }) => {
+ipcMain.handle('create-scenario-from-manager', async (event, { managerClassName, product, scenarioNumber, scenarioTitle, scenarioDescription }) => {
   try {
     const productUpper = product ? product.toUpperCase() : 'TROMBONE';
     
@@ -5669,22 +5959,26 @@ ipcMain.handle('create-scenario-from-manager', async (event, { managerClassName,
       throw new Error(`Manager 파일을 찾을 수 없습니다: ${managerFile}`);
     }
     
-    // 다음 시나리오 번호 찾기
+    // 시나리오 디렉토리 경로 설정
     const scenarioDir = path.join(__dirname, '..', productUpper, 'tests', 'scenario');
     if (!fs.existsSync(scenarioDir)) {
       fs.mkdirSync(scenarioDir, { recursive: true });
     }
     
-    const existingFiles = fs.readdirSync(scenarioDir)
-      .filter(f => f.match(/^scenario-\d+\.spec\.js$/));
-    
-    let nextScenarioNumber = 1;
-    if (existingFiles.length > 0) {
-      const numbers = existingFiles.map(f => {
-        const match = f.match(/^scenario-(\d+)\.spec\.js$/);
-        return match ? parseInt(match[1]) : 0;
-      });
-      nextScenarioNumber = Math.max(...numbers) + 1;
+    // 시나리오 번호가 지정되지 않은 경우 다음 번호 자동 할당
+    let nextScenarioNumber = scenarioNumber;
+    if (!nextScenarioNumber) {
+      const existingFiles = fs.readdirSync(scenarioDir)
+        .filter(f => f.match(/^scenario-\d+\.spec\.js$/));
+      
+      nextScenarioNumber = 1;
+      if (existingFiles.length > 0) {
+        const numbers = existingFiles.map(f => {
+          const match = f.match(/^scenario-(\d+)\.spec\.js$/);
+          return match ? parseInt(match[1]) : 0;
+        });
+        nextScenarioNumber = Math.max(...numbers) + 1;
+      }
     }
     
     console.log(`🔄 시나리오 ${nextScenarioNumber} 생성 중...`);
@@ -5717,14 +6011,20 @@ ipcMain.handle('create-scenario-from-manager', async (event, { managerClassName,
       // 해당 번호의 시나리오 찾기
       let scenarioEntry = scenarioList.scenarios.find(s => s.id === nextScenarioNumber);
       
+      // 시나리오 제목 결정 (사용자 입력 > Manager 제목 > 기본값)
+      const finalTitle = scenarioTitle || result.title || `시나리오 ${nextScenarioNumber}`;
+      const finalDescription = scenarioDescription || '';
+      
       if (scenarioEntry) {
         // 기존 항목 업데이트
-        scenarioEntry.name = `시나리오 ${nextScenarioNumber}: ${result.title}`;
+        scenarioEntry.name = `시나리오 ${nextScenarioNumber}: ${finalTitle}`;
+        scenarioEntry.description = finalDescription;
       } else {
         // 새 항목 추가
         scenarioEntry = {
           id: nextScenarioNumber,
-          name: `시나리오 ${nextScenarioNumber}: ${result.title}`,
+          name: `시나리오 ${nextScenarioNumber}: ${finalTitle}`,
+          description: finalDescription,
           path: `./scenario-${nextScenarioNumber}/custom-report.html`,
           status: 'not-run',
           lastRun: null,
@@ -5745,6 +6045,7 @@ ipcMain.handle('create-scenario-from-manager', async (event, { managerClassName,
       // scenario-list.json 저장
       fs.writeFileSync(scenarioListPath, JSON.stringify(scenarioList, null, 2), 'utf8');
       console.log(`✅ scenario-list.json 업데이트 완료`);
+      
       // 메인 창에 목록 갱신 알림 (시나리오 카드 즉시 반영)
       if (mainWindow && !mainWindow.isDestroyed()) {
         mainWindow.webContents.send('scenario-list-updated', { product: productUpper });
@@ -5753,11 +6054,60 @@ ipcMain.handle('create-scenario-from-manager', async (event, { managerClassName,
       console.warn(`⚠️ scenario-list.json 업데이트 실패 (계속 진행):`, listError);
     }
     
+    // recording-settings.json 업데이트
+    try {
+      const configDir = path.join(__dirname, '..', productUpper, 'config');
+      if (!fs.existsSync(configDir)) {
+        fs.mkdirSync(configDir, { recursive: true });
+      }
+      
+      const recordingSettingsPath = path.join(configDir, 'recording-settings.json');
+      let recordingSettings = {};
+      
+      // 기존 설정 읽기
+      if (fs.existsSync(recordingSettingsPath)) {
+        recordingSettings = JSON.parse(fs.readFileSync(recordingSettingsPath, 'utf8'));
+      }
+      
+      // 새 시나리오 번호 추가 (기본값: false)
+      if (recordingSettings[nextScenarioNumber] === undefined) {
+        recordingSettings[nextScenarioNumber] = false;
+        fs.writeFileSync(recordingSettingsPath, JSON.stringify(recordingSettings, null, 2), 'utf8');
+        console.log(`✅ recording-settings.json 업데이트 완료 (시나리오 ${nextScenarioNumber})`);
+      }
+    } catch (recordingError) {
+      console.warn(`⚠️ recording-settings.json 업데이트 실패:`, recordingError.message);
+    }
+    
+    // user-recording-folders.json 업데이트
+    try {
+      const configDir = path.join(__dirname, '..', productUpper, 'config');
+      const userFoldersPath = path.join(configDir, 'user-recording-folders.json');
+      let userFolders = {};
+      
+      // 기존 설정 읽기
+      if (fs.existsSync(userFoldersPath)) {
+        userFolders = JSON.parse(fs.readFileSync(userFoldersPath, 'utf8'));
+      }
+      
+      // 새 시나리오 번호 추가 (기본값: null - 기본 경로 사용)
+      if (userFolders[nextScenarioNumber] === undefined) {
+        userFolders[nextScenarioNumber] = null;
+        fs.writeFileSync(userFoldersPath, JSON.stringify(userFolders, null, 2), 'utf8');
+        console.log(`✅ user-recording-folders.json 업데이트 완료 (시나리오 ${nextScenarioNumber})`);
+      }
+    } catch (folderError) {
+      console.warn(`⚠️ user-recording-folders.json 업데이트 실패:`, folderError.message);
+    }
+    
+    // 최종 제목 결정
+    const finalTitle = scenarioTitle || result.title || `시나리오 ${nextScenarioNumber}`;
+    
     return {
       success: true,
       scenarioFile,
       scenarioNumber: nextScenarioNumber,
-      scenarioTitle: result.title,
+      scenarioTitle: finalTitle,
       message: `시나리오 ${nextScenarioNumber} 생성 완료`
     };
     
@@ -5806,6 +6156,192 @@ ipcMain.handle('generate-playwright-code', async (event, { caseId, product, useM
       });
     });
   });
+});
+
+// Unique 값 저장
+ipcMain.handle('save-unique-values', async (event, { className, uniqueValues }) => {
+  try {
+    const productUpper = currentProduct ? currentProduct.toUpperCase() : 'TROMBONE';
+    const uniqueValuesPath = path.join(__dirname, '..', productUpper, 'config', 'unique-values.json');
+    
+    // 기존 unique 값 설정 로드
+    let allUniqueValues = {};
+    if (fs.existsSync(uniqueValuesPath)) {
+      const content = fs.readFileSync(uniqueValuesPath, 'utf8');
+      allUniqueValues = JSON.parse(content);
+    }
+    
+    // 클래스별 unique 값 저장
+    allUniqueValues[className] = {
+      values: uniqueValues,
+      savedAt: new Date().toISOString()
+    };
+    
+    // config 디렉토리 생성
+    const configDir = path.dirname(uniqueValuesPath);
+    if (!fs.existsSync(configDir)) {
+      fs.mkdirSync(configDir, { recursive: true });
+    }
+    
+    // 파일 저장
+    fs.writeFileSync(uniqueValuesPath, JSON.stringify(allUniqueValues, null, 2), 'utf8');
+    
+    console.log(`🔑 Unique 값 저장 완료: ${className} (${uniqueValues.length}개)`);
+    
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Unique 값 저장 실패:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// Unique 값 불러오기
+ipcMain.handle('load-unique-values', async (event, className) => {
+  try {
+    const productUpper = currentProduct ? currentProduct.toUpperCase() : 'TROMBONE';
+    const uniqueValuesPath = path.join(__dirname, '..', productUpper, 'config', 'unique-values.json');
+    
+    if (!fs.existsSync(uniqueValuesPath)) {
+      return { success: true, uniqueValues: [] };
+    }
+    
+    const content = fs.readFileSync(uniqueValuesPath, 'utf8');
+    const allUniqueValues = JSON.parse(content);
+    
+    const classData = allUniqueValues[className];
+    const uniqueValues = classData ? classData.values : [];
+    
+    console.log(`🔑 Unique 값 로드: ${className} (${uniqueValues.length}개)`);
+    
+    return { success: true, uniqueValues };
+  } catch (error) {
+    console.error('❌ Unique 값 로드 실패:', error);
+    return { success: false, error: error.message, uniqueValues: [] };
+  }
+});
+
+// 다음 카운터 값 가져오기 (unique 값에 추가할 _001, _002 등)
+ipcMain.handle('get-next-counter', async (event, { className, fieldName, baseValue }) => {
+  try {
+    const productUpper = currentProduct ? currentProduct.toUpperCase() : 'TROMBONE';
+    const countersPath = path.join(__dirname, '..', productUpper, 'config', 'unique-counters.json');
+    
+    // 카운터 파일 로드
+    let counters = {};
+    if (fs.existsSync(countersPath)) {
+      const content = fs.readFileSync(countersPath, 'utf8');
+      counters = JSON.parse(content);
+    }
+    
+    // 클래스별, 필드별 카운터 초기화
+    if (!counters[className]) {
+      counters[className] = {};
+    }
+    if (!counters[className][fieldName]) {
+      counters[className][fieldName] = {};
+    }
+    if (!counters[className][fieldName][baseValue]) {
+      counters[className][fieldName][baseValue] = 0;
+    }
+    
+    // 카운터 증가
+    counters[className][fieldName][baseValue]++;
+    const counter = counters[className][fieldName][baseValue];
+    
+    // 카운터 파일 저장
+    const configDir = path.dirname(countersPath);
+    if (!fs.existsSync(configDir)) {
+      fs.mkdirSync(configDir, { recursive: true });
+    }
+    fs.writeFileSync(countersPath, JSON.stringify(counters, null, 2), 'utf8');
+    
+    // 3자리 숫자로 포맷팅 (001, 002, ...)
+    const formattedCounter = counter.toString().padStart(3, '0');
+    const nextValue = `${baseValue}_${formattedCounter}`;
+    
+    console.log(`🔢 다음 카운터 값: ${className}.${fieldName}.${baseValue} → ${nextValue}`);
+    
+    return { success: true, counter, nextValue };
+  } catch (error) {
+    console.error('❌ 카운터 가져오기 실패:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// 카운터 초기화
+ipcMain.handle('reset-counters', async (event, className) => {
+  try {
+    const productUpper = currentProduct ? currentProduct.toUpperCase() : 'TROMBONE';
+    const countersPath = path.join(__dirname, '..', productUpper, 'config', 'unique-counters.json');
+    
+    if (!fs.existsSync(countersPath)) {
+      return { success: true, message: '카운터 파일이 없습니다.' };
+    }
+    
+    let counters = {};
+    const content = fs.readFileSync(countersPath, 'utf8');
+    counters = JSON.parse(content);
+    
+    if (className) {
+      // 특정 클래스만 초기화
+      delete counters[className];
+      console.log(`🔄 카운터 초기화: ${className}`);
+    } else {
+      // 전체 초기화
+      counters = {};
+      console.log('🔄 전체 카운터 초기화');
+    }
+    
+    fs.writeFileSync(countersPath, JSON.stringify(counters, null, 2), 'utf8');
+    
+    return { success: true };
+  } catch (error) {
+    console.error('❌ 카운터 초기화 실패:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// Manager 파일에서 fill 값들 추출
+ipcMain.handle('parse-manager-fill-values', async (event, filePath) => {
+  try {
+    if (!fs.existsSync(filePath)) {
+      return { success: false, error: '파일이 존재하지 않습니다.' };
+    }
+    
+    const content = fs.readFileSync(filePath, 'utf8');
+    
+    // fill 값 추출 (정규식)
+    const fillRegex = /const\s+(\w+)Value\s*=\s*await\s+this\.processUniqueValue\('(\w+)',\s*'([^']+)'\)/g;
+    const fillValues = [];
+    let match;
+    let index = 0;
+    
+    while ((match = fillRegex.exec(content)) !== null) {
+      const varName = match[1];
+      const fieldName = match[2];
+      const value = match[3];
+      
+      // 필드 레이블 추출 시도 (getByRole 다음 줄에서)
+      const labelRegex = new RegExp(`getByRole\\([^)]+name:\\s*['"]([^'"]+)['"][^)]*\\)\\.fill\\(${varName}Value\\)`, 'g');
+      const labelMatch = labelRegex.exec(content);
+      const fieldLabel = labelMatch ? labelMatch[1] : fieldName;
+      
+      fillValues.push({
+        index: index++,
+        fieldName,
+        fieldLabel,
+        value,
+        action: `fill('${value}')`
+      });
+    }
+    
+    console.log(`📝 Manager 파일에서 ${fillValues.length}개의 fill 값 추출`);
+    
+    return { success: true, fillValues };
+  } catch (error) {
+    console.error('❌ Manager fill 값 파싱 실패:', error);
+    return { success: false, error: error.message, fillValues: [] };
+  }
 });
 
 // 파일 선택 다이얼로그

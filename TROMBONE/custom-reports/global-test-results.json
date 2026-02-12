@@ -1,5 +1,5 @@
 {
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
     "status": "fail",
     "duration": "0분 20초",
     "startTime": "2025-12-04T08:47:13.849Z",
@@ -616,7 +616,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-1": {
     "status": "fail",
     "duration": "0분 20초",
     "startTime": "2025-12-04T08:47:13.849Z",
@@ -1233,7 +1233,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-2": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-2": {
     "status": "stopped",
     "duration": "0분 17초",
     "startTime": "2025-11-27T09:10:36.960Z",
@@ -1770,7 +1770,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-2": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-2": {
     "status": "stopped",
     "duration": "0분 17초",
     "startTime": "2025-11-27T09:10:36.960Z",
@@ -2307,7 +2307,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
     "scenarioId": "1",
     "status": "stopped",
     "duration": "0분 29초",
@@ -2413,7 +2413,7 @@
       "message": "테스트가 수동으로 닫힘"
     }
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
     "scenarioId": "1",
     "status": "stopped",
     "duration": "0분 23초",
@@ -3696,7 +3696,7 @@
       "❌ TROMBONE 시나리오 1 stopped 상태로 종료 (exit code: 1)"
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
     "scenarioId": "3",
     "status": "stopped",
     "duration": "0분 44초",
@@ -3802,7 +3802,7 @@
       "message": "테스트가 수동으로 닫힘"
     }
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
     "scenarioId": "3",
     "status": "fail",
     "duration": "3초",
@@ -3814,7 +3814,7 @@
     "screenshots": [],
     "logs": []
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-4": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-4": {
     "scenarioId": "4",
     "status": "fail",
     "duration": "4초",
@@ -3826,7 +3826,7 @@
     "screenshots": [],
     "logs": []
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-5": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-5": {
     "scenarioId": "5",
     "status": "fail",
     "duration": "4초",

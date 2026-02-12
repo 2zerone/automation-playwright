@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CMP 자동화 테스트</title>
+    <title>CONTRABASS 자동화 테스트</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 공통 입력란 스타일 */
@@ -61,7 +61,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: #e3f2fd;
+            background: #ffebee;
             min-height: 100vh;
             overflow-x: hidden;
             overflow-y: auto;
@@ -72,7 +72,7 @@
         .app-container {
             display: flex;
             min-height: 100vh;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            background: #ffffff;
             backdrop-filter: blur(20px);
             transition: background 0.3s ease;
         }
@@ -211,7 +211,7 @@
         }
 
         body.light-theme .lnb-header h1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -257,15 +257,15 @@
 
         body.light-theme .nav-item:hover {
             background: rgba(102, 126, 234, 0.1);
-            border-color: #667eea;
+            border-color: #f76205;
             transform: translateX(3px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         body.light-theme .nav-item.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             color: #ffffff;
-            border-color: #667eea;
+            border-color: #f76205;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
@@ -293,7 +293,7 @@
         }
 
         body.light-theme .scenario-card:hover {
-            border-color: #667eea;
+            border-color: #f76205;
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
             transform: translateY(-2px);
         }
@@ -325,7 +325,7 @@
         }
 
         body.light-theme .summary-card:hover {
-            border-color: #667eea;
+            border-color: #f76205;
             box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
         }
 
@@ -336,9 +336,9 @@
 
 
         body.light-theme .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             color: #ffffff;
-            border-color: #667eea;
+            border-color: #f76205;
         }
 
         body.light-theme .btn-secondary {
@@ -431,7 +431,7 @@
             color: #856404;
         }
 
-        body.light-theme .status-badge.pass,
+        body.light-theme .status-badge.completed,
         body.light-theme .status-badge.pass {
             background: #d4edda;
             color: #155724;
@@ -453,7 +453,7 @@
         }
 
         body.light-theme .scenario-checkbox-label:before {
-            background: #667eea;
+            background: #f76205;
         }
 
         body.light-theme .scenario-history {
@@ -468,7 +468,7 @@
 
         body.light-theme .scenario-history-item:hover {
             background: rgba(102, 126, 234, 0.05);
-            border-color: #667eea;
+            border-color: #f76205;
         }
 
 
@@ -483,7 +483,7 @@
 
         /* 라이트 모드 도넛 버튼 스타일 */
         body.light-theme .donut-center-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
@@ -607,7 +607,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(52, 152, 219, 0.1);
+            background: rgba(231, 76, 60, 0.1);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -618,13 +618,13 @@
 
         .nav-item:hover {
             transform: translateX(5px);
-            border-left-color: #3498db;
+            border-left-color: #e74c3c;
         }
 
         .nav-item.active {
-            background: #3498db;
-            border-left-color: #3498db;
-            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3);
+            background: #e74c3c;
+            border-left-color: #e74c3c;
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
         }
 
         .nav-item.active i,
@@ -728,7 +728,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #2196f3, #1976d2);
+            background: linear-gradient(90deg, #f44336, #d32f2f);
         }
         
         .summary-card:hover {
@@ -794,7 +794,7 @@
         
         .scenario-history-item .history-date {
             font-weight: bold;
-            color: #667eea;
+            color: #f76205;
         }
         
         .scenario-history-item .history-status {
@@ -1239,7 +1239,7 @@
         .scenario-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
+            border-color: #f76205;
         }
 
 
@@ -1267,7 +1267,7 @@
             box-shadow: 0 8px 32px rgba(243, 156, 18, 0.3);
         }
 
-        .scenario-card.pass,
+        .scenario-card.completed,
         .scenario-card.pass {
             border-color: #27ae60;
             background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(46, 204, 113, 0.1) 100%);
@@ -1534,8 +1534,8 @@
         }
 
         .scenario-checkbox-input:checked + .scenario-checkbox-label {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-color: #667eea;
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
+            border-color: #f76205;
         }
 
         .scenario-checkbox-input:checked + .scenario-checkbox-label::after {
@@ -1554,7 +1554,7 @@
             background: rgba(102, 126, 234, 0.1) !important;
             border: 1px solid rgba(102, 126, 234, 0.3) !important;
             border-radius: 8px;
-            color: #667eea;
+            color: #f76205;
             font-size: 0.9em;
             padding: 10px 15px;
             margin-bottom: 15px;
@@ -1586,7 +1586,7 @@
             width: 45px;
             height: 45px;
             border-radius: 12px;
-            background: #3498db;
+            background: #e74c3c;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1602,7 +1602,6 @@
             font-size: 1.2em;
             font-weight: 700;
             color: #000000;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             flex: 1;
         }
 
@@ -1644,7 +1643,7 @@
             border-color: rgba(243, 156, 18, 0.3);
         }
 
-        .status-badge.pass,
+        .status-badge.completed,
         .status-badge.pass {
             background: rgba(39, 174, 96, 0.2);
             color: #27ae60;
@@ -1730,7 +1729,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             color: white;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
@@ -1780,8 +1779,8 @@
 
         .log-entry.info {
             background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            border-left: 4px solid #667eea;
+            color: #f76205;
+            border-left: 4px solid #f76205;
         }
 
         .log-entry.success {
@@ -1868,7 +1867,7 @@
         }
 
         .settings-section h3 {
-            color: #667eea;
+            color: #f76205;
             margin-bottom: 20px;
             font-size: 1.3em;
             font-weight: 700;
@@ -1921,7 +1920,7 @@
         }
 
         .user-row-header h4 {
-            color: #667eea;
+            color: #f76205;
             font-size: 1.1em;
             font-weight: 600;
             margin: 0;
@@ -1961,7 +1960,7 @@
 
         .form-group input:focus, .form-group select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #f76205;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
             background: rgba(255, 255, 255, 0.1);
         }
@@ -2015,11 +2014,11 @@
         }
 
         .help-section h3 {
-            color: #667eea;
+            color: #f76205;
             font-size: 1.5em;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #f76205;
             font-weight: 700;
         }
 
@@ -2046,7 +2045,7 @@
             padding: 4px 8px;
             border-radius: 6px;
             font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-            color: #667eea;
+            color: #f76205;
             border: 1px solid rgba(102, 126, 234, 0.2);
         }
 
@@ -2065,7 +2064,7 @@
             width: 20px;
             height: 20px;
             border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #667eea;
+            border-top: 3px solid #f76205;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-right: 10px;
@@ -2087,12 +2086,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #3498db;
+            background: #e74c3c;
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #2980b9;
+            background: #c0392b;
         }
 
         /* Touch-friendly interactions */
@@ -2127,12 +2126,14 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-content {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            margin: 5% auto;
+            margin: 0;
             padding: 0;
             border-radius: 20px;
             width: 90%;
@@ -2164,7 +2165,7 @@
         }
 
         .modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             color: white;
             padding: 25px 30px;
             border-radius: 20px 20px 0 0;
@@ -2204,7 +2205,7 @@
         }
 
         .scenario-info h3 {
-            color: #667eea;
+            color: #f76205;
             margin-bottom: 10px;
             font-size: 1.3em;
             font-weight: 700;
@@ -2225,7 +2226,7 @@
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
             color: white !important;
             box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
         }
@@ -2236,7 +2237,7 @@
         }
 
         .btn-success:disabled {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
             color: white !important;
         }
 
@@ -2312,7 +2313,7 @@
         }
 
         .recording-option.selected {
-            border-color: #667eea;
+            border-color: #f76205;
             background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
         }
@@ -2324,7 +2325,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
         }
 
         .recording-icon {
@@ -2343,7 +2344,7 @@
         }
 
         .recording-option.selected .recording-icon {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             color: white;
             transform: scale(1.1);
         }
@@ -2392,7 +2393,7 @@
 
         .recording-folder-section h4 {
             margin: 0 0 15px 0;
-            color: #667eea;
+            color: #f76205;
             font-size: 1.1em;
             font-weight: 600;
         }
@@ -2416,12 +2417,12 @@
 
         .folder-path-input input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #f76205;
         }
 
         .folder-path-input button {
             padding: 12px 16px;
-            background: #667eea;
+            background: #f76205;
             color: white;
             border: none;
             border-radius: 8px;
@@ -2469,7 +2470,7 @@
 
         .recording-option.selected .benefit-tag {
             background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
+            color: #f76205;
         }
 
         .recording-status {
@@ -2592,7 +2593,7 @@
         }
 
         .expandable-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
             color: white;
             padding: 20px 25px;
             cursor: pointer;
@@ -2754,7 +2755,7 @@
             }
             
             .nav-item.active {
-                border-bottom-color: #667eea;
+                border-bottom-color: #f76205;
             }
             
             .main-content {
@@ -3038,6 +3039,206 @@
         .toast.info .toast-icon {
             color: #3b82f6;
         }
+
+        /* ============================================================================ */
+        /* 테스트 유형 선택 화면 스타일 */
+        /* ============================================================================ */
+        .test-type-selection-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 50%, #ef9a9a 100%);
+            padding: 40px;
+        }
+
+        body.light-theme .test-type-selection-screen {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 50%, #ef9a9a 100%);
+        }
+
+        .test-type-selection-screen.hidden {
+            display: none;
+        }
+
+        .test-type-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .test-type-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .test-type-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        body.light-theme .test-type-title {
+            color: #2c3e50;
+        }
+
+        .test-type-subtitle {
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.7);
+            font-weight: 400;
+        }
+
+        body.light-theme .test-type-subtitle {
+            color: #7f8c8d;
+        }
+
+        .test-type-subtitle span {
+            font-weight: 700;
+            color: #f76205;
+        }
+
+        body.light-theme .test-type-subtitle span {
+            color: #f76205;
+        }
+
+        .test-type-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .test-type-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 48px 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .test-type-card {
+            background: white;
+            border-color: #e9ecef;
+        }
+
+        .test-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #f76205;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        body.light-theme .test-type-card::before {
+            background: #f76205;
+        }
+
+        .test-type-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .test-type-card:hover {
+            border-color: #f76205;
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(247, 98, 5, 0.2);
+        }
+
+        body.light-theme .test-type-card:hover {
+            border-color: #f76205;
+            box-shadow: 0 16px 32px rgba(247, 98, 5, 0.2);
+        }
+
+        .test-type-icon {
+            font-size: 72px;
+            margin-bottom: 24px;
+        }
+
+        .test-type-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+
+        body.light-theme .test-type-name {
+            color: #2c3e50;
+        }
+
+        .test-type-desc {
+            font-size: 15px;
+            color: rgba(0, 0, 0, 0.6);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        body.light-theme .test-type-desc {
+            color: #7f8c8d;
+        }
+
+        .test-type-status {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .test-type-status.available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        body.light-theme .test-type-status.available {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .test-type-status.coming-soon {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        body.light-theme .test-type-status.coming-soon {
+            background: #fff8e1;
+            color: #f57c00;
+        }
+
+        /* 메인 앱 컨텐츠 래퍼 */
+        .main-app-content {
+            display: flex;
+            flex: 1;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .test-type-cards {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .test-type-title {
+                font-size: 28px;
+            }
+
+            .test-type-card {
+                padding: 32px 24px;
+            }
+
+            .test-type-icon {
+                font-size: 56px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3053,12 +3254,40 @@
     </button>
     
     <div class="app-container">
-        <!-- LNB (Left Navigation Bar) -->
-        <div class="lnb">
+        <!-- 테스트 유형 선택 화면 -->
+        <div id="testTypeSelectionScreen" class="test-type-selection-screen">
+            <div class="test-type-container">
+                <div class="test-type-header">
+                    <h2 class="test-type-title">테스트 유형 선택</h2>
+                    <p class="test-type-subtitle"><span id="currentProductName">CONTRABASS</span> 테스트를 시작합니다</p>
+                </div>
+                
+                <div class="test-type-cards">
+                    <div class="test-type-card" onclick="selectTestType('api')">
+                        <div class="test-type-icon">🧪</div>
+                        <h3 class="test-type-name">API 테스트</h3>
+                        <p class="test-type-desc">SwaggerUI JSON 기반 REST API 테스트</p>
+                        <span class="test-type-status coming-soon">Coming Soon</span>
+                    </div>
+                    
+                    <div class="test-type-card" onclick="selectTestType('ui')">
+                        <div class="test-type-icon">🖥️</div>
+                        <h3 class="test-type-name">UI 테스트</h3>
+                        <p class="test-type-desc">Playwright 기반 UI 자동화 테스트</p>
+                        <span class="test-type-status available">사용 가능</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메인 앱 컨텐츠 (LNB + Main Content) -->
+        <div id="mainAppContent" class="main-app-content" style="display: none;">
+            <!-- LNB (Left Navigation Bar) -->
+            <div class="lnb">
         <div class="lnb-header">
             <h1>
-                <img src="../COMMON/images/cmp_24x24.png" alt="logo" width="24" height="24">
-                CMP
+                <img src="../COMMON/images/contrabass_24x24.png" alt="logo" width="24" height="24">
+                CONTRABASS
             </h1>
             <p>자동화 테스트</p>
         </div>
@@ -3072,7 +3301,7 @@
                     <i>📊</i>
                     <span>이력 관리</span>
                 </div>
-                <div class="nav-item" onclick="openCodegenGui(event)">
+                <div class="nav-item" onclick="navigateToCodegen(event)">
                     <i>🎬</i>
                     <span>코드 생성</span>
                 </div>
@@ -3328,6 +3557,9 @@
         </div>
     </div>
 
+        </div> <!-- End mainAppContent -->
+    </div> <!-- End app-container -->
+
     <!-- 녹화 설정 전용 모달 -->
     <div id="recordingModal" class="modal">
         <div class="modal-content">
@@ -3413,48 +3645,105 @@
 
         // 시나리오 데이터
         let scenarios = [
-            { id: 1, title: "로그인 및 AWS 인스턴스 생성 테스트", description: "로그인 후 AWS 인스턴스를 생성하는 테스트", status: "ready" },
-            { id: 2, title: "모니터링 대시보드 생성 및 리소스 등록 테스트", description: "모니터링 대시보드를 생성하고 리소스를 등록하는 테스트", status: "ready" },
+            { id: 1, title: "로그인 및 인스턴스 생성 테스트", description: "로그인 및 인스턴스를 생성하는 테스트", status: "ready" },
+            { id: 2, title: "로드밸런서 생성 테스트", description: "생성된 인스턴스를 통해 로드밸런서를 생성하는 테스트", status: "ready" },
         ];
+        
+        // 시나리오별 로그 저장소
+        const scenarioLogs = {};
+        scenarioLogs['all'] = []; // 전체 로그 배열 초기화
+        
+        // 시나리오별 실시간 로그 저장소 (전역 유지)
+        const scenarioRealTimeLogs = window.contrabassRealTimeLogs || {};
+        window.contrabassRealTimeLogs = scenarioRealTimeLogs;
+        
+        // ==============================
+        // 🔥 실시간 로그 IPC 리스너 즉시 등록
+        // ==============================
+        console.log('🎯 [CONTRABASS MAIN] IPC 리스너 등록 시작');
+        
+        ipcRenderer.on('test-output', (event, data) => {
+            console.log('📥 [test-output] 이벤트 수신:', data);
+            
+            if (data && data.testType && data.data) {
+                const scenarioId = data.testType.replace('scenario-', '');
+                const numericScenarioId = parseInt(scenarioId);
+                
+                if (data.data.trim()) {
+                    console.log(`🔵 [test-output] 시나리오 ${numericScenarioId}에 로그 추가 시도`);
+                    
+                    // 실시간 로그 저장
+                    if (!scenarioRealTimeLogs[numericScenarioId]) {
+                        scenarioRealTimeLogs[numericScenarioId] = [];
+                        console.log(`📦 [test-output] 시나리오 ${numericScenarioId} 실시간 로그 배열 생성`);
+                    }
+                    
+                    const logEntry = { timestamp: new Date(), message: data.data.trim() };
+                    scenarioRealTimeLogs[numericScenarioId].push(logEntry);
+                    console.log(`✅ [test-output] 로그 추가 완료 - 총 ${scenarioRealTimeLogs[numericScenarioId].length}개`);
+                    
+                    // UI 업데이트 (함수가 정의된 후에 호출)
+                    setTimeout(() => {
+                        if (typeof updateHistoryScenarioRealTimeLogView === 'function') {
+                            updateHistoryScenarioRealTimeLogView(numericScenarioId);
+                        } else {
+                            console.log(`⚠️ updateHistoryScenarioRealTimeLogView 함수가 아직 정의되지 않음`);
+                        }
+                    }, 0);
+                }
+            }
+        });
+        
+        console.log('✅ [CONTRABASS MAIN] IPC 리스너 등록 완료');
+        // ==============================
         
         // 시나리오 로드 함수
         async function loadScenarios() {
             try {
-                console.log(`📋 CMP 시나리오 로드 시작`);
+                console.log(`📋 CONTRABASS 시나리오 로드 시작`);
                 
-                // 기본 시나리오 데이터
-                const defaultScenarios = [
-                    { id: 1, title: "로그인 및 AWS 인스턴스 생성 테스트", description: "로그인 후 AWS 인스턴스를 생성하는 테스트", status: "ready" },
-                    { id: 2, title: "모니터링 대시보드 생성 및 리소스 등록 테스트", description: "모니터링 대시보드를 생성하고 리소스를 등록하는 테스트", status: "ready" },
-                ];
-                
-                // scenario-list.json에서 실제 상태 로드 시도
+                // scenario-list.json에서 시나리오 로드
                 try {
                     const response = await fetch('./custom-reports/scenario-list.json');
                     if (response.ok) {
                         const data = await response.json();
                         console.log('📋 scenario-list.json 로드 성공:', data);
                         
-                        // scenario-list.json의 상태를 기본 시나리오에 반영
-                        scenarios = defaultScenarios.map(scenario => {
-                            const jsonScenario = data.scenarios.find(s => s.id === scenario.id);
-                            if (jsonScenario && jsonScenario.status) {
-                                return { ...scenario, status: jsonScenario.status };
-                            }
-                            return scenario;
-                        });
+                        // scenario-list.json의 모든 시나리오를 UI 형식으로 변환
+                        scenarios = data.scenarios
+                            .filter(s => {
+                                // scenario-X.spec.js 파일이 실제로 존재하는지 확인하고 싶지만,
+                                // 일단 모든 시나리오를 로드 (not-run 상태도 포함)
+                                return true;
+                            })
+                            .map(s => ({
+                                id: s.id,
+                                title: s.name.replace(/^시나리오 \d+:\s*/, ''), // "시나리오 3: test11" -> "test11"
+                                description: `시나리오 ${s.id}`,
+                                status: s.status === 'not-run' ? 'ready' : s.status,
+                                lastRun: s.lastRun,
+                                duration: s.duration,
+                                runCount: s.runCount || 0
+                            }));
                         
-                        console.log(`📋 CMP 시나리오 상태 로드 완료:`, scenarios.map(s => ({ id: s.id, status: s.status })));
+                        console.log(`📋 CONTRABASS 시나리오 로드 완료: ${scenarios.length}개`, scenarios.map(s => ({ id: s.id, title: s.title, status: s.status })));
                     } else {
-                        scenarios = defaultScenarios;
-                        console.log('📋 scenario-list.json 없음, 기본값 사용');
+                        // scenario-list.json이 없으면 기본값 사용
+                        console.warn('📋 scenario-list.json 없음, 기본값 사용');
+                        scenarios = [
+                            { id: 1, title: "로그인 및 인스턴스 생성 테스트", description: "시나리오 1", status: "ready" },
+                            { id: 2, title: "로드밸런서 생성 테스트", description: "시나리오 2", status: "ready" }
+                        ];
                     }
                 } catch (jsonError) {
-                    scenarios = defaultScenarios;
                     console.warn('📋 scenario-list.json 로드 실패, 기본값 사용:', jsonError.message);
+                    scenarios = [
+                        { id: 1, title: "로그인 및 인스턴스 생성 테스트", description: "시나리오 1", status: "ready" },
+                        { id: 2, title: "로드밸런서 생성 테스트", description: "시나리오 2", status: "ready" }
+                    ];
                 }
                 
-                console.log(`📋 CMP 시나리오 로드 완료: ${scenarios.length}개`);
+                console.log(`📋 CONTRABASS 최종 시나리오 개수: ${scenarios.length}개`);
                 
             } catch (error) {
                 console.error('시나리오 로드 중 오류:', error);
@@ -3463,18 +3752,75 @@
 
         // 페이지 로드 시 초기화
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('🟢 애플리케이션 초기화 시작');
+            
+            // ⭐ 초기 화면 설정: 테스트 유형 선택 화면 표시, 메인 앱 숨김
+            const testTypeScreen = document.getElementById('testTypeSelectionScreen');
+            const mainAppContent = document.getElementById('mainAppContent');
+            
+            if (testTypeScreen) {
+                testTypeScreen.classList.remove('hidden');
+                console.log('✅ 테스트 유형 선택 화면 표시');
+            }
+            
+            if (mainAppContent) {
+                mainAppContent.style.display = 'none';
+                console.log('✅ 메인 앱 컨텐츠 숨김');
+            }
+            
+            // 제품명 표시
+            const productNameEl = document.getElementById('currentProductName');
+            if (productNameEl) {
+                productNameEl.textContent = 'CONTRABASS';
+            }
+            
             loadScenarios().then(() => {
                 initializeScenarios();
                 setupEventListeners();
                 createParticles();
                 loadRecordingSettings(); // 녹화 설정 로드
                 setupModalRecordingToggle(); // 모달 녹화 토글 설정
+                setupRecordingModalOptions(); // 녹화 설정 모달 옵션 초기화
                 createSummaryCards(); // 요약 카드 생성
                 initializeTheme(); // 테마 초기화
                 setupTestOutputListeners(); // 테스트 출력 이벤트 리스너 설정
                 setupConsoleLogCapture(); // 터미널 로그 캡처 설정
             });
         });
+
+        // ============================================================================
+        // 테스트 유형 선택 함수
+        // ============================================================================
+        function selectTestType(testType) {
+            console.log('🟣 selectTestType 호출:', testType);
+            
+            if (testType === 'api') {
+                // API 테스트는 아직 미구현
+                showToast('🧪 API 테스트 기능은 준비 중입니다.', 'info');
+                console.log('ℹ️ API 테스트는 Coming Soon');
+                return;
+            }
+            
+            if (testType === 'ui') {
+                console.log('🖥️ UI 테스트 선택 - 메인 앱으로 전환');
+                
+                // 테스트 유형 화면 숨기기
+                const testTypeScreen = document.getElementById('testTypeSelectionScreen');
+                if (testTypeScreen) {
+                    testTypeScreen.classList.add('hidden');
+                    console.log('✅ 테스트 유형 화면 숨김');
+                }
+                
+                // 메인 앱 컨텐츠 표시
+                const mainAppContent = document.getElementById('mainAppContent');
+                if (mainAppContent) {
+                    mainAppContent.style.display = 'flex';
+                    console.log('✅ 메인 앱 표시');
+                }
+                
+                showToast('🖥️ UI 테스트 화면으로 전환되었습니다.', 'success');
+            }
+        }
 
         // 테마 초기화
         function initializeTheme() {
@@ -3520,10 +3866,6 @@
             }
         }
 
-        // 시나리오별 로그 저장소
-        const scenarioLogs = {};
-        scenarioLogs['all'] = []; // 전체 로그 배열 초기화
-        
         // 시나리오별 실행 기록 저장소
         const scenarioHistories = {};
         const scenarioReports = {};
@@ -3661,15 +4003,15 @@
                 }
                 
                 // 결과 분석
-                const passScenarios = scenarios.filter(s => selectedScenarios.includes(s.id) && s.status === 'pass');
+                const completedScenarios = scenarios.filter(s => selectedScenarios.includes(s.id) && s.status === 'completed');
                 const failedScenarios = scenarios.filter(s => selectedScenarios.includes(s.id) && s.status === 'failed');
                 
                 if (failedScenarios.length === 0) {
-                    showToast(`🎉 모든 시나리오(${passScenarios.length}개)가 성공적으로 완료되었습니다!`, 'success');
-                } else if (passScenarios.length === 0) {
+                    showToast(`🎉 모든 시나리오(${completedScenarios.length}개)가 성공적으로 완료되었습니다!`, 'success');
+                } else if (completedScenarios.length === 0) {
                     showToast(`❌ 모든 시나리오(${failedScenarios.length}개) 실행이 실패했습니다.`, 'error');
                 } else {
-                    showToast(`⚠️ 시나리오 실행 완료: ${passScenarios.length}개 성공, ${failedScenarios.length}개 실패`, 'warning');
+                    showToast(`⚠️ 시나리오 실행 완료: ${completedScenarios.length}개 성공, ${failedScenarios.length}개 실패`, 'warning');
                 }
                 
                 addLog('모든 선택된 시나리오 직렬 실행이 완료되었습니다.', 'success');
@@ -3709,15 +4051,15 @@
                 await Promise.all(promises);
                 
                 // 결과 분석
-                const passScenarios = scenarios.filter(s => selectedScenarios.includes(s.id) && s.status === 'pass');
+                const completedScenarios = scenarios.filter(s => selectedScenarios.includes(s.id) && s.status === 'completed');
                 const failedScenarios = scenarios.filter(s => selectedScenarios.includes(s.id) && s.status === 'failed');
                 
                 if (failedScenarios.length === 0) {
-                    showToast(`🎉 모든 시나리오(${passScenarios.length}개)가 성공적으로 완료되었습니다!`, 'success');
-                } else if (passScenarios.length === 0) {
+                    showToast(`🎉 모든 시나리오(${completedScenarios.length}개)가 성공적으로 완료되었습니다!`, 'success');
+                } else if (completedScenarios.length === 0) {
                     showToast(`❌ 모든 시나리오(${failedScenarios.length}개) 실행이 실패했습니다.`, 'error');
                 } else {
-                    showToast(`⚠️ 시나리오 실행 완료: ${passScenarios.length}개 성공, ${failedScenarios.length}개 실패`, 'warning');
+                    showToast(`⚠️ 시나리오 실행 완료: ${completedScenarios.length}개 성공, ${failedScenarios.length}개 실패`, 'warning');
                 }
                 
                 addLog('모든 선택된 시나리오 병렬 실행이 완료되었습니다.', 'success');
@@ -3741,25 +4083,25 @@
             
             // 통계 계산
             const totalScenarios = scenarios.length;
-            const passScenarios = scenarios.filter(s => s.status === 'pass' || s.status === 'pass').length;
+            const completedScenarios = scenarios.filter(s => s.status === 'completed' || s.status === 'pass').length;
             const failedScenarios = scenarios.filter(s => s.status === 'failed' || s.status === 'fail').length;
             const interruptedScenarios = scenarios.filter(s => s.status === 'stopped').length;
             const notRunScenarios = scenarios.filter(s => s.status === 'ready').length;
             
             console.log('통계 계산 결과:', {
                 total: totalScenarios,
-                pass: passScenarios,
+                completed: completedScenarios,
                 failed: failedScenarios,
                 interrupted: interruptedScenarios,
                 notRun: notRunScenarios
             });
             
             // 수행률 계산: (성공+실패)/총 시나리오
-            const executionRate = totalScenarios > 0 ? ((passScenarios + failedScenarios) / totalScenarios * 100).toFixed(1) : '0.0';
+            const executionRate = totalScenarios > 0 ? ((completedScenarios + failedScenarios) / totalScenarios * 100).toFixed(1) : '0.0';
             
             // 성공률 계산: 중단된 시나리오는 제외하고 계산
-            const executedScenarios = passScenarios + failedScenarios + interruptedScenarios;
-            const successRate = executedScenarios > 0 ? (passScenarios / executedScenarios * 100).toFixed(1) : '0.0';
+            const executedScenarios = completedScenarios + failedScenarios + interruptedScenarios;
+            const successRate = executedScenarios > 0 ? (completedScenarios / executedScenarios * 100).toFixed(1) : '0.0';
             
             summaryContainer.innerHTML = `
                 <div class="summary-card total">
@@ -3767,7 +4109,7 @@
                     <div class="label">총 시나리오</div>
                 </div>
                 <div class="summary-card success">
-                    <div class="number success">${passScenarios}</div>
+                    <div class="number success">${completedScenarios}</div>
                     <div class="label">성공</div>
                 </div>
                 <div class="summary-card failure">
@@ -3817,7 +4159,7 @@
             selectedInfo.style.backgroundColor = 'rgba(102, 126, 234, 0.1)';
             selectedInfo.style.border = '1px solid rgba(102, 126, 234, 0.3)';
             selectedInfo.style.borderRadius = '8px';
-            selectedInfo.style.color = '#667eea';
+            selectedInfo.style.color = '#f76205';
             selectedInfo.style.fontSize = '0.9em';
             
             grid.appendChild(selectedInfo);
@@ -3929,7 +4271,7 @@
                 
                 // 저장된 기록 로드
                 try {
-                    const savedHistory = localStorage.getItem(`cmp-scenario-history-${scenario.id}`);
+                    const savedHistory = localStorage.getItem(`contrabass-scenario-history-${scenario.id}`);
                     if (savedHistory) {
                         scenarioHistories[scenario.id] = JSON.parse(savedHistory);
                     } else {
@@ -3980,10 +4322,13 @@
                                 <i class="fas fa-stop"></i>
                                 <span class="btn-text">중단</span>
                             </button>
+                            <!-- 설정 버튼 주석처리: test-settings.json 파일로 직접 관리 -->
+                            <!--
                             <button class="action-btn settings-btn" onclick="openScenarioModal(${scenario.id}); event.stopPropagation();" title="설정">
                                 <i class="fas fa-cog"></i>
                                 <span class="btn-text">설정</span>
                             </button>
+                            -->
                             <button class="action-btn record-btn" onclick="toggleRecording(${scenario.id}); event.stopPropagation();" id="recording-btn-${scenario.id}" title="녹화">
                                 <i class="fas fa-video" id="recording-icon-${scenario.id}"></i>
                                 <span class="btn-text" id="record-text-${scenario.id}">녹화 OFF</span>
@@ -4083,6 +4428,12 @@
                            <i class="fas fa-terminal"></i>
                            <span class="btn-text">실행 로그</span>
                        </button>
+                       <button class="action-btn realtime-log-btn" onclick="toggleHistoryScenarioRealTimeLog(${scenario.id}); event.stopPropagation();" title="실시간 로그" style="
+                           background: linear-gradient(135deg, #8d6e63 0%, #5d4037 100%);
+                       ">
+                           <i class="fas fa-stream"></i>
+                           <span class="btn-text">실시간 로그</span>
+                       </button>
                         </div>
                     </div>
                 </div>
@@ -4136,7 +4487,7 @@
                     scenarioId
                 });
                 
-                // 해당 시나리오의 로그 창이 없으면 자동으로 생성
+                // 해당 시나리오의 로그 창이 없으면 자동으로 생성 (하지만 자동으로 열지 않음)
                 let logContainer = document.getElementById(`history-scenario-log-${scenarioId}`);
                 if (!logContainer) {
                     // 이력 관리 탭에서 시나리오 카드 찾기
@@ -4144,8 +4495,8 @@
                     if (scenarioCard) {
                         logContainer = createHistoryLogContainer(scenarioId);
                         scenarioCard.parentNode.insertBefore(logContainer, scenarioCard.nextSibling);
-                        // 로그 창을 즉시 표시
-                        logContainer.style.display = 'block';
+                        // ⚠️ 자동 포커싱 제거 - 사용자가 '실행 로그' 버튼을 클릭해야만 열림
+                        // logContainer.style.display = 'block';
                     }
                 }
                 
@@ -4212,25 +4563,25 @@
             
             // 통계 계산
             const totalScenarios = scenarios.length;
-            const passScenarios = scenarios.filter(s => s.status === 'pass' || s.status === 'pass').length;
+            const completedScenarios = scenarios.filter(s => s.status === 'completed' || s.status === 'pass').length;
             const failedScenarios = scenarios.filter(s => s.status === 'failed' || s.status === 'fail').length;
             const interruptedScenarios = scenarios.filter(s => s.status === 'stopped').length;
             const notRunScenarios = scenarios.filter(s => s.status === 'ready').length;
             
             console.log('통계 계산 결과:', {
                 total: totalScenarios,
-                pass: passScenarios,
+                completed: completedScenarios,
                 failed: failedScenarios,
                 interrupted: interruptedScenarios,
                 notRun: notRunScenarios
             });
             
             // 수행률 계산: (성공+실패)/총 시나리오
-            const executionRate = totalScenarios > 0 ? ((passScenarios + failedScenarios) / totalScenarios * 100).toFixed(1) : '0.0';
+            const executionRate = totalScenarios > 0 ? ((completedScenarios + failedScenarios) / totalScenarios * 100).toFixed(1) : '0.0';
             
             // 성공률 계산: 중단된 시나리오는 제외하고 계산
-            const executedScenarios = passScenarios + failedScenarios + interruptedScenarios;
-            const successRate = executedScenarios > 0 ? (passScenarios / executedScenarios * 100).toFixed(1) : '0.0';
+            const executedScenarios = completedScenarios + failedScenarios + interruptedScenarios;
+            const successRate = executedScenarios > 0 ? (completedScenarios / executedScenarios * 100).toFixed(1) : '0.0';
             
             summaryContainer.innerHTML = `
                 <div class="summary-card total">
@@ -4238,7 +4589,7 @@
                     <div class="label">총 시나리오</div>
                 </div>
                 <div class="summary-card success">
-                    <div class="number success">${passScenarios}</div>
+                    <div class="number success">${completedScenarios}</div>
                     <div class="label">성공</div>
                 </div>
                 <div class="summary-card failure">
@@ -4272,7 +4623,7 @@
                 'ready': '미실행',
                 'running': '실행중',
                 'pass': '성공',
-                'pass': '성공',  // 하위 호환성
+                'completed': '성공',  // 하위 호환성
                 'fail': '실패',
                 'failed': '실패',  // 하위 호환성
                 'stopped': '중단됨'
@@ -4366,7 +4717,7 @@
             
             // localStorage에 저장
             try {
-                localStorage.setItem(`cmp-scenario-history-${scenarioId}`, JSON.stringify(scenarioHistories[scenarioId]));
+                localStorage.setItem(`contrabass-scenario-history-${scenarioId}`, JSON.stringify(scenarioHistories[scenarioId]));
                 console.log(`✅ 시나리오 ${scenarioId} 실행 기록 localStorage 저장 완료`);
             } catch (error) {
                 console.error('시나리오 기록 저장 중 오류:', error);
@@ -4385,7 +4736,7 @@
                 
                 // localStorage에 저장
                 try {
-                    localStorage.setItem(`cmp-scenario-history-${scenarioId}`, JSON.stringify(scenarioHistories[scenarioId]));
+                    localStorage.setItem(`contrabass-scenario-history-${scenarioId}`, JSON.stringify(scenarioHistories[scenarioId]));
                     console.log(`시나리오 ${scenarioId} 기록의 리포트 경로가 업데이트되었습니다: ${reportPath}`);
                 } catch (error) {
                     console.error('시나리오 기록 업데이트 중 오류:', error);
@@ -4396,7 +4747,7 @@
         // 시나리오 실행 기록 초기화 (테스트용)
         function clearScenarioHistory(scenarioId) {
             try {
-                localStorage.removeItem(`cmp-scenario-history-${scenarioId}`);
+                localStorage.removeItem(`contrabass-scenario-history-${scenarioId}`);
                 scenarioHistories[scenarioId] = [];
                 console.log(`시나리오 ${scenarioId} 실행 기록이 초기화되었습니다.`);
             } catch (error) {
@@ -4411,7 +4762,7 @@
         function clearAllScenarioHistory() {
             try {
                 for (let i = 1; i <= 21; i++) {
-                    localStorage.removeItem(`cmp-scenario-history-${i}`);
+                    localStorage.removeItem(`contrabass-scenario-history-${i}`);
                     if (scenarioHistories[i]) {
                         scenarioHistories[i] = [];
                     }
@@ -4505,7 +4856,7 @@
                                 let durationText = 'N/A';
                                 
                                 // 기본값 설정
-                                let status = 'pass';
+                                let status = 'completed';
                                 
                                 try {
                                     // 실제 리포트 파일에서 duration과 status 정보 추출
@@ -4513,14 +4864,14 @@
                                     const reportInfo = await extractDurationFromReport(reportFilePath);
                                     duration = reportInfo.duration;
                                     durationText = reportInfo.durationText;
-                                    status = reportInfo.status || 'pass';
+                                    status = reportInfo.status || 'completed';
                                     
                                     console.log(`📊 Duration 및 Status 정보 추출 완료: ${durationText}, ${status}`);
                                 } catch (extractError) {
                                     console.warn(`⚠️ Duration/Status 정보 추출 실패:`, extractError);
                                     duration = 0;
                                     durationText = '알 수 없음';
-                                    status = 'pass';
+                                    status = 'completed';
                                 }
                                 
                                 history.push({
@@ -4566,13 +4917,13 @@
                 const response = await fetch(reportPath);
                 if (!response.ok) {
                     console.warn(`⚠️ 리포트 파일을 읽을 수 없음: ${reportPath}`);
-                    return { duration: 0, durationText: '알 수 없음', status: 'pass' };
+                    return { duration: 0, durationText: '알 수 없음', status: 'completed' };
                 }
 
                 const htmlContent = await response.text();
 
                 // Status 추출 (우선순위: 메타 정보 > 개별 status-badge)
-                let status = 'pass';
+                let status = 'completed';
                 
                 // 1순위: 메타 정보의 "결과: 성공/실패" 패턴 (최종 결과)
                 const resultSuccessMatch = htmlContent.match(/결과[:\s]*성공/i);
@@ -4582,8 +4933,8 @@
                     status = 'failed';
                     console.log(`✅ Status 감지: failed (메타 정보 - 결과: 실패)`);
                 } else if (resultSuccessMatch) {
-                    status = 'pass';
-                    console.log(`✅ Status 감지: pass (메타 정보 - 결과: 성공)`);
+                    status = 'completed';
+                    console.log(`✅ Status 감지: completed (메타 정보 - 결과: 성공)`);
                 } else {
                     // 2순위: status-badge 패턴
                     const hasFailStatus = htmlContent.includes('status-badge fail') || htmlContent.includes('class="status-fail"');
@@ -4598,8 +4949,8 @@
                         status = 'not-run';
                         console.log(`✅ Status 감지: not-run`);
                     } else if (hasPassStatus) {
-                        status = 'pass';
-                        console.log(`✅ Status 감지: pass (status-badge)`);
+                        status = 'completed';
+                        console.log(`✅ Status 감지: completed (status-badge)`);
                     }
                 }
 
@@ -4649,7 +5000,7 @@
                 return { duration: 0, durationText: '알 수 없음', status: status };
             } catch (error) {
                 console.warn(`⚠️ 리포트 파일 읽기 실패: ${reportPath}`, error);
-                return { duration: 0, durationText: '알 수 없음', status: 'pass' };
+                return { duration: 0, durationText: '알 수 없음', status: 'completed' };
             }
         }
 
@@ -4681,7 +5032,7 @@
             if (!historyContent) return;
             
             try {
-                console.log(`📊 시나리오 ${scenarioId} 기록 로드 시작 (CMP)`);
+                console.log(`📊 시나리오 ${scenarioId} 기록 로드 시작 (CONTRABASS)`);
                 
                 // 실제 파일 시스템에서 리포트 파일들을 가져오기 (VIOLA 방식)
                 const history = await getScenarioHistoryFromFiles(scenarioId);
@@ -4737,7 +5088,7 @@
                         }
                         
                         const statusText = getStatusText(item.status);
-                        const statusClass = item.status === 'pass' ? 'success' : 
+                        const statusClass = item.status === 'completed' ? 'success' : 
                                           item.status === 'failed' ? 'error' : 
                                           item.status === 'running' ? 'warning' : 'info';
                         
@@ -4824,6 +5175,291 @@
         }
         
 
+
+        // ========== 실시간 로그 함수들 ==========
+        
+        // 이력 관리 탭용 실시간 로그창 생성
+        function createHistoryRealTimeLogContainer(scenarioId) {
+            const container = document.createElement('div');
+            container.id = `history-scenario-realtime-log-${scenarioId}`;
+            container.className = 'scenario-log';
+            container.style.display = 'none';
+            
+            container.innerHTML = `
+                <div class="log-header" style="
+                    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+                    padding: 20px 25px;
+                    border-radius: 12px 12px 0 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: none;
+                ">
+                    <div class="log-title" style="display: flex; align-items: center; font-weight: 600; color: #ffffff;">
+                        <i class="fas fa-stream" style="margin-right: 10px; font-size: 18px; color: #3498db;"></i>
+                        <span style="font-size: 16px;">시나리오 ${scenarioId} 실시간 로그</span>
+                        <span id="realtime-status-${scenarioId}" style="
+                            margin-left: 15px;
+                            font-size: 11px;
+                            padding: 4px 10px;
+                            background: rgba(255, 255, 255, 0.2);
+                            border-radius: 12px;
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                        ">
+                            <span class="status-indicator" style="
+                                width: 8px;
+                                height: 8px;
+                                border-radius: 50%;
+                                background: #27ae60;
+                            "></span>
+                            대기 중
+                        </span>
+                    </div>
+                    <div class="log-controls" style="display: flex; gap: 10px;">
+                        <button class="btn btn-small btn-secondary" onclick="clearRealTimeLogs(${scenarioId})" title="로그 지우기" style="
+                            background: rgba(255, 255, 255, 0.2);
+                            border: none;
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 8px;
+                            font-size: 13px;
+                            font-weight: 500;
+                            transition: all 0.3s ease;
+                        ">
+                            <i class="fas fa-trash-alt" style="margin-right: 6px;"></i> 지우기
+                        </button>
+                        <button class="btn btn-small btn-primary" onclick="saveRealTimeLogsToFile(${scenarioId})" title="로그 저장" style="
+                            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
+                            border: none;
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 8px;
+                            font-size: 13px;
+                            font-weight: 500;
+                            transition: all 0.3s ease;
+                        ">
+                            <i class="fas fa-save" style="margin-right: 6px;"></i> 로그 저장
+                        </button>
+                        <button class="log-close-btn" onclick="this.parentElement.parentElement.parentElement.style.display='none'" style="
+                            background: rgba(255, 255, 255, 0.1);
+                            border: none;
+                            color: white;
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: all 0.3s ease;
+                            cursor: pointer;
+                        ">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="log-content" id="history-realtime-log-content-${scenarioId}" style="
+                    max-height: 500px;
+                    overflow-y: auto;
+                    background: #1e1e1e;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 0 0 12px 12px;
+                    padding: 15px 15px 15px 10px;
+                    font-family: 'Courier New', monospace;
+                    font-size: 12px;
+                    line-height: 1.6;
+                    color: #00ff00;
+                ">
+                    <div style="text-align: center; padding: 40px 20px; color: rgba(255, 255, 255, 0.4);">
+                        <i class="fas fa-hourglass-half" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                        <div>시나리오를 실행하면 실시간 로그가 표시됩니다</div>
+                        <div style="font-size: 11px; margin-top: 5px;">터미널 출력과 동일한 로그를 실시간으로 보여줍니다</div>
+                    </div>
+                </div>
+            `;
+            
+            return container;
+        }
+
+        // 실시간 로그 토글
+        function toggleHistoryScenarioRealTimeLog(scenarioId) {
+            const scenarioCard = document.querySelector(`#history .scenario-card[data-scenario-id="${scenarioId}"]`);
+            if (!scenarioCard) return;
+            
+            // 기존 실시간 로그창이 있는지 확인
+            let logContainer = document.getElementById(`history-scenario-realtime-log-${scenarioId}`);
+            const isVisible = logContainer && logContainer.style.display !== 'none';
+            
+            if (isVisible) {
+                // 로그창 숨기기
+                logContainer.style.display = 'none';
+            } else {
+                // 로그창이 없으면 생성
+                if (!logContainer) {
+                    logContainer = createHistoryRealTimeLogContainer(scenarioId);
+                    // 시나리오 카드 다음에 삽입
+                    scenarioCard.parentNode.insertBefore(logContainer, scenarioCard.nextSibling);
+                }
+                
+                logContainer.style.display = 'block';
+                updateHistoryScenarioRealTimeLogView(scenarioId);
+            }
+        }
+
+        // 실시간 로그 뷰 업데이트
+        function updateHistoryScenarioRealTimeLogView(scenarioId) {
+            const logContent = document.getElementById(`history-realtime-log-content-${scenarioId}`);
+            if (!logContent) return;
+            
+            const logs = scenarioRealTimeLogs[scenarioId] || [];
+            
+            // 실시간 로그 상태에 로그 개수 표시
+            const statusElement = document.getElementById(`realtime-status-${scenarioId}`);
+            if (statusElement) {
+                statusElement.innerHTML = `
+                    <span class="status-indicator" style="
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: #3498db;
+                    "></span>
+                    ${logs.length}개 로그
+                `;
+            }
+            
+            // 로그가 없으면 안내 메시지 표시
+            if (logs.length === 0) {
+                logContent.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: rgba(255, 255, 255, 0.4);">
+                        <i class="fas fa-hourglass-half" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                        <div>시나리오를 실행하면 실시간 로그가 표시됩니다</div>
+                        <div style="font-size: 11px; margin-top: 5px;">터미널 출력과 동일한 로그를 실시간으로 보여줍니다</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 모든 로그를 터미널 스타일로 표시
+            logContent.innerHTML = '';
+            
+            logs.forEach((log, index) => {
+                const logLine = document.createElement('div');
+                
+                // 로그 레벨에 따른 색상 구분
+                let logColor = '#e0e0e0';
+                let bgColor = 'transparent';
+                let borderLeft = 'none';
+                
+                const message = log.message.toLowerCase();
+                
+                // 로그 타입별 색상 및 강조
+                if (message.includes('✅') || message.includes('성공') || message.includes('완료') || message.includes('pass')) {
+                    logColor = '#4caf50';
+                    borderLeft = '3px solid #4caf50';
+                } else if (message.includes('❌') || message.includes('실패') || message.includes('fail') || message.includes('error')) {
+                    logColor = '#f44336';
+                    borderLeft = '3px solid #f44336';
+                    bgColor = 'rgba(244, 67, 54, 0.1)';
+                } else if (message.includes('⚠️') || message.includes('경고') || message.includes('warning')) {
+                    logColor = '#ff9800';
+                    borderLeft = '3px solid #ff9800';
+                } else if (message.includes('🔍') || message.includes('debug')) {
+                    logColor = '#2196f3';
+                } else if (message.includes('📊') || message.includes('info')) {
+                    logColor = '#00bcd4';
+                } else if (message.includes('running') || message.includes('실행')) {
+                    logColor = '#9c27b0';
+                }
+                
+                // Zebra striping
+                if (index % 2 === 0 && bgColor === 'transparent') {
+                    bgColor = 'rgba(255, 255, 255, 0.02)';
+                }
+                
+                logLine.style.cssText = `
+                    padding: 8px 12px;
+                    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                    font-size: 13px;
+                    line-height: 1.8;
+                    color: ${logColor};
+                    background: ${bgColor};
+                    white-space: pre-wrap;
+                    word-break: break-word;
+                    border-left: ${borderLeft};
+                    margin-bottom: 1px;
+                    transition: background 0.2s ease;
+                `;
+                
+                // 호버 효과
+                logLine.addEventListener('mouseenter', () => {
+                    logLine.style.background = 'rgba(255, 255, 255, 0.08)';
+                });
+                logLine.addEventListener('mouseleave', () => {
+                    logLine.style.background = bgColor;
+                });
+                
+                // 타임스탬프 포함
+                const timestamp = new Date(log.timestamp).toLocaleTimeString('ko-KR', { 
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                
+                // 타임스탬프를 어두운 색으로 표시
+                logLine.innerHTML = `<span style="color: rgba(255, 255, 255, 0.4); font-weight: 600;">[${timestamp}]</span> ${log.message}`;
+                logContent.appendChild(logLine);
+            });
+            
+            // 자동 스크롤 (최신 로그로)
+            logContent.scrollTop = logContent.scrollHeight;
+        }
+
+        // 실시간 로그 지우기
+        function clearRealTimeLogs(scenarioId) {
+            if (confirm(`시나리오 ${scenarioId}의 실시간 로그를 지우시겠습니까?`)) {
+                scenarioRealTimeLogs[scenarioId] = [];
+                updateHistoryScenarioRealTimeLogView(scenarioId);
+            }
+        }
+
+        // 실시간 로그 파일로 저장
+        async function saveRealTimeLogsToFile(scenarioId) {
+            if (!scenarioRealTimeLogs[scenarioId] || scenarioRealTimeLogs[scenarioId].length === 0) {
+                alert('저장할 실시간 로그가 없습니다.');
+                return;
+            }
+
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            const fileName = `scenario-${scenarioId}-realtime-logs-${timestamp}.txt`;
+            
+            let logContent = `=== CONTRABASS 시나리오 ${scenarioId} 실시간 로그 ===\n`;
+            logContent += `생성 시간: ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}\n`;
+            logContent += `시나리오 ID: ${scenarioId}\n`;
+            logContent += `총 로그 수: ${scenarioRealTimeLogs[scenarioId].length}개\n\n`;
+            
+            scenarioRealTimeLogs[scenarioId].forEach((log, index) => {
+                const logTime = new Date(log.timestamp).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+                logContent += `[${logTime}] ${log.message}\n`;
+            });
+            
+            const blob = new Blob([logContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            console.log(`📄 시나리오 ${scenarioId} 실시간 로그 파일 저장 완료: ${fileName}`);
+        }
+        
+        // ========== 실시간 로그 함수 끝 ==========
 
         // 이력 관리 탭용 시나리오 기록 토글
         function toggleHistoryScenarioHistory(scenarioId) {
@@ -4932,7 +5568,7 @@
                     </div>
                     <div class="log-controls" style="display: flex; gap: 10px;">
                         <button class="btn btn-small btn-primary" onclick="saveScenarioLogsToFile(${scenarioId})" title="로그 저장" style="
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            background: linear-gradient(135deg, #f76205 0%, #e65100 100%);
                             border: none;
                             color: white;
                             padding: 8px 16px;
@@ -5145,7 +5781,7 @@
                 scenarios.forEach(scenario => {
                     statusData[scenario.id] = scenario.status;
                 });
-                localStorage.setItem('cmp-scenarioStatusData', JSON.stringify(statusData));
+                localStorage.setItem('contrabass-scenarioStatusData', JSON.stringify(statusData));
                 console.log('📊 시나리오 상태 저장 완료:', statusData);
             } catch (error) {
                 console.error('시나리오 상태 저장 실패:', error);
@@ -5155,7 +5791,7 @@
         // 시나리오 상태 로드
         function loadScenarioStatus() {
             try {
-                const savedData = localStorage.getItem('cmp-scenarioStatusData');
+                const savedData = localStorage.getItem('contrabass-scenarioStatusData');
                 if (savedData) {
                     const statusData = JSON.parse(savedData);
                     scenarios.forEach(scenario => {
@@ -5195,6 +5831,9 @@
                 
                 // 상태 저장
                 saveScenarioStatus();
+                
+                // 실행/중단 버튼 UI 업데이트
+                updateRunStopButtonsUI();
                 
                 // 요약 카드 업데이트
                 createSummaryCards();
@@ -5311,6 +5950,9 @@
                             }
                         }
                         
+                        // 실행/중단 버튼 UI 업데이트
+                        updateRunStopButtonsUI();
+                        
                         createSummaryCards(); // 요약 카드 업데이트
                         saveScenarioStatus(); // 상태 변경 후 저장
                     }
@@ -5332,14 +5974,14 @@
             ipcRenderer.send('go-back-to-product-selector');
         }
 
-        // CMP 전용 설정
-        const PRODUCT_NAME = 'CMP';
+        // CONTRABASS 전용 설정
+        const PRODUCT_NAME = 'CONTRABASS';
         const PRODUCT_PATH = './';
         const REPORTS_PATH = './reports/html/';
         
         // 제품별 독립적인 데이터 관리
-        const PRODUCT_DATA_KEY = 'cmp_test_results';
-        const PRODUCT_SCENARIOS_KEY = 'cmp_scenarios';
+        const PRODUCT_DATA_KEY = 'contrabass_test_results';
+        const PRODUCT_SCENARIOS_KEY = 'contrabass_scenarios';
 
         // 탭 전환
         function switchTab(tabName, event) {
@@ -5364,35 +6006,18 @@
             }
         }
 
-        // 코드 생성 GUI 실행
-        async function openCodegenGui(event) {
-            console.log('🎬 코드 생성 GUI 실행 중...');
-            
-            // 현재 활성화된 탭 저장
-            const currentActiveNav = document.querySelector('.nav-item.active');
-            
-            try {
-                // IPC를 통해 main process에 요청
-                const result = await ipcRenderer.invoke('open-codegen-gui');
-                
-                if (result.success) {
-                    console.log('✅ 코드 생성 GUI 실행 완료');
-                    showToast('🎬 코드 생성 GUI를 별도 창으로 실행했습니다.', 'success');
-                } else {
-                    console.error('❌ 코드 생성 GUI 실행 실패:', result.error);
-                    showToast('코드 생성 GUI 실행에 실패했습니다.', 'error');
-                }
-            } catch (error) {
-                console.error('❌ 코드 생성 GUI 실행 오류:', error);
-                showToast('코드 생성 GUI 실행 중 오류가 발생했습니다.', 'error');
-            }
-            
-            // 원래 활성화되어 있던 탭 상태 유지 (변경하지 않음)
-            // 이벤트 전파만 중단
+        // 코드 생성 화면으로 이동
+        function navigateToCodegen(event) {
             if (event) {
                 event.preventDefault();
                 event.stopPropagation();
             }
+            
+            console.log('🎬 코드 생성 화면으로 이동 중...');
+            
+            // 현재 페이지를 코드 생성 GUI로 전환 (제품 정보와 돌아올 경로 전달)
+            const codegenPath = '../autoscript/electron-codegen-gui/renderer/index.html?product=contrabass&from=contrabass-main';
+            window.location.href = codegenPath;
         }
 
         // 마스터 리포트 열기
@@ -5482,6 +6107,16 @@
 
             console.log(`시나리오 정보:`, scenario);
 
+            // 실시간 로그 초기화
+            scenarioRealTimeLogs[numericScenarioId] = [];
+            console.log(`🧹 시나리오 ${numericScenarioId} 실시간 로그 초기화 완료`);
+            
+            // 실시간 로그 UI 초기화 (화면에 표시된 로그도 지우기)
+            const realtimeLogContainer = document.getElementById(`history-scenario-realtime-log-${numericScenarioId}`);
+            if (realtimeLogContainer) {
+                updateHistoryScenarioRealTimeLogView(numericScenarioId);
+            }
+
             // 실행 시작 시간 기록
             const startTime = new Date();
             const startTimestamp = startTime.getTime();
@@ -5499,7 +6134,7 @@
             console.log(`🔍 시나리오 ${runningScenarioId}를 실행 중인 시나리오 목록에 즉시 추가했습니다.`);
             console.log(`🔍 현재 실행 중인 시나리오들:`, Array.from(currentRunningScenarioIds));
             
-            // 이력 관리 탭에서 해당 시나리오의 로그 창을 미리 생성하고 표시
+            // 이력 관리 탭에서 해당 시나리오의 로그 창을 미리 생성 (자동으로 열지 않음)
             const scenarioCard = document.querySelector(`#history .scenario-card[data-scenario-id="${runningScenarioId}"]`);
             if (scenarioCard) {
                 let logContainer = document.getElementById(`history-scenario-log-${runningScenarioId}`);
@@ -5507,8 +6142,18 @@
                     logContainer = createHistoryLogContainer(runningScenarioId);
                     scenarioCard.parentNode.insertBefore(logContainer, scenarioCard.nextSibling);
                 }
-                // 로그 창을 즉시 표시
-                logContainer.style.display = 'block';
+                // ⚠️ 자동 포커싱 제거 - 사용자가 버튼을 클릭해야 열림
+                // logContainer.style.display = 'block';
+                
+                // 실시간 로그 컨테이너도 미리 생성 (자동으로 열지 않음)
+                let realtimeLogContainer = document.getElementById(`history-scenario-realtime-log-${runningScenarioId}`);
+                if (!realtimeLogContainer) {
+                    realtimeLogContainer = createHistoryRealTimeLogContainer(runningScenarioId);
+                    scenarioCard.parentNode.insertBefore(realtimeLogContainer, scenarioCard.nextSibling);
+                    console.log(`✅ 시나리오 ${runningScenarioId} 실시간 로그 컨테이너 미리 생성 완료`);
+                }
+                // ⚠️ 자동 포커싱 제거 - 사용자가 '실시간 로그' 버튼을 클릭해야 열림
+                // realtimeLogContainer.style.display = 'block';
             }
             
             // 실행 시작 로그 추가 (addDirectLog 사용)
@@ -5542,6 +6187,9 @@
                 }
                 
                 console.log(`ipcRenderer.invoke 결과:`, result);
+                console.log(`📊 [DEBUG] result.success: ${result.success}`);
+                console.log(`📊 [DEBUG] result.code: ${result.code}`);
+                console.log(`📊 [DEBUG] result.signal: ${result.signal}`);
                 
                 // 실행 종료 시간 및 소요시간 계산
                 const endTime = new Date();
@@ -5551,7 +6199,7 @@
                 if (result.success) {
                     addLog(`시나리오 ${scenarioId}: 테스트 실행 완료 - 결과 처리 중...`, 'info', scenarioId);
                     scenario.status = 'pass';
-                    currentRunningScenarioIds.delete(scenarioId); // 즉시 제거하여 test-pass 이벤트가 중복 처리하지 않도록
+                    currentRunningScenarioIds.delete(scenarioId); // 즉시 제거하여 test-completed 이벤트가 중복 처리하지 않도록
                     
                     // 시나리오 목록 탭의 카드 즉시 업데이트 (메모리 상태 기반)
                     const card = document.querySelector(`#scenarios [data-scenario-id="${scenarioId}"]`);
@@ -5580,7 +6228,7 @@
                     // 레포트 정보 업데이트
                     addLog(`시나리오 ${scenarioId}: 레포트 정보 업데이트 중...`, 'info', scenarioId);
                     scenarioReports[scenarioId] = {
-                        status: 'pass',
+                        status: 'completed',
                         lastRun: endTime.toISOString(),
                         reportUrl: `playwright-report/scenario-${scenarioId}/index.html`
                     };
@@ -5597,7 +6245,7 @@
                         startTime: startTime.toISOString(),
                         endTime: endTime.toISOString(),
                         duration: duration,
-                        status: 'pass',
+                        status: 'completed',
                         reportPath: reportPath
                     });
                     saveScenarioHistory(scenarioId, {
@@ -5605,9 +6253,21 @@
                         startTime: startTime.toISOString(),
                         endTime: endTime.toISOString(),
                         duration: duration,
-                        status: 'pass',
+                        status: 'completed',
                         reportPath: reportPath // 커스텀 리포트 경로 바로 설정
                     });
+                    
+                    // 이력 관리 탭의 카드도 즉시 업데이트
+                    const historyCard = document.querySelector(`#history [data-scenario-id="${scenarioId}"]`);
+                    if (historyCard) {
+                        historyCard.className = `scenario-card completed`;
+                        const historyStatusBadge = historyCard.querySelector('.status-badge');
+                        if (historyStatusBadge) {
+                            historyStatusBadge.className = `status-badge completed`;
+                            historyStatusBadge.textContent = '성공';
+                        }
+                        console.log(`✅ 이력 관리 탭 카드 업데이트 완료: completed`);
+                    }
                     
                     if (reportPath) {
                         addLog(`시나리오 ${scenarioId}: 커스텀 리포트 생성 완료 - ${reportPath}`, 'success', scenarioId);
@@ -5683,6 +6343,18 @@
                         reportPath: reportPath // 커스텀 리포트 경로 바로 설정
                     });
                     
+                    // 이력 관리 탭의 카드도 즉시 업데이트
+                    const historyCard = document.querySelector(`#history [data-scenario-id="${scenarioId}"]`);
+                    if (historyCard) {
+                        historyCard.className = `scenario-card failed`;
+                        const historyStatusBadge = historyCard.querySelector('.status-badge');
+                        if (historyStatusBadge) {
+                            historyStatusBadge.className = `status-badge failed`;
+                            historyStatusBadge.textContent = '실패';
+                        }
+                        console.log(`✅ 이력 관리 탭 카드 업데이트 완료: failed`);
+                    }
+                    
                     if (reportPath) {
                         addLog(`시나리오 ${scenarioId}: 실패 케이스 커스텀 리포트 생성 완료 - ${reportPath}`, 'success', scenarioId);
                         console.log(`✅ 실패 케이스 커스텀 리포트 경로: ${reportPath}`);
@@ -5699,6 +6371,13 @@
                 }
             } catch (error) {
                 addLog(`시나리오 ${scenarioId}: 예외 발생 - 오류 처리 중...`, 'warning', scenarioId);
+                
+                // 이미 성공 처리된 경우 (리포트 생성 중 에러), 실패로 변경하지 않음
+                if (scenario.status === 'pass') {
+                    console.log(`✅ 시나리오 ${scenarioId}는 이미 성공 처리되었으므로 예외를 무시합니다.`);
+                    addLog(`시나리오 ${scenarioId}: 테스트는 성공했으나 후처리 중 예외 발생 - ${error.message}`, 'warning', scenarioId);
+                    return;
+                }
                 
                 // 실행 종료 시간 및 소요시간 계산
                 const endTime = new Date();
@@ -5755,7 +6434,8 @@
             // 정리 작업 (currentRunningScenarioIds는 이미 제거됨)
             addLog(`시나리오 ${scenarioId}: 실행 완료 - 정리 작업 중...`, 'info', scenarioId);
             updateScenarioButtons(scenarioId, false);
-            updateScenarioCard(scenarioId); // 시나리오 카드 UI 업데이트
+            updateRecordingButtonsUI(); // 녹화 버튼 UI 업데이트
+            // updateScenarioCard()는 리포트 생성 후 호출됨 (test-completed/test-failed 이벤트에서)
             
             // 버튼 상태 업데이트
             updateSelectedScenarios();
@@ -6079,11 +6759,11 @@
                     folderSection.style.display = 'none';
                 }
                 
-                // 녹화 옵션 클릭 이벤트 설정
-                setupRecordingModalOptions();
-                
                 // 모달 표시
-                document.getElementById('recordingModal').style.display = 'block';
+                document.getElementById('recordingModal').style.display = 'flex';
+                
+                // 배경 스크롤 막기
+                document.body.style.overflow = 'hidden';
                 
                 // 전역 변수 설정
                 window.currentRecordingScenarioId = scenarioId;
@@ -6162,6 +6842,9 @@
         function closeRecordingModal() {
             // 변경사항을 저장하지 않고 모달 닫기
             document.getElementById('recordingModal').style.display = 'none';
+            
+            // 배경 스크롤 복원
+            document.body.style.overflow = '';
             
             // 녹화 설정을 원래 상태로 되돌리기
             if (window.currentRecordingScenarioId && window.originalRecordingSettings) {
@@ -7402,180 +8085,20 @@
                 }, 1000);
             });
 
-            // 테스트 완료 이벤트
+            // 테스트 완료 이벤트 (runScenario에서 이미 모든 처리 완료, 이벤트는 로그용으로만 사용)
             ipcRenderer.on('test-pass', (event, data) => {
-                console.log('🔄 테스트 완료 이벤트 수신:', data);
-                console.log('🔄 현재 실행 중인 시나리오들:', Array.from(currentRunningScenarioIds));
-                console.log('🔄 수동으로 닫힌 시나리오들:', Array.from(manuallyClosedScenarioIds));
-                
-                currentRunningScenarioIds.forEach(scenarioId => {
-                    console.log(`🔄 시나리오 ${scenarioId} 완료 처리 시작`);
-                    
-                    if (manuallyClosedScenarioIds.has(scenarioId)) {
-                        console.log(`🔄 시나리오 ${scenarioId}는 수동으로 닫혔으므로 완료 처리하지 않습니다.`);
-                        return;
-                    }
-                    
-                    // 이미 stopped 상태인 시나리오는 완료 처리하지 않음
-                    const scenario = scenarios.find(s => s.id === scenarioId);
-                    if (scenario && scenario.status === 'stopped') {
-                        console.log(`🔄 시나리오 ${scenarioId}는 이미 stopped 상태이므로 완료 처리하지 않습니다.`);
-                        return;
-                    }
-                    
-                    console.log(`🔄 시나리오 ${scenarioId} 상태를 pass로 변경`);
-                    addLog(`시나리오 ${scenarioId} 테스트가 정상적으로 완료되었습니다.`, 'success', scenarioId);
-                    
-                    if (scenario) {
-                        console.log(`🔄 시나리오 ${scenarioId} 이전 상태:`, scenario.status);
-                        scenario.status = 'pass';
-                        console.log(`🔄 시나리오 ${scenarioId} 새 상태:`, scenario.status);
-                        
-                        // 이력 관리 탭의 카드 상태를 읽어와서 시나리오 목록 탭에 반영
-                        setTimeout(() => {
-                            const historyCard = document.querySelector(`#history [data-scenario-id="${scenarioId}"]`);
-                            if (historyCard) {
-                                const historyStatus = historyCard.classList.contains('pass') ? 'pass' : 
-                                                     historyCard.classList.contains('fail') ? 'fail' : 
-                                                     historyCard.classList.contains('running') ? 'running' : 'ready';
-                                console.log(`📋 이력 관리 탭에서 읽어온 상태: ${historyStatus}`);
-                                
-                                // 시나리오 목록 탭 카드 업데이트
-                                const card = document.querySelector(`#scenarios [data-scenario-id="${scenarioId}"]`);
-                                if (card) {
-                                    card.className = `scenario-card ${historyStatus}`;
-                                    const statusBadge = card.querySelector('.status-badge');
-                                    if (statusBadge) {
-                                        statusBadge.className = `status-badge ${historyStatus}`;
-                                        statusBadge.textContent = getStatusText(historyStatus);
-                                    }
-                                    console.log(`✅ 시나리오 목록 탭 카드 업데이트 완료: ${historyStatus}`);
-                                }
-                                
-                                // 메모리 상태도 동기화
-                                scenario.status = historyStatus;
-                                
-                                // 실행/중단 버튼 UI 업데이트
-                                updateRunStopButtonsUI();
-                                
-                                // 요약 카드 업데이트
-                                createSummaryCards();
-                                createSummaryCardsForHistory();
-                            }
-                        }, 100);
-                    }
-                    
-                    updateScenarioButtons(scenarioId, false);
-                    
-                    // 테스트 완료 후 자동으로 커스텀 리포트 열기
-                    setTimeout(() => {
-                        openCustomReport(scenarioId);
-                    }, 2000); // 2초 후 리포트 열기
-                });
-                
+                console.log('✅ test-pass 이벤트 수신 (runScenario에서 이미 처리 완료):', data);
+                // runScenario()에서 이미 모든 상태 업데이트를 완료했으므로 여기서는 아무것도 하지 않음
                 manuallyClosedScenarioIds.clear();
                 currentRunningScenarioIds.clear();
-                
-                // 요약 카드만 업데이트 (시나리오 카드는 이미 runScenario에서 업데이트됨)
-                createSummaryCards();
-                createSummaryCardsForHistory();
-                
-                console.log('🔄 테스트 완료 이벤트 처리 완료');
             });
 
-            // 테스트 실패 이벤트
+            // 테스트 실패 이벤트 (runScenario에서 이미 모든 처리 완료, 이벤트는 로그용으로만 사용)
             ipcRenderer.on('test-failed', (event, data) => {
-                console.log('🔄 테스트 실패 이벤트 수신:', data);
-                console.log('🔄 현재 실행 중인 시나리오들:', Array.from(currentRunningScenarioIds));
-                console.log('🔄 수동으로 닫힌 시나리오들:', Array.from(manuallyClosedScenarioIds));
-                
-                currentRunningScenarioIds.forEach(scenarioId => {
-                    console.log(`🔄 시나리오 ${scenarioId} 실패 처리 시작`);
-                    
-                    const isManuallyClosed = manuallyClosedScenarioIds.has(scenarioId);
-                    const isManuallyClosedFromMain = data && data.manuallyClosed;
-                    
-                    console.log(`🔄 시나리오 ${scenarioId} 수동 닫기 확인:`, { isManuallyClosed, isManuallyClosedFromMain });
-                    
-                    // 이미 stopped 또는 pass 상태인 시나리오는 처리하지 않음
-                    const scenario = scenarios.find(s => s.id === scenarioId);
-                    if (scenario && (scenario.status === 'stopped' || scenario.status === 'pass' || scenario.status === 'pass')) {
-                        console.log(`🔄 시나리오 ${scenarioId}는 이미 ${scenario.status} 상태이므로 실패 처리하지 않습니다.`);
-                        return;
-                    }
-                    
-                    if (isManuallyClosed || isManuallyClosedFromMain) {
-                        console.log(`🔄 시나리오 ${scenarioId} 상태를 stopped로 변경 (수동 닫기)`);
-                        addLog(`브라우저가 수동으로 닫혔습니다. 시나리오 ${scenarioId} 실행이 중단되었습니다.`, 'warning', scenarioId);
-                        
-                        if (scenario) {
-                            console.log(`🔄 시나리오 ${scenarioId} 이전 상태:`, scenario.status);
-                            scenario.status = 'stopped';
-                            console.log(`🔄 시나리오 ${scenarioId} 새 상태:`, scenario.status);
-                            updateScenarioCard(scenarioId);
-                        }
-                    } else {
-                        console.log(`🔄 시나리오 ${scenarioId} 상태를 failed로 변경 (실제 실패)`);
-                        addLog(`시나리오 ${scenarioId} 테스트가 실패했습니다.`, 'error', scenarioId);
-                        
-                        if (scenario) {
-                            console.log(`🔄 시나리오 ${scenarioId} 이전 상태:`, scenario.status);
-                            scenario.status = 'fail';
-                            console.log(`🔄 시나리오 ${scenarioId} 새 상태:`, scenario.status);
-                            
-                            // 이력 관리 탭의 카드 상태를 읽어와서 시나리오 목록 탭에 반영
-                            setTimeout(() => {
-                                const historyCard = document.querySelector(`#history [data-scenario-id="${scenarioId}"]`);
-                                if (historyCard) {
-                                    const historyStatus = historyCard.classList.contains('pass') ? 'pass' : 
-                                                         historyCard.classList.contains('fail') ? 'fail' : 
-                                                         historyCard.classList.contains('running') ? 'running' : 'ready';
-                                    console.log(`📋 이력 관리 탭에서 읽어온 상태: ${historyStatus}`);
-                                    
-                                    // 시나리오 목록 탭 카드 업데이트
-                                    const card = document.querySelector(`#scenarios [data-scenario-id="${scenarioId}"]`);
-                                    if (card) {
-                                        card.className = `scenario-card ${historyStatus}`;
-                                        const statusBadge = card.querySelector('.status-badge');
-                                        if (statusBadge) {
-                                            statusBadge.className = `status-badge ${historyStatus}`;
-                                            statusBadge.textContent = getStatusText(historyStatus);
-                                        }
-                                        console.log(`✅ 시나리오 목록 탭 카드 업데이트 완료: ${historyStatus}`);
-                                    }
-                                    
-                                    // 메모리 상태도 동기화
-                                    scenario.status = historyStatus;
-                                    
-                                    // 실행/중단 버튼 UI 업데이트
-                                    updateRunStopButtonsUI();
-                                    
-                                    // 요약 카드 업데이트
-                                    createSummaryCards();
-                                    createSummaryCardsForHistory();
-                                }
-                            }, 100);
-                        }
-                        
-                        // 실패 시에도 커스텀 리포트 열기 (isTestFailure가 true인 경우)
-                        if (data && data.isTestFailure) {
-                            setTimeout(() => {
-                                openCustomReport(scenarioId);
-                            }, 2000); // 2초 후 리포트 열기
-                        }
-                    }
-                    
-                    updateScenarioButtons(scenarioId, false);
-                });
-                
+                console.log('❌ test-failed 이벤트 수신 (runScenario에서 이미 처리 완료):', data);
+                // runScenario()에서 이미 모든 상태 업데이트를 완료했으므로 여기서는 아무것도 하지 않음
                 manuallyClosedScenarioIds.clear();
                 currentRunningScenarioIds.clear();
-                
-                // 요약 카드만 업데이트 (시나리오 카드는 이미 runScenario에서 업데이트됨)
-                createSummaryCards();
-                createSummaryCardsForHistory();
-                
-                console.log('🔄 테스트 실패 이벤트 처리 완료');
             });
 
             // 윈도우 리사이즈 이벤트

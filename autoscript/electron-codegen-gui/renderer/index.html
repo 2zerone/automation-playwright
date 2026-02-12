@@ -173,9 +173,17 @@
                 <small id="managerInfo" class="manager-info"></small>
               </div>
               
-              <button id="createScenarioBtn" class="primary-btn" disabled>
-                ✅ 시나리오 생성
-              </button>
+              <div style="display: flex; gap: 10px;">
+                <button id="manageUniqueValuesBtn" class="secondary-btn" disabled title="선택한 Manager의 Unique 값 설정">
+                  🔑 Unique 값 관리
+                </button>
+                <button id="deleteManagerBtn" class="secondary-btn" disabled title="선택한 Manager 클래스 삭제" style="background: rgba(231, 76, 60, 0.2); border-color: #e74c3c; color: #e74c3c;">
+                  🗑️ Manager 삭제
+                </button>
+                <button id="createScenarioBtn" class="primary-btn" disabled>
+                  ✅ 시나리오 생성
+                </button>
+              </div>
             </div>
 
             <!-- 생성된 시나리오 목록 -->
@@ -240,10 +248,8 @@
               <div class="canvas-header">
                 <h3>시나리오 구성</h3>
                 <div class="scenario-input-group">
-                  <label>시나리오 번호:</label>
-                  <input type="number" id="scenarioNumber" min="1" placeholder="ex. 10" />
                   <button id="resetScenarioBtn" class="primary-btn">초기화</button>
-                  <button id="generateScenarioBtn" class="primary-btn">생성</button>
+                  <button id="generateScenarioBtn" class="primary-btn">✅ 시나리오 생성</button>
                 </div>
               </div>
               <div id="scenarioSequence" class="sequence-area">
@@ -380,6 +386,75 @@
       <div class="custom-modal-footer">
         <button id="modalConfirmBtn" class="modal-btn modal-btn-primary">확인</button>
         <button id="modalCancelBtn" class="modal-btn modal-btn-secondary" style="display: none;">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시나리오 생성 정보 입력 모달 -->
+  <div id="scenarioInfoModal" class="modal hidden">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2>📋 시나리오 생성</h2>
+        <button class="modal-close" id="closeScenarioInfoModal">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">
+            시나리오 번호 <span style="color: #e74c3c;">*</span>
+          </label>
+          <input type="number" id="modalScenarioNumber" min="1" placeholder="" 
+                 style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" />
+          <small style="color: #666; display: block; margin-top: 4px;">
+            ※ 비워두면 자동으로 다음 사용 가능한 번호가 설정됩니다.
+          </small>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">
+            시나리오 제목
+          </label>
+          <input type="text" id="modalScenarioTitle" placeholder="ex. 로그인 테스트" 
+                 style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" />
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">
+            시나리오 설명
+          </label>
+          <textarea id="modalScenarioDescription" placeholder="ex. 사용자 로그인 기능을 검증하는 시나리오" 
+                    rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; resize: vertical;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding: 15px 20px; display: flex; gap: 10px; justify-content: flex-end;">
+        <button id="cancelScenarioInfoBtn" class="secondary-btn">취소</button>
+        <button id="confirmScenarioInfoBtn" class="primary-btn">생성</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unique 값 선택 모달 -->
+  <div id="uniqueValuesModal" class="modal hidden">
+    <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h2>🔑 Unique 값 선택</h2>
+        <button class="close-btn" id="closeUniqueValuesBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-box" style="margin-bottom: 20px;">
+          <strong>💡 Unique 값이란?</strong>
+          <p>시나리오를 반복 실행할 때 중복되면 안 되는 값입니다.</p>
+          <p>선택한 값은 자동으로 <code>값_001</code>, <code>값_002</code> 형태로 카운터가 추가됩니다.</p>
+          <p style="margin-top: 8px; color: #4ecdc4;">예: <code>yh-namespace</code> → <code>yh-namespace_001</code>, <code>yh-namespace_002</code></p>
+        </div>
+        
+        <h3 style="margin-bottom: 12px;">입력된 값 목록</h3>
+        <div id="uniqueValuesList" class="unique-values-list">
+          <!-- 동적으로 생성됨 -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="skipUniqueValuesBtn" class="secondary-btn">건너뛰기</button>
+        <button id="saveUniqueValuesBtn" class="primary-btn">선택 완료</button>
       </div>
     </div>
   </div>

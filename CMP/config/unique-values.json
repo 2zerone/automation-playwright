@@ -1,0 +1,14 @@
+{
+  "AutoRecorded_cmp_test": {
+    "values": [
+      {
+        "index": 2,
+        "fieldName": "username",
+        "fieldLabel": "아이디를 입력해 주세요",
+        "value": "yh.lee5",
+        "action": "getByRole('textbox', { name: '아이디를 입력해 주세요' }).fill('yh.lee5')"
+      }
+    ],
+    "savedAt": "2026-02-11T08:29:57.338Z"
+  }
+}

@@ -1,14 +1,10 @@
 // 기본 매니저 클래스 - 공통 기능 제공
 import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class BaseManager {
   constructor(utils) {
     this.utils = utils;
+    this.page = utils?.page || null;
   }
 
   // 스크린샷 캡처 함수 - 모든 매니저 클래스에서 공통 사용
@@ -19,8 +15,6 @@ class BaseManager {
         scenarioId = this.detectCurrentScenario();
       }
       
-      console.log(`📸 스크린샷 캡처 시작: ${stepName} (시나리오 ${scenarioId})`);
-      
       // UI 안정화를 위해 1초 대기
       await new Promise(resolve => setTimeout(resolve, 1000));
       
@@ -28,32 +22,25 @@ class BaseManager {
       const fileName = suffix ? `screenshot-${stepName}-${suffix}-${timestamp}.png` : `screenshot-${stepName}-${timestamp}.png`;
       const screenshotPath = path.join(__dirname, `../../custom-reports/scenario-${scenarioId}`, fileName);
       
-      console.log(`📁 스크린샷 저장 경로: ${screenshotPath}`);
-      
       // 디렉토리가 없으면 생성
       const dir = path.dirname(screenshotPath);
+      const fs = require('fs');
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
-        console.log(`📁 디렉토리 생성: ${dir}`);
-      }
-      
-      // utils.page 확인
-      if (!this.utils || !this.utils.page) {
-        console.error(`❌ this.utils.page가 없습니다! this.utils: ${this.utils}`);
-        throw new Error('this.utils.page가 null이거나 undefined입니다.');
       }
       
       // 스크린샷 찍기
-      await this.utils.page.screenshot({ 
-        path: screenshotPath, 
-        fullPage: true 
-      });
+      const page = this.page || this.utils?.page;
+      if (page) {
+        await page.screenshot({ 
+          path: screenshotPath, 
+          fullPage: true 
+        });
+      }
       
-      console.log(`✅ 스크린샷 저장 성공: ${fileName}`);
       return screenshotPath;
     } catch (error) {
-      console.error(`❌ 스크린샷 저장 실패 (${stepName}): ${error.message}`);
-      console.error(`   스택: ${error.stack}`);
+      console.error(`❌ 스크린샷 저장 실패: ${error.message}`);
       return null;
     }
   }
@@ -105,15 +92,19 @@ class BaseManager {
       
       // 디렉토리가 없으면 생성
       const dir = path.dirname(screenshotPath);
+      const fs = require('fs');
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
       
       // 스크린샷 찍기 (완료까지 대기)
-      await this.utils.page.screenshot({ 
-        path: screenshotPath, 
-        fullPage: true 
-      });
+      const page = this.page || this.utils?.page;
+      if (page) {
+        await page.screenshot({ 
+          path: screenshotPath, 
+          fullPage: true 
+        });
+      }
       
       console.log(`✅ ${stepName} 실패 순간 스크린샷 저장 완료: ${screenshotPath}`);
       return screenshotPath;
@@ -213,8 +204,8 @@ class BaseManager {
       // 시나리오 정보 추가
       scenarioId: this.detectCurrentScenario(),
       // 브라우저 상태 정보
-      pageUrl: this.utils?.page?.url() || 'unknown',
-      pageTitle: this.utils?.page?.title() || 'unknown'
+      pageUrl: (this.page || this.utils?.page)?.url() || 'unknown',
+      pageTitle: (this.page || this.utils?.page)?.title() || 'unknown'
     };
     
     // 전역 실패 로그에 추가 (커스텀 리포트에서 사용)
@@ -229,7 +220,8 @@ class BaseManager {
   // 페이지에서 특정 텍스트가 나타나는지 확인하는 검증 함수
   async verifyTextAppears(text, timeout = 5000) {
     try {
-      await this.utils.page.waitForSelector(`text=${text}`, { timeout });
+      const page = this.page || this.utils?.page;
+      await page.waitForSelector(`text=${text}`, { timeout });
       return true;
     } catch (error) {
       return false;
@@ -239,7 +231,8 @@ class BaseManager {
   // 페이지에서 특정 요소가 사라지는지 확인하는 검증 함수
   async verifyElementDisappears(selector, timeout = 5000) {
     try {
-      await this.utils.page.waitForSelector(selector, { state: 'detached', timeout });
+      const page = this.page || this.utils?.page;
+      await page.waitForSelector(selector, { state: 'detached', timeout });
       return true;
     } catch (error) {
       return false;
@@ -262,32 +255,104 @@ class BaseManager {
     }
   }
 
-  // 페이지 전체를 렌더링하기 위해 끝까지 스크롤
-  async forceRenderFullPage() {
+  // Unique 값 처리 메서드 - 카운터를 추가하여 중복 방지
+  async processUniqueValue(fieldName, baseValue, className = null) {
     try {
-      console.log('📜 페이지 전체 렌더링을 위해 스크롤 중...');
+      console.log(`\n========== processUniqueValue 시작 ==========`);
+      console.log(`📋 fieldName: ${fieldName}`);
+      console.log(`📋 baseValue: ${baseValue}`);
       
-      // 페이지 끝까지 스크롤
-      await this.utils.page.evaluate(() => {
-        window.scrollTo(0, document.body.scrollHeight);
+      // 클래스명이 없으면 현재 클래스에서 추출
+      if (!className) {
+        className = this.constructor.name;
+      }
+      console.log(`📋 className: ${className}`);
+      
+      // unique-values.json에서 해당 필드가 unique 값으로 설정되어 있는지 확인
+      const fs = await import('fs');
+      const path = await import('path');
+      const { fileURLToPath } = await import('url');
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = path.default.dirname(__filename);
+      
+      const uniqueValuesPath = path.default.join(__dirname, '../../config/unique-values.json');
+      console.log(`📂 uniqueValuesPath: ${uniqueValuesPath}`);
+      
+      // unique 값 설정이 없으면 원본 값 반환
+      if (!fs.default.existsSync(uniqueValuesPath)) {
+        console.log(`⚠️ unique-values.json 파일이 없습니다!`);
+        console.log(`========================================\n`);
+        return baseValue;
+      }
+      console.log(`✅ unique-values.json 파일 존재`);
+      
+      const uniqueValuesContent = fs.default.readFileSync(uniqueValuesPath, 'utf8');
+      const allUniqueValues = JSON.parse(uniqueValuesContent);
+      console.log(`📦 전체 unique values:`, JSON.stringify(allUniqueValues, null, 2));
+      
+      // 해당 클래스의 unique 값 설정 확인
+      const classUniqueValues = allUniqueValues[className];
+      console.log(`📦 ${className}의 unique values:`, JSON.stringify(classUniqueValues, null, 2));
+      
+      if (!classUniqueValues || !classUniqueValues.values) {
+        console.log(`⚠️ ${className}에 unique 값 설정이 없습니다!`);
+        console.log(`========================================\n`);
+        return baseValue;
+      }
+      
+      // 현재 필드가 unique 값으로 설정되어 있는지 확인
+      const isUnique = classUniqueValues.values.some(uv => {
+        console.log(`  비교: uv.fieldName(${uv.fieldName}) === fieldName(${fieldName}) && uv.value(${uv.value}) === baseValue(${baseValue})`);
+        return uv.fieldName === fieldName && uv.value === baseValue;
       });
       
-      // 렌더링 대기
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log(`🔍 isUnique 결과: ${isUnique}`);
       
-      // 다시 맨 위로
-      await this.utils.page.evaluate(() => {
-        window.scrollTo(0, 0);
-      });
+      if (!isUnique) {
+        console.log(`⚠️ ${fieldName}=${baseValue}는 unique 값이 아닙니다!`);
+        console.log(`========================================\n`);
+        return baseValue;
+      }
       
-      // 안정화 대기
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // unique 값이면 카운터 추가
+      console.log(`🔑 Unique 값 감지: ${fieldName} = ${baseValue}`);
       
-      console.log('✅ 페이지 전체 렌더링 완료');
-      return true;
+      // 카운터 파일에서 다음 카운터 가져오기
+      const countersPath = path.default.join(__dirname, '../../config/unique-counters.json');
+      let counters = {};
+      
+      if (fs.default.existsSync(countersPath)) {
+        const countersContent = fs.default.readFileSync(countersPath, 'utf8');
+        counters = JSON.parse(countersContent);
+      }
+      
+      // 카운터 초기화 및 증가
+      if (!counters[className]) {
+        counters[className] = {};
+      }
+      if (!counters[className][fieldName]) {
+        counters[className][fieldName] = {};
+      }
+      if (!counters[className][fieldName][baseValue]) {
+        counters[className][fieldName][baseValue] = 0;
+      }
+      
+      counters[className][fieldName][baseValue]++;
+      const counter = counters[className][fieldName][baseValue];
+      
+      // 카운터 파일 저장
+      fs.default.writeFileSync(countersPath, JSON.stringify(counters, null, 2), 'utf8');
+      
+      // 3자리 숫자로 포맷팅 (001, 002, ...)
+      const formattedCounter = counter.toString().padStart(3, '0');
+      const nextValue = `${baseValue}-${formattedCounter}`;
+      
+      console.log(`🔢 Unique 값 생성: ${baseValue} → ${nextValue}`);
+      
+      return nextValue;
     } catch (error) {
-      console.warn(`⚠️ 전체 페이지 렌더링 실패: ${error.message}`);
-      return false;
+      console.error(`❌ Unique 값 처리 실패: ${error.message}`);
+      return baseValue; // 실패 시 원본 값 반환
     }
   }
 
@@ -325,7 +390,8 @@ class BaseManager {
       // 각 패턴으로 시도
       for (const pattern of stylePatterns) {
         try {
-          const locator = this.utils.page.locator(`${selector}[style*="${pattern}"]`);
+          const page = this.page || this.utils?.page;
+          const locator = page.locator(`${selector}[style*="${pattern}"]`);
           if (exact) {
             const element = await locator.first();
             if (await element.isVisible()) {

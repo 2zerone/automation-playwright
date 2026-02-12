@@ -1,0 +1,50 @@
+{
+  "AutoRecorded_testaa": {
+    "values": [
+      {
+        "index": 2,
+        "fieldName": "username",
+        "fieldLabel": "아이디를 입력해 주세요",
+        "value": "yh.lee5",
+        "action": "getByRole('textbox', { name: '아이디를 입력해 주세요' }).fill('yh.lee5')"
+      }
+    ],
+    "savedAt": "2026-02-09T09:33:09.562Z"
+  },
+  "AutoRecorded_yh_test1": {
+    "values": [
+      {
+        "index": 2,
+        "fieldName": "name",
+        "fieldLabel": "이름을 입력해 주세요.",
+        "value": "yh-namespace",
+        "action": "getByRole('textbox', { name: '이름을 입력해 주세요.', exact: true }).fill('yh-namespace')"
+      }
+    ],
+    "savedAt": "2026-02-09T10:30:00.000Z"
+  },
+  "AutoRecorded_addd": {
+    "values": [
+      {
+        "index": 2,
+        "fieldName": "name",
+        "fieldLabel": "이름을 입력해 주세요.",
+        "value": "yh-pod",
+        "action": "fill('yh-pod')"
+      }
+    ],
+    "savedAt": "2026-02-10T05:03:27.695Z"
+  },
+  "viola_test_1": {
+    "values": [
+      {
+        "index": 12,
+        "fieldName": "name",
+        "fieldLabel": "이름을 입력해 주세요",
+        "value": "test001-11",
+        "action": "getByRole('textbox', { name: '이름을 입력해 주세요' }).fill('test001-11')"
+      }
+    ],
+    "savedAt": "2026-02-12T01:52:33.584Z"
+  }
+}
