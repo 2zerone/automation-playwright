@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\playwright.config.js",
-    "rootDir": "C:/Users/okestro/Desktop/test/CONTRABASS/tests",
+    "configFile": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\playwright.config.js",
+    "rootDir": "C:/Users/okestro/Desktop/automation-playwright/CONTRABASS/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -18,14 +18,14 @@
       [
         "html",
         {
-          "outputFolder": "C:/Users/okestro/Desktop/test/CONTRABASS/playwright-report",
+          "outputFolder": "C:/Users/okestro/Desktop/automation-playwright/CONTRABASS/playwright-report",
           "open": "never"
         }
       ],
       [
         "json",
         {
-          "outputFile": "C:/Users/okestro/Desktop/test/CONTRABASS/playwright-report/test-results.json"
+          "outputFile": "C:/Users/okestro/Desktop/automation-playwright/CONTRABASS/playwright-report/test-results.json"
         }
       ],
       [
@@ -48,7 +48,7 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "C:/Users/okestro/Desktop/test/CONTRABASS/test-results",
+        "outputDir": "C:/Users/okestro/Desktop/automation-playwright/CONTRABASS/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -56,7 +56,7 @@
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "C:/Users/okestro/Desktop/test/CONTRABASS/tests",
+        "testDir": "C:/Users/okestro/Desktop/automation-playwright/CONTRABASS/tests",
         "testIgnore": [],
         "testMatch": [
           "scenario/**/*.spec.js",
@@ -68,26 +68,26 @@
     "shard": null,
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
-    "version": "1.55.1",
+    "version": "1.53.1",
     "workers": 7,
     "webServer": null
   },
   "suites": [
     {
-      "title": "scenario\\scenario-10.spec.js",
-      "file": "scenario/scenario-10.spec.js",
+      "title": "scenario\\scenario-12.spec.js",
+      "file": "scenario/scenario-12.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "시나리오 10: mj kim",
-          "file": "scenario/scenario-10.spec.js",
-          "line": 27,
+          "title": "시나리오 12: test 001",
+          "file": "scenario/scenario-12.spec.js",
+          "line": 47,
           "column": 15,
           "specs": [
             {
-              "title": "Navigate to page",
+              "title": "페이지 이동",
               "ok": true,
               "tags": [],
               "tests": [
@@ -102,35 +102,35 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4681,
+                      "duration": 3225,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "🎬 시나리오 10 녹화 설정: 비활성화\n"
+                          "text": "🎬 시나리오 12 녹화 설정: 비활성화\n"
                         },
                         {
                           "text": "🎬 녹화가 비활성화되어 일반 브라우저 컨텍스트를 생성합니다.\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:24.062Z] INFO: 📝 Navigate to page 시작...\n"
+                          "text": "[2026-02-12T04:56:34.230Z] INFO: 📝 페이지 이동 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Navigate to page...\n"
+                          "text": "📝 Executing: 페이지 이동...\n"
                         },
                         {
-                          "text": "🔍 감지된 시나리오 ID: 10\n"
+                          "text": "🔍 감지된 시나리오 ID: 12\n"
                         },
                         {
-                          "text": "✅ Completed: Navigate to page\n"
+                          "text": "✅ Completed: 페이지 이동\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:26.473Z] SUCCESS: ✅ Navigate to page 성공\n"
+                          "text": "[2026-02-12T04:56:36.491Z] SUCCESS: ✅ 페이지 이동 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:26.474Z] INFO: ⏱️ Navigate to page 소요시간: 2412ms\n"
+                          "text": "[2026-02-12T04:56:36.491Z] INFO: ⏱️ 페이지 이동 소요시간: 2262ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Navigate to page-성공-2026-02-05T07-01-26-475.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-페이지 이동-성공-2026-02-12T04-56-36-491.png\n"
                         }
                       ],
                       "stderr": [
@@ -141,17 +141,17 @@
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Navigate to page",
-                          "duration": 4668
+                          "title": "페이지 이동",
+                          "duration": 3220
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:20.580Z",
+                      "startTime": "2026-02-12T04:56:33.395Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Navigate-to-page-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-페이지-이동-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -159,143 +159,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-2544be37a95e68e5b337",
-              "file": "scenario/scenario-10.spec.js",
-              "line": 45,
-              "column": 3
-            },
-            {
-              "title": "Fill username",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 3600000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2924,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[2026-02-05T07:01:28.767Z] INFO: 📝 Fill username 시작...\n"
-                        },
-                        {
-                          "text": "📝 Executing: Fill username...\n"
-                        },
-                        {
-                          "text": "✅ Completed: Fill username\n"
-                        },
-                        {
-                          "text": "[2026-02-05T07:01:30.206Z] SUCCESS: ✅ Fill username 성공\n"
-                        },
-                        {
-                          "text": "[2026-02-05T07:01:30.206Z] INFO: ⏱️ Fill username 소요시간: 1439ms\n"
-                        },
-                        {
-                          "text": "📸 스크린샷 저장: screenshot-Fill username-성공-2026-02-05T07-01-30-206.png\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Fill username",
-                          "duration": 2208
-                        }
-                      ],
-                      "startTime": "2026-02-05T07:01:28.746Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Fill-username-chromium\\test-finished-1.png"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ab2a651581a4dd5c8010-05a732a27c69827daad3",
-              "file": "scenario/scenario-10.spec.js",
-              "line": 55,
-              "column": 3
-            },
-            {
-              "title": "Fill password",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 3600000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2624,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[2026-02-05T07:01:31.727Z] INFO: 📝 Fill password 시작...\n"
-                        },
-                        {
-                          "text": "📝 Executing: Fill password...\n"
-                        },
-                        {
-                          "text": "✅ Completed: Fill password\n"
-                        },
-                        {
-                          "text": "[2026-02-05T07:01:33.134Z] SUCCESS: ✅ Fill password 성공\n"
-                        },
-                        {
-                          "text": "[2026-02-05T07:01:33.134Z] INFO: ⏱️ Fill password 소요시간: 1407ms\n"
-                        },
-                        {
-                          "text": "📸 스크린샷 저장: screenshot-Fill password-성공-2026-02-05T07-01-33-134.png\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Fill password",
-                          "duration": 2010
-                        }
-                      ],
-                      "startTime": "2026-02-05T07:01:31.696Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Fill-password-chromium\\test-finished-1.png"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ab2a651581a4dd5c8010-1aebec33509e8cac313f",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-841c8c03d4e10933d083",
+              "file": "scenario/scenario-12.spec.js",
               "line": 65,
               "column": 3
             },
             {
-              "title": "Click login button",
+              "title": "아이디를 입력해 주세요 입력",
               "ok": true,
               "tags": [],
               "tests": [
@@ -310,43 +180,79 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3262,
+                      "duration": 4551,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:34.366Z] INFO: 📝 Click login button 시작...\n"
+                          "text": "[2026-02-12T04:56:37.481Z] INFO: 📝 아이디를 입력해 주세요 입력 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click login button...\n"
+                          "text": "📝 Executing: 아이디를 입력해 주세요 입력...\n"
                         },
                         {
-                          "text": "✅ Completed: Click login button\n"
+                          "text": "\n========== processUniqueValue 시작 ==========\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:36.440Z] SUCCESS: ✅ Click login button 성공\n"
+                          "text": "📋 fieldName: username\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:36.440Z] INFO: ⏱️ Click login button 소요시간: 2074ms\n"
+                          "text": "📋 baseValue: yh.lee5\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click login button-성공-2026-02-05T07-01-36-440.png\n"
+                          "text": "📋 className: test_001\n"
+                        },
+                        {
+                          "text": "📂 uniqueValuesPath: C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\config\\unique-values.json\n"
+                        },
+                        {
+                          "text": "✅ unique-values.json 파일 존재\n"
+                        },
+                        {
+                          "text": "📦 전체 unique values: {\n  \"test_001\": {\n    \"values\": [\n      {\n        \"index\": 13,\n        \"fieldName\": \"name\",\n        \"fieldLabel\": \"이름을 입력해 주세요\",\n        \"value\": \"instance-test\",\n        \"action\": \"getByRole('textbox', { name: '이름을 입력해 주세요' }).fill('instance-test')\"\n      }\n    ],\n    \"savedAt\": \"2026-02-12T04:56:13.078Z\"\n  }\n}\n"
+                        },
+                        {
+                          "text": "📦 test_001의 unique values: {\n  \"values\": [\n    {\n      \"index\": 13,\n      \"fieldName\": \"name\",\n      \"fieldLabel\": \"이름을 입력해 주세요\",\n      \"value\": \"instance-test\",\n      \"action\": \"getByRole('textbox', { name: '이름을 입력해 주세요' }).fill('instance-test')\"\n    }\n  ],\n  \"savedAt\": \"2026-02-12T04:56:13.078Z\"\n}\n"
+                        },
+                        {
+                          "text": "  비교: uv.fieldName(name) === fieldName(username) && uv.value(instance-test) === baseValue(yh.lee5)\n"
+                        },
+                        {
+                          "text": "🔍 isUnique 결과: false\n"
+                        },
+                        {
+                          "text": "⚠️ username=yh.lee5는 unique 값이 아닙니다!\n"
+                        },
+                        {
+                          "text": "========================================\n\n"
+                        },
+                        {
+                          "text": "✅ Completed: 아이디를 입력해 주세요 입력\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:56:38.941Z] SUCCESS: ✅ 아이디를 입력해 주세요 입력 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:56:38.941Z] INFO: ⏱️ 아이디를 입력해 주세요 입력 소요시간: 1460ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-아이디를 입력해 주세요 입력-성공-2026-02-12T04-56-38-941.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click login button",
-                          "duration": 2974
+                          "title": "아이디를 입력해 주세요 입력",
+                          "duration": 2997
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:34.354Z",
+                      "startTime": "2026-02-12T04:56:37.458Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-login-button-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-아이디를-입력해-주세요-입력-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -354,13 +260,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-2dbe21e83d365c6c247e",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-589e4d59c1f69601d46d",
+              "file": "scenario/scenario-12.spec.js",
               "line": 75,
               "column": 3
             },
             {
-              "title": "Click field",
+              "title": "비밀번호를 입력해 주세요 입력",
               "ok": true,
               "tags": [],
               "tests": [
@@ -375,43 +281,55 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1951,
+                      "duration": 2825,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:37.646Z] INFO: 📝 Click field 시작...\n"
+                          "text": "[2026-02-12T04:56:42.026Z] INFO: 📝 비밀번호를 입력해 주세요 입력 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click field...\n"
+                          "text": "📝 Executing: 비밀번호를 입력해 주세요 입력...\n"
                         },
                         {
-                          "text": "✅ Completed: Click field\n"
+                          "text": "📋 fieldName: password\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:39.279Z] SUCCESS: ✅ Click field 성공\n"
+                          "text": "📋 baseValue: Okestro2018!\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:39.279Z] INFO: ⏱️ Click field 소요시간: 1633ms\n"
+                          "text": "  비교: uv.fieldName(name) === fieldName(password) && uv.value(instance-test) === baseValue(Okestro2018!)\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click field-성공-2026-02-05T07-01-39-279.png\n"
+                          "text": "⚠️ password=Okestro2018!는 unique 값이 아닙니다!\n"
+                        },
+                        {
+                          "text": "✅ Completed: 비밀번호를 입력해 주세요 입력\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:56:43.490Z] SUCCESS: ✅ 비밀번호를 입력해 주세요 입력 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:56:43.490Z] INFO: ⏱️ 비밀번호를 입력해 주세요 입력 소요시간: 1464ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-비밀번호를 입력해 주세요 입력-성공-2026-02-12T04-56-43-490.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click field",
-                          "duration": 1793
+                          "title": "비밀번호를 입력해 주세요 입력",
+                          "duration": 2176
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:37.635Z",
+                      "startTime": "2026-02-12T04:56:42.014Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-field-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-비밀번호를-입력해-주세요-입력-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -419,13 +337,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-1236ef8dd448f979b017",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-49b58df62885d9ecde07",
+              "file": "scenario/scenario-12.spec.js",
               "line": 85,
               "column": 3
             },
             {
-              "title": "Click field 2",
+              "title": "로그인 버튼 클릭",
               "ok": true,
               "tags": [],
               "tests": [
@@ -440,43 +358,43 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1895,
+                      "duration": 2985,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:39.614Z] INFO: 📝 Click field 2 시작...\n"
+                          "text": "[2026-02-12T04:56:44.862Z] INFO: 📝 로그인 버튼 클릭 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click field 2...\n"
+                          "text": "📝 Executing: 로그인 버튼 클릭...\n"
                         },
                         {
-                          "text": "✅ Completed: Click field 2\n"
+                          "text": "✅ Completed: 로그인 버튼 클릭\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:41.199Z] SUCCESS: ✅ Click field 2 성공\n"
+                          "text": "[2026-02-12T04:56:46.991Z] SUCCESS: ✅ 로그인 버튼 클릭 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:41.200Z] INFO: ⏱️ Click field 2 소요시간: 1586ms\n"
+                          "text": "[2026-02-12T04:56:46.991Z] INFO: ⏱️ 로그인 버튼 클릭 소요시간: 2129ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click field 2-성공-2026-02-05T07-01-41-200.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-로그인 버튼 클릭-성공-2026-02-12T04-56-46-991.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click field 2",
-                          "duration": 1733
+                          "title": "로그인 버튼 클릭",
+                          "duration": 2766
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:39.603Z",
+                      "startTime": "2026-02-12T04:56:44.847Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-field-2-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-로그인-버튼-클릭-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -484,13 +402,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-d194f7949fa85af797d1",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-f7d0ab1f518f1d7fb84a",
+              "file": "scenario/scenario-12.spec.js",
               "line": 95,
               "column": 3
             },
             {
-              "title": "Click field 3",
+              "title": "Okestro OKESTRO unfold_more 버튼 클릭",
               "ok": true,
               "tags": [],
               "tests": [
@@ -505,43 +423,43 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1855,
+                      "duration": 2430,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:41.520Z] INFO: 📝 Click field 3 시작...\n"
+                          "text": "[2026-02-12T04:56:47.853Z] INFO: 📝 Okestro OKESTRO unfold_more 버튼 클릭 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click field 3...\n"
+                          "text": "📝 Executing: Okestro OKESTRO unfold_more 버튼 클릭...\n"
                         },
                         {
-                          "text": "✅ Completed: Click field 3\n"
+                          "text": "✅ Completed: Okestro OKESTRO unfold_more 버튼 클릭\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:43.110Z] SUCCESS: ✅ Click field 3 성공\n"
+                          "text": "[2026-02-12T04:56:49.976Z] SUCCESS: ✅ Okestro OKESTRO unfold_more 버튼 클릭 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:43.110Z] INFO: ⏱️ Click field 3 소요시간: 1590ms\n"
+                          "text": "[2026-02-12T04:56:49.977Z] INFO: ⏱️ Okestro OKESTRO unfold_more 버튼 클릭 소요시간: 2124ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click field 3-성공-2026-02-05T07-01-43-111.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-Okestro OKESTRO unfold_more 버튼 클릭-성공-2026-02-12T04-56-49-977.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click field 3",
-                          "duration": 1720
+                          "title": "Okestro OKESTRO unfold_more 버튼 클릭",
+                          "duration": 2277
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:41.513Z",
+                      "startTime": "2026-02-12T04:56:47.848Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-field-3-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--9db05-o-OKESTRO-unfold-more-버튼-클릭-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -549,13 +467,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-3113b816b8bdc0278bda",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-8e8919bd6a433c67f1aa",
+              "file": "scenario/scenario-12.spec.js",
               "line": 105,
               "column": 3
             },
             {
-              "title": "Click field 4",
+              "title": "요소 클릭",
               "ok": true,
               "tags": [],
               "tests": [
@@ -570,43 +488,43 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1881,
+                      "duration": 1862,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:43.396Z] INFO: 📝 Click field 4 시작...\n"
+                          "text": "[2026-02-12T04:56:50.284Z] INFO: 📝 요소 클릭 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click field 4...\n"
+                          "text": "📝 Executing: 요소 클릭...\n"
                         },
                         {
-                          "text": "✅ Completed: Click field 4\n"
+                          "text": "✅ Completed: 요소 클릭\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:44.973Z] SUCCESS: ✅ Click field 4 성공\n"
+                          "text": "[2026-02-12T04:56:51.846Z] SUCCESS: ✅ 요소 클릭 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:44.977Z] INFO: ⏱️ Click field 4 소요시간: 1581ms\n"
+                          "text": "[2026-02-12T04:56:51.846Z] INFO: ⏱️ 요소 클릭 소요시간: 1562ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click field 4-성공-2026-02-05T07-01-44-977.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-요소 클릭-성공-2026-02-12T04-56-51-846.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click field 4",
-                          "duration": 1729
+                          "title": "요소 클릭",
+                          "duration": 1713
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:43.384Z",
+                      "startTime": "2026-02-12T04:56:50.281Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-field-4-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-요소-클릭-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -614,13 +532,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-a5d61647bba0e1e4e0f8",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-e1235041c6cd4970c75b",
+              "file": "scenario/scenario-12.spec.js",
               "line": 115,
               "column": 3
             },
             {
-              "title": "Click create button",
+              "title": "목동(allinone) 버튼 클릭",
               "ok": true,
               "tags": [],
               "tests": [
@@ -635,43 +553,43 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2357,
+                      "duration": 2323,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:45.290Z] INFO: 📝 Click create button 시작...\n"
+                          "text": "[2026-02-12T04:56:52.149Z] INFO: 📝 목동(allinone) 버튼 클릭 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click create button...\n"
+                          "text": "📝 Executing: 목동(allinone) 버튼 클릭...\n"
                         },
                         {
-                          "text": "✅ Completed: Click create button\n"
+                          "text": "✅ Completed: 목동(allinone) 버튼 클릭\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:47.400Z] SUCCESS: ✅ Click create button 성공\n"
+                          "text": "[2026-02-12T04:56:54.250Z] SUCCESS: ✅ 목동(allinone) 버튼 클릭 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:47.401Z] INFO: ⏱️ Click create button 소요시간: 2111ms\n"
+                          "text": "[2026-02-12T04:56:54.250Z] INFO: ⏱️ 목동(allinone) 버튼 클릭 소요시간: 2101ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click create button-성공-2026-02-05T07-01-47-401.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-목동(allinone) 버튼 클릭-성공-2026-02-12T04-56-54-250.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click create button",
-                          "duration": 2238
+                          "title": "목동(allinone) 버튼 클릭",
+                          "duration": 2218
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:45.281Z",
+                      "startTime": "2026-02-12T04:56:52.146Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-create-button-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-목동-allinone-버튼-클릭-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -679,13 +597,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-808256be0b561da57b5d",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-827e41ade8d1259e24e0",
+              "file": "scenario/scenario-12.spec.js",
               "line": 125,
               "column": 3
             },
             {
-              "title": "Fill name",
+              "title": "전체 프로젝트 버튼 클릭",
               "ok": true,
               "tags": [],
               "tests": [
@@ -700,43 +618,43 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1640,
+                      "duration": 2316,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:47.661Z] INFO: 📝 Fill name 시작...\n"
+                          "text": "[2026-02-12T04:56:54.477Z] INFO: 📝 전체 프로젝트 버튼 클릭 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Fill name...\n"
+                          "text": "📝 Executing: 전체 프로젝트 버튼 클릭...\n"
                         },
                         {
-                          "text": "✅ Completed: Fill name\n"
+                          "text": "✅ Completed: 전체 프로젝트 버튼 클릭\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:49.080Z] SUCCESS: ✅ Fill name 성공\n"
+                          "text": "[2026-02-12T04:56:56.546Z] SUCCESS: ✅ 전체 프로젝트 버튼 클릭 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:49.081Z] INFO: ⏱️ Fill name 소요시간: 1420ms\n"
+                          "text": "[2026-02-12T04:56:56.546Z] INFO: ⏱️ 전체 프로젝트 버튼 클릭 소요시간: 2069ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Fill name-성공-2026-02-05T07-01-49-081.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-전체 프로젝트 버튼 클릭-성공-2026-02-12T04-56-56-546.png\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Fill name",
-                          "duration": 1532
+                          "title": "전체 프로젝트 버튼 클릭",
+                          "duration": 2187
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:47.654Z",
+                      "startTime": "2026-02-12T04:56:54.472Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Fill-name-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-전체-프로젝트-버튼-클릭-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -744,13 +662,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-33f86af3f1d2495cc0f0",
-              "file": "scenario/scenario-10.spec.js",
+              "id": "74450a4ebf26839d0e97-f0acc43610e00b8e5cdc",
+              "file": "scenario/scenario-12.spec.js",
               "line": 135,
               "column": 3
             },
             {
-              "title": "Click confirm button",
+              "title": "선택 버튼 클릭",
               "ok": true,
               "tags": [],
               "tests": [
@@ -765,88 +683,1626 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2279,
+                      "duration": 4039,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-05T07:01:49.315Z] INFO: 📝 Click confirm button 시작...\n"
+                          "text": "[2026-02-12T04:56:56.797Z] INFO: 📝 선택 버튼 클릭 시작...\n"
                         },
                         {
-                          "text": "📝 Executing: Click confirm button...\n"
+                          "text": "📝 Executing: 선택 버튼 클릭...\n"
                         },
                         {
-                          "text": "✅ Completed: Click confirm button\n"
+                          "text": "✅ Completed: 선택 버튼 클릭\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:51.390Z] SUCCESS: ✅ Click confirm button 성공\n"
+                          "text": "[2026-02-12T04:56:58.959Z] SUCCESS: ✅ 선택 버튼 클릭 성공\n"
                         },
                         {
-                          "text": "[2026-02-05T07:01:51.391Z] INFO: ⏱️ Click confirm button 소요시간: 2076ms\n"
+                          "text": "[2026-02-12T04:56:58.959Z] INFO: ⏱️ 선택 버튼 클릭 소요시간: 2162ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click confirm button-성공-2026-02-05T07-01-51-391.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-선택 버튼 클릭-성공-2026-02-12T04-56-58-959.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "선택 버튼 클릭",
+                          "duration": 3761
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:56:56.792Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-선택-버튼-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-f54bae37c0bdee88fd5b",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 145,
+              "column": 3
+            },
+            {
+              "title": "요소 클릭 2",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2012,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:00.843Z] INFO: 📝 요소 클릭 2 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 요소 클릭 2...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 요소 클릭 2\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:02.468Z] SUCCESS: ✅ 요소 클릭 2 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:02.469Z] INFO: ⏱️ 요소 클릭 2 소요시간: 1626ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-요소 클릭 2-성공-2026-02-12T04-57-02-469.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "요소 클릭 2",
+                          "duration": 1786
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:00.835Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-요소-클릭-2-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-7dcc179f730ef534658a",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 155,
+              "column": 3
+            },
+            {
+              "title": "인스턴스 메뉴 클릭",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1969,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:02.855Z] INFO: 📝 인스턴스 메뉴 클릭 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 인스턴스 메뉴 클릭...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 인스턴스 메뉴 클릭\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:04.449Z] SUCCESS: ✅ 인스턴스 메뉴 클릭 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:04.449Z] INFO: ⏱️ 인스턴스 메뉴 클릭 소요시간: 1594ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-인스턴스 메뉴 클릭-성공-2026-02-12T04-57-04-449.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "인스턴스 메뉴 클릭",
+                          "duration": 1775
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:02.852Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-인스턴스-메뉴-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-f85bd02d9389440093b6",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 165,
+              "column": 3
+            },
+            {
+              "title": "add 생성 버튼 클릭",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2351,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:04.827Z] INFO: 📝 add 생성 버튼 클릭 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: add 생성 버튼 클릭...\n"
+                        },
+                        {
+                          "text": "✅ Completed: add 생성 버튼 클릭\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:06.914Z] SUCCESS: ✅ add 생성 버튼 클릭 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:06.915Z] INFO: ⏱️ add 생성 버튼 클릭 소요시간: 2088ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-add 생성 버튼 클릭-성공-2026-02-12T04-57-06-915.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "add 생성 버튼 클릭",
+                          "duration": 2228
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:04.824Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-add-생성-버튼-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-5045ddb20cf491f0bf9c",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 175,
+              "column": 3
+            },
+            {
+              "title": "이름을 입력해 주세요 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1680,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:07.180Z] INFO: 📝 이름을 입력해 주세요 입력 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 이름을 입력해 주세요 입력...\n"
+                        },
+                        {
+                          "text": "📋 fieldName: name\n"
+                        },
+                        {
+                          "text": "📋 baseValue: instance-test\n"
+                        },
+                        {
+                          "text": "  비교: uv.fieldName(name) === fieldName(name) && uv.value(instance-test) === baseValue(instance-test)\n"
+                        },
+                        {
+                          "text": "🔍 isUnique 결과: true\n"
+                        },
+                        {
+                          "text": "🔑 Unique 값 감지: name = instance-test\n"
+                        },
+                        {
+                          "text": "🔢 Unique 값 생성: instance-test → instance-test-001\n"
+                        },
+                        {
+                          "text": "✅ Completed: 이름을 입력해 주세요 입력\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:08.604Z] SUCCESS: ✅ 이름을 입력해 주세요 입력 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:08.604Z] INFO: ⏱️ 이름을 입력해 주세요 입력 소요시간: 1424ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-이름을 입력해 주세요 입력-성공-2026-02-12T04-57-08-604.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "이름을 입력해 주세요 입력",
+                          "duration": 1557
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:07.177Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-이름을-입력해-주세요-입력-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-e106310071d35a419ab3",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 185,
+              "column": 3
+            },
+            {
+              "title": "항목 이름 또는 값을 입력해 주세요 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1717,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:08.864Z] INFO: 📝 항목 이름 또는 값을 입력해 주세요 입력 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 항목 이름 또는 값을 입력해 주세요 입력...\n"
+                        },
+                        {
+                          "text": "📋 baseValue: qa\n"
+                        },
+                        {
+                          "text": "  비교: uv.fieldName(name) === fieldName(name) && uv.value(instance-test) === baseValue(qa)\n"
+                        },
+                        {
+                          "text": "⚠️ name=qa는 unique 값이 아닙니다!\n"
+                        },
+                        {
+                          "text": "✅ Completed: 항목 이름 또는 값을 입력해 주세요 입력\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:10.333Z] SUCCESS: ✅ 항목 이름 또는 값을 입력해 주세요 입력 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:10.333Z] INFO: ⏱️ 항목 이름 또는 값을 입력해 주세요 입력 소요시간: 1469ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-항목 이름 또는 값을 입력해 주세요 입력-성공-2026-02-12T04-57-10-333.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "항목 이름 또는 값을 입력해 주세요 입력",
+                          "duration": 1590
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:08.860Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-항목-이름-또는-값을-입력해-주세요-입력-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-12b1c67e7389cce1c08b",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 195,
+              "column": 3
+            },
+            {
+              "title": "엔터 키 누르기",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1649,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:10.583Z] INFO: 📝 엔터 키 누르기 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 엔터 키 누르기...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 엔터 키 누르기\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:11.970Z] SUCCESS: ✅ 엔터 키 누르기 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:11.971Z] INFO: ⏱️ 엔터 키 누르기 소요시간: 1388ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-엔터 키 누르기-성공-2026-02-12T04-57-11-971.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "엔터 키 누르기",
+                          "duration": 1543
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:10.579Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-엔터-키-누르기-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-e600476b154965e016c4",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 205,
+              "column": 3
+            },
+            {
+              "title": "folder QA a10de7c81554455cad94c00aee1819a2 체크",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1702,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:12.233Z] INFO: 📝 folder QA a10de7c81554455cad94c00aee1819a2 체크 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: folder QA a10de7c81554455cad94c00aee1819a2 체크...\n"
+                        },
+                        {
+                          "text": "✅ Completed: folder QA a10de7c81554455cad94c00aee1819a2 체크\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:13.676Z] SUCCESS: ✅ folder QA a10de7c81554455cad94c00aee1819a2 체크 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:13.676Z] INFO: ⏱️ folder QA a10de7c81554455cad94c00aee1819a2 체크 소요시간: 1443ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-folder QA a10de7c81554455cad94c00aee1819a2 체크-성공-2026-02-12T04-57-13-676.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "folder QA a10de7c81554455cad94c00aee1819a2 체크",
+                          "duration": 1589
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:12.231Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--b89c3-1554455cad94c00aee1819a2-체크-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-195d21c902b4b2f1fb3a",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "다음 버튼 클릭",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2555,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:13.937Z] INFO: 📝 다음 버튼 클릭 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 다음 버튼 클릭...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 다음 버튼 클릭\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:16.179Z] SUCCESS: ✅ 다음 버튼 클릭 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:16.179Z] INFO: ⏱️ 다음 버튼 클릭 소요시간: 2242ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-다음 버튼 클릭-성공-2026-02-12T04-57-16-179.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "다음 버튼 클릭",
+                          "duration": 2392
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:13.935Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-다음-버튼-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-b31ce6b3fdf0ae2c71e6",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 225,
+              "column": 3
+            },
+            {
+              "title": "항목 이름 또는 값을 입력해 주세요 입력 2",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1879,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:16.494Z] INFO: 📝 항목 이름 또는 값을 입력해 주세요 입력 2 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 항목 이름 또는 값을 입력해 주세요 입력 2...\n"
+                        },
+                        {
+                          "text": "📋 baseValue: ubuntu\n"
+                        },
+                        {
+                          "text": "  비교: uv.fieldName(name) === fieldName(name) && uv.value(instance-test) === baseValue(ubuntu)\n"
+                        },
+                        {
+                          "text": "⚠️ name=ubuntu는 unique 값이 아닙니다!\n"
+                        },
+                        {
+                          "text": "✅ Completed: 항목 이름 또는 값을 입력해 주세요 입력 2\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:18.071Z] SUCCESS: ✅ 항목 이름 또는 값을 입력해 주세요 입력 2 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:18.071Z] INFO: ⏱️ 항목 이름 또는 값을 입력해 주세요 입력 2 소요시간: 1577ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-항목 이름 또는 값을 입력해 주세요 입력 2-성공-2026-02-12T04-57-18-071.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "항목 이름 또는 값을 입력해 주세요 입력 2",
+                          "duration": 1723
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:16.492Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--56f7c-01-항목-이름-또는-값을-입력해-주세요-입력-2-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-c0fa44870c65a1bbc798",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 235,
+              "column": 3
+            },
+            {
+              "title": "엔터 키 누르기 2",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1730,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:18.376Z] INFO: 📝 엔터 키 누르기 2 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 엔터 키 누르기 2...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 엔터 키 누르기 2\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:19.789Z] SUCCESS: ✅ 엔터 키 누르기 2 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:19.790Z] INFO: ⏱️ 엔터 키 누르기 2 소요시간: 1414ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-엔터 키 누르기 2-성공-2026-02-12T04-57-19-790.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "엔터 키 누르기 2",
+                          "duration": 1580
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:18.373Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-엔터-키-누르기-2-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-d28773ebc9a06a235f00",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 245,
+              "column": 3
+            },
+            {
+              "title": "ubuntu-24.04-kubespray ACTIVE 체크",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1839,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:20.108Z] INFO: 📝 ubuntu-24.04-kubespray ACTIVE 체크 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: ubuntu-24.04-kubespray ACTIVE 체크...\n"
+                        },
+                        {
+                          "text": "✅ Completed: ubuntu-24.04-kubespray ACTIVE 체크\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:21.651Z] SUCCESS: ✅ ubuntu-24.04-kubespray ACTIVE 체크 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:21.652Z] INFO: ⏱️ ubuntu-24.04-kubespray ACTIVE 체크 소요시간: 1544ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-ubuntu-24.04-kubespray ACTIVE 체크-성공-2026-02-12T04-57-21-652.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "ubuntu-24.04-kubespray ACTIVE 체크",
+                          "duration": 1702
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:20.106Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--2abbf-u-24-04-kubespray-ACTIVE-체크-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-45751b0d583e58e4a1b2",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 255,
+              "column": 3
+            },
+            {
+              "title": "볼륨을 입력해 주세요 입력",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1763,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:21.950Z] INFO: 📝 볼륨을 입력해 주세요 입력 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 볼륨을 입력해 주세요 입력...\n"
+                        },
+                        {
+                          "text": "📋 fieldName: field\n"
+                        },
+                        {
+                          "text": "📋 baseValue: 30\n"
+                        },
+                        {
+                          "text": "  비교: uv.fieldName(name) === fieldName(field) && uv.value(instance-test) === baseValue(30)\n"
+                        },
+                        {
+                          "text": "⚠️ field=30는 unique 값이 아닙니다!\n"
+                        },
+                        {
+                          "text": "✅ Completed: 볼륨을 입력해 주세요 입력\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:23.342Z] SUCCESS: ✅ 볼륨을 입력해 주세요 입력 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:23.343Z] INFO: ⏱️ 볼륨을 입력해 주세요 입력 소요시간: 1393ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-볼륨을 입력해 주세요 입력-성공-2026-02-12T04-57-23-343.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "볼륨을 입력해 주세요 입력",
+                          "duration": 1602
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:21.947Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-볼륨을-입력해-주세요-입력-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-4b0d270539ad8b52f66b",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 265,
+              "column": 3
+            },
+            {
+              "title": "요소 클릭 3",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2026,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:23.716Z] INFO: 📝 요소 클릭 3 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 요소 클릭 3...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 요소 클릭 3\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:25.430Z] SUCCESS: ✅ 요소 클릭 3 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:25.430Z] INFO: ⏱️ 요소 클릭 3 소요시간: 1714ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-요소 클릭 3-성공-2026-02-12T04-57-25-430.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "요소 클릭 3",
+                          "duration": 1878
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:23.712Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-요소-클릭-3-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-09a928a3d023495e9f47",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 275,
+              "column": 3
+            },
+            {
+              "title": "keyboard_arrow_right 버튼 클릭",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2484,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:25.744Z] INFO: 📝 keyboard_arrow_right 버튼 클릭 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: keyboard_arrow_right 버튼 클릭...\n"
+                        },
+                        {
+                          "text": "✅ Completed: keyboard_arrow_right 버튼 클릭\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:27.933Z] SUCCESS: ✅ keyboard_arrow_right 버튼 클릭 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:27.933Z] INFO: ⏱️ keyboard_arrow_right 버튼 클릭 소요시간: 2189ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-keyboard_arrow_right 버튼 클릭-성공-2026-02-12T04-57-27-933.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "keyboard_arrow_right 버튼 클릭",
+                          "duration": 2340
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:25.742Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--ad11b--keyboard-arrow-right-버튼-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-f0ace3649c38965ea2e9",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 285,
+              "column": 3
+            },
+            {
+              "title": "4C8M 4 Core 8.0 GiB 0.0 GiB 체크",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1727,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:28.231Z] INFO: 📝 4C8M 4 Core 8.0 GiB 0.0 GiB 체크 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 4C8M 4 Core 8.0 GiB 0.0 GiB 체크...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 4C8M 4 Core 8.0 GiB 0.0 GiB 체크\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:29.690Z] SUCCESS: ✅ 4C8M 4 Core 8.0 GiB 0.0 GiB 체크 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:29.690Z] INFO: ⏱️ 4C8M 4 Core 8.0 GiB 0.0 GiB 체크 소요시간: 1459ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-4C8M 4 Core 8.0 GiB 0.0 GiB 체크-성공-2026-02-12T04-57-29-690.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "4C8M 4 Core 8.0 GiB 0.0 GiB 체크",
+                          "duration": 1586
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:28.228Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--cd59a-M-4-Core-8-0-GiB-0-0-GiB-체크-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-c84cf3d0d0e7c9bf1e1b",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 295,
+              "column": 3
+            },
+            {
+              "title": "다음 버튼 클릭 2",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2346,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:29.960Z] INFO: 📝 다음 버튼 클릭 2 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 다음 버튼 클릭 2...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 다음 버튼 클릭 2\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:32.076Z] SUCCESS: ✅ 다음 버튼 클릭 2 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:32.076Z] INFO: ⏱️ 다음 버튼 클릭 2 소요시간: 2116ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-다음 버튼 클릭 2-성공-2026-02-12T04-57-32-076.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "다음 버튼 클릭 2",
+                          "duration": 2229
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:29.958Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-다음-버튼-클릭-2-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-90989fb016de5b8d921e",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 305,
+              "column": 3
+            },
+            {
+              "title": "고정 IP 추가 버튼 클릭",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2419,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:32.309Z] INFO: 📝 고정 IP 추가 버튼 클릭 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 고정 IP 추가 버튼 클릭...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 고정 IP 추가 버튼 클릭\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:34.469Z] SUCCESS: ✅ 고정 IP 추가 버튼 클릭 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:34.470Z] INFO: ⏱️ 고정 IP 추가 버튼 클릭 소요시간: 2161ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-고정 IP 추가 버튼 클릭-성공-2026-02-12T04-57-34-470.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "고정 IP 추가 버튼 클릭",
+                          "duration": 2279
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:32.306Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-고정-IP-추가-버튼-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-3133f37500991de97b9a",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 315,
+              "column": 3
+            },
+            {
+              "title": "항목 이름 또는 값을 입력해 주세요 입력 3",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1791,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:34.730Z] INFO: 📝 항목 이름 또는 값을 입력해 주세요 입력 3 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 항목 이름 또는 값을 입력해 주세요 입력 3...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 항목 이름 또는 값을 입력해 주세요 입력 3\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:36.206Z] SUCCESS: ✅ 항목 이름 또는 값을 입력해 주세요 입력 3 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:36.206Z] INFO: ⏱️ 항목 이름 또는 값을 입력해 주세요 입력 3 소요시간: 1476ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-항목 이름 또는 값을 입력해 주세요 입력 3-성공-2026-02-12T04-57-36-206.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "항목 이름 또는 값을 입력해 주세요 입력 3",
+                          "duration": 1635
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:34.727Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--2776f-01-항목-이름-또는-값을-입력해-주세요-입력-3-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-f47593407e685fe1a94c",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 325,
+              "column": 3
+            },
+            {
+              "title": "엔터 키 누르기 3",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1643,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:36.524Z] INFO: 📝 엔터 키 누르기 3 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 엔터 키 누르기 3...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 엔터 키 누르기 3\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:37.912Z] SUCCESS: ✅ 엔터 키 누르기 3 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:37.912Z] INFO: ⏱️ 엔터 키 누르기 3 소요시간: 1388ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-엔터 키 누르기 3-성공-2026-02-12T04-57-37-912.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "엔터 키 누르기 3",
+                          "duration": 1517
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:36.521Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-엔터-키-누르기-3-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-69c2732f127444e048c4",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 335,
+              "column": 3
+            },
+            {
+              "title": "QA-segment ACTIVE 1 Yes No 체크",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1781,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:38.170Z] INFO: 📝 QA-segment ACTIVE 1 Yes No 체크 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: QA-segment ACTIVE 1 Yes No 체크...\n"
+                        },
+                        {
+                          "text": "✅ Completed: QA-segment ACTIVE 1 Yes No 체크\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:39.643Z] SUCCESS: ✅ QA-segment ACTIVE 1 Yes No 체크 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:39.643Z] INFO: ⏱️ QA-segment ACTIVE 1 Yes No 체크 소요시간: 1473ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-QA-segment ACTIVE 1 Yes No 체크-성공-2026-02-12T04-57-39-643.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "QA-segment ACTIVE 1 Yes No 체크",
+                          "duration": 1634
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:38.166Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오--72639--segment-ACTIVE-1-Yes-No-체크-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-24f0e3850e56d9c2669e",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 345,
+              "column": 3
+            },
+            {
+              "title": "추가 버튼 클릭",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2330,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:39.952Z] INFO: 📝 추가 버튼 클릭 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 추가 버튼 클릭...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 추가 버튼 클릭\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:42.074Z] SUCCESS: ✅ 추가 버튼 클릭 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:42.074Z] INFO: ⏱️ 추가 버튼 클릭 소요시간: 2122ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-추가 버튼 클릭-성공-2026-02-12T04-57-42-074.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "추가 버튼 클릭",
+                          "duration": 2217
+                        }
+                      ],
+                      "startTime": "2026-02-12T04:57:39.950Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-추가-버튼-클릭-chromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "74450a4ebf26839d0e97-e98159673d44e2bccb38",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 355,
+              "column": 3
+            },
+            {
+              "title": "다음 버튼 클릭 3",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 3600000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2413,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-02-12T04:57:42.285Z] INFO: 📝 다음 버튼 클릭 3 시작...\n"
+                        },
+                        {
+                          "text": "📝 Executing: 다음 버튼 클릭 3...\n"
+                        },
+                        {
+                          "text": "✅ Completed: 다음 버튼 클릭 3\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:44.429Z] SUCCESS: ✅ 다음 버튼 클릭 3 성공\n"
+                        },
+                        {
+                          "text": "[2026-02-12T04:57:44.429Z] INFO: ⏱️ 다음 버튼 클릭 3 소요시간: 2144ms\n"
+                        },
+                        {
+                          "text": "📸 스크린샷 저장: screenshot-다음 버튼 클릭 3-성공-2026-02-12T04-57-44-429.png\n"
                         },
                         {
                           "text": "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.\n"
                         },
                         {
-                          "text": "\n--- CONTRABASS 시나리오 10: mj kim 최종 테스트 결과 ---\n"
+                          "text": "\n--- CONTRABASS 시나리오 12: test 001 최종 테스트 결과 ---\n"
                         },
                         {
-                          "text": "✅ Navigate to page: PASS (2412ms)\n"
+                          "text": "✅ 페이지 이동: PASS (2262ms)\n"
                         },
                         {
-                          "text": "✅ Fill username: PASS (1439ms)\n"
+                          "text": "✅ 아이디를 입력해 주세요 입력: PASS (1460ms)\n"
                         },
                         {
-                          "text": "✅ Fill password: PASS (1407ms)\n"
+                          "text": "✅ 비밀번호를 입력해 주세요 입력: PASS (1464ms)\n"
                         },
                         {
-                          "text": "✅ Click login button: PASS (2074ms)\n"
+                          "text": "✅ 로그인 버튼 클릭: PASS (2129ms)\n"
                         },
                         {
-                          "text": "✅ Click field: PASS (1633ms)\n"
+                          "text": "✅ Okestro OKESTRO unfold_more 버튼 클릭: PASS (2124ms)\n"
                         },
                         {
-                          "text": "✅ Click field 2: PASS (1586ms)\n"
+                          "text": "✅ 요소 클릭: PASS (1562ms)\n"
                         },
                         {
-                          "text": "✅ Click field 3: PASS (1590ms)\n"
+                          "text": "✅ 목동(allinone) 버튼 클릭: PASS (2101ms)\n"
                         },
                         {
-                          "text": "✅ Click field 4: PASS (1581ms)\n"
+                          "text": "✅ 전체 프로젝트 버튼 클릭: PASS (2069ms)\n"
                         },
                         {
-                          "text": "✅ Click create button: PASS (2111ms)\n"
+                          "text": "✅ 선택 버튼 클릭: PASS (2162ms)\n"
                         },
                         {
-                          "text": "✅ Fill name: PASS (1420ms)\n"
+                          "text": "✅ 요소 클릭 2: PASS (1626ms)\n"
                         },
                         {
-                          "text": "✅ Click confirm button: PASS (2076ms)\n"
+                          "text": "✅ 인스턴스 메뉴 클릭: PASS (1594ms)\n"
+                        },
+                        {
+                          "text": "✅ add 생성 버튼 클릭: PASS (2088ms)\n"
+                        },
+                        {
+                          "text": "✅ 이름을 입력해 주세요 입력: PASS (1424ms)\n"
+                        },
+                        {
+                          "text": "✅ 항목 이름 또는 값을 입력해 주세요 입력: PASS (1469ms)\n"
+                        },
+                        {
+                          "text": "✅ 엔터 키 누르기: PASS (1388ms)\n"
+                        },
+                        {
+                          "text": "✅ folder QA a10de7c81554455cad94c00aee1819a2 체크: PASS (1443ms)\n"
+                        },
+                        {
+                          "text": "✅ 다음 버튼 클릭: PASS (2242ms)\n"
+                        },
+                        {
+                          "text": "✅ 항목 이름 또는 값을 입력해 주세요 입력 2: PASS (1577ms)\n"
+                        },
+                        {
+                          "text": "✅ 엔터 키 누르기 2: PASS (1414ms)\n"
+                        },
+                        {
+                          "text": "✅ ubuntu-24.04-kubespray ACTIVE 체크: PASS (1544ms)\n"
+                        },
+                        {
+                          "text": "✅ 볼륨을 입력해 주세요 입력: PASS (1393ms)\n"
+                        },
+                        {
+                          "text": "✅ 요소 클릭 3: PASS (1714ms)\n"
+                        },
+                        {
+                          "text": "✅ keyboard_arrow_right 버튼 클릭: PASS (2189ms)\n"
+                        },
+                        {
+                          "text": "✅ 4C8M 4 Core 8.0 GiB 0.0 GiB 체크: PASS (1459ms)\n"
+                        },
+                        {
+                          "text": "✅ 다음 버튼 클릭 2: PASS (2116ms)\n"
+                        },
+                        {
+                          "text": "✅ 고정 IP 추가 버튼 클릭: PASS (2161ms)\n"
+                        },
+                        {
+                          "text": "✅ 항목 이름 또는 값을 입력해 주세요 입력 3: PASS (1476ms)\n"
+                        },
+                        {
+                          "text": "✅ 엔터 키 누르기 3: PASS (1388ms)\n"
+                        },
+                        {
+                          "text": "✅ QA-segment ACTIVE 1 Yes No 체크: PASS (1473ms)\n"
+                        },
+                        {
+                          "text": "✅ 추가 버튼 클릭: PASS (2122ms)\n"
+                        },
+                        {
+                          "text": "✅ 다음 버튼 클릭 3: PASS (2144ms)\n"
                         },
                         {
                           "text": "----------------------------------\n"
                         },
                         {
-                          "text": "🏁 CONTRABASS 시나리오 10: mj kim 테스트 완료\n"
+                          "text": "🏁 CONTRABASS 시나리오 12: test 001 테스트 완료\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Click confirm button",
-                          "duration": 2187
+                          "title": "다음 버튼 클릭 3",
+                          "duration": 2284
                         }
                       ],
-                      "startTime": "2026-02-05T07:01:49.307Z",
+                      "startTime": "2026-02-12T04:57:42.282Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\test\\CONTRABASS\\test-results\\scenario-scenario-10-시나리오-10-mj-kim-Click-confirm-button-chromium\\test-finished-1.png"
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CONTRABASS\\test-results\\scenario-scenario-12-시나리오-12-test-001-다음-버튼-클릭-3-chromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -854,9 +2310,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "ab2a651581a4dd5c8010-91a3467551eae4812dac",
-              "file": "scenario/scenario-10.spec.js",
-              "line": 145,
+              "id": "74450a4ebf26839d0e97-e263245c0e6bac0cc00d",
+              "file": "scenario/scenario-12.spec.js",
+              "line": 365,
               "column": 3
             }
           ]
@@ -866,9 +2322,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-02-05T07:01:15.991Z",
-    "duration": 35910.154,
-    "expected": 11,
+    "startTime": "2026-02-12T04:56:32.416Z",
+    "duration": 72531.246,
+    "expected": 31,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

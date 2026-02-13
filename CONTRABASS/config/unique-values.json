@@ -1,0 +1,14 @@
+{
+  "test_001": {
+    "values": [
+      {
+        "index": 13,
+        "fieldName": "name",
+        "fieldLabel": "이름을 입력해 주세요",
+        "value": "instance-test",
+        "action": "getByRole('textbox', { name: '이름을 입력해 주세요' }).fill('instance-test')"
+      }
+    ],
+    "savedAt": "2026-02-12T04:56:13.078Z"
+  }
+}

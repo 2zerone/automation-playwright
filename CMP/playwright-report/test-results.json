@@ -102,23 +102,17 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3897,
+                      "duration": 2901,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "🎬 시나리오 1 녹화 설정: 활성화\n"
+                          "text": "🎬 시나리오 1 녹화 설정: 비활성화\n"
                         },
                         {
-                          "text": "🎬 녹화가 활성화되어 브라우저 컨텍스트를 생성합니다.\n"
+                          "text": "🎬 녹화가 비활성화되어 일반 브라우저 컨텍스트를 생성합니다.\n"
                         },
                         {
-                          "text": "🎯 녹화를 위한 브라우저 포커싱 설정 중...\n"
-                        },
-                        {
-                          "text": "🎯 브라우저 포커싱 완료\n"
-                        },
-                        {
-                          "text": "[2026-02-12T01:43:42.893Z] INFO: 📝 Navigate to page 시작...\n"
+                          "text": "[2026-02-12T06:57:47.093Z] INFO: 📝 Navigate to page 시작...\n"
                         },
                         {
                           "text": "📝 Executing: Navigate to page...\n"
@@ -130,13 +124,13 @@
                           "text": "✅ Completed: Navigate to page\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:45.291Z] SUCCESS: ✅ Navigate to page 성공\n"
+                          "text": "[2026-02-12T06:57:49.303Z] SUCCESS: ✅ Navigate to page 성공\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:45.292Z] INFO: ⏱️ Navigate to page 소요시간: 2399ms\n"
+                          "text": "[2026-02-12T06:57:49.303Z] INFO: ⏱️ Navigate to page 소요시간: 2210ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Navigate to page-성공-2026-02-12T01-43-45-292.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-Navigate to page-성공-2026-02-12T06-57-49-303.png\n"
                         }
                       ],
                       "stderr": [
@@ -148,10 +142,10 @@
                       "steps": [
                         {
                           "title": "Navigate to page",
-                          "duration": 3890
+                          "duration": 2896
                         }
                       ],
-                      "startTime": "2026-02-12T01:43:39.020Z",
+                      "startTime": "2026-02-12T06:57:45.617Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -186,11 +180,11 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3442,
+                      "duration": 2676,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-12T01:43:46.794Z] INFO: 📝 Fill username 시작...\n"
+                          "text": "[2026-02-12T06:57:50.003Z] INFO: 📝 Fill username 시작...\n"
                         },
                         {
                           "text": "📝 Executing: Fill username...\n"
@@ -229,19 +223,19 @@
                           "text": "🔑 Unique 값 감지: username = yh.lee5\n"
                         },
                         {
-                          "text": "🔢 Unique 값 생성: yh.lee5 → yh.lee5-001\n"
+                          "text": "🔢 Unique 값 생성: yh.lee5 → yh.lee5-002\n"
                         },
                         {
                           "text": "✅ Completed: Fill username\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:48.256Z] SUCCESS: ✅ Fill username 성공\n"
+                          "text": "[2026-02-12T06:57:51.439Z] SUCCESS: ✅ Fill username 성공\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:48.256Z] INFO: ⏱️ Fill username 소요시간: 1462ms\n"
+                          "text": "[2026-02-12T06:57:51.439Z] INFO: ⏱️ Fill username 소요시간: 1436ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Fill username-성공-2026-02-12T01-43-48-257.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-Fill username-성공-2026-02-12T06-57-51-439.png\n"
                         }
                       ],
                       "stderr": [],
@@ -249,10 +243,10 @@
                       "steps": [
                         {
                           "title": "Fill username",
-                          "duration": 2450
+                          "duration": 2099
                         }
                       ],
-                      "startTime": "2026-02-12T01:43:46.783Z",
+                      "startTime": "2026-02-12T06:57:49.993Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -287,11 +281,11 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3134,
+                      "duration": 2487,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-12T01:43:50.243Z] INFO: 📝 Fill password 시작...\n"
+                          "text": "[2026-02-12T06:57:52.680Z] INFO: 📝 Fill password 시작...\n"
                         },
                         {
                           "text": "📝 Executing: Fill password...\n"
@@ -318,13 +312,13 @@
                           "text": "✅ Completed: Fill password\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:51.664Z] SUCCESS: ✅ Fill password 성공\n"
+                          "text": "[2026-02-12T06:57:54.077Z] SUCCESS: ✅ Fill password 성공\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:51.664Z] INFO: ⏱️ Fill password 소요시간: 1421ms\n"
+                          "text": "[2026-02-12T06:57:54.078Z] INFO: ⏱️ Fill password 소요시간: 1398ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Fill password-성공-2026-02-12T01-43-51-664.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-Fill password-성공-2026-02-12T06-57-54-078.png\n"
                         }
                       ],
                       "stderr": [],
@@ -332,10 +326,10 @@
                       "steps": [
                         {
                           "title": "Fill password",
-                          "duration": 2297
+                          "duration": 2001
                         }
                       ],
-                      "startTime": "2026-02-12T01:43:50.235Z",
+                      "startTime": "2026-02-12T06:57:52.677Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -370,11 +364,11 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3049,
+                      "duration": 3932,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[2026-02-12T01:43:53.393Z] INFO: 📝 Click login button 시작...\n"
+                          "text": "[2026-02-12T06:57:55.172Z] INFO: 📝 Click login button 시작...\n"
                         },
                         {
                           "text": "📝 Executing: Click login button...\n"
@@ -383,52 +377,31 @@
                           "text": "✅ Completed: Click login button\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:55.495Z] SUCCESS: ✅ Click login button 성공\n"
+                          "text": "[2026-02-12T06:57:57.335Z] SUCCESS: ✅ Click login button 성공\n"
                         },
                         {
-                          "text": "[2026-02-12T01:43:55.496Z] INFO: ⏱️ Click login button 소요시간: 2103ms\n"
+                          "text": "[2026-02-12T06:57:57.335Z] INFO: ⏱️ Click login button 소요시간: 2163ms\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Click login button-성공-2026-02-12T01-43-55-496.png\n"
+                          "text": "📸 스크린샷 저장: screenshot-Click login button-성공-2026-02-12T06-57-57-335.png\n"
                         },
                         {
-                          "text": "🎬 녹화가 활성화되어 녹화 파일을 처리합니다.\n"
-                        },
-                        {
-                          "text": "📹 [시나리오 1] Playwright 비디오 경로: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\test-results\\videos\\ddd97e29eeb5e1ed81d8f89c6ecbcaa8.webm\n"
-                        },
-                        {
-                          "text": "📹 녹화 파일명 변경: ddd97e29eeb5e1ed81d8f89c6ecbcaa8.webm → CMP-scenario-1-2026.-02.-12.-10-43-42.webm\n"
-                        },
-                        {
-                          "text": "📹 사용자 지정 경로에 녹화 파일 복사 완료: C:\\Users\\okestro\\Desktop\\0212\\CMP-scenario-1-2026.-02.-12.-10-43-42.webm\n"
-                        },
-                        {
-                          "text": "✅ 사용자 지정 경로 녹화 파일 확인 완료:\n"
-                        },
-                        {
-                          "text": "   - 경로: C:\\Users\\okestro\\Desktop\\0212\\CMP-scenario-1-2026.-02.-12.-10-43-42.webm\n"
-                        },
-                        {
-                          "text": "   - 크기: 0.78 MB\n"
-                        },
-                        {
-                          "text": "   - 수정시간: 2026. 2. 12. 오전 10:43:56\n"
+                          "text": "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.\n"
                         },
                         {
                           "text": "\n--- CMP 시나리오 1: cmp test 최종 테스트 결과 ---\n"
                         },
                         {
-                          "text": "✅ Navigate to page: PASS (2399ms)\n"
+                          "text": "✅ Navigate to page: PASS (2210ms)\n"
                         },
                         {
-                          "text": "✅ Fill username: PASS (1462ms)\n"
+                          "text": "✅ Fill username: PASS (1436ms)\n"
                         },
                         {
-                          "text": "✅ Fill password: PASS (1421ms)\n"
+                          "text": "✅ Fill password: PASS (1398ms)\n"
                         },
                         {
-                          "text": "✅ Click login button: PASS (2103ms)\n"
+                          "text": "✅ Click login button: PASS (2163ms)\n"
                         },
                         {
                           "text": "----------------------------------\n"
@@ -442,12 +415,18 @@
                       "steps": [
                         {
                           "title": "Click login button",
-                          "duration": 3045
+                          "duration": 3072
                         }
                       ],
-                      "startTime": "2026-02-12T01:43:53.376Z",
+                      "startTime": "2026-02-12T06:57:55.167Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\test-results\\scenario-scenario-1-시나리오-1-cmp-test-Click-login-button-chromium\\test-finished-1.png"
+                        }
+                      ]
                     }
                   ],
                   "status": "expected"
@@ -465,8 +444,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-02-12T01:43:36.914Z",
-    "duration": 20208.074,
+    "startTime": "2026-02-12T06:57:44.482Z",
+    "duration": 15035.828,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

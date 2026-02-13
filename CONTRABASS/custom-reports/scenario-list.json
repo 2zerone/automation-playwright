@@ -111,6 +111,21 @@
       "totalDuration": 0,
       "successCount": 0,
       "failCount": 0
+    },
+    {
+      "id": 12,
+      "name": "시나리오 12: test 001",
+      "description": "설명",
+      "path": "./scenario-12/custom-report.html",
+      "status": "pass",
+      "lastRun": "2026-02-12T04:57:45.107Z",
+      "duration": "1분 15초",
+      "startTime": "2026-02-12T04:56:30.488Z",
+      "timestamp": "2026. 2. 12. 오후 1:56:30",
+      "runCount": 2,
+      "totalDuration": 150,
+      "successCount": 4,
+      "failCount": 0
     }
   ]
 }

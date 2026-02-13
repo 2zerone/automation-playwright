@@ -590,5 +590,293 @@
     "startTime": "2026-02-05T07:01:09.653Z",
     "endTime": "2026-02-05T07:01:52.000Z",
     "timestamp": "2026. 2. 5. 오후 4:01:09"
+  },
+  "scenario-12": {
+    "status": "pass",
+    "testCases": [
+      {
+        "name": "페이지 이동",
+        "status": "pass",
+        "duration": 3225,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:33.395Z",
+        "endTime": "2026-02-12T04:56:36.620Z"
+      },
+      {
+        "name": "아이디를 입력해 주세요 입력",
+        "status": "pass",
+        "duration": 4551,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:37.458Z",
+        "endTime": "2026-02-12T04:56:42.009Z"
+      },
+      {
+        "name": "비밀번호를 입력해 주세요 입력",
+        "status": "pass",
+        "duration": 2825,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:42.014Z",
+        "endTime": "2026-02-12T04:56:44.839Z"
+      },
+      {
+        "name": "로그인 버튼 클릭",
+        "status": "pass",
+        "duration": 2985,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:44.847Z",
+        "endTime": "2026-02-12T04:56:47.832Z"
+      },
+      {
+        "name": "Okestro OKESTRO unfold_more 버튼 클릭",
+        "status": "pass",
+        "duration": 2430,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:47.848Z",
+        "endTime": "2026-02-12T04:56:50.278Z"
+      },
+      {
+        "name": "요소 클릭",
+        "status": "pass",
+        "duration": 1862,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:50.281Z",
+        "endTime": "2026-02-12T04:56:52.143Z"
+      },
+      {
+        "name": "목동(allinone) 버튼 클릭",
+        "status": "pass",
+        "duration": 2323,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:52.146Z",
+        "endTime": "2026-02-12T04:56:54.469Z"
+      },
+      {
+        "name": "전체 프로젝트 버튼 클릭",
+        "status": "pass",
+        "duration": 2316,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:54.472Z",
+        "endTime": "2026-02-12T04:56:56.788Z"
+      },
+      {
+        "name": "선택 버튼 클릭",
+        "status": "pass",
+        "duration": 4039,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:56:56.792Z",
+        "endTime": "2026-02-12T04:57:00.831Z"
+      },
+      {
+        "name": "요소 클릭 2",
+        "status": "pass",
+        "duration": 2012,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:00.835Z",
+        "endTime": "2026-02-12T04:57:02.847Z"
+      },
+      {
+        "name": "인스턴스 메뉴 클릭",
+        "status": "pass",
+        "duration": 1969,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:02.852Z",
+        "endTime": "2026-02-12T04:57:04.821Z"
+      },
+      {
+        "name": "add 생성 버튼 클릭",
+        "status": "pass",
+        "duration": 2351,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:04.824Z",
+        "endTime": "2026-02-12T04:57:07.175Z"
+      },
+      {
+        "name": "이름을 입력해 주세요 입력",
+        "status": "pass",
+        "duration": 1680,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:07.177Z",
+        "endTime": "2026-02-12T04:57:08.857Z"
+      },
+      {
+        "name": "항목 이름 또는 값을 입력해 주세요 입력",
+        "status": "pass",
+        "duration": 1717,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:08.860Z",
+        "endTime": "2026-02-12T04:57:10.577Z"
+      },
+      {
+        "name": "엔터 키 누르기",
+        "status": "pass",
+        "duration": 1649,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:10.579Z",
+        "endTime": "2026-02-12T04:57:12.228Z"
+      },
+      {
+        "name": "folder QA a10de7c81554455cad94c00aee1819a2 체크",
+        "status": "pass",
+        "duration": 1702,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:12.231Z",
+        "endTime": "2026-02-12T04:57:13.933Z"
+      },
+      {
+        "name": "다음 버튼 클릭",
+        "status": "pass",
+        "duration": 2555,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:13.935Z",
+        "endTime": "2026-02-12T04:57:16.490Z"
+      },
+      {
+        "name": "항목 이름 또는 값을 입력해 주세요 입력 2",
+        "status": "pass",
+        "duration": 1879,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:16.492Z",
+        "endTime": "2026-02-12T04:57:18.371Z"
+      },
+      {
+        "name": "엔터 키 누르기 2",
+        "status": "pass",
+        "duration": 1730,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:18.373Z",
+        "endTime": "2026-02-12T04:57:20.103Z"
+      },
+      {
+        "name": "ubuntu-24.04-kubespray ACTIVE 체크",
+        "status": "pass",
+        "duration": 1839,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:20.106Z",
+        "endTime": "2026-02-12T04:57:21.945Z"
+      },
+      {
+        "name": "볼륨을 입력해 주세요 입력",
+        "status": "pass",
+        "duration": 1763,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:21.947Z",
+        "endTime": "2026-02-12T04:57:23.710Z"
+      },
+      {
+        "name": "요소 클릭 3",
+        "status": "pass",
+        "duration": 2026,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:23.712Z",
+        "endTime": "2026-02-12T04:57:25.738Z"
+      },
+      {
+        "name": "keyboard_arrow_right 버튼 클릭",
+        "status": "pass",
+        "duration": 2484,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:25.742Z",
+        "endTime": "2026-02-12T04:57:28.226Z"
+      },
+      {
+        "name": "4C8M 4 Core 8.0 GiB 0.0 GiB 체크",
+        "status": "pass",
+        "duration": 1727,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:28.228Z",
+        "endTime": "2026-02-12T04:57:29.955Z"
+      },
+      {
+        "name": "다음 버튼 클릭 2",
+        "status": "pass",
+        "duration": 2346,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:29.958Z",
+        "endTime": "2026-02-12T04:57:32.304Z"
+      },
+      {
+        "name": "고정 IP 추가 버튼 클릭",
+        "status": "pass",
+        "duration": 2419,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:32.306Z",
+        "endTime": "2026-02-12T04:57:34.725Z"
+      },
+      {
+        "name": "항목 이름 또는 값을 입력해 주세요 입력 3",
+        "status": "pass",
+        "duration": 1791,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:34.727Z",
+        "endTime": "2026-02-12T04:57:36.518Z"
+      },
+      {
+        "name": "엔터 키 누르기 3",
+        "status": "pass",
+        "duration": 1643,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:36.521Z",
+        "endTime": "2026-02-12T04:57:38.164Z"
+      },
+      {
+        "name": "QA-segment ACTIVE 1 Yes No 체크",
+        "status": "pass",
+        "duration": 1781,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:38.166Z",
+        "endTime": "2026-02-12T04:57:39.947Z"
+      },
+      {
+        "name": "추가 버튼 클릭",
+        "status": "pass",
+        "duration": 2330,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:39.950Z",
+        "endTime": "2026-02-12T04:57:42.280Z"
+      },
+      {
+        "name": "다음 버튼 클릭 3",
+        "status": "pass",
+        "duration": 2413,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T04:57:42.282Z",
+        "endTime": "2026-02-12T04:57:44.695Z"
+      }
+    ],
+    "duration": "1분 15초",
+    "startTime": "2026-02-12T04:56:30.488Z",
+    "endTime": "2026-02-12T04:57:45.074Z",
+    "timestamp": "2026. 2. 12. 오후 1:56:30"
   }
 }

@@ -5,43 +5,88 @@
       {
         "name": "Navigate to page",
         "status": "pass",
-        "duration": 3897,
+        "duration": 2901,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T01:43:39.020Z",
-        "endTime": "2026-02-12T01:43:42.917Z"
+        "startTime": "2026-02-12T06:57:45.617Z",
+        "endTime": "2026-02-12T06:57:48.518Z"
       },
       {
         "name": "Fill username",
         "status": "pass",
-        "duration": 3442,
+        "duration": 2676,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T01:43:46.783Z",
-        "endTime": "2026-02-12T01:43:50.225Z"
+        "startTime": "2026-02-12T06:57:49.993Z",
+        "endTime": "2026-02-12T06:57:52.669Z"
       },
       {
         "name": "Fill password",
         "status": "pass",
-        "duration": 3134,
+        "duration": 2487,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T01:43:50.235Z",
-        "endTime": "2026-02-12T01:43:53.369Z"
+        "startTime": "2026-02-12T06:57:52.677Z",
+        "endTime": "2026-02-12T06:57:55.164Z"
       },
       {
         "name": "Click login button",
         "status": "pass",
-        "duration": 3049,
+        "duration": 3932,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T01:43:53.376Z",
-        "endTime": "2026-02-12T01:43:56.425Z"
+        "startTime": "2026-02-12T06:57:55.167Z",
+        "endTime": "2026-02-12T06:57:59.099Z"
       }
     ],
-    "duration": "0분 25초",
-    "startTime": "2026-02-12T01:43:32.205Z",
-    "endTime": "2026-02-12T01:43:57.311Z",
-    "timestamp": "2026. 2. 12. 오전 10:43:32"
+    "duration": "0분 17초",
+    "startTime": "2026-02-12T06:57:42.183Z",
+    "endTime": "2026-02-12T06:57:59.640Z",
+    "timestamp": "2026. 2. 12. 오후 3:57:42"
+  },
+  "scenario-2": {
+    "status": "fail",
+    "testCases": [
+      {
+        "name": "Navigate to page",
+        "status": "pass",
+        "duration": 3026,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T06:57:45.868Z",
+        "endTime": "2026-02-12T06:57:48.894Z"
+      },
+      {
+        "name": "Fill username",
+        "status": "pass",
+        "duration": 3011,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T06:57:50.163Z",
+        "endTime": "2026-02-12T06:57:53.174Z"
+      },
+      {
+        "name": "Fill password",
+        "status": "pass",
+        "duration": 3291,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-12T06:57:53.178Z",
+        "endTime": "2026-02-12T06:57:56.469Z"
+      },
+      {
+        "name": "Click login button",
+        "status": "fail",
+        "duration": 55,
+        "error": "Error: locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '로그인' })\u001b[22m\n\n\n   at ..\\lib\\classes\\AutoRecorded_cmp_test.js:82\n\n  80 |   async clickLoginButton(config) {\n  81 |     console.log('📝 Executing: Click login button...');\n> 82 |     await this.page.getByRole('button', { name: '로그인' }).click();\n     |                                                          ^\n  83 |     await this.page.waitForTimeout(1000);\n  84 |     await this.captureScreenshot('clickLoginButton');\n  85 |     console.log('✅ Completed: Click login button');\n    at AutoRecorded_cmp_test.clickLoginButton (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\lib\\classes\\AutoRecorded_cmp_test.js:82:58)\n    at stepFunction (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-2.spec.js:72:46)\n    at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:95:11)\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-2.spec.js:70:13\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-2.spec.js:69:16",
+        "hasResults": true,
+        "startTime": "2026-02-12T06:57:56.474Z",
+        "endTime": "2026-02-12T06:57:56.529Z"
+      }
+    ],
+    "duration": "0분 15초",
+    "startTime": "2026-02-12T06:57:42.178Z",
+    "endTime": "2026-02-12T06:57:57.166Z",
+    "timestamp": "2026. 2. 12. 오후 3:57:42"
   }
 }
