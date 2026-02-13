@@ -765,6 +765,24 @@
             color: #ef4444;
         }
 
+        .result-count {
+            margin-top: 12px;
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 3px solid #3b82f6;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #1e40af;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-count i {
+            color: #3b82f6;
+        }
+
         .summary-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -3461,6 +3479,8 @@
                                 </button>
                             </div>
                         </div>
+                        <!-- 검색 결과 카운터 -->
+                        <div id="scenarioResultCount" class="result-count" style="display: none;"></div>
                     </div>
                     
                     <!-- 시나리오 그리드 -->
@@ -3495,6 +3515,8 @@
                                 </button>
                             </div>
                         </div>
+                        <!-- 검색 결과 카운터 -->
+                        <div id="historyResultCount" class="result-count" style="display: none;"></div>
                     </div>
                         
                     <!-- 시나리오 그리드 -->
@@ -4285,19 +4307,19 @@
             const successRate = executedScenarios > 0 ? (completedScenarios / executedScenarios * 100).toFixed(1) : '0.0';
             
             summaryContainer.innerHTML = `
-                <div class="summary-card total">
+                <div class="summary-card total" data-filter="all" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number total">${totalScenarios}</div>
                     <div class="label">총 시나리오</div>
                 </div>
-                <div class="summary-card success">
+                <div class="summary-card success" data-filter="success" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number success">${completedScenarios}</div>
                     <div class="label">성공</div>
                 </div>
-                <div class="summary-card failure">
+                <div class="summary-card failure" data-filter="failed" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number failure">${failedScenarios}</div>
                     <div class="label">실패</div>
                 </div>
-                <div class="summary-card not-run">
+                <div class="summary-card not-run" data-filter="ready" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number not-run">${notRunScenarios}</div>
                     <div class="label">미실행</div>
                 </div>
@@ -4311,7 +4333,133 @@
                 </div>
             `;
             
+            // 요약 카드 클릭 이벤트 추가
+            const filterCards = summaryContainer.querySelectorAll('.summary-card[data-filter]');
+            filterCards.forEach(card => {
+                const filterType = card.getAttribute('data-filter');
+                
+                // 현재 활성화된 필터와 일치하면 강조 표시 복원
+                if (currentFilter && currentFilter === filterType && filterType !== 'all') {
+                    card.style.border = '2px solid rgba(59, 130, 246, 0.8)';
+                    card.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
+                }
+                
+                card.addEventListener('click', () => {
+                    handleSummaryCardClick(filterType, card);
+                });
+                
+                // 호버 효과
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'scale(1.05)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+            
             console.log('요약 카드 생성 완료');
+            
+            // 필터가 활성화되어 있으면 자동으로 재적용
+            if (currentFilter) {
+                console.log('저장된 필터 재적용:', currentFilter);
+                // 약간의 지연 후 필터 적용 (DOM 렌더링 완료 대기)
+                setTimeout(() => {
+                    filterScenarios('scenarios');
+                }, 100);
+            }
+        }
+
+        // 요약 카드 클릭 처리 (필터링)
+        let currentFilter = null; // 현재 활성화된 필터
+        
+        function handleSummaryCardClick(filterType, clickedCard) {
+            console.log('🔍 요약 카드 클릭:', filterType);
+            
+            const grid = document.getElementById('scenarioGrid');
+            const cards = Array.from(grid.children).filter(el => 
+                el.classList && el.classList.contains('scenario-card') && el.dataset.scenarioId
+            );
+            
+            // 모든 요약 카드에서 active 클래스 제거
+            const allFilterCards = document.querySelectorAll('.summary-card[data-filter]');
+            allFilterCards.forEach(card => {
+                card.style.border = '';
+                card.style.boxShadow = '';
+            });
+            
+            // 같은 필터를 다시 클릭하면 필터 해제
+            if (currentFilter === filterType && filterType !== 'all') {
+                console.log('🔄 필터 해제');
+                currentFilter = null;
+                cards.forEach(card => {
+                    card.style.display = '';
+                });
+                updateNoResultsMessage(grid, false);
+                return;
+            }
+            
+            // 새로운 필터 적용
+            currentFilter = filterType;
+            
+            // 클릭된 카드 강조
+            if (filterType !== 'all') {
+                clickedCard.style.border = '2px solid rgba(59, 130, 246, 0.8)';
+                clickedCard.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
+            }
+            
+            // 필터 적용
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const scenarioId = parseInt(card.dataset.scenarioId);
+                const scenario = scenarios.find(s => s.id === scenarioId);
+                
+                if (!scenario) {
+                    card.style.display = 'none';
+                    return;
+                }
+                
+                let shouldShow = false;
+                if (filterType === 'all') {
+                    shouldShow = true;
+                } else if (filterType === 'success') {
+                    // 성공 상태: completed, pass, success 모두 포함
+                    shouldShow = scenario.status === 'success' || scenario.status === 'completed' || scenario.status === 'pass';
+                } else if (filterType === 'failed') {
+                    // 실패 상태: failed, fail 모두 포함
+                    shouldShow = scenario.status === 'failed' || scenario.status === 'fail';
+                } else if (filterType === 'ready') {
+                    shouldShow = scenario.status === 'ready';
+                }
+                
+                card.style.display = shouldShow ? '' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+            
+            console.log(`✅ 필터 적용 완료: ${visibleCount}개 표시`);
+            updateNoResultsMessage(grid, visibleCount === 0);
+        }
+        
+        function updateNoResultsMessage(grid, show) {
+            let noResultsDiv = grid.querySelector('.no-results-filter');
+            
+            if (show && !noResultsDiv) {
+                noResultsDiv = document.createElement('div');
+                noResultsDiv.className = 'no-results-filter';
+                noResultsDiv.style.cssText = `
+                    grid-column: 1 / -1;
+                    text-align: center;
+                    padding: 40px 20px;
+                    color: #94a3b8;
+                    font-size: 1.1em;
+                `;
+                noResultsDiv.innerHTML = `
+                    <i class="fas fa-filter" style="font-size: 3em; margin-bottom: 15px; opacity: 0.3;"></i>
+                    <p style="margin: 0;">해당 상태의 시나리오가 없습니다.</p>
+                `;
+                grid.appendChild(noResultsDiv);
+            } else if (!show && noResultsDiv) {
+                noResultsDiv.remove();
+            }
         }
 
         // 시나리오 초기화
@@ -4595,7 +4743,9 @@
             }
 
             const searchTerm = searchInput.value.toLowerCase().trim();
-            console.log(`검색 시작: "${searchTerm}" (모드: ${mode})`);
+            const activeFilter = isHistory ? currentHistoryFilter : currentFilter;
+            
+            console.log(`필터링 시작: 검색어="${searchTerm}", 상태필터="${activeFilter}" (모드: ${mode})`);
             
             // scenario-card 클래스를 가진 div만 선택
             const cards = Array.from(grid.children).filter(el => 
@@ -4615,7 +4765,7 @@
                     return;
                 }
 
-                // 통합 검색: 번호, 제목, 설명 모두에서 검색
+                // 1. 검색어 필터링
                 let matchSearch = true;
                 if (searchTerm) {
                     const idMatch = scenario.id.toString().includes(searchTerm);
@@ -4626,9 +4776,23 @@
                     
                     console.log(`시나리오 ${scenarioId} 검색: ID=${idMatch}, 제목=${titleMatch}, 설명=${descMatch}`);
                 }
+                
+                // 2. 상태 필터링
+                let matchStatus = true;
+                if (activeFilter && activeFilter !== 'all') {
+                    if (activeFilter === 'success') {
+                        matchStatus = scenario.status === 'success' || scenario.status === 'completed' || scenario.status === 'pass';
+                    } else if (activeFilter === 'failed') {
+                        matchStatus = scenario.status === 'failed' || scenario.status === 'fail';
+                    } else if (activeFilter === 'ready') {
+                        matchStatus = scenario.status === 'ready';
+                    }
+                }
 
-                // 카드 표시/숨김
-                if (matchSearch) {
+                // 3. 교집합: 검색어와 상태 필터 모두 만족해야 표시
+                const shouldShow = matchSearch && matchStatus;
+                
+                if (shouldShow) {
                     card.style.display = 'block';
                     visibleCount++;
                 } else {
@@ -4636,11 +4800,11 @@
                 }
             });
 
-            console.log(`검색 완료: ${visibleCount}개 표시`);
+            console.log(`필터링 완료: ${visibleCount}개 표시`);
 
-            // 검색 결과 없을 때 메시지 표시
+            // 결과 없을 때 메시지 표시
             let noResultsMsg = grid.querySelector('.no-search-results');
-            if (visibleCount === 0 && searchTerm) {
+            if (visibleCount === 0) {
                 if (!noResultsMsg) {
                     noResultsMsg = document.createElement('div');
                     noResultsMsg.className = 'no-search-results';
@@ -4651,18 +4815,48 @@
                         font-size: 16px;
                         grid-column: 1 / -1;
                     `;
-                    noResultsMsg.innerHTML = `
+                    grid.appendChild(noResultsMsg);
+                }
+                
+                let message = '';
+                if (searchTerm && activeFilter && activeFilter !== 'all') {
+                    message = `
+                        <i class="fas fa-filter" style="font-size: 48px; margin-bottom: 20px; opacity: 0.5;"></i>
+                        <div style="font-weight: 600; margin-bottom: 8px;">필터링 결과가 없습니다</div>
+                        <div style="font-size: 14px;">검색어 "${searchTerm}"와 선택한 상태를 모두 만족하는 시나리오가 없습니다.</div>
+                    `;
+                } else if (searchTerm) {
+                    message = `
                         <i class="fas fa-search" style="font-size: 48px; margin-bottom: 20px; opacity: 0.5;"></i>
                         <div style="font-weight: 600; margin-bottom: 8px;">검색 결과가 없습니다</div>
                         <div style="font-size: 14px;">"${searchTerm}"에 대한 시나리오를 찾을 수 없습니다.</div>
                     `;
-                    grid.appendChild(noResultsMsg);
-                } else {
-                    noResultsMsg.style.display = 'block';
-                    noResultsMsg.querySelector('div:last-child').textContent = `"${searchTerm}"에 대한 시나리오를 찾을 수 없습니다.`;
+                } else if (activeFilter && activeFilter !== 'all') {
+                    message = `
+                        <i class="fas fa-filter" style="font-size: 48px; margin-bottom: 20px; opacity: 0.5;"></i>
+                        <div style="font-weight: 600; margin-bottom: 8px;">필터링 결과가 없습니다</div>
+                        <div style="font-size: 14px;">해당 상태의 시나리오가 없습니다.</div>
+                    `;
                 }
+                
+                noResultsMsg.innerHTML = message;
+                noResultsMsg.style.display = 'block';
             } else if (noResultsMsg) {
                 noResultsMsg.style.display = 'none';
+            }
+            
+            // 결과 카운터 업데이트
+            const resultCountEl = document.getElementById(isHistory ? 'historyResultCount' : 'scenarioResultCount');
+            const totalCount = cards.length;
+            
+            if (resultCountEl) {
+                if (searchTerm || (activeFilter && activeFilter !== 'all')) {
+                    // 검색어나 필터가 활성화된 경우에만 표시
+                    resultCountEl.innerHTML = `<i class="fas fa-check-circle"></i> 총 ${totalCount}개 중 <strong>${visibleCount}개</strong> 표시`;
+                    resultCountEl.style.display = 'flex';
+                } else {
+                    resultCountEl.style.display = 'none';
+                }
             }
         }
 
@@ -4978,19 +5172,19 @@
             const successRate = executedScenarios > 0 ? (completedScenarios / executedScenarios * 100).toFixed(1) : '0.0';
             
             summaryContainer.innerHTML = `
-                <div class="summary-card total">
+                <div class="summary-card total" data-filter="all" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number total">${totalScenarios}</div>
                     <div class="label">총 시나리오</div>
                 </div>
-                <div class="summary-card success">
+                <div class="summary-card success" data-filter="success" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number success">${completedScenarios}</div>
                     <div class="label">성공</div>
                 </div>
-                <div class="summary-card failure">
+                <div class="summary-card failure" data-filter="failed" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number failure">${failedScenarios}</div>
                     <div class="label">실패</div>
                 </div>
-                <div class="summary-card not-run">
+                <div class="summary-card not-run" data-filter="ready" style="cursor: pointer; transition: transform 0.2s;">
                     <div class="number not-run">${notRunScenarios}</div>
                     <div class="label">미실행</div>
                 </div>
@@ -5004,7 +5198,131 @@
                 </div>
             `;
             
+            // 요약 카드 클릭 이벤트 추가
+            const filterCards = summaryContainer.querySelectorAll('.summary-card[data-filter]');
+            filterCards.forEach(card => {
+                const filterType = card.getAttribute('data-filter');
+                
+                // 현재 활성화된 필터와 일치하면 강조 표시 복원
+                if (currentHistoryFilter && currentHistoryFilter === filterType && filterType !== 'all') {
+                    card.style.border = '2px solid rgba(59, 130, 246, 0.8)';
+                    card.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
+                }
+                
+                card.addEventListener('click', () => {
+                    handleHistorySummaryCardClick(filterType, card);
+                });
+                
+                // 호버 효과
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'scale(1.05)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+            
             console.log('이력 관리 요약 카드 생성 완료');
+            
+            // 필터가 활성화되어 있으면 자동으로 재적용
+            if (currentHistoryFilter) {
+                console.log('저장된 이력 필터 재적용:', currentHistoryFilter);
+                // 약간의 지연 후 필터 적용 (DOM 렌더링 완료 대기)
+                setTimeout(() => {
+                    filterScenarios('history');
+                }, 100);
+            }
+        }
+        
+        // 이력 관리 탭 요약 카드 클릭 처리 (필터링)
+        let currentHistoryFilter = null; // 현재 활성화된 필터 (이력 관리용)
+        
+        function handleHistorySummaryCardClick(filterType, clickedCard) {
+            console.log('🔍 이력 관리 요약 카드 클릭:', filterType);
+            
+            const grid = document.getElementById('historyScenarioGrid');
+            const cards = Array.from(grid.children).filter(el => 
+                el.classList && el.classList.contains('scenario-card') && el.dataset.scenarioId
+            );
+            
+            // 모든 요약 카드에서 active 클래스 제거
+            const allFilterCards = document.querySelectorAll('#historySummaryCards .summary-card[data-filter]');
+            allFilterCards.forEach(card => {
+                card.style.border = '';
+                card.style.boxShadow = '';
+            });
+            
+            // 같은 필터를 다시 클릭하면 필터 해제
+            if (currentHistoryFilter === filterType && filterType !== 'all') {
+                console.log('🔄 필터 해제');
+                currentHistoryFilter = null;
+                cards.forEach(card => {
+                    card.style.display = '';
+                });
+                updateHistoryNoResultsMessage(grid, false);
+                return;
+            }
+            
+            // 새로운 필터 적용
+            currentHistoryFilter = filterType;
+            
+            // 클릭된 카드 강조
+            if (filterType !== 'all') {
+                clickedCard.style.border = '2px solid rgba(59, 130, 246, 0.8)';
+                clickedCard.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
+            }
+            
+            // 필터 적용
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const scenarioId = parseInt(card.dataset.scenarioId);
+                const scenario = scenarios.find(s => s.id === scenarioId);
+                
+                if (!scenario) {
+                    card.style.display = 'none';
+                    return;
+                }
+                
+                let shouldShow = false;
+                if (filterType === 'all') {
+                    shouldShow = true;
+                } else if (filterType === 'success') {
+                    shouldShow = scenario.status === 'success' || scenario.status === 'completed' || scenario.status === 'pass';
+                } else if (filterType === 'failed') {
+                    shouldShow = scenario.status === 'failed' || scenario.status === 'fail';
+                } else if (filterType === 'ready') {
+                    shouldShow = scenario.status === 'ready';
+                }
+                
+                card.style.display = shouldShow ? '' : 'none';
+                if (shouldShow) visibleCount++;
+            });
+            
+            console.log(`✅ 이력 관리 필터 적용 완료: ${visibleCount}개 표시`);
+            updateHistoryNoResultsMessage(grid, visibleCount === 0);
+        }
+        
+        function updateHistoryNoResultsMessage(grid, show) {
+            let noResultsDiv = grid.querySelector('.no-results-filter');
+            
+            if (show && !noResultsDiv) {
+                noResultsDiv = document.createElement('div');
+                noResultsDiv.className = 'no-results-filter';
+                noResultsDiv.style.cssText = `
+                    grid-column: 1 / -1;
+                    text-align: center;
+                    padding: 40px 20px;
+                    color: #94a3b8;
+                    font-size: 1.1em;
+                `;
+                noResultsDiv.innerHTML = `
+                    <i class="fas fa-filter" style="font-size: 3em; margin-bottom: 15px; opacity: 0.3;"></i>
+                    <p style="margin: 0;">해당 상태의 시나리오가 없습니다.</p>
+                `;
+                grid.appendChild(noResultsDiv);
+            } else if (!show && noResultsDiv) {
+                noResultsDiv.remove();
+            }
         }
 
 
