@@ -171,10 +171,12 @@
             <div class="manager-select-container">
               <div class="form-group" style="flex: 1; margin-bottom: 0;">
                 <label for="managerSelect">Manager 클래스 선택</label>
-                <select id="managerSelect" class="manager-select">
-                  <option value="">-- Manager를 선택하세요 --</option>
-                  <!-- 동적으로 옵션 생성 -->
-                </select>
+                <div class="searchable-select-wrapper">
+                  <input type="text" id="managerSearchInput" class="manager-search-input" placeholder="Manager를 선택하세요." autocomplete="off" />
+                  <button type="button" id="clearManagerSearchBtn" class="clear-search-btn" style="display: none;" title="검색어 지우기">✕</button>
+                  <div id="managerDropdown" class="manager-dropdown" style="display: none;"></div>
+                  <input type="hidden" id="managerSelect" />
+                </div>
                 <small id="managerInfo" class="manager-info"></small>
               </div>
             </div>

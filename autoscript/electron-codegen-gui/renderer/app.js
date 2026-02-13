@@ -71,6 +71,9 @@ const elements = {
   startCodegenBtn: document.getElementById('startCodegenBtn'),
   managerSelectSection: document.getElementById('managerSelectSection'),
   managerSelect: document.getElementById('managerSelect'),
+  managerSearchInput: document.getElementById('managerSearchInput'),
+  managerDropdown: document.getElementById('managerDropdown'),
+  clearManagerSearchBtn: document.getElementById('clearManagerSearchBtn'),
   managerInfo: document.getElementById('managerInfo'),
   createScenarioBtn: document.getElementById('createScenarioBtn'),
   scenarioHistorySection: document.getElementById('scenarioHistorySection'),
@@ -827,25 +830,35 @@ function setupEventListeners() {
   elements.editDefaultUrlBtn.addEventListener('click', editDefaultUrl);
   
   // Manager 선택 및 시나리오 생성
-  elements.managerSelect.addEventListener('change', () => {
-    const selected = elements.managerSelect.value;
-    const selectedOption = elements.managerSelect.options[elements.managerSelect.selectedIndex];
+  // 검색 input 포커스 시 드롭다운 표시
+  elements.managerSearchInput.addEventListener('focus', () => {
+    if (!elements.managerSearchInput.disabled && managerListData.length > 0) {
+      renderManagerDropdown(managerListData, elements.managerSearchInput.value);
+      elements.managerDropdown.style.display = 'block';
+    }
+  });
+  
+  // 검색 input 입력 시 필터링
+  elements.managerSearchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value;
     
-    if (selected) {
-      elements.createScenarioBtn.disabled = false;
-      elements.manageUniqueValuesBtn.disabled = false;
-      elements.deleteManagerBtn.disabled = false;
-      const title = selectedOption.dataset.title;
-      const steps = selectedOption.dataset.steps;
-      const date = selectedOption.dataset.date;
-      const fileName = selectedOption.dataset.filename;
-      
-      elements.managerInfo.innerHTML = `
-        <strong>📄 파일:</strong> ${fileName}<br>
-        <strong>📋 제목:</strong> ${title}<br>
-        <strong>📅 생성일:</strong> ${new Date(date).toLocaleString('ko-KR')}
-      `;
+    // X 버튼 표시/숨김
+    if (searchTerm) {
+      elements.clearManagerSearchBtn.style.display = 'flex';
     } else {
+      elements.clearManagerSearchBtn.style.display = 'none';
+    }
+    
+    // 검색어가 있으면 필터링하여 드롭다운 표시
+    if (managerListData.length > 0) {
+      renderManagerDropdown(managerListData, searchTerm);
+      elements.managerDropdown.style.display = 'block';
+    }
+    
+    // 검색어가 정확히 일치하는 Manager가 없으면 선택 초기화
+    const exactMatch = managerListData.find(m => m.className === searchTerm);
+    if (!exactMatch && elements.managerSelect.value) {
+      elements.managerSelect.value = '';
       elements.createScenarioBtn.disabled = true;
       elements.manageUniqueValuesBtn.disabled = true;
       elements.deleteManagerBtn.disabled = true;
@@ -853,9 +866,36 @@ function setupEventListeners() {
     }
   });
   
+  // 문서 클릭 시 드롭다운 닫기
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.searchable-select-wrapper')) {
+      elements.managerDropdown.style.display = 'none';
+    }
+  });
+  
   elements.createScenarioBtn.addEventListener('click', createScenario);
   elements.manageUniqueValuesBtn.addEventListener('click', manageUniqueValues);
   elements.deleteManagerBtn.addEventListener('click', deleteManager);
+  
+  // Manager 검색 X 버튼
+  elements.clearManagerSearchBtn.addEventListener('click', () => {
+    elements.managerSearchInput.value = '';
+    elements.managerSelect.value = '';
+    elements.clearManagerSearchBtn.style.display = 'none';
+    elements.createScenarioBtn.disabled = true;
+    elements.manageUniqueValuesBtn.disabled = true;
+    elements.deleteManagerBtn.disabled = true;
+    elements.managerInfo.innerHTML = '';
+    
+    // 드롭다운 다시 표시 (전체 목록)
+    if (managerListData.length > 0) {
+      renderManagerDropdown(managerListData);
+      elements.managerDropdown.style.display = 'block';
+    }
+    
+    // input에 포커스
+    elements.managerSearchInput.focus();
+  });
   
   // 코드 변환
   elements.convertCodeBtn.addEventListener('click', convertCode);
@@ -1943,9 +1983,11 @@ async function refreshManagerList() {
     
     if (!managers || managers.length === 0) {
       // Manager가 없을 때
-      elements.managerSelect.innerHTML = '<option value="">-- 아직 녹화된 Manager가 없습니다 --</option>';
-      elements.managerSelect.disabled = true;
+      elements.managerSearchInput.disabled = true;
+      elements.managerSearchInput.placeholder = '아직 녹화된 Manager가 없습니다';
       elements.createScenarioBtn.disabled = true;
+      elements.manageUniqueValuesBtn.disabled = true;
+      elements.deleteManagerBtn.disabled = true;
       
       // 안내 메시지 추가
       if (!elements.managerInfo.textContent.includes('녹화를 먼저')) {
@@ -1958,19 +2000,11 @@ async function refreshManagerList() {
     }
     
     // Manager가 있을 때
-    elements.managerSelect.disabled = false;
+    elements.managerSearchInput.disabled = false;
+    elements.managerSearchInput.placeholder = 'Manager를 선택하세요.';
     
-    // Select Box 옵션 업데이트
-    elements.managerSelect.innerHTML = '<option value="">-- Manager를 선택하세요 --</option>' +
-      managers.map(m => `
-        <option value="${m.className}" 
-                data-title="${m.title}" 
-                data-steps="${m.stepCount}"
-                data-date="${m.createdAt}"
-                data-filename="${m.fileName}">
-          ${m.className}
-        </option>
-      `).join('');
+    // 검색 가능한 드롭다운 렌더링
+    renderManagerDropdown(managers);
     
     addLog('info', `📦 Manager 목록 로드 완료: ${managers.length}개`);
     
@@ -1979,6 +2013,85 @@ async function refreshManagerList() {
     addLog('error', `❌ Manager 목록 로드 실패: ${error.message}`);
   }
 }
+
+// 검색 가능한 Manager 드롭다운 렌더링
+function renderManagerDropdown(managers, searchTerm = '') {
+  if (!managers || managers.length === 0) {
+    elements.managerDropdown.innerHTML = '<div class="manager-dropdown-empty">Manager가 없습니다</div>';
+    return;
+  }
+  
+  // 검색어로 필터링
+  const filteredManagers = searchTerm 
+    ? managers.filter(m => 
+        m.className.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        m.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : managers;
+  
+  if (filteredManagers.length === 0) {
+    elements.managerDropdown.innerHTML = '<div class="manager-dropdown-empty">검색 결과가 없습니다</div>';
+    return;
+  }
+  
+  // 현재 선택된 값
+  const selectedValue = elements.managerSelect.value;
+  
+  elements.managerDropdown.innerHTML = filteredManagers.map(m => `
+    <div class="manager-dropdown-item ${m.className === selectedValue ? 'selected' : ''}" 
+         data-value="${m.className}"
+         data-title="${m.title}"
+         data-steps="${m.stepCount}"
+         data-date="${m.createdAt}"
+         data-filename="${m.fileName}">
+      <div class="manager-dropdown-item-title">${m.className}</div>
+      <div class="manager-dropdown-item-info">
+        ${m.title} | ${m.stepCount}개 단계 | ${new Date(m.createdAt).toLocaleDateString('ko-KR')}
+      </div>
+    </div>
+  `).join('');
+  
+  // 각 아이템에 클릭 이벤트 추가
+  elements.managerDropdown.querySelectorAll('.manager-dropdown-item').forEach(item => {
+    item.addEventListener('click', () => {
+      selectManager(item);
+    });
+  });
+}
+
+// Manager 선택 처리
+function selectManager(itemElement) {
+  const value = itemElement.dataset.value;
+  const title = itemElement.dataset.title;
+  const steps = itemElement.dataset.steps;
+  const date = itemElement.dataset.date;
+  const fileName = itemElement.dataset.filename;
+  
+  // hidden input에 값 저장
+  elements.managerSelect.value = value;
+  
+  // 검색 input에 선택된 값 표시
+  elements.managerSearchInput.value = value;
+  
+  // X 버튼 표시
+  elements.clearManagerSearchBtn.style.display = 'flex';
+  
+  // 드롭다운 닫기
+  elements.managerDropdown.style.display = 'none';
+  
+  // 버튼 활성화
+  elements.createScenarioBtn.disabled = false;
+  elements.manageUniqueValuesBtn.disabled = false;
+  elements.deleteManagerBtn.disabled = false;
+  
+  // 정보 표시
+  elements.managerInfo.innerHTML = `
+    <strong>📄 파일명:</strong> ${fileName}<br>
+    <strong>📅 생성일:</strong> ${new Date(date).toLocaleString('ko-KR')}
+  `;
+  elements.managerInfo.style.color = 'var(--text-primary)';
+}
+
 
 // 시나리오 히스토리 저장 (LocalStorage)
 let scenarioHistory = [];
@@ -2601,10 +2714,11 @@ async function deleteManager() {
       addLog('success', `✅ ${selectedManager}이(가) 삭제되었습니다`);
       
       // Manager 목록 새로고침
-      await loadManagerList();
+      await refreshManagerList();
       
       // 선택 초기화
       elements.managerSelect.value = '';
+      elements.managerSearchInput.value = '';
       elements.managerInfo.textContent = '';
       elements.createScenarioBtn.disabled = true;
       elements.manageUniqueValuesBtn.disabled = true;
