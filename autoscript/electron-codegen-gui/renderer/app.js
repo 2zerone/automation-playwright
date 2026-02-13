@@ -2186,17 +2186,267 @@ async function manageUniqueValues() {
 }
 
 /**
+ * Toast 알림 표시
+ */
+function showToast(message, type = 'info') {
+  console.log(`Toast 알림 [${type}]: ${message}`);
+  
+  // Toast 타입별 설정
+  const toastConfig = {
+    success: {
+      icon: 'fas fa-check-circle',
+      title: '성공',
+      color: '#10b981'
+    },
+    error: {
+      icon: 'fas fa-exclamation-circle',
+      title: '오류',
+      color: '#ef4444'
+    },
+    warning: {
+      icon: 'fas fa-exclamation-triangle',
+      title: '경고',
+      color: '#f59e0b'
+    },
+    info: {
+      icon: 'fas fa-info-circle',
+      title: '정보',
+      color: '#3b82f6'
+    }
+  };
+  
+  const config = toastConfig[type] || toastConfig.info;
+  
+  // Toast 요소 생성
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+    max-width: 500px;
+    z-index: 10000;
+    animation: slideIn 0.3s ease-out;
+    border-left: 4px solid ${config.color};
+  `;
+  
+  toast.innerHTML = `
+    <i class="${config.icon}" style="color: ${config.color}; font-size: 20px;"></i>
+    <div style="flex: 1;">
+      <div style="font-weight: 600; color: #2c3e50; margin-bottom: 4px;">${config.title}</div>
+      <div style="color: #6c757d; font-size: 14px;">${message}</div>
+    </div>
+    <button onclick="this.parentElement.remove()" style="
+      background: none;
+      border: none;
+      color: #6c757d;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 4px;
+    ">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+  
+  // body에 추가
+  document.body.appendChild(toast);
+  
+  // 자동 제거 (5초 후)
+  setTimeout(() => {
+    toast.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+      if (toast.parentElement) {
+        toast.remove();
+      }
+    }, 300);
+  }, 5000);
+}
+
+/**
+ * 확인 다이얼로그 표시
+ */
+function showConfirmDialog(title, message, warning = '') {
+  return new Promise((resolve) => {
+    // 기존 팝업이 있다면 제거
+    const existingPopup = document.getElementById('confirmDialog');
+    if (existingPopup) {
+      existingPopup.remove();
+    }
+
+    // 팝업 오버레이 생성
+    const overlay = document.createElement('div');
+    overlay.id = 'confirmDialog';
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10001;
+      animation: fadeIn 0.3s ease-out;
+    `;
+    
+    overlay.innerHTML = `
+      <div class="confirm-dialog" style="
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        animation: scaleIn 0.3s ease-out;
+      ">
+        <div class="confirm-dialog-header" style="
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+        ">
+          <div style="
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fef3c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          ">
+            <i class="fas fa-exclamation-triangle" style="color: #f59e0b; font-size: 24px;"></i>
+          </div>
+          <h3 style="margin: 0; color: #2c3e50; font-size: 18px;">${title}</h3>
+        </div>
+        <div class="confirm-dialog-content" style="margin-bottom: 24px;">
+          <p style="color: #6c757d; margin: 0; line-height: 1.6;">${message}</p>
+          ${warning ? `<p style="color: #ef4444; margin-top: 12px; font-weight: 500; line-height: 1.6;">${warning}</p>` : ''}
+        </div>
+        <div class="confirm-dialog-actions" style="
+          display: flex;
+          gap: 12px;
+          justify-content: flex-end;
+        ">
+          <button class="confirm-dialog-cancel" style="
+            padding: 10px 20px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            color: #6c757d;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+          ">
+            <i class="fas fa-times"></i>
+            취소
+          </button>
+          <button class="confirm-dialog-confirm" style="
+            padding: 10px 20px;
+            border: none;
+            background: #ef4444;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+          ">
+            <i class="fas fa-check"></i>
+            확인
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // 애니메이션 CSS 추가
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes scaleIn {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // 버튼 이벤트 리스너
+    const cancelBtn = overlay.querySelector('.confirm-dialog-cancel');
+    const confirmBtn = overlay.querySelector('.confirm-dialog-confirm');
+
+    const closeDialog = (result) => {
+      overlay.style.animation = 'fadeIn 0.3s ease-out reverse';
+      setTimeout(() => {
+        overlay.remove();
+        style.remove();
+        resolve(result);
+      }, 300);
+    };
+
+    cancelBtn.addEventListener('click', () => closeDialog(false));
+    confirmBtn.addEventListener('click', () => closeDialog(true));
+
+    // ESC 키로 취소
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        closeDialog(false);
+        document.removeEventListener('keydown', handleEsc);
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+
+    // 오버레이 클릭으로 취소
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeDialog(false);
+      }
+    });
+  });
+}
+
+/**
  * Manager 클래스 삭제
  */
 async function deleteManager() {
   const selectedManager = elements.managerSelect.value;
   
   if (!selectedManager) {
-    addLog('error', '❌ Manager를 먼저 선택하세요');
+    showToast('Manager를 먼저 선택하세요', 'warning');
     return;
   }
   
-  const confirmed = confirm(`정말로 "${selectedManager}" Manager 클래스를 삭제하시겠습니까?\n\n⚠️ 이 작업은 되돌릴 수 없으며, 다음 항목들이 삭제됩니다:\n- Manager .js 파일\n- Unique 값 설정\n- 관련 카운터 정보\n\n계속하시겠습니까?`);
+  // showConfirmDialog 사용 (시나리오 삭제와 동일한 스타일)
+  const confirmed = await showConfirmDialog(
+    'Manager 삭제', 
+    `"${selectedManager}" Manager 클래스를 삭제하시겠습니까?`,
+    'Manager 클래스 파일이 완전히 삭제됩니다.'
+  );
   
   if (!confirmed) {
     return;
@@ -2211,6 +2461,7 @@ async function deleteManager() {
     });
     
     if (result.success) {
+      showToast(`${selectedManager} Manager 삭제 완료`, 'success');
       addLog('success', `✅ ${selectedManager}이(가) 삭제되었습니다`);
       
       // Manager 목록 새로고침
@@ -2223,9 +2474,11 @@ async function deleteManager() {
       elements.manageUniqueValuesBtn.disabled = true;
       elements.deleteManagerBtn.disabled = true;
     } else {
+      showToast(`Manager 삭제 실패: ${result.error}`, 'error');
       addLog('error', `❌ Manager 삭제 실패: ${result.error}`);
     }
   } catch (error) {
+    showToast(`Manager 삭제 중 오류: ${error.message}`, 'error');
     addLog('error', `❌ Manager 삭제 중 오류: ${error.message}`);
     console.error('Manager 삭제 실패:', error);
   }
