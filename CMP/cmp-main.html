@@ -4405,12 +4405,15 @@
 
             // 카드 클릭 시 체크박스 토글 (버튼 영역 제외)
             card.addEventListener('click', (e) => {
-                // 액션 버튼이나 체크박스 클릭 시 카드 선택 방지
-                if (e.target.closest('.scenario-actions') || e.target.closest('.action-btn') || e.target.closest('.scenario-checkbox')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    return false;
+                // 체크박스 영역 클릭 시: 체크박스 자체의 동작만 허용하고 카드 선택 로직은 실행하지 않음
+                if (e.target.closest('.scenario-checkbox')) {
+                    // 체크박스의 기본 동작을 허용하고, 카드 본체 클릭 로직만 건너뜀
+                    return;
+                }
+                
+                // 액션 버튼 클릭 시 카드 선택 방지
+                if (e.target.closest('.scenario-actions') || e.target.closest('.action-btn')) {
+                    return;
                 }
                 
                 // 다른 버튼 클릭 시에도 카드 선택 방지
