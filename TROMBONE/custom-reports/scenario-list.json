@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "시나리오 1: 로그인 테스트",
-      "description": "설명 ㅇ테스트",
+      "description": "설명 테스트",
       "path": "./scenario-1/custom-report.html",
       "status": "not-run",
       "lastRun": null,
@@ -13,7 +13,8 @@
       "runCount": 0,
       "totalDuration": 0,
       "successCount": 0,
-      "failCount": 0
+      "failCount": 0,
+      "title": "로그인 테스트"
     }
   ]
 }

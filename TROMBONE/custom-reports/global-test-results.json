@@ -1,5 +1,5 @@
 {
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
     "status": "fail",
     "duration": "0분 20초",
     "startTime": "2025-12-04T08:47:13.849Z",
@@ -616,7 +616,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-1": {
     "status": "fail",
     "duration": "0분 20초",
     "startTime": "2025-12-04T08:47:13.849Z",
@@ -1233,7 +1233,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-2": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-2": {
     "status": "stopped",
     "duration": "0분 17초",
     "startTime": "2025-11-27T09:10:36.960Z",
@@ -1770,7 +1770,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-2": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-trombone-scenario-2": {
     "status": "stopped",
     "duration": "0분 17초",
     "startTime": "2025-11-27T09:10:36.960Z",
@@ -2307,7 +2307,7 @@
       }
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
     "scenarioId": "1",
     "status": "stopped",
     "duration": "0분 29초",
@@ -2413,7 +2413,7 @@
       "message": "테스트가 수동으로 닫힘"
     }
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-1": {
     "scenarioId": "1",
     "status": "stopped",
     "duration": "0분 23초",
@@ -3696,7 +3696,7 @@
       "❌ TROMBONE 시나리오 1 stopped 상태로 종료 (exit code: 1)"
     ]
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
     "scenarioId": "3",
     "status": "stopped",
     "duration": "0분 44초",
@@ -3802,7 +3802,7 @@
       "message": "테스트가 수동으로 닫힘"
     }
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-3": {
     "scenarioId": "3",
     "status": "fail",
     "duration": "3초",
@@ -3814,7 +3814,7 @@
     "screenshots": [],
     "logs": []
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-4": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-4": {
     "scenarioId": "4",
     "status": "fail",
     "duration": "4초",
@@ -3826,7 +3826,7 @@
     "screenshots": [],
     "logs": []
   },
-  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-5": {
+  "scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-scenario-5": {
     "scenarioId": "5",
     "status": "fail",
     "duration": "4초",
@@ -3838,7 +3838,7 @@
     "screenshots": [],
     "logs": []
   },
-  "scenario-scenario-22": {
+  "scenario-scenario-scenario-scenario-scenario-22": {
     "scenarioId": "22",
     "status": "stopped",
     "duration": "0분 27초",
@@ -3898,7 +3898,7 @@
       "message": "테스트가 수동으로 닫힘"
     }
   },
-  "scenario-viola-scenario-23": {
+  "scenario-scenario-scenario-scenario-viola-scenario-23": {
     "scenarioId": "23",
     "status": "pass",
     "duration": "0분 38초",
@@ -4575,7 +4575,7 @@
     "generatedAt": "2026. 2. 12. 오전 11:06:44",
     "cacheKey": "viola-23-1770862004649"
   },
-  "scenario-2": {
+  "scenario-scenario-scenario-scenario-2": {
     "scenarioId": "2",
     "status": "stopped",
     "duration": "0분 15초",
@@ -4626,5 +4626,222 @@
     "error": {
       "message": "테스트가 수동으로 닫힘"
     }
+  },
+  "scenario-1": {
+    "scenarioId": "1",
+    "status": "fail",
+    "duration": "0분 12초",
+    "startTime": "2026-02-13T06:02:39.082Z",
+    "endTime": "2026-02-13T06:02:51.287Z",
+    "tester": "yh.lee5",
+    "testCases": [
+      {
+        "name": "Navigate to page",
+        "status": "fail",
+        "duration": 2313,
+        "error": "Error: 브라우저가 강제 종료되었습니다\n\n   at scenario\\scenario-common.js:99\n\n   97 |     if (page.isClosed()) {\n   98 |       testCase.status = 'fail';\n>  99 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  100 |       testResults.status = 'fail';\n  101 |       testResults.error = testCase.error;\n  102 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);\n    at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:99:24)\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:40:7\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:39:5",
+        "hasResults": true,
+        "startTime": "2026-02-13T06:02:45.180Z",
+        "endTime": "2026-02-13T06:02:47.493Z"
+      },
+      {
+        "name": "Fill username",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-13T06:02:51.078Z",
+        "endTime": "2026-02-13T06:02:51.078Z"
+      },
+      {
+        "name": "Fill password",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-13T06:02:51.079Z",
+        "endTime": "2026-02-13T06:02:51.079Z"
+      },
+      {
+        "name": "Click login button",
+        "status": "not-test",
+        "duration": 0,
+        "error": null,
+        "hasResults": true,
+        "startTime": "2026-02-13T06:02:51.080Z",
+        "endTime": "2026-02-13T06:02:51.080Z"
+      }
+    ],
+    "errorDetails": "❌ 스크린샷 저장 실패: __dirname is not defined\n❌ 스크린샷 저장 실패: __dirname is not defined\n⚠️ 브라우저가 닫혀있어 스크린샷을 캡처할 수 없습니다: Navigate to page\n⚠️ 브라우저가 닫혀있어 스크린샷을 캡처할 수 없습니다: Navigate to page\n  오류: 브라우저가 강제 종료되었습니다\n  오류: 브라우저가 강제 종료되었습니다\n❌ CMP 시나리오 1: cmp test 테스트 중 실패한 케이스가 있습니다.\n❌ CMP 시나리오 1: cmp test 테스트 중 실패한 케이스가 있습니다.\n",
+    "screenshots": [],
+    "logs": [
+      "📊 CMP Electron 시나리오 실행기",
+      "🎵 CMP 시나리오 1 실행을 시작합니다...",
+      "⏰ 시작 시간: 2026. 2. 13. 오후 3:02:39",
+      "📊 CMP 시나리오 1 구조 레포트",
+      "============================================================",
+      "📋 CMP 시나리오 목록",
+      "----------------------------------------",
+      "1. CMP 기본 로그인 및 대시보드 확인",
+      "2. CMP 워크플로우 생성 및 관리",
+      "3. CMP 티켓 생성 및 승인 프로세스",
+      "4. CMP GitLab 연동 테스트",
+      "5. CMP 파이프라인 실행 및 모니터링",
+      "6. CMP SonarQube 정적 분석",
+      "7. CMP JUnit 테스트 결과 확인",
+      "8. CMP 배포 파이프라인 생성",
+      "📋 테스트 파일 사용: scenario-1.spec.js",
+      "🔄 Playwright 테스트 실행 중...",
+      "============================================================",
+      "📂 실행할 테스트 파일: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js",
+      "🔍 Playwright 테스트 직접 실행",
+      "--- PLAYWRIGHT DEBUG ---",
+      "CWD: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP",
+      "testFile (raw): C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js",
+      "testFile (posix): C:/Users/okestro/Desktop/automation-playwright/CMP/tests/scenario/scenario-1.spec.js",
+      "config (posix): C:/Users/okestro/Desktop/automation-playwright/CMP/playwright.config.js",
+      "scenarioDir: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario",
+      "scenarioDir file list:",
+      " - scenario-1.spec.js",
+      " - scenario-2.spec.js",
+      " - scenario-3.spec.js",
+      " - scenario-4.spec.js",
+      " - scenario-55.spec.js",
+      " - scenario-common.js",
+      "exists(testFile): true",
+      "exists(config): true",
+      "--- /PLAYWRIGHT DEBUG ---",
+      "🚀 CMP 시나리오 실행 시작",
+      "📂 실행 명령: npx playwright test \"tests/scenario/scenario-1.spec.js\" --project=chromium --headed",
+      "Running 4 tests using 1 worker",
+      "[1/4] [chromium] › tests\\scenario\\scenario-1.spec.js:38:3 › 시나리오 1: cmp test › Navigate to page",
+      "🎬 시나리오 1 녹화 설정: 비활성화",
+      "[chromium] › tests\\scenario\\scenario-1.spec.js:38:3 › 시나리오 1: cmp test › Navigate to page",
+      "🎬 시나리오 1 녹화 설정: 비활성화",
+      "🎬 녹화가 비활성화되어 일반 브라우저 컨텍스트를 생성합니다.",
+      "🎬 녹화가 비활성화되어 일반 브라우저 컨텍스트를 생성합니다.",
+      "[2026-02-13T06:02:48.121Z] INFO: 📝 Navigate to page 시작...",
+      "[2026-02-13T06:02:48.121Z] INFO: 📝 Navigate to page 시작...",
+      "📝 Executing: Navigate to page...",
+      "📝 Executing: Navigate to page...",
+      "🔍 감지된 시나리오 ID: 1",
+      "🔍 감지된 시나리오 ID: 1",
+      "✅ Completed: Navigate to page",
+      "✅ Completed: Navigate to page",
+      "[2026-02-13T06:02:50.416Z] ERROR: ❌ Navigate to page 실패: 브라우저 강제 종료",
+      "[2026-02-13T06:02:50.416Z] ERROR: ❌ Navigate to page 실패: 브라우저 강제 종료",
+      "[2026-02-13T06:02:50.416Z] ERROR: ❌ Navigate to page 실패: 브라우저가 강제 종료되었습니다",
+      "[2026-02-13T06:02:50.416Z] ERROR: ❌ Navigate to page 실패: 브라우저가 강제 종료되었습니다",
+      "[2026-02-13T06:02:50.416Z] INFO: ⏱️ Navigate to page 소요시간: 2296ms",
+      "[2026-02-13T06:02:50.416Z] INFO: ⏱️ Navigate to page 소요시간: 2296ms",
+      "     1.1 [chromium] › tests\\scenario\\scenario-1.spec.js:38:3 › 시나리오 1: cmp test › Navigate to page › Navigate to page (2.3s)",
+      "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.",
+      "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.",
+      "--- CMP 시나리오 1: cmp test 최종 테스트 결과 ---",
+      "--- CMP 시나리오 1: cmp test 최종 테스트 결과 ---",
+      "❌ Navigate to page: FAIL (2296ms)",
+      "❌ Navigate to page: FAIL (2296ms)",
+      "❌ Fill username: PENDING (undefinedms)",
+      "❌ Fill username: PENDING (undefinedms)",
+      "❌ Fill password: PENDING (undefinedms)",
+      "❌ Fill password: PENDING (undefinedms)",
+      "❌ Click login button: PENDING (undefinedms)",
+      "❌ Click login button: PENDING (undefinedms)",
+      "----------------------------------",
+      "----------------------------------",
+      "🏁 CMP 시나리오 1: cmp test 테스트 완료",
+      "🏁 CMP 시나리오 1: cmp test 테스트 완료",
+      "  ✘  1 [chromium] › tests\\scenario\\scenario-1.spec.js:38:3 › 시나리오 1: cmp test › Navigate to page (2.3s)",
+      "  1) [chromium] › tests\\scenario\\scenario-1.spec.js:38:3 › 시나리오 1: cmp test › Navigate to page › Navigate to page ",
+      "    Error: 브라우저가 강제 종료되었습니다",
+      "       at scenario\\scenario-common.js:99",
+      "       97 |     if (page.isClosed()) {",
+      "       98 |       testCase.status = 'fail';",
+      "    >  99 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');",
+      "          |                        ^",
+      "      100 |       testResults.status = 'fail';",
+      "      101 |       testResults.error = testCase.error;",
+      "      102 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);",
+      "        at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:99:24)",
+      "        at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:40:7",
+      "        at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:39:5",
+      "    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────",
+      "    test-results\\scenario-scenario-1-시나리오-1-cmp-test-Navigate-to-page-chromium\\test-finished-1.png",
+      "    ────────────────────────────────────────────────────────────────────────────────────────────────",
+      "[2/4] [chromium] › tests\\scenario\\scenario-1.spec.js:48:3 › 시나리오 1: cmp test › Fill username",
+      "  -  2 [chromium] › tests\\scenario\\scenario-1.spec.js:48:3 › 시나리오 1: cmp test › Fill username",
+      "[3/4] [chromium] › tests\\scenario\\scenario-1.spec.js:58:3 › 시나리오 1: cmp test › Fill password",
+      "  -  3 [chromium] › tests\\scenario\\scenario-1.spec.js:58:3 › 시나리오 1: cmp test › Fill password",
+      "[4/4] [chromium] › tests\\scenario\\scenario-1.spec.js:68:3 › 시나리오 1: cmp test › Click login button",
+      "  -  4 [chromium] › tests\\scenario\\scenario-1.spec.js:68:3 › 시나리오 1: cmp test › Click login button",
+      "  1 failed",
+      "    [chromium] › tests\\scenario\\scenario-1.spec.js:38:3 › 시나리오 1: cmp test › Navigate to page ──────",
+      "  3 did not run",
+      "To open last HTML report run:",
+      "  npx playwright show-report",
+      "⚠️ Playwright 종료 코드: 1 (테스트 실패 가능)",
+      "✅ CMP 시나리오 실행 완료",
+      "============================================================",
+      "⚠️ CMP 시나리오 실행 완료",
+      "⏰ 종료 시간: 2026. 2. 13. 오후 3:02:51",
+      "⏱️ 총 실행시간: 0분 12초 (12205ms)",
+      "📊 종료 코드: 1 (실패 또는 강제 종료)",
+      "💡 Playwright HTML 레포트에서 결과 확인: playwright-report/index.html",
+      "📊 새로운 커스텀 리포트 생성 중...",
+      "📊 [CMP] test-results.json 파일 확인: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\playwright-report\\test-results.json",
+      "📊 [CMP] Playwright 결과 파일 발견",
+      "🔍 [CMP DEBUG] testExitCode: 1",
+      "🔍 [CMP DEBUG] test-results.json suites 수: 1",
+      "📊 [CMP] 시나리오 1 파일 패턴 검색 중...",
+      "✅ [CMP] 시나리오 발견 (패턴: scenario/scenario-1.spec.js, 실제 파일: scenario/scenario-1.spec.js)",
+      "✅ [CMP] 시나리오 1 테스트 결과 발견",
+      "📊 [CMP] 발견된 테스트 스펙: 4개",
+      "📊 [CMP] 전체 테스트: 4개, results 있음: 4개",
+      "📊 [CMP] 파싱된 테스트 케이스: 4개, 파싱 상태: fail",
+      "📊 [CMP] 브라우저 강제 종료 지점 탐색 시작 (총 4개 테스트)",
+      "📊 [CMP] testCases 상세: [0] Navigate to page: fail (hasResults: true), [1] Fill username: not-test (hasResults: true), [2] Fill password: not-test (hasResults: true), [3] Click login button: not-test (hasResults: true)",
+      "📊 [CMP] hasTestsWithoutResults: false",
+      "📊 [CMP] testResults 생성: testCases 4개 (동적 데이터)",
+      "⚠️ 시나리오 1 설정 파일이 없습니다. 기본값 사용",
+      "🔍 CMP 시나리오 1: 초기 testResults 상태: 데이터 있음",
+      "🔍 CMP 시나리오 1: reportData 전체: {",
+      "  testResults: {",
+      "    status: 'fail',",
+      "    testCases: [ [Object], [Object], [Object], [Object] ],",
+      "    duration: '0분 12초',",
+      "    startTime: '2026-02-13T06:02:39.082Z',",
+      "    endTime: '2026-02-13T06:02:51.287Z',",
+      "    timestamp: '2026. 2. 13. 오후 3:02:39'",
+      "  },",
+      "  timestamp: '2026-02-13T06-02-51'",
+      "}",
+      "✅ CMP 시나리오 1: reportData에서 testResults 발견",
+      "📊 CMP 시나리오 1: testResults 상태: fail, 테스트 케이스: 4개",
+      "📊 CMP 실시간 데이터 우선 사용 (파일 캐시 완전 무시)",
+      "✅ CMP 시나리오 1: 실시간 testResults에서 데이터 발견",
+      "📊 CMP 실시간 상태: fail",
+      "📊 CMP 실시간 테스트 케이스 수: 4개",
+      "📊 CMP 실시간 데이터 사용 완료: 4개 테스트, 상태: fail",
+      "📊 CMP testCases 상세: [0] Navigate to page: fail, [1] Fill username: not-test, [2] Fill password: not-test, [3] Click login button: not-test",
+      "📊 CMP 동적 결과 사용 - fallback 로직 완전히 건너뛰기",
+      "🔍 [SCREENSHOT MAPPING] 시나리오 1에서 4개 테스트 케이스에 스크린샷 매핑 적용",
+      "📊 최종 통계: 총 4개, 실행 1개, 성공 0개, 실패 1개, NOT TEST 3개, 성공률 0.0%, 시나리오 상태: fail",
+      "💾 커스텀 리포트 저장 완료: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\custom-reports\\scenario-1\\custom-report-2026-02-13T06-02-51.html",
+      "📋 시나리오 1 인덱스 파일 업데이트 완료: custom-report-2026-02-13T06-02-51.html",
+      "✅ CMP 커스텀 리포트 생성 완료",
+      "✅ CMP 시나리오 목록 업데이트 완료",
+      "✅ CMP 시나리오 1 완료 플래그 생성: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\custom-reports\\scenario-1-complete.flag",
+      "🌐 커스텀 리포트 자동 열기: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\custom-reports\\scenario-1\\custom-report-2026-02-13T06-02-51.html",
+      "✅ 커스텀 리포트 브라우저에서 열림",
+      "🔍 [CMP DEBUG] saveGlobalTestResults 호출됨!",
+      "🔍 [CMP DEBUG] scenarioId: 1, 타입: string",
+      "🔍 [CMP DEBUG] testResultsData.testCases?.length: 4",
+      "🔍 [CMP DEBUG] 기존 키 개수: 2",
+      "🔍 [CMP DEBUG] 저장할 키: scenario-1",
+      "🔍 [CMP DEBUG] 저장 후 키 개수: 2",
+      "💾 CMP global-test-results.json 저장 완료: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\custom-reports\\global-test-results.json",
+      "💾 저장 키: scenario-1",
+      "❌ CMP 시나리오 1 실패로 종료 (testExitCode: 1)"
+    ]
   }
 }

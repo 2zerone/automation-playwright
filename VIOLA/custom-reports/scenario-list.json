@@ -12,7 +12,9 @@
       "runCount": 291,
       "totalDuration": 23685,
       "successCount": 58,
-      "failCount": 233
+      "failCount": 233,
+      "title": "로그인 및 파드 생성ㆍ백업",
+      "description": "시나리오 설명"
     },
     {
       "id": 2,
@@ -26,7 +28,9 @@
       "runCount": 315,
       "totalDuration": 20864,
       "successCount": 49,
-      "failCount": 163
+      "failCount": 163,
+      "title": "Pod 삭제 및 백업 복원",
+      "description": "시나리오 2"
     },
     {
       "id": 3,
@@ -270,20 +274,6 @@
       "id": 20,
       "name": "시나리오 20",
       "path": "./scenario-20/custom-report.html",
-      "status": "not-run",
-      "lastRun": null,
-      "duration": null,
-      "startTime": null,
-      "timestamp": null,
-      "runCount": 0,
-      "totalDuration": 0,
-      "successCount": 0,
-      "failCount": 0
-    },
-    {
-      "id": 21,
-      "name": "시나리오 21",
-      "path": "./scenario-21/custom-report.html",
       "status": "not-run",
       "lastRun": null,
       "duration": null,

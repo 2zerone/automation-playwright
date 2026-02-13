@@ -1,48 +1,48 @@
 {
   "scenario-1": {
-    "status": "pass",
+    "status": "fail",
     "testCases": [
       {
         "name": "Navigate to page",
-        "status": "pass",
-        "duration": 2901,
-        "error": null,
+        "status": "fail",
+        "duration": 2313,
+        "error": "Error: 브라우저가 강제 종료되었습니다\n\n   at scenario\\scenario-common.js:99\n\n   97 |     if (page.isClosed()) {\n   98 |       testCase.status = 'fail';\n>  99 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  100 |       testResults.status = 'fail';\n  101 |       testResults.error = testCase.error;\n  102 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);\n    at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:99:24)\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:40:7\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:39:5",
         "hasResults": true,
-        "startTime": "2026-02-12T06:57:45.617Z",
-        "endTime": "2026-02-12T06:57:48.518Z"
+        "startTime": "2026-02-13T06:02:45.180Z",
+        "endTime": "2026-02-13T06:02:47.493Z"
       },
       {
         "name": "Fill username",
-        "status": "pass",
-        "duration": 2676,
+        "status": "not-test",
+        "duration": 0,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T06:57:49.993Z",
-        "endTime": "2026-02-12T06:57:52.669Z"
+        "startTime": "2026-02-13T06:02:51.078Z",
+        "endTime": "2026-02-13T06:02:51.078Z"
       },
       {
         "name": "Fill password",
-        "status": "pass",
-        "duration": 2487,
+        "status": "not-test",
+        "duration": 0,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T06:57:52.677Z",
-        "endTime": "2026-02-12T06:57:55.164Z"
+        "startTime": "2026-02-13T06:02:51.079Z",
+        "endTime": "2026-02-13T06:02:51.079Z"
       },
       {
         "name": "Click login button",
-        "status": "pass",
-        "duration": 3932,
+        "status": "not-test",
+        "duration": 0,
         "error": null,
         "hasResults": true,
-        "startTime": "2026-02-12T06:57:55.167Z",
-        "endTime": "2026-02-12T06:57:59.099Z"
+        "startTime": "2026-02-13T06:02:51.080Z",
+        "endTime": "2026-02-13T06:02:51.080Z"
       }
     ],
-    "duration": "0분 17초",
-    "startTime": "2026-02-12T06:57:42.183Z",
-    "endTime": "2026-02-12T06:57:59.640Z",
-    "timestamp": "2026. 2. 12. 오후 3:57:42"
+    "duration": "0분 12초",
+    "startTime": "2026-02-13T06:02:39.082Z",
+    "endTime": "2026-02-13T06:02:51.287Z",
+    "timestamp": "2026. 2. 13. 오후 3:02:39"
   },
   "scenario-2": {
     "status": "fail",

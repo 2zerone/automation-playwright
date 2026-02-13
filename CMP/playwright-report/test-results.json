@@ -88,7 +88,7 @@
           "specs": [
             {
               "title": "Navigate to page",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -101,9 +101,28 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2901,
-                      "errors": [],
+                      "status": "failed",
+                      "duration": 2313,
+                      "error": {
+                        "message": "Error: 브라우저가 강제 종료되었습니다",
+                        "stack": "Error: 브라우저가 강제 종료되었습니다\n    at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:99:24)\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:40:7\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:39:5",
+                        "location": {
+                          "file": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js",
+                          "column": 24,
+                          "line": 99
+                        },
+                        "snippet": "   at scenario\\scenario-common.js:99\n\n   97 |     if (page.isClosed()) {\n   98 |       testCase.status = 'fail';\n>  99 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  100 |       testResults.status = 'fail';\n  101 |       testResults.error = testCase.error;\n  102 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js",
+                            "column": 24,
+                            "line": 99
+                          },
+                          "message": "Error: 브라우저가 강제 종료되었습니다\n\n   at scenario\\scenario-common.js:99\n\n   97 |     if (page.isClosed()) {\n   98 |       testCase.status = 'fail';\n>  99 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  100 |       testResults.status = 'fail';\n  101 |       testResults.error = testCase.error;\n  102 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);\n    at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:99:24)\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:40:7\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:39:5"
+                        }
+                      ],
                       "stdout": [
                         {
                           "text": "🎬 시나리오 1 녹화 설정: 비활성화\n"
@@ -112,7 +131,7 @@
                           "text": "🎬 녹화가 비활성화되어 일반 브라우저 컨텍스트를 생성합니다.\n"
                         },
                         {
-                          "text": "[2026-02-12T06:57:47.093Z] INFO: 📝 Navigate to page 시작...\n"
+                          "text": "[2026-02-13T06:02:48.121Z] INFO: 📝 Navigate to page 시작...\n"
                         },
                         {
                           "text": "📝 Executing: Navigate to page...\n"
@@ -124,28 +143,71 @@
                           "text": "✅ Completed: Navigate to page\n"
                         },
                         {
-                          "text": "[2026-02-12T06:57:49.303Z] SUCCESS: ✅ Navigate to page 성공\n"
+                          "text": "[2026-02-13T06:02:50.416Z] ERROR: ❌ Navigate to page 실패: 브라우저 강제 종료\n"
                         },
                         {
-                          "text": "[2026-02-12T06:57:49.303Z] INFO: ⏱️ Navigate to page 소요시간: 2210ms\n"
+                          "text": "[2026-02-13T06:02:50.416Z] ERROR: ❌ Navigate to page 실패: 브라우저가 강제 종료되었습니다\n"
                         },
                         {
-                          "text": "📸 스크린샷 저장: screenshot-Navigate to page-성공-2026-02-12T06-57-49-303.png\n"
+                          "text": "[2026-02-13T06:02:50.416Z] INFO: ⏱️ Navigate to page 소요시간: 2296ms\n"
+                        },
+                        {
+                          "text": "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.\n"
+                        },
+                        {
+                          "text": "\n--- CMP 시나리오 1: cmp test 최종 테스트 결과 ---\n"
+                        },
+                        {
+                          "text": "❌ Navigate to page: FAIL (2296ms)\n"
+                        },
+                        {
+                          "text": "❌ Fill username: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ Fill password: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "❌ Click login button: PENDING (undefinedms)\n"
+                        },
+                        {
+                          "text": "----------------------------------\n"
+                        },
+                        {
+                          "text": "🏁 CMP 시나리오 1: cmp test 테스트 완료\n"
                         }
                       ],
                       "stderr": [
                         {
                           "text": "❌ 스크린샷 저장 실패: __dirname is not defined\n"
+                        },
+                        {
+                          "text": "⚠️ 브라우저가 닫혀있어 스크린샷을 캡처할 수 없습니다: Navigate to page\n"
+                        },
+                        {
+                          "text": "  오류: 브라우저가 강제 종료되었습니다\n"
+                        },
+                        {
+                          "text": "❌ CMP 시나리오 1: cmp test 테스트 중 실패한 케이스가 있습니다.\n"
                         }
                       ],
                       "retry": 0,
                       "steps": [
                         {
                           "title": "Navigate to page",
-                          "duration": 2896
+                          "duration": 2301,
+                          "error": {
+                            "message": "Error: 브라우저가 강제 종료되었습니다",
+                            "stack": "Error: 브라우저가 강제 종료되었습니다\n    at runTestStep (C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js:99:24)\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:40:7\n    at C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-1.spec.js:39:5",
+                            "location": {
+                              "file": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js",
+                              "column": 24,
+                              "line": 99
+                            },
+                            "snippet": "   at scenario\\scenario-common.js:99\n\n   97 |     if (page.isClosed()) {\n   98 |       testCase.status = 'fail';\n>  99 |       testCase.error = new Error('브라우저가 강제 종료되었습니다');\n      |                        ^\n  100 |       testResults.status = 'fail';\n  101 |       testResults.error = testCase.error;\n  102 |       captureLog('error', `❌ ${stepName} 실패: 브라우저 강제 종료`);"
+                          }
                         }
                       ],
-                      "startTime": "2026-02-12T06:57:45.617Z",
+                      "startTime": "2026-02-13T06:02:45.180Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -153,10 +215,15 @@
                           "contentType": "image/png",
                           "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\test-results\\scenario-scenario-1-시나리오-1-cmp-test-Navigate-to-page-chromium\\test-finished-1.png"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\tests\\scenario\\scenario-common.js",
+                        "column": 24,
+                        "line": 99
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "d8af0fbbce451178e86b-e7f6b2417ceaf8bcfed7",
@@ -177,87 +244,20 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2676,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[2026-02-12T06:57:50.003Z] INFO: 📝 Fill username 시작...\n"
-                        },
-                        {
-                          "text": "📝 Executing: Fill username...\n"
-                        },
-                        {
-                          "text": "\n========== processUniqueValue 시작 ==========\n"
-                        },
-                        {
-                          "text": "📋 fieldName: username\n"
-                        },
-                        {
-                          "text": "📋 baseValue: yh.lee5\n"
-                        },
-                        {
-                          "text": "📋 className: AutoRecorded_cmp_test\n"
-                        },
-                        {
-                          "text": "📂 uniqueValuesPath: C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\config\\unique-values.json\n"
-                        },
-                        {
-                          "text": "✅ unique-values.json 파일 존재\n"
-                        },
-                        {
-                          "text": "📦 전체 unique values: {\n  \"AutoRecorded_cmp_test\": {\n    \"values\": [\n      {\n        \"index\": 2,\n        \"fieldName\": \"username\",\n        \"fieldLabel\": \"아이디를 입력해 주세요\",\n        \"value\": \"yh.lee5\",\n        \"action\": \"getByRole('textbox', { name: '아이디를 입력해 주세요' }).fill('yh.lee5')\"\n      }\n    ],\n    \"savedAt\": \"2026-02-11T08:29:57.338Z\"\n  }\n}\n"
-                        },
-                        {
-                          "text": "📦 AutoRecorded_cmp_test의 unique values: {\n  \"values\": [\n    {\n      \"index\": 2,\n      \"fieldName\": \"username\",\n      \"fieldLabel\": \"아이디를 입력해 주세요\",\n      \"value\": \"yh.lee5\",\n      \"action\": \"getByRole('textbox', { name: '아이디를 입력해 주세요' }).fill('yh.lee5')\"\n    }\n  ],\n  \"savedAt\": \"2026-02-11T08:29:57.338Z\"\n}\n"
-                        },
-                        {
-                          "text": "  비교: uv.fieldName(username) === fieldName(username) && uv.value(yh.lee5) === baseValue(yh.lee5)\n"
-                        },
-                        {
-                          "text": "🔍 isUnique 결과: true\n"
-                        },
-                        {
-                          "text": "🔑 Unique 값 감지: username = yh.lee5\n"
-                        },
-                        {
-                          "text": "🔢 Unique 값 생성: yh.lee5 → yh.lee5-002\n"
-                        },
-                        {
-                          "text": "✅ Completed: Fill username\n"
-                        },
-                        {
-                          "text": "[2026-02-12T06:57:51.439Z] SUCCESS: ✅ Fill username 성공\n"
-                        },
-                        {
-                          "text": "[2026-02-12T06:57:51.439Z] INFO: ⏱️ Fill username 소요시간: 1436ms\n"
-                        },
-                        {
-                          "text": "📸 스크린샷 저장: screenshot-Fill username-성공-2026-02-12T06-57-51-439.png\n"
-                        }
-                      ],
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Fill username",
-                          "duration": 2099
-                        }
-                      ],
-                      "startTime": "2026-02-12T06:57:49.993Z",
+                      "startTime": "2026-02-13T06:02:51.078Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\test-results\\scenario-scenario-1-시나리오-1-cmp-test-Fill-username-chromium\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
               "id": "d8af0fbbce451178e86b-0d8a2aa481cc8d3df9dc",
@@ -278,69 +278,20 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2487,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[2026-02-12T06:57:52.680Z] INFO: 📝 Fill password 시작...\n"
-                        },
-                        {
-                          "text": "📝 Executing: Fill password...\n"
-                        },
-                        {
-                          "text": "📋 fieldName: password\n"
-                        },
-                        {
-                          "text": "📋 baseValue: Okestro2018!\n"
-                        },
-                        {
-                          "text": "  비교: uv.fieldName(username) === fieldName(password) && uv.value(yh.lee5) === baseValue(Okestro2018!)\n"
-                        },
-                        {
-                          "text": "🔍 isUnique 결과: false\n"
-                        },
-                        {
-                          "text": "⚠️ password=Okestro2018!는 unique 값이 아닙니다!\n"
-                        },
-                        {
-                          "text": "========================================\n\n"
-                        },
-                        {
-                          "text": "✅ Completed: Fill password\n"
-                        },
-                        {
-                          "text": "[2026-02-12T06:57:54.077Z] SUCCESS: ✅ Fill password 성공\n"
-                        },
-                        {
-                          "text": "[2026-02-12T06:57:54.078Z] INFO: ⏱️ Fill password 소요시간: 1398ms\n"
-                        },
-                        {
-                          "text": "📸 스크린샷 저장: screenshot-Fill password-성공-2026-02-12T06-57-54-078.png\n"
-                        }
-                      ],
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Fill password",
-                          "duration": 2001
-                        }
-                      ],
-                      "startTime": "2026-02-12T06:57:52.677Z",
+                      "startTime": "2026-02-13T06:02:51.079Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\test-results\\scenario-scenario-1-시나리오-1-cmp-test-Fill-password-chromium\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
               "id": "d8af0fbbce451178e86b-e9ad5dd31c302c320dba",
@@ -361,75 +312,20 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3932,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[2026-02-12T06:57:55.172Z] INFO: 📝 Click login button 시작...\n"
-                        },
-                        {
-                          "text": "📝 Executing: Click login button...\n"
-                        },
-                        {
-                          "text": "✅ Completed: Click login button\n"
-                        },
-                        {
-                          "text": "[2026-02-12T06:57:57.335Z] SUCCESS: ✅ Click login button 성공\n"
-                        },
-                        {
-                          "text": "[2026-02-12T06:57:57.335Z] INFO: ⏱️ Click login button 소요시간: 2163ms\n"
-                        },
-                        {
-                          "text": "📸 스크린샷 저장: screenshot-Click login button-성공-2026-02-12T06-57-57-335.png\n"
-                        },
-                        {
-                          "text": "🎬 녹화가 비활성화되어 녹화 파일 처리를 건너뜁니다.\n"
-                        },
-                        {
-                          "text": "\n--- CMP 시나리오 1: cmp test 최종 테스트 결과 ---\n"
-                        },
-                        {
-                          "text": "✅ Navigate to page: PASS (2210ms)\n"
-                        },
-                        {
-                          "text": "✅ Fill username: PASS (1436ms)\n"
-                        },
-                        {
-                          "text": "✅ Fill password: PASS (1398ms)\n"
-                        },
-                        {
-                          "text": "✅ Click login button: PASS (2163ms)\n"
-                        },
-                        {
-                          "text": "----------------------------------\n"
-                        },
-                        {
-                          "text": "🏁 CMP 시나리오 1: cmp test 테스트 완료\n"
-                        }
-                      ],
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Click login button",
-                          "duration": 3072
-                        }
-                      ],
-                      "startTime": "2026-02-12T06:57:55.167Z",
+                      "startTime": "2026-02-13T06:02:51.080Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\okestro\\Desktop\\automation-playwright\\CMP\\test-results\\scenario-scenario-1-시나리오-1-cmp-test-Click-login-button-chromium\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
               "id": "d8af0fbbce451178e86b-09b082e3b1ec949bd03b",
@@ -444,11 +340,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-02-12T06:57:44.482Z",
-    "duration": 15035.828,
-    "expected": 4,
-    "skipped": 0,
-    "unexpected": 0,
+    "startTime": "2026-02-13T06:02:43.137Z",
+    "duration": 7997.352,
+    "expected": 0,
+    "skipped": 3,
+    "unexpected": 1,
     "flaky": 0
   }
 }
