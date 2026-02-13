@@ -1605,6 +1605,62 @@
             flex: 1;
         }
 
+        /* 편집 버튼 스타일 */
+        .edit-scenario-btn {
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        }
+
+        .edit-scenario-btn:hover {
+            background: rgba(108, 117, 125, 0.1);
+            color: #3b82f6;
+        }
+
+        .edit-scenario-btn i {
+            font-size: 16px;
+        }
+
+        /* 편집 모드 스타일 */
+        .scenario-title-edit,
+        .scenario-description-edit {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #3b82f6;
+            border-radius: 4px;
+            font-size: inherit;
+            font-family: inherit;
+            color: inherit;
+            background: rgba(59, 130, 246, 0.05);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .scenario-title-edit {
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .scenario-description-edit {
+            font-size: 0.9em;
+            resize: vertical;
+            min-height: 50px;
+        }
+
+        .scenario-title-edit:focus,
+        .scenario-description-edit:focus {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #2563eb;
+        }
+
         .scenario-description {
             color: #000000;
             font-size: 0.95em;
@@ -4507,13 +4563,16 @@
             card.innerHTML = `
                 <div class="scenario-header">
                     <div class="scenario-icon">${scenario.id}</div>
-                    <div class="scenario-title">${scenario.title}</div>
+                    <div class="scenario-title" data-scenario-id="${scenario.id}">${scenario.title}</div>
+                    <button class="edit-scenario-btn" onclick="editScenarioInfo(${scenario.id}); event.stopPropagation();" title="편집">
+                        <i class="fas fa-edit"></i>
+                    </button>
                     <div class="scenario-checkbox">
                         <input type="checkbox" id="scenario-${scenario.id}" class="scenario-checkbox-input" onchange="updateSelectedScenarios()">
                         <label for="scenario-${scenario.id}" class="scenario-checkbox-label"></label>
                     </div>
                 </div>
-                <div class="scenario-description">${scenario.description}</div>
+                <div class="scenario-description" data-scenario-id="${scenario.id}">${scenario.description}</div>
                 <div class="scenario-status">
                     <span class="status-badge ${scenario.status}">${getStatusText(scenario.status)}</span>
                     <div class="scenario-actions">
@@ -4553,6 +4612,17 @@
                 // 체크박스 영역 클릭 시: 체크박스 자체의 동작만 허용하고 카드 선택 로직은 실행하지 않음
                 if (e.target.closest('.scenario-checkbox')) {
                     // 체크박스의 기본 동작을 허용하고, 카드 본체 클릭 로직만 건너뜀
+                    return;
+                }
+                
+                // 편집 모드 입력 필드 클릭 시 카드 선택 방지
+                if (e.target.classList.contains('scenario-title-edit') || 
+                    e.target.classList.contains('scenario-description-edit')) {
+                    return;
+                }
+                
+                // 편집 버튼 클릭 시 카드 선택 방지
+                if (e.target.closest('.edit-scenario-btn')) {
                     return;
                 }
                 
@@ -6296,6 +6366,132 @@
                 console.error('시나리오 일괄 삭제 중 오류:', error);
                 showToast('시나리오 삭제 중 오류가 발생했습니다.', 'error');
             }
+        }
+
+        // 시나리오 정보 편집
+        async function editScenarioInfo(scenarioId) {
+            const card = document.querySelector(`[data-scenario-id="${scenarioId}"]`);
+            if (!card) return;
+
+            const titleElement = card.querySelector('.scenario-title');
+            const descriptionElement = card.querySelector('.scenario-description');
+            const editBtn = card.querySelector('.edit-scenario-btn');
+
+            // 이미 편집 중이면 저장
+            if (titleElement.querySelector('input')) {
+                await saveScenarioInfo(scenarioId);
+                return;
+            }
+
+            // 현재 값 저장
+            const currentTitle = titleElement.textContent.trim();
+            const currentDescription = descriptionElement.textContent.trim();
+
+            // 편집 모드로 전환
+            titleElement.innerHTML = `
+                <input type="text" class="scenario-title-edit" value="${currentTitle}" 
+                    data-original="${currentTitle}" 
+                    onkeydown="if(event.key==='Enter') saveScenarioInfo(${scenarioId}); if(event.key==='Escape') cancelEditScenarioInfo(${scenarioId});">
+            `;
+            
+            descriptionElement.innerHTML = `
+                <textarea class="scenario-description-edit" 
+                    data-original="${currentDescription}"
+                    onkeydown="if(event.key==='Escape') cancelEditScenarioInfo(${scenarioId});">${currentDescription}</textarea>
+            `;
+
+            // 편집 버튼 아이콘 변경
+            editBtn.innerHTML = '<i class="fas fa-save"></i>';
+            editBtn.title = '저장';
+
+            // 포커스
+            const input = titleElement.querySelector('input');
+            input.focus();
+            input.select();
+        }
+
+        // 시나리오 정보 저장
+        async function saveScenarioInfo(scenarioId) {
+            const card = document.querySelector(`[data-scenario-id="${scenarioId}"]`);
+            if (!card) return;
+
+            const titleInput = card.querySelector('.scenario-title-edit');
+            const descriptionTextarea = card.querySelector('.scenario-description-edit');
+            const editBtn = card.querySelector('.edit-scenario-btn');
+
+            if (!titleInput || !descriptionTextarea) return;
+
+            const newTitle = titleInput.value.trim();
+            const newDescription = descriptionTextarea.value.trim();
+
+            // 유효성 검사
+            if (!newTitle) {
+                showToast('시나리오 제목을 입력하세요.', 'warning');
+                titleInput.focus();
+                return;
+            }
+
+            try {
+                // 서버에 저장
+                const result = await ipcRenderer.invoke('update-scenario-info', {
+                    scenarioId,
+                    title: newTitle,
+                    description: newDescription
+                });
+
+                if (result.success) {
+                    // 메모리 업데이트
+                    const scenario = scenarios.find(s => s.id === scenarioId);
+                    if (scenario) {
+                        scenario.title = newTitle;
+                        scenario.description = newDescription;
+                    }
+
+                    // UI 업데이트
+                    const titleElement = card.querySelector('.scenario-title');
+                    const descriptionElement = card.querySelector('.scenario-description');
+                    
+                    titleElement.innerHTML = newTitle;
+                    descriptionElement.innerHTML = newDescription;
+
+                    // 편집 버튼 아이콘 복구
+                    editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                    editBtn.title = '편집';
+
+                    showToast('시나리오 정보가 수정되었습니다.', 'success');
+                } else {
+                    showToast(`수정 실패: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('시나리오 정보 수정 중 오류:', error);
+                showToast('수정 중 오류가 발생했습니다.', 'error');
+            }
+        }
+
+        // 시나리오 정보 편집 취소
+        function cancelEditScenarioInfo(scenarioId) {
+            const card = document.querySelector(`[data-scenario-id="${scenarioId}"]`);
+            if (!card) return;
+
+            const titleInput = card.querySelector('.scenario-title-edit');
+            const descriptionTextarea = card.querySelector('.scenario-description-edit');
+            const editBtn = card.querySelector('.edit-scenario-btn');
+
+            if (!titleInput || !descriptionTextarea) return;
+
+            // 원래 값으로 복구
+            const originalTitle = titleInput.dataset.original;
+            const originalDescription = descriptionTextarea.dataset.original;
+
+            const titleElement = card.querySelector('.scenario-title');
+            const descriptionElement = card.querySelector('.scenario-description');
+            
+            titleElement.innerHTML = originalTitle;
+            descriptionElement.innerHTML = originalDescription;
+
+            // 편집 버튼 아이콘 복구
+            editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+            editBtn.title = '편집';
         }
 
         // 예쁜 확인 팝업 표시

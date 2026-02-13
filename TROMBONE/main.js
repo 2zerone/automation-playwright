@@ -1287,6 +1287,62 @@ ipcMain.handle('delete-scenario', async (event, scenarioId) => {
   }
 });
 
+// 시나리오 정보 수정
+ipcMain.handle('update-scenario-info', async (event, { scenarioId, title, description }) => {
+  try {
+    console.log(`📝 시나리오 ${scenarioId} 정보 수정 중... (제품: ${currentProduct})`);
+    
+    // 제품별 경로 결정 (대소문자 무관)
+    let productPath;
+    const productLower = currentProduct ? currentProduct.toLowerCase() : 'trombone';
+    
+    switch(productLower) {
+      case 'trombone':
+        productPath = __dirname;
+        break;
+      case 'viola':
+        productPath = path.join(__dirname, '..', 'VIOLA');
+        break;
+      case 'cmp':
+        productPath = path.join(__dirname, '..', 'CMP');
+        break;
+      case 'contrabass':
+        productPath = path.join(__dirname, '..', 'CONTRABASS');
+        break;
+      default:
+        console.warn(`⚠️ 알 수 없는 제품: ${currentProduct}, TROMBONE으로 기본 설정`);
+        productPath = __dirname;
+    }
+    
+    // scenario-list.json 업데이트
+    const scenarioListPath = path.join(productPath, 'custom-reports', 'scenario-list.json');
+    
+    if (!fs.existsSync(scenarioListPath)) {
+      throw new Error('scenario-list.json 파일을 찾을 수 없습니다.');
+    }
+    
+    const data = fs.readFileSync(scenarioListPath, 'utf8');
+    const scenarioList = JSON.parse(data);
+    
+    const scenario = scenarioList.scenarios.find(s => s.id === scenarioId);
+    if (!scenario) {
+      throw new Error(`시나리오 ${scenarioId}를 찾을 수 없습니다.`);
+    }
+    
+    // 정보 업데이트
+    scenario.title = title;
+    scenario.description = description;
+    
+    fs.writeFileSync(scenarioListPath, JSON.stringify(scenarioList, null, 2), 'utf8');
+    console.log(`✅ 시나리오 ${scenarioId} 정보 수정 완료`);
+    
+    return { success: true };
+  } catch (error) {
+    console.error('시나리오 정보 수정 중 오류:', error);
+    return { success: false, error: error.message };
+  }
+});
+
 // 시나리오 존재 여부 확인
 ipcMain.handle('check-scenario-exists', async (event, { product, scenarioNumber }) => {
   try {
