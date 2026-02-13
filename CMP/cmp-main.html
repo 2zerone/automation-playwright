@@ -5997,14 +5997,9 @@
                 return;
             }
             
-            const scenarioNames = selectedScenarios.map(id => {
-                const scenario = scenarios.find(s => s.id === id);
-                return scenario ? `${id}번: ${scenario.title}` : `시나리오 ${id}`;
-            }).join('\n');
-            
             if (!await showConfirmDialog(
                 '선택 시나리오 삭제', 
-                `정말로 선택한 ${selectedScenarios.length}개의 시나리오를 삭제하시겠습니까?\n\n삭제할 시나리오:\n${scenarioNames}\n\n⚠️ 이 작업은 되돌릴 수 없으며, 다음 항목들이 삭제됩니다:\n- Scenario spec 파일\n- Custom reports\n- 실행 기록`,
+                `선택한 ${selectedScenarios.length}개의 시나리오를 삭제하시겠습니까?\n`,
                 '계속하시겠습니까?'
             )) {
                 return;
