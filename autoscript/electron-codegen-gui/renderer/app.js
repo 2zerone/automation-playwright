@@ -62,6 +62,7 @@ const elements = {
   
   // Codegen 탭
   urlInput: document.getElementById('urlInput'),
+  editDefaultUrlBtn: document.getElementById('editDefaultUrlBtn'),
   caseIdInput: document.getElementById('caseIdInput'),
   titleInput: document.getElementById('titleInput'),
   fileNameInput: document.getElementById('fileNameInput'),
@@ -286,9 +287,19 @@ async function init() {
     elements.urlInput.value = config.productUrls[config.currentProduct];
     config.lastUrl = config.productUrls[config.currentProduct];
     addLog('info', `🌐 ${config.currentProduct} 기본 URL 설정: ${config.lastUrl}`);
+    
+    // URL 편집 버튼 활성화
+    if (elements.editDefaultUrlBtn) {
+      elements.editDefaultUrlBtn.disabled = false;
+    }
   } else if (config.lastUrl) {
     // 저장된 URL이 있으면 사용
     elements.urlInput.value = config.lastUrl;
+  }
+  
+  // 제품이 선택되지 않았으면 URL 편집 버튼 비활성화
+  if (!config.currentProduct && elements.editDefaultUrlBtn) {
+    elements.editDefaultUrlBtn.disabled = true;
   }
   
   // 이벤트 리스너 등록
@@ -336,6 +347,11 @@ async function selectProduct(product) {
   if (config.productUrls && config.productUrls[product]) {
     elements.urlInput.value = config.productUrls[product];
     config.lastUrl = config.productUrls[product];
+  }
+  
+  // URL 편집 버튼 활성화
+  if (elements.editDefaultUrlBtn) {
+    elements.editDefaultUrlBtn.disabled = false;
   }
   
   // 제품별 색상 적용
@@ -661,6 +677,125 @@ async function selectCredentialsFile() {
   }
 }
 
+// 기본 URL 수정
+async function editDefaultUrl() {
+  if (!config.currentProduct) {
+    showToast('⚠️ 제품을 먼저 선택해주세요.', 'warning');
+    return;
+  }
+  
+  const currentUrl = config.productUrls?.[config.currentProduct] || '';
+  
+  // 입력 모달 생성
+  const modalDiv = document.createElement('div');
+  modalDiv.className = 'modal';
+  modalDiv.innerHTML = `
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2>🔧 기본 URL 수정</h2>
+        <button class="close-btn" id="closeUrlEditModal">✕</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">
+            ${config.currentProduct} 기본 URL <span style="color: #e74c3c;">*</span>
+          </label>
+          <input type="text" id="editUrlInput" value="${currentUrl}" placeholder="http://example.com"
+                 style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" />
+          <small style="color: #666; display: block; margin-top: 4px;">
+            ※ 이 URL은 ${config.currentProduct} 제품 선택 시 자동으로 설정됩니다.
+          </small>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding: 15px 20px; display: flex; gap: 10px; justify-content: flex-end;">
+        <button id="cancelUrlEditBtn" class="secondary-btn">취소</button>
+        <button id="confirmUrlEditBtn" class="primary-btn">저장</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modalDiv);
+  
+  // 모달 표시
+  setTimeout(() => {
+    modalDiv.classList.add('show');
+  }, 10);
+  
+  const editUrlInput = document.getElementById('editUrlInput');
+  const confirmBtn = document.getElementById('confirmUrlEditBtn');
+  const cancelBtn = document.getElementById('cancelUrlEditBtn');
+  const closeBtn = document.getElementById('closeUrlEditModal');
+  
+  // 포커스
+  editUrlInput.focus();
+  editUrlInput.select();
+  
+  // 닫기 함수
+  const closeModal = () => {
+    modalDiv.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(modalDiv);
+    }, 200);
+  };
+  
+  // 저장 함수
+  const saveUrl = async () => {
+    const newUrl = editUrlInput.value.trim();
+    
+    if (!newUrl) {
+      showToast('⚠️ URL을 입력해주세요.', 'warning');
+      return;
+    }
+    
+    // URL 형식 간단 검증
+    if (!newUrl.startsWith('http://') && !newUrl.startsWith('https://')) {
+      showToast('⚠️ URL은 http:// 또는 https://로 시작해야 합니다.', 'warning');
+      return;
+    }
+    
+    // config 업데이트
+    if (!config.productUrls) {
+      config.productUrls = {};
+    }
+    
+    config.productUrls[config.currentProduct] = newUrl;
+    
+    // 저장
+    const success = await electronAPI.saveConfig(config);
+    
+    if (success) {
+      // 현재 input 값도 업데이트
+      elements.urlInput.value = newUrl;
+      config.lastUrl = newUrl;
+      
+      showToast(`✅ ${config.currentProduct} 기본 URL이 저장되었습니다.`, 'success');
+      addLog('success', `✅ ${config.currentProduct} 기본 URL 변경: ${newUrl}`);
+      closeModal();
+    } else {
+      showToast('❌ URL 저장에 실패했습니다.', 'error');
+      addLog('error', '❌ URL 저장 실패');
+    }
+  };
+  
+  // 이벤트 리스너
+  confirmBtn.addEventListener('click', saveUrl);
+  cancelBtn.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', closeModal);
+  
+  editUrlInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      saveUrl();
+    }
+  });
+  
+  // 모달 배경 클릭 시 닫기
+  modalDiv.addEventListener('click', (e) => {
+    if (e.target === modalDiv) {
+      closeModal();
+    }
+  });
+}
+
 // 설정 저장
 async function saveSettings() {
   const newConfig = {
@@ -689,6 +824,7 @@ function setupEventListeners() {
   
   // Codegen
   elements.startCodegenBtn.addEventListener('click', startCodegen);
+  elements.editDefaultUrlBtn.addEventListener('click', editDefaultUrl);
   
   // Manager 선택 및 시나리오 생성
   elements.managerSelect.addEventListener('change', () => {

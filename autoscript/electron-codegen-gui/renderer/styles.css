@@ -180,6 +180,19 @@ body.product-cmp {
   box-shadow: var(--shadow-sm);
 }
 
+.icon-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.icon-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 /* 뒤로가기 버튼 */
 .back-btn {
   background: var(--current-light);

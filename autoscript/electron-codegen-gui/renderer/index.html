@@ -105,7 +105,12 @@
               </div>
               
               <div class="form-group">
-                <label for="urlInput">시작 URL</label>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <label for="urlInput" style="margin-bottom: 0;">시작 URL</label>
+                  <button id="editDefaultUrlBtn" class="icon-btn" title="기본 URL 수정" style="padding: 6px 12px; font-size: 14px; background: rgba(52, 152, 219, 0.1); border: 1px solid #3498db; color: #3498db; border-radius: 6px; cursor: pointer; transition: all 0.2s;" disabled>
+                    <i class="fas fa-edit"></i> 기본값 수정
+                  </button>
+                </div>
                 <input type="text" id="urlInput" placeholder="http://tst.console.trombone.okestro.cloud/login" />
               </div>
 
