@@ -4013,6 +4013,17 @@
                         </div>
                     </div>
                     
+                    <!-- 전체 시나리오 적용 옵션 -->
+                    <div class="apply-all-section" style="margin-top: 24px; padding: 16px; background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.3); border-radius: 8px;">
+                        <label style="display: flex; align-items: center; cursor: pointer; margin: 0;">
+                            <input type="checkbox" id="applyToAllScenarios" style="width: 18px; height: 18px; margin-right: 12px; cursor: pointer;">
+                            <div>
+                                <strong style="font-size: 15px; color: #2c3e50;">📢 모든 시나리오에 이 설정 적용하기</strong>
+                                <p style="margin: 4px 0 0 0; font-size: 13px; color: #7f8c8d;">체크하면 현재 설정이 모든 시나리오에 강제로 덮어씁니다.</p>
+                            </div>
+                        </label>
+                    </div>
+                    
                     <input type="hidden" id="recordingModalEnabled" value="false">
                     <input type="hidden" id="recordingModalFolder" value="">
                 </div>
@@ -8362,6 +8373,7 @@
                 // 녹화 활성화 여부 확인
                 const isEnabled = document.getElementById('recordingModalEnabled').value === 'true';
                 const folderPath = document.getElementById('recordingModalFolder').value;
+                const applyToAll = document.getElementById('applyToAllScenarios').checked;
                 
                 // 녹화 활성화 시 폴더 경로 필수
                 if (isEnabled && !folderPath) {
@@ -8369,22 +8381,54 @@
                     return;
                 }
                 
-                // 녹화 설정 저장
-                recordingSettings[scenarioId] = isEnabled;
-                await ipcRenderer.invoke('save-recording-setting', scenarioId, isEnabled);
-                
-                // 폴더 경로 저장
-                if (folderPath) {
-                    const recordingFolderSettings = JSON.parse(localStorage.getItem('recordingFolderSettings') || '{}');
-                    recordingFolderSettings[scenarioId] = folderPath;
-                    localStorage.setItem('recordingFolderSettings', JSON.stringify(recordingFolderSettings));
+                // 전체 시나리오에 적용하는 경우
+                if (applyToAll) {
+                    // 시나리오 리스트 가져오기
+                    const scenarios = await ipcRenderer.invoke('get-scenarios');
+                    let appliedCount = 0;
                     
-                    // main.js가 읽을 수 있도록 파일에도 저장
-                    try {
-                        await ipcRenderer.invoke('save-user-recording-folder', scenarioId, folderPath);
-                    } catch (error) {
-                        console.log('📁 사용자 녹화 폴더 설정 파일 저장 실패:', error);
+                    // 모든 시나리오에 강제로 적용
+                    for (const scenario of scenarios) {
+                        recordingSettings[scenario.id] = isEnabled;
+                        await ipcRenderer.invoke('save-recording-setting', scenario.id, isEnabled);
+                        
+                        if (folderPath) {
+                            const recordingFolderSettings = JSON.parse(localStorage.getItem('recordingFolderSettings') || '{}');
+                            recordingFolderSettings[scenario.id] = folderPath;
+                            localStorage.setItem('recordingFolderSettings', JSON.stringify(recordingFolderSettings));
+                            
+                            try {
+                                await ipcRenderer.invoke('save-user-recording-folder', scenario.id, folderPath);
+                            } catch (error) {
+                                console.log(`📁 시나리오 ${scenario.id} 녹화 폴더 설정 저장 실패:`, error);
+                            }
+                        }
+                        appliedCount++;
                     }
+                    
+                    showToast(`${appliedCount}개 시나리오에 녹화 설정이 적용되었습니다.`, 'success');
+                    console.log(`📹 전체 적용: ${appliedCount}개 시나리오에 녹화 설정 적용 완료`);
+                } else {
+                    // 현재 시나리오에만 적용
+                    recordingSettings[scenarioId] = isEnabled;
+                    await ipcRenderer.invoke('save-recording-setting', scenarioId, isEnabled);
+                    
+                    // 폴더 경로 저장
+                    if (folderPath) {
+                        const recordingFolderSettings = JSON.parse(localStorage.getItem('recordingFolderSettings') || '{}');
+                        recordingFolderSettings[scenarioId] = folderPath;
+                        localStorage.setItem('recordingFolderSettings', JSON.stringify(recordingFolderSettings));
+                        
+                        // main.js가 읽을 수 있도록 파일에도 저장
+                        try {
+                            await ipcRenderer.invoke('save-user-recording-folder', scenarioId, folderPath);
+                        } catch (error) {
+                            console.log('📁 사용자 녹화 폴더 설정 파일 저장 실패:', error);
+                        }
+                    }
+                    
+                    showToast(`시나리오 ${scenarioId} 녹화 설정이 저장되었습니다.`, 'success');
+                    console.log(`📹 시나리오 ${scenarioId} 녹화 설정 저장 완료: ${isEnabled ? '활성화' : '비활성화'}, 폴더: ${folderPath}`);
                 }
                 
                 // 메인 화면 UI 업데이트
@@ -8395,8 +8439,6 @@
                     selectRecordingOption(isEnabled);
                 }
                 
-                showToast(`시나리오 ${scenarioId} 녹화 설정이 저장되었습니다.`, 'success');
-                
                 // 원본 설정 업데이트 (다음 X 버튼 클릭 시 되돌릴 설정)
                 window.originalRecordingSettings = {
                     enabled: isEnabled,
@@ -8404,8 +8446,6 @@
                 };
                 
                 closeRecordingModal();
-                
-                console.log(`📹 시나리오 ${scenarioId} 녹화 설정 저장 완료: ${isEnabled ? '활성화' : '비활성화'}, 폴더: ${folderPath}`);
                 
             } catch (error) {
                 console.error('녹화 설정 저장 실패:', error);

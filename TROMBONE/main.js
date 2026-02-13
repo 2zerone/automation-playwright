@@ -4004,8 +4004,18 @@ ipcMain.handle('get-scenarios', async (event) => {
   try {
     let scenarios = [];
     
-    // 실제 존재하는 시나리오 파일만 찾기
-    const scenarioDir = path.join(__dirname, '..', 'tests', 'scenario');
+    // 현재 제품에 따른 시나리오 디렉토리 경로 결정
+    let scenarioDir;
+    if (currentProduct === 'viola') {
+      scenarioDir = path.join(__dirname, '..', 'VIOLA', 'tests', 'scenario');
+    } else if (currentProduct === 'cmp') {
+      scenarioDir = path.join(__dirname, '..', 'CMP', 'tests', 'scenario');
+    } else if (currentProduct === 'contrabass') {
+      scenarioDir = path.join(__dirname, '..', 'CONTRABASS', 'tests', 'scenario');
+    } else {
+      // trombone 또는 제품이 선택되지 않은 경우 (기본값: TROMBONE)
+      scenarioDir = path.join(__dirname, 'tests', 'scenario');
+    }
     
     if (!fs.existsSync(scenarioDir)) {
       console.log(`📋 시나리오 디렉토리가 존재하지 않습니다: ${scenarioDir}`);
